@@ -38,9 +38,7 @@ public static class StringHelper
                  let unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c)
                  where unicodeCategory != UnicodeCategory.NonSpacingMark
                  select c)
-        {
             stringBuilder.Append(c);
-        }
 
         return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
     }
@@ -53,9 +51,7 @@ public static class StringHelper
 
         var cursor = 0;
         foreach (var current in subject.Where(current => Array.IndexOf(stripped, current) < 0))
-        {
             result[cursor++] = current;
-        }
 
         return new string(result, 0, cursor);
     }
@@ -65,10 +61,7 @@ public static class StringHelper
         var result = new char[subject.Length];
 
         var cursor = 0;
-        foreach (var current in subject.Where(current => !predicate(current)))
-        {
-            result[cursor++] = current;
-        }
+        foreach (var current in subject.Where(current => !predicate(current))) result[cursor++] = current;
 
         return new string(result, 0, cursor);
     }

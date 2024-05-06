@@ -3,6 +3,7 @@
 public static class CodeGen
 {
     private static readonly object obj = new();
+
     public static string GenRandomNumber(int length = 6)
     {
         var code = string.Empty;
@@ -14,6 +15,7 @@ public static class CodeGen
         {
             code = new Random().Next(start, end).ToString();
         }
+
         return code;
     }
 }

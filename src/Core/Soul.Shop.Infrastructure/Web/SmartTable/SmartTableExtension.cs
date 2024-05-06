@@ -12,7 +12,9 @@ public static class SmartTableExtension
 
         var totalRecord = query.Count();
 
-        query = !string.IsNullOrWhiteSpace(param.Sort.Predicate) ? query.OrderByName(param.Sort.Predicate, param.Sort.Reverse) : query.OrderByName("Id", true);
+        query = !string.IsNullOrWhiteSpace(param.Sort.Predicate)
+            ? query.OrderByName(param.Sort.Predicate, param.Sort.Reverse)
+            : query.OrderByName("Id", true);
 
         var items = query
             .Skip(param.Pagination.Start)
@@ -34,7 +36,9 @@ public static class SmartTableExtension
 
         var totalRecord = query.Count();
 
-        query = !string.IsNullOrWhiteSpace(param.Sort.Predicate) ? query.OrderByName(param.Sort.Predicate, param.Sort.Reverse) : query.OrderByName("Id", true);
+        query = !string.IsNullOrWhiteSpace(param.Sort.Predicate)
+            ? query.OrderByName(param.Sort.Predicate, param.Sort.Reverse)
+            : query.OrderByName("Id", true);
 
         var items = query
             .Skip(param.Pagination.Start)

@@ -1,4 +1,5 @@
 ﻿namespace Soul.Shop.Infrastructure.Models;
+
 public enum ShopEnv
 {
     DEV,
