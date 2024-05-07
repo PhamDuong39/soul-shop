@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Carts", "Carts", "{D27BAE84
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Core.Abstractions", "src\Modules\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj", "{E1CD3CD4-E374-4F1C-A2E4-7F2CAB116E1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Core", "src\Modules\Core\Soul.Shop.Module.Core\Soul.Shop.Module.Core.csproj", "{8E2D7339-6AEE-42D7-B0D2-31D06445738D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,7 @@ Global
 		{F82CB4CC-E413-49DE-8087-B6FE70A5666B} = {C4CA5383-C9D8-4436-8906-9EA6B54E4FC1}
 		{D27BAE84-3B4E-430A-B18F-5BAD45AA3F6D} = {C4CA5383-C9D8-4436-8906-9EA6B54E4FC1}
 		{E1CD3CD4-E374-4F1C-A2E4-7F2CAB116E1D} = {9D3C6139-5043-4BFE-820F-96A160275993}
+		{8E2D7339-6AEE-42D7-B0D2-31D06445738D} = {9D3C6139-5043-4BFE-820F-96A160275993}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59B6732E-6E45-4F92-AECE-39844F69504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -94,5 +97,9 @@ Global
 		{E1CD3CD4-E374-4F1C-A2E4-7F2CAB116E1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1CD3CD4-E374-4F1C-A2E4-7F2CAB116E1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1CD3CD4-E374-4F1C-A2E4-7F2CAB116E1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E2D7339-6AEE-42D7-B0D2-31D06445738D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E2D7339-6AEE-42D7-B0D2-31D06445738D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E2D7339-6AEE-42D7-B0D2-31D06445738D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E2D7339-6AEE-42D7-B0D2-31D06445738D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
