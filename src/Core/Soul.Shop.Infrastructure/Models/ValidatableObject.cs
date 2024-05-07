@@ -9,7 +9,7 @@ public abstract class ValidatableObject
         return Validate().Count == 0;
     }
 
-    protected virtual IList<ValidationResult> Validate()
+    public virtual IList<ValidationResult> Validate()
     {
         IList<ValidationResult> validationResults = new List<ValidationResult>();
         Validator.TryValidateObject(this, new ValidationContext(this, null, null), validationResults, true);
