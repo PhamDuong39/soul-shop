@@ -2,6 +2,6 @@
 
 public enum CountryWithId
 {
-    China = 1,
+    VietNam = 1,
     UnitedStates = 2
 }
