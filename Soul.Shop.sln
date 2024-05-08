@@ -57,6 +57,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Catalog", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Shipping.Abstractions", "src\Modules\Shipments\Soul.Shop.Module.Shipping.Abstractions\Soul.Shop.Module.Shipping.Abstractions.csproj", "{785D2609-6D94-45A4-9C56-EFC761B0F0B3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{065373E9-F878-4B27-9434-61ABA5511547}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Tests", "src\tests\Soul.Shop.Tests\Soul.Shop.Tests.csproj", "{4DF4FF1E-A906-4911-9A7E-2C400FC1964E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -92,6 +96,8 @@ Global
 		{61DE2904-13D0-4D46-B94B-ED59F47EF3D0} = {5D1A1941-7696-4C7A-87C5-D8E841816C28}
 		{4A8EEFB4-AA30-4474-AE59-357B5A44E5B9} = {5D1A1941-7696-4C7A-87C5-D8E841816C28}
 		{785D2609-6D94-45A4-9C56-EFC761B0F0B3} = {E1B0FCB1-62B5-4BC1-8E97-E688E12ECC24}
+		{065373E9-F878-4B27-9434-61ABA5511547} = {516B11B9-4386-4C0F-A084-E5763EE38905}
+		{4DF4FF1E-A906-4911-9A7E-2C400FC1964E} = {065373E9-F878-4B27-9434-61ABA5511547}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59B6732E-6E45-4F92-AECE-39844F69504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -122,5 +128,9 @@ Global
 		{785D2609-6D94-45A4-9C56-EFC761B0F0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{785D2609-6D94-45A4-9C56-EFC761B0F0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{785D2609-6D94-45A4-9C56-EFC761B0F0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DF4FF1E-A906-4911-9A7E-2C400FC1964E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DF4FF1E-A906-4911-9A7E-2C400FC1964E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DF4FF1E-A906-4911-9A7E-2C400FC1964E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DF4FF1E-A906-4911-9A7E-2C400FC1964E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
