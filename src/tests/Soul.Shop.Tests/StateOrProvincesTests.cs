@@ -3,45 +3,47 @@ using Soul.Shop.Infrastructure.Data;
 using Soul.Shop.Module.Core.Abstractions.Entities;
 using Xunit;
 
-namespace Shop.Module.Core.Tests;
+namespace Soul.Shop.Tests;
 
 public class StateOrProvincesTests
 {
-    [Fact]
-    public void Test1()
-    {
-        var res = MakeRepository();
-        var list = res.Object.Query().ToList();
-
-        //Assert.Equal(true);
-    }
-
-    private Mock<IRepository<StateOrProvince>> MakeRepository()
-    {
-        var pageRepository = new Mock<IRepository<StateOrProvince>>();
-        //pageRepository.Setup(x => x.Query()).Returns();
-
-        //pageRepository.Setup(x => x.Query()).Returns(new List<StateOrProvince>() { new StateOrProvince() { Name = "Page" } }.AsQueryable());
-        return pageRepository;
-    }
-
-    private UserAddress MakeShippingAddress()
-    {
-        var country = new Country() { Name = "France" };
-        var stateOrProvince = new StateOrProvince { Name = "IDF", Country = country };
-
-        var address = new Address
-        {
-            CountryId = 1,
-            AddressLine1 = "115 Rue Marcel",
-            Country = country,
-            StateOrProvince = stateOrProvince
-        };
-
-        var userAddress = new UserAddress { UserId = 1, Address = address };
-
-        return userAddress;
-    }
+    // [Fact]
+    // public void Test1()
+    // {
+    //     //test if 1=1
+    //     // Assert.Equal(1, 1);
+    //     var res = MakeRepository();
+    //     var list = res.Object.Query().ToList();
+    //
+    //     //Assert.Equal(true);
+    // }
+    //
+    // private Mock<IRepository<StateOrProvince>> MakeRepository()
+    // {
+    //     var pageRepository = new Mock<IRepository<StateOrProvince>>();
+    //     //pageRepository.Setup(x => x.Query()).Returns();
+    //
+    //     //pageRepository.Setup(x => x.Query()).Returns(new List<StateOrProvince>() { new StateOrProvince() { Name = "Page" } }.AsQueryable());
+    //     return pageRepository;
+    // }
+    //
+    // private UserAddress MakeShippingAddress()
+    // {
+    //     var country = new Country() { Name = "France" };
+    //     var stateOrProvince = new StateOrProvince { Name = "IDF", Country = country };
+    //
+    //     var address = new Address
+    //     {
+    //         CountryId = 1,
+    //         AddressLine1 = "115 Rue Marcel",
+    //         Country = country,
+    //         StateOrProvince = stateOrProvince
+    //     };
+    //
+    //     var userAddress = new UserAddress { UserId = 1, Address = address };
+    //
+    //     return userAddress;
+    // }
 
     //private DefaultShippingAddressViewComponent MakeMockedDefaultAddressViewComponent(UserAddress address, User user)
     //{
