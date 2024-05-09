@@ -12,7 +12,7 @@ public interface IOrderService
     Task Cancel(int id, int userId, string reason);
 
     Task<OrderAddressResult> GetOrderAddress(int orderAddressId);
-
+    // TODO: Implement this method
     // Task<PaymentOrderBaseResponse> PayInfo(int orderId);
 
     Task PaymentReceived(PaymentReceivedParam param);
