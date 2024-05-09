@@ -13,7 +13,7 @@ public interface IOrderService
 
     Task<OrderAddressResult> GetOrderAddress(int orderAddressId);
 
-    Task<PaymentOrderBaseResponse> PayInfo(int orderId);
+    // Task<PaymentOrderBaseResponse> PayInfo(int orderId);
 
     Task PaymentReceived(PaymentReceivedParam param);
 

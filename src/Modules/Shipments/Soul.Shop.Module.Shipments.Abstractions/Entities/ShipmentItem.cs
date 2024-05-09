@@ -1,4 +1,5 @@
 ﻿using Soul.Shop.Infrastructure.Models;
+using Soul.Shop.Module.Catalog.Abstractions.Entities;
 using Soul.Shop.Module.Core.Abstractions.Entities;
 using Soul.Shop.Module.Orders.Abstractions.Entities;
 
@@ -21,7 +22,6 @@ public class ShipmentItem : EntityBase
     public OrderItem OrderItem { get; set; }
 
     public int ProductId { get; set; }
-    //TODO: should be Product
     public Product Product { get; set; }
 
     public int Quantity { get; set; }

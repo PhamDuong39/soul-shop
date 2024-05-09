@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Soul.Shop.Infrastructure.Models;
+using Soul.Shop.Module.Catalog.Abstractions.Entities;
 using Soul.Shop.Module.Core.Abstractions.Entities;
 
 namespace Soul.Shop.Module.Orders.Abstractions.Entities;
