@@ -9,6 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj" />
+      <ProjectReference Include="..\..\Orders\Soul.Shop.Module.Orders.Abstractions\Soul.Shop.Module.Orders.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>

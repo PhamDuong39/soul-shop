@@ -1,5 +1,6 @@
 ﻿using Soul.Shop.Infrastructure.Models;
 using Soul.Shop.Module.Core.Abstractions.Entities;
+using Soul.Shop.Module.Orders.Abstractions.Entities;
 
 namespace Soul.Shop.Module.Shipments.Abstractions.Entities;
 
@@ -17,11 +18,11 @@ public class ShipmentItem : EntityBase
 
     public int OrderItemId { get; set; }
     // bug: should be OrderItem
-    // public OrderItem OrderItem { get; set; }
+    public OrderItem OrderItem { get; set; }
 
     public int ProductId { get; set; }
-    // bug: should be Product
-    // public Product Product { get; set; }
+    //TODO: should be Product
+    public Product Product { get; set; }
 
     public int Quantity { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Soul.Shop.Infrastructure.Models;
 using Soul.Shop.Module.Core.Abstractions.Entities;
+using Soul.Shop.Module.Orders.Abstractions.Entities;
 
 namespace Soul.Shop.Module.Shipments.Abstractions.Entities;
 
@@ -14,7 +15,7 @@ public class Shipment : EntityBase
 
     public int OrderId { get; set; }
     //bug: should be Order
-    // public Order Order { get; set; }
+    public Order Order { get; set; }
 
     public decimal TotalWeight { get; set; }
 
