@@ -22,16 +22,16 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '8.0.x' # Adjust the version as needed
+        dotnet-version: '3.1.x' # Adjust the version as needed
 
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
       with:
         languages: csharp
         queries: security-and-quality,my-custom-query # Add your custom queries here
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2
