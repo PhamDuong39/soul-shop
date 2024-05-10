@@ -1,11 +1,6 @@
 name: "CodeQL"
 
 on:
-  push:
-    branches: ["master","develop"]
-    paths:
-    - '**.cs'
-    - '**.csproj'
   pull_request:
     branches: ["master","develop"]
     paths:
@@ -27,7 +22,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
         fetch-depth: 2
 
@@ -35,12 +30,12 @@ jobs:
       if: ${{ github.event_name == 'pull_request' }}
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v1
+      uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
 
     - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
+      uses: github/codeql-action/autobuild@v2
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v1
+      uses: github/codeql-action/analyze@v2
