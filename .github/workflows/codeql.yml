@@ -1,37 +1,46 @@
-name: "CodeQL for .NET Core"
+name: "CodeQL"
 
 on:
   push:
-    branches: [ "master","develop" ]
+    branches: [main]
+    paths:
+    - '**.cs'
+    - '**.csproj'
   pull_request:
-    branches: [ "master","develop" ]
+    branches: [main]
+    paths:
+    - '**.cs'
+    - '**.csproj'
   schedule:
-    - cron: '45 21 * * 6'
+    - cron: '0 8 * * 4'
 
 jobs:
   analyze:
-    name: Analyze .NET Core
+
+    name: analyze
     runs-on: ubuntu-latest
+
     strategy:
       fail-fast: false
+      matrix:
+        language: ['csharp']
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Setup .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/checkout@v3
       with:
-        dotnet-version: '8.0.x' # Adjust the version as needed
+        fetch-depth: 2
 
-    - name: Restore dependencies
-      run: dotnet restore
+    - run: git checkout HEAD^2
+      if: ${{ github.event_name == 'pull_request' }}
 
     - name: Initialize CodeQL
-      uses: github/codeql-action/init@v2
+      uses: github/codeql-action/init@v1
       with:
-        languages: csharp
-        queries: security-and-quality,my-custom-query # Add your custom queries here
+        languages: ${{ matrix.language }}
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v1
 
     - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v2
+      uses: github/codeql-action/analyze@v1
