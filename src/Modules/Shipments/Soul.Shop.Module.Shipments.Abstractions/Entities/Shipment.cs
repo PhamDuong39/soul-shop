@@ -14,6 +14,7 @@ public class Shipment : EntityBase
     }
 
     public int OrderId { get; set; }
+
     //bug: should be Order
     public Order Order { get; set; }
 

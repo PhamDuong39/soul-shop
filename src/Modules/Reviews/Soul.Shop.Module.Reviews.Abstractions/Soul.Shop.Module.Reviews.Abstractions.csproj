@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj" />
+        <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

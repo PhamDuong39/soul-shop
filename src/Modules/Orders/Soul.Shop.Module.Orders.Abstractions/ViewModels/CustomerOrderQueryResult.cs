@@ -47,6 +47,7 @@ public class CustomerOrderQueryResult
     public DateTime UpdatedOn { get; set; }
 
     public string OrderStatusString => OrderStatus.GetDisplayName();
+
     public decimal SubTotal
     {
         get { return Items.Sum(x => x.Quantity * x.ProductPrice); }
