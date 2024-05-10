@@ -2,6 +2,7 @@
 using Soul.Shop.Infrastructure.Models;
 
 namespace Soul.Shop.Module.Catalog.Abstractions.Entities;
+
 public class ProductOptionCombination : EntityBase
 {
     public ProductOptionCombination()

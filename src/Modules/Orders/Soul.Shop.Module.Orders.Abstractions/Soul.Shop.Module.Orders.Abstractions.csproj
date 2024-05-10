@@ -7,8 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Catalog\Soul.Shop.Module.Catalog.Abstractions\Soul.Shop.Module.Catalog.Abstractions.csproj" />
-      <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj" />
+        <ProjectReference Include="..\..\Catalog\Soul.Shop.Module.Catalog.Abstractions\Soul.Shop.Module.Catalog.Abstractions.csproj"/>
+        <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

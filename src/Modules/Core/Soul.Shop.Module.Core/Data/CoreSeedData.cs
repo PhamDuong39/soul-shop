@@ -51,7 +51,8 @@ public static class CoreSeedData
                 ConcurrencyStamp = "c83afcbc-312c-4589-bad7-8686bd4754c0", Email = "admin@soul-shop.com",
                 EmailConfirmed = false, FullName = "Shop Admin", IsDeleted = false, LockoutEnabled = true,
                 NormalizedEmail = "ADMIN@TRUEAI.ORG", NormalizedUserName = "ADMIN",
-                PasswordHash = "AQAAAAEAACcQAAAAECWSPYhRBTHbETKsda3xnUUxDaH++2r3TmeHcn/agfSEOMmQFGhRdyKGlg3qJL+1HA==",//123456
+                PasswordHash =
+                    "AQAAAAEAACcQAAAAECWSPYhRBTHbETKsda3xnUUxDaH++2r3TmeHcn/agfSEOMmQFGhRdyKGlg3qJL+1HA==", //123456
                 PhoneNumberConfirmed = false, SecurityStamp = "d6847450-47f0-4c7a-9fed-0c66234bf61f",
                 TwoFactorEnabled = false, UserGuid = new Guid("ed8210c3-24b0-4823-a744-80078cf12eb4"),
                 UserName = "admin", IsActive = true, CreatedOn = GlobalConfiguration.InitialOn,

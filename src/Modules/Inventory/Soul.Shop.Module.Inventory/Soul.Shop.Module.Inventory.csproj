@@ -8,12 +8,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+        <Folder Include="Controllers\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
-      <ProjectReference Include="..\Soul.Shop.Module.Inventory.Abstractions\Soul.Shop.Module.Inventory.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Soul.Shop.Module.Inventory.Abstractions\Soul.Shop.Module.Inventory.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>
