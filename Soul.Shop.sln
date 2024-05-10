@@ -79,7 +79,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Shipping",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Shipping.Abstractions", "src\Modules\Shipping\Soul.Shop.Module.Shipping.Abstractions\Soul.Shop.Module.Shipping.Abstractions.csproj", "{255D25F7-8A2D-4C56-9139-0DEC46DBB45C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Module.ShoppingCart", "src\Modules\Carts\Shop.Module.ShoppingCart\Shop.Module.ShoppingCart.csproj", "{F40A01A1-2F85-46D3-ADC3-93A8BBC2474B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.ShoppingCart", "src\Modules\Carts\Soul.Shop.Module.ShoppingCart\Soul.Shop.Module.ShoppingCart.csproj", "{F40A01A1-2F85-46D3-ADC3-93A8BBC2474B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.ShoppingCart.Abstractions", "src\Modules\Carts\Soul.Shop.Module.ShoppingCart.Abstractions\Soul.Shop.Module.ShoppingCart.Abstractions.csproj", "{6D66B2C2-DF51-4641-BD15-BF06F2341BDE}"
 EndProject
