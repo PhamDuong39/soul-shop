@@ -88,6 +88,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Reviews", "src\Modules\Reviews\Soul.Shop.Module.Reviews\Soul.Shop.Module.Reviews.csproj", "{25A194BA-D7A4-4FFC-AC27-059525F40033}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{19CEAF2E-0461-48D0-A1D0-E69AB845614B}"
+	ProjectSection(SolutionItems) = preProject
+		build\.dockerignore = build\.dockerignore
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SmsSend", "SmsSend", "{B647B436-05D5-4113-AEB6-FB6CBDB27849}"
 EndProject
@@ -96,6 +99,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.SampleData", "src\Modules\Data\Soul.Shop.Module.SampleData\Soul.Shop.Module.SampleData.csproj", "{21CB73CE-AE7D-417C-8A9D-B3F5ABA6CEC6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.SmsSender", "src\Modules\Soul.Shop.Module.SmsSender\Soul.Shop.Module.SmsSender.csproj", "{1292BD60-2307-4AED-9F5D-857E07A3CB5C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{5E8851A3-D327-417C-9E60-7D0D12BF106C}"
+	ProjectSection(SolutionItems) = preProject
+		build\docker\docker-compose.setup.develop.yml = build\docker\docker-compose.setup.develop.yml
+		build\docker\docker-compose.setup.staging.yml = build\docker\docker-compose.setup.staging.yml
+		build\docker\docker-compose.setup.production.yml = build\docker\docker-compose.setup.production.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{21BBE37D-FFA8-4068-912A-356533D89972}"
+	ProjectSection(SolutionItems) = preProject
+		build\docker\api\docker-compose.api.develop.yml = build\docker\api\docker-compose.api.develop.yml
+		build\docker\api\docker-compose.api.staging.yml = build\docker\api\docker-compose.api.staging.yml
+		build\docker\api\docker-compose.api.production.yml = build\docker\api\docker-compose.api.production.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -151,6 +168,8 @@ Global
 		{D5BFECAF-151A-48B5-B17F-38F5BF561151} = {7E6CD1E6-51FF-499D-AFF3-3D5FECA23FD2}
 		{21CB73CE-AE7D-417C-8A9D-B3F5ABA6CEC6} = {29053304-9593-486D-8EAE-8708E94E5CAB}
 		{1292BD60-2307-4AED-9F5D-857E07A3CB5C} = {B647B436-05D5-4113-AEB6-FB6CBDB27849}
+		{5E8851A3-D327-417C-9E60-7D0D12BF106C} = {19CEAF2E-0461-48D0-A1D0-E69AB845614B}
+		{21BBE37D-FFA8-4068-912A-356533D89972} = {5E8851A3-D327-417C-9E60-7D0D12BF106C}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59B6732E-6E45-4F92-AECE-39844F69504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
