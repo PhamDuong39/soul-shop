@@ -11,5 +11,6 @@ public class FeedbackAddParam
     [Required(ErrorMessage = "Please enter content, and the content length cannot exceed 450 characters")]
     public string Content { get; set; }
 
-    [Required(ErrorMessage = "Please select feedback type")] public FeedbackType? Type { get; set; }
+    [Required(ErrorMessage = "Please select feedback type")]
+    public FeedbackType? Type { get; set; }
 }

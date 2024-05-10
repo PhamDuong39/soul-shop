@@ -7,13 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
-      <Folder Include="Services\" />
+        <Folder Include="Controllers\"/>
+        <Folder Include="Services\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
-      <ProjectReference Include="..\Soul.Shop.Module.ShoppingCart.Abstractions\Soul.Shop.Module.ShoppingCart.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Soul.Shop.Module.ShoppingCart.Abstractions\Soul.Shop.Module.ShoppingCart.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

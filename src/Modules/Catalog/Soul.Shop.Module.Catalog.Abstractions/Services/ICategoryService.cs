@@ -7,7 +7,6 @@ namespace Soul.Shop.Module.Catalog.Abstractions.Services;
 
 public interface ICategoryService
 {
-
     Task<IList<CategoryResult>> GetAll();
 
     Task<IList<Category>> GetAllByCache();

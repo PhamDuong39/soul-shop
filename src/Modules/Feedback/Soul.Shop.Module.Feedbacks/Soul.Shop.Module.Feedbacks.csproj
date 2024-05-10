@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Controllers\" />
+        <Folder Include="Controllers\"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
-      <ProjectReference Include="..\Soul.Shop.Module.Feedbacks.Abstractions\Soul.Shop.Module.Feedbacks.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Soul.Shop.Module.Feedbacks.Abstractions\Soul.Shop.Module.Feedbacks.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

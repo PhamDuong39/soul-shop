@@ -27,8 +27,7 @@ public class Stock : EntityBase
     public int DisplayOrder { get; set; }
 
     public bool IsEnabled { get; set; }
-    [StringLength(450)]
-    public string Note { get; set; }
+    [StringLength(450)] public string Note { get; set; }
 
     public bool IsDeleted { get; set; }
 

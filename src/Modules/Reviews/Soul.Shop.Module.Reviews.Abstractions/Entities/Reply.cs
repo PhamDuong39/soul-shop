@@ -31,14 +31,11 @@ public class Reply : EntityBase
 
     [StringLength(450)] public string ReplierName { get; set; }
 
-    [ForeignKey("ToUser")]
-    public int? ToUserId { get; set; }
+    [ForeignKey("ToUser")] public int? ToUserId { get; set; }
 
-    [ForeignKey("ToUserId")]
-    public User ToUser { get; set; }
+    [ForeignKey("ToUserId")] public User ToUser { get; set; }
 
-    [StringLength(450)]
-    public string ToUserName { get; set; }
+    [StringLength(450)] public string ToUserName { get; set; }
 
     public ReplyStatus Status { get; set; }
 

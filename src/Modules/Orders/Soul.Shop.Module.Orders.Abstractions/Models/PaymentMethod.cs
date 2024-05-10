@@ -8,6 +8,7 @@ public enum PaymentMethod
     BankTransfer = 3,
     CashOnDelivery = 4,
     CreditCard = 5,
+
     // CashOnDeliveryWhenReceive = 6,
     NganLuong = 7,
     PayPal = 8,
@@ -17,5 +18,5 @@ public enum PaymentMethod
     ViettelPay = 12,
     PayDay = 13,
     VuiPay = 14,
-    NinePay = 15,
+    NinePay = 15
 }
