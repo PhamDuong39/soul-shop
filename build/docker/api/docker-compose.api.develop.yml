@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  soul.shop.api:
+    build:
+      context: ../../src/server
+      dockerfile: src/Host/Soul.Shop.Api/Dockerfile
+    container_name: soul-shop-api-develop
+    ports:
+      - "8080:8080"
+    restart: always
+    networks:
+      - soul-shop-net-develop
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - /home/soul-shop/soul-shop-api/user-content:/app/wwwroot/user-content/
+      - /home/soul-shop/soul-shop-api/logs:/app/logs
+      - /etc/localtime:/etc/localtime:ro
+
+networks:
+  soul-shop-net-develop:
+    external: true
