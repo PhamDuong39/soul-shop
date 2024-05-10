@@ -59,13 +59,13 @@ public class EmailSender(
             }
 
             send.IsSucceed = true;
-            logger.LogInformation("Mail sent successfully", send);
+            logger.LogInformation("Mail sent successfully");
         }
         catch (Exception ex)
         {
             send.Message = ex.Message;
             send.IsSucceed = false;
-            logger.LogError(ex, "Email sending exception", send, email, subject, body, isHtml);
+            logger.LogError(ex, "Email sending exception");
         }
         finally
         {
