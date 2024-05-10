@@ -8,9 +8,12 @@
 
     <ItemGroup>
         <Folder Include="Controllers\"/>
-        <Folder Include="Data\"/>
-        <Folder Include="Handlers\"/>
         <Folder Include="Services\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
+      <ProjectReference Include="..\Soul.Shop.Module.Orders.Abstractions\Soul.Shop.Module.Orders.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
