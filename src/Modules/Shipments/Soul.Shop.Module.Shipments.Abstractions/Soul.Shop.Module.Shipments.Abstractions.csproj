@@ -7,10 +7,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Catalog\Soul.Shop.Module.Catalog.Abstractions\Soul.Shop.Module.Catalog.Abstractions.csproj" />
-      <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj" />
-      <ProjectReference Include="..\..\Orders\Soul.Shop.Module.Orders.Abstractions\Soul.Shop.Module.Orders.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\Catalog\Soul.Shop.Module.Catalog.Abstractions\Soul.Shop.Module.Catalog.Abstractions.csproj"/>
+        <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj"/>
+        <ProjectReference Include="..\..\Orders\Soul.Shop.Module.Orders.Abstractions\Soul.Shop.Module.Orders.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

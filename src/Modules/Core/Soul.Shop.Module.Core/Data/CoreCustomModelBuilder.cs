@@ -9,27 +9,27 @@ public class CoreCustomModelBuilder : ICustomModelBuilder
 {
     public void Build(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AppSetting>().ToTable("Core_AppSetting");
+        modelBuilder.Entity<AppSetting>().ToTable("AppSetting");
 
         modelBuilder.Entity<User>()
-            .ToTable("Core_User");
+            .ToTable("User");
 
         modelBuilder.Entity<Role>()
-            .ToTable("Core_Role");
+            .ToTable("Role");
 
         modelBuilder.Entity<UserLogin>()
-            .ToTable("Core_UserLogin");
+            .ToTable("UserLogin");
 
         modelBuilder.Entity<IdentityUserClaim<int>>(b =>
         {
             b.HasKey(uc => uc.Id);
-            b.ToTable("Core_UserClaim");
+            b.ToTable("UserClaim");
         });
 
         modelBuilder.Entity<IdentityRoleClaim<int>>(b =>
         {
             b.HasKey(rc => rc.Id);
-            b.ToTable("Core_RoleClaim");
+            b.ToTable("RoleClaim");
         });
 
         modelBuilder.Entity<UserRole>(b =>
@@ -37,10 +37,10 @@ public class CoreCustomModelBuilder : ICustomModelBuilder
             b.HasKey(ur => new { ur.UserId, ur.RoleId });
             b.HasOne(ur => ur.Role).WithMany(x => x.Users).HasForeignKey(r => r.RoleId);
             b.HasOne(ur => ur.User).WithMany(x => x.Roles).HasForeignKey(u => u.UserId);
-            b.ToTable("Core_UserRole");
+            b.ToTable("UserRole");
         });
 
-        modelBuilder.Entity<IdentityUserToken<int>>(b => { b.ToTable("Core_UserToken"); });
+        modelBuilder.Entity<IdentityUserToken<int>>(b => { b.ToTable("UserToken"); });
 
         modelBuilder.Entity<Entity>(e =>
         {

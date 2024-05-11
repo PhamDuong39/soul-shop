@@ -18,7 +18,8 @@ public enum OrderStatus
 
     [Description("Shipped")] Shipped = 50,
 
-    [Description("Transaction successful")] Complete = 60,
+    [Description("Transaction successful")]
+    Complete = 60,
 
     [Description("Cancel transaction")] Canceled = 70
 }
