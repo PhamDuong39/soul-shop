@@ -60,8 +60,8 @@ namespace Soul.Shop.Modules.MessageQueueBus
             {
                 services.TryAddSingleton<IMQService, MemoryMQService>();
             }
-
-            services.AddMassTransitHostedService(null);
+            //TODO: Add MassTransit Hosted Service
+            // services.AddMassTransitHostedService(null);
             return;
 
             void configure(IBusRegistrationContext context, IBusFactoryConfigurator cfg)
