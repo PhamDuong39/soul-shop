@@ -21,7 +21,7 @@ public class Order : EntityBase
 
     public int CustomerId { get; set; }
 
-    [JsonIgnore] // To simplify the json stored in order history
+    [JsonIgnore]
     public User Customer { get; set; }
 
     public int? ShippingAddressId { get; set; }
