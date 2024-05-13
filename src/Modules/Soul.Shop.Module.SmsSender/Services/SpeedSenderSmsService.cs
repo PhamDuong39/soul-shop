@@ -26,11 +26,11 @@ public class SpeedSenderSmsService(
 {
     private const string SEPARATOR = "&";
 
-    private readonly int timeoutInMilliSeconds = 100000;
-    private readonly string version = "2017-05-25";
-    private readonly string action = "SendSms";
-    private readonly string format = "JSON";
-    private readonly string domain = "dysmsapi.aliyuncs.com";
+    private readonly int timeoutInMilliSeconds = 0;
+    private readonly string version = "";
+    private readonly string action = "";
+    private readonly string format = "";
+    private readonly string domain = "";
     private readonly string regionId = options.CurrentValue.RegionId;
     private readonly string accessKeyId = options.CurrentValue.AccessKeyId;
     private readonly string accessKeySecret = options.CurrentValue.AccessKeySecret;
@@ -83,7 +83,7 @@ public class SpeedSenderSmsService(
             }
             else
             {
-                model.Message = "发送短信失败";
+                model.Message = "Failed to send text messages";
             }
         }
         catch (Exception ex)
@@ -112,12 +112,12 @@ public class SpeedSenderSmsService(
             throw new ArgumentNullException(nameof(captcha));
         phone = phone.Trim();
         captcha = captcha.Trim();
-        var regex = new Regex(@"^\d{11}$");
+        var regex = new Regex(@"^\d{10}$");
         if (!regex.IsMatch(phone))
-            return (false, "手机号格式错误");
+            return (false, "Malformed phone number");
 
         var cacheKey = ShopKeys.RegisterPhonePrefix + phone;
-        if (cacheManager.IsSet(cacheKey)) return (false, "请求频繁，请稍后重试");
+        if (cacheManager.IsSet(cacheKey)) return (false, "Frequent requests, please try again later");
 
         var code = captcha;
         var success = await SendSmsAsync(new SmsSend()
@@ -126,16 +126,13 @@ public class SpeedSenderSmsService(
             Value = code,
             TemplateType = SmsTemplateType.Captcha,
             TemplateCode = "SMS_70055704",
-            SignName = "天网",
+            SignName = "Skynet",
             TemplateParam = JsonConvert.SerializeObject(new { code })
         });
-        if (success)
-        {
-            cacheManager.Set(cacheKey, code, 1);
-            return (true, "发送成功");
-        }
+        if (!success) return (false, "Failed to send SMS verification code");
+        cacheManager.Set(cacheKey, code, 1);
+        return (true, "Sent successfully");
 
-        return (false, "发送短信验证码失败");
     }
 
     private static string SignString(string source, string accessSecret)
