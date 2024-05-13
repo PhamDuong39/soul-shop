@@ -132,7 +132,6 @@ public class SpeedSenderSmsService(
         if (!success) return (false, "Failed to send SMS verification code");
         cacheManager.Set(cacheKey, code, 1);
         return (true, "Sent successfully");
-
     }
 
     private static string SignString(string source, string accessSecret)

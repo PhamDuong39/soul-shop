@@ -7,17 +7,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Hangfire" Version="1.8.12" />
-      <PackageReference Include="Hangfire.Core" Version="1.8.12" />
-      <PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
-      <PackageReference Include="Hangfire.MemoryStorage" Version="1.8.1.1" />
-      <PackageReference Include="Hangfire.Redis.StackExchange" Version="1.9.3" />
-      <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0" />
+        <PackageReference Include="Hangfire" Version="1.8.12"/>
+        <PackageReference Include="Hangfire.Core" Version="1.8.12"/>
+        <PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2"/>
+        <PackageReference Include="Hangfire.MemoryStorage" Version="1.8.1.1"/>
+        <PackageReference Include="Hangfire.Redis.StackExchange" Version="1.9.3"/>
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="8.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
-      <ProjectReference Include="..\Soul.Shop.Module.Schedule.Abstractions\Soul.Shop.Module.Schedule.Abstractions.csproj" />
+        <ProjectReference Include="..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Soul.Shop.Module.Schedule.Abstractions\Soul.Shop.Module.Schedule.Abstractions.csproj"/>
     </ItemGroup>
 
 </Project>

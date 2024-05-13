@@ -94,9 +94,9 @@ public class MiniProfilerMiddleware
         return Options.ShouldProfile?.Invoke(request) ?? true;
     }
 
-    private void EnsureName(Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, HttpContext context)
+    private void EnsureName(MiniProfiler profiler, HttpContext context)
     {
-        if (profiler.Name == nameof(Soul.Shop.Module.ApiProfiler.MiniProfiler))
+        if (profiler.Name == nameof(MiniProfiler))
         {
             var url = StringBuilderCache.Get()
                 .Append(context.Request.Scheme)
@@ -119,11 +119,11 @@ public class MiniProfilerMiddleware
                     profiler.Name = profiler.Name.Remove(50);
             }
 
-            if (profiler.Root?.Name == nameof(Soul.Shop.Module.ApiProfiler.MiniProfiler)) profiler.Root.Name = url;
+            if (profiler.Root?.Name == nameof(MiniProfiler)) profiler.Root.Name = url;
         }
     }
 
-    private async Task SetHeadersAndState(HttpContext context, Soul.Shop.Module.ApiProfiler.MiniProfiler current)
+    private async Task SetHeadersAndState(HttpContext context, MiniProfiler current)
     {
         try
         {

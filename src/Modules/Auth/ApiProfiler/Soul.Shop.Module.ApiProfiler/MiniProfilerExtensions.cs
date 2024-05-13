@@ -17,7 +17,7 @@ public static class MiniProfilerExtensions
     /// <param name="name">The <see cref="Timing"/> step name used to label the profiler results.</param>
     /// <returns>the profiled result.</returns>
     /// <exception cref="ArgumentNullException">Throws when <paramref name="selector"/> is <c>null</c>.</exception>
-    public static T Inline<T>(this Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, Func<T> selector, string name)
+    public static T Inline<T>(this MiniProfiler profiler, Func<T> selector, string name)
     {
         if (selector == null) throw new ArgumentNullException(nameof(selector));
         if (profiler == null) return selector();
@@ -33,7 +33,7 @@ public static class MiniProfilerExtensions
     /// <param name="profiler">The current profiling session or null.</param>
     /// <param name="name">A descriptive name for the code that is encapsulated by the resulting Timing's lifetime.</param>
     /// <returns>the profile step</returns>
-    public static Timing Step(this Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, string name)
+    public static Timing Step(this MiniProfiler profiler, string name)
     {
         return profiler?.StepImpl(name);
     }
@@ -50,7 +50,7 @@ public static class MiniProfilerExtensions
     /// <returns></returns>
     /// <remarks>If <paramref name="includeChildren"/> is set to true and a child is removed due to its use of StepIf, then the 
     /// time spent in that time will also not count for the current StepIf calculation.</remarks>
-    public static Timing StepIf(this Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, string name, decimal minSaveMs,
+    public static Timing StepIf(this MiniProfiler profiler, string name, decimal minSaveMs,
         bool includeChildren = false)
     {
         return profiler?.StepImpl(name, minSaveMs, includeChildren);
@@ -65,7 +65,7 @@ public static class MiniProfilerExtensions
     /// </remarks>
     /// <param name="profiler">The current profiling session or null.</param>
     /// <returns>the profile step</returns>
-    public static IDisposable Ignore(this Soul.Shop.Module.ApiProfiler.MiniProfiler profiler)
+    public static IDisposable Ignore(this MiniProfiler profiler)
     {
         return profiler != null ? new Suppression(profiler) : null;
     }
@@ -76,7 +76,7 @@ public static class MiniProfilerExtensions
     /// </summary>
     /// <param name="profiler">The <see cref="Soul.Shop.Module.ApiProfiler.MiniProfiler"/> to add to.</param>
     /// <param name="externalProfiler">The <see cref="Soul.Shop.Module.ApiProfiler.MiniProfiler"/> to append to <paramref name="profiler"/>'s tree.</param>
-    public static void AddProfilerResults(this Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, Soul.Shop.Module.ApiProfiler.MiniProfiler externalProfiler)
+    public static void AddProfilerResults(this MiniProfiler profiler, MiniProfiler externalProfiler)
     {
         if (profiler?.Head == null || externalProfiler == null) return;
         profiler.Head.AddChild(externalProfiler.Root);
@@ -89,7 +89,7 @@ public static class MiniProfilerExtensions
     /// <param name="profiler">The <see cref="Soul.Shop.Module.ApiProfiler.MiniProfiler"/> to add the link to.</param>
     /// <param name="text">The text label for the link.</param>
     /// <param name="url">The URL the link goes to.</param>
-    public static void AddCustomLink(this Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, string text, string url)
+    public static void AddCustomLink(this MiniProfiler profiler, string text, string url)
     {
         if (profiler == null || !profiler.IsActive) return;
 
@@ -107,7 +107,7 @@ public static class MiniProfilerExtensions
     /// </summary>
     /// <param name="profiler">A profiling session with child <see cref="Timing"/> instances.</param>
     /// <param name="htmlEncode">Whether to HTML encode the response, for use in a web page for example.</param>
-    public static string RenderPlainText(this Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, bool htmlEncode = false)
+    public static string RenderPlainText(this MiniProfiler profiler, bool htmlEncode = false)
     {
         if (profiler == null) return string.Empty;
 

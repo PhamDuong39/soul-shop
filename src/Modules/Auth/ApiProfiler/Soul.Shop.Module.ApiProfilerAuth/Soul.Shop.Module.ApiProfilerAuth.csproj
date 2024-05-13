@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
-      <ProjectReference Include="..\..\Soul.Shop.Module.Auth\Soul.Shop.Module.Auth.csproj" />
-      <ProjectReference Include="..\Soul.Shop.Module.ApiProfiler\Soul.Shop.Module.ApiProfiler.csproj" />
+        <ProjectReference Include="..\..\..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj"/>
+        <ProjectReference Include="..\..\Soul.Shop.Module.Auth\Soul.Shop.Module.Auth.csproj"/>
+        <ProjectReference Include="..\Soul.Shop.Module.ApiProfiler\Soul.Shop.Module.ApiProfiler.csproj"/>
     </ItemGroup>
 
 </Project>
