@@ -1,5 +1,5 @@
 # Contributor Covenant Code of Conduct
-
+### Adapted from the [Contributor Covenant](https://www.contributor-covenant.org) version 1.4
 
 ## Our Pledge
 
