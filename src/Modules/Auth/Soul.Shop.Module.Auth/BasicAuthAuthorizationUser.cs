@@ -37,6 +37,8 @@ public class BasicAuthAuthorizationUser
             return StructuralComparisons.StructuralEqualityComparer.Equals(passwordHash, Password);
         }
         else
+        {
             return false;
+        }
     }
 }
