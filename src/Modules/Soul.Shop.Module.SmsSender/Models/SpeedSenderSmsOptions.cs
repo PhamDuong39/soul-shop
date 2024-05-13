@@ -2,7 +2,6 @@
 
 public class SpeedSenderSmsOptions
 {
-
     public string RegionId { get; set; }
 
     public string AccessKeyId { get; set; }

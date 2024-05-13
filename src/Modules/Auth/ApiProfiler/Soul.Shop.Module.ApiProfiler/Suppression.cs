@@ -26,7 +26,7 @@ public class Suppression : IDisposable
     /// </summary>
     /// <param name="profiler">The <see cref="Soul.Shop.Module.ApiProfiler.MiniProfiler"/> to suppress.</param>
     /// <exception cref="ArgumentNullException">Throws when the <paramref name="profiler"/> is <c>null</c>.</exception>
-    public Suppression(Soul.Shop.Module.ApiProfiler.MiniProfiler profiler)
+    public Suppression(MiniProfiler profiler)
     {
         Profiler = profiler ?? throw new ArgumentNullException(nameof(profiler));
         if (!Profiler.IsActive) return;
@@ -38,7 +38,7 @@ public class Suppression : IDisposable
     /// <summary>
     /// Gets a reference to the containing profiler, allowing this Suppression to affect profiler activity.
     /// </summary>
-    internal Soul.Shop.Module.ApiProfiler.MiniProfiler Profiler { get; }
+    internal MiniProfiler Profiler { get; }
 
     void IDisposable.Dispose()
     {

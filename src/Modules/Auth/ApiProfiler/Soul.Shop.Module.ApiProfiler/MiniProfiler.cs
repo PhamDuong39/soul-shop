@@ -18,7 +18,7 @@ public partial class MiniProfiler
     /// The vast majority of use cases will be a single options instance, so this works pretty well.
     /// </summary>
     [IgnoreDataMember]
-    public MiniProfilerBaseOptions Options { get; } = global::Soul.Shop.Module.ApiProfiler.MiniProfiler.DefaultOptions;
+    public MiniProfilerBaseOptions Options { get; } = DefaultOptions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MiniProfiler"/> class.
@@ -199,7 +199,7 @@ public partial class MiniProfiler
     /// <summary>
     /// Gets the currently running MiniProfiler for the current context; null if no MiniProfiler was started.
     /// </summary>
-    public static MiniProfiler Current => global::Soul.Shop.Module.ApiProfiler.MiniProfiler.DefaultOptions.ProfilerProvider?.CurrentProfiler;
+    public static MiniProfiler Current => DefaultOptions.ProfilerProvider?.CurrentProfiler;
 
     /// <summary>
     /// A <see cref="IAsyncStorage"/> strategy to use for the current profiler.
@@ -325,7 +325,7 @@ public partial class MiniProfiler
             IgnoreExtensionDataObject = false,
             PreserveObjectReferences = true
         });
-        using (var ms = new System.IO.MemoryStream())
+        using (var ms = new MemoryStream())
         {
             serializer.WriteObject(ms, this);
             ms.Position = 0;

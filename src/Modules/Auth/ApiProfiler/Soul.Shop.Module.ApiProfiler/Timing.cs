@@ -37,7 +37,7 @@ public class Timing : IDisposable
     /// <param name="name">The name of this timing.</param>
     /// <param name="minSaveMs">(Optional) The minimum threshold (in milliseconds) for saving this timing.</param>
     /// <param name="includeChildrenWithMinSave">(Optional) Whether the children are included when comparing to the <paramref name="minSaveMs"/> threshold.</param>
-    public Timing(Soul.Shop.Module.ApiProfiler.MiniProfiler profiler, Timing parent, string name, decimal? minSaveMs = null,
+    public Timing(MiniProfiler profiler, Timing parent, string name, decimal? minSaveMs = null,
         bool? includeChildrenWithMinSave = false)
     {
         Id = Guid.NewGuid();
@@ -196,7 +196,7 @@ public class Timing : IDisposable
     /// <summary>
     /// Gets a reference to the containing profiler, allowing this Timing to affect the Head and get Stopwatch readings.
     /// </summary>
-    internal Soul.Shop.Module.ApiProfiler.MiniProfiler Profiler { get; set; }
+    internal MiniProfiler Profiler { get; set; }
 
     /// <summary>
     /// The unique identifier used to identify the Profiler with which this Timing is associated. Used for sql storage.
