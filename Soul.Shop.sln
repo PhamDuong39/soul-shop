@@ -98,8 +98,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.EmailSende
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.SampleData", "src\Modules\Data\Soul.Shop.Module.SampleData\Soul.Shop.Module.SampleData.csproj", "{21CB73CE-AE7D-417C-8A9D-B3F5ABA6CEC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.SmsSender", "src\Modules\Soul.Shop.Module.SmsSender\Soul.Shop.Module.SmsSender.csproj", "{1292BD60-2307-4AED-9F5D-857E07A3CB5C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{5E8851A3-D327-417C-9E60-7D0D12BF106C}"
 	ProjectSection(SolutionItems) = preProject
 		build\docker\docker-compose.setup.develop.yml = build\docker\docker-compose.setup.develop.yml
@@ -114,10 +112,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{21BBE37D-FFA
 		build\docker\api\docker-compose.api.production.yml = build\docker\api\docker-compose.api.production.yml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Modules.MessageQueueBus", "src\Modules\Soul.Shop.Modules.MessageQueueBus\Soul.Shop.Modules.MessageQueueBus.csproj", "{51BD6602-0109-49B9-A5AF-3F1336046592}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Modules.MessageQueueBus.Abstractions", "src\Modules\Soul.Shop.Modules.MessageQueueBus.Abstractions\Soul.Shop.Modules.MessageQueueBus.Abstractions.csproj", "{536F9E2A-CF23-4C99-980A-3CAE22D244EA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Schedule.Abstractions", "src\Modules\Schedule\Soul.Shop.Module.Schedule.Abstractions\Soul.Shop.Module.Schedule.Abstractions.csproj", "{1BFAF98B-526D-499D-B16F-D0CD1AABA2D0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Hangfire", "src\Modules\Schedule\Soul.Shop.Module.Hangfire\Soul.Shop.Module.Hangfire.csproj", "{087DEB74-93F4-41AD-84CB-03F61A0B6461}"
@@ -129,6 +123,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.ApiProfilerAuth", "src\Modules\Auth\ApiProfiler\Soul.Shop.Module.ApiProfilerAuth\Soul.Shop.Module.ApiProfilerAuth.csproj", "{C0AAF260-A129-4EFB-94A7-C096FF26130F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.ApiProfiler", "src\Modules\Auth\ApiProfiler\Soul.Shop.Module.ApiProfiler\Soul.Shop.Module.ApiProfiler.csproj", "{50AB1D42-A070-48AD-8A05-E780D5A330E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Minio", "Minio", "{6172C51E-0935-4032-9EA9-72E00BDEAA33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Local", "Local", "{6D730188-2210-439A-AA83-6458D2B25F76}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Modules.MessageQueueBus", "src\Modules\MessageBus\Soul.Shop.Modules.MessageQueueBus\Soul.Shop.Modules.MessageQueueBus.csproj", "{F5BD9AC9-F8CD-4B3A-A349-9A2730A08C7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Modules.MessageQueueBus.Abstractions", "src\Modules\MessageBus\Soul.Shop.Modules.MessageQueueBus.Abstractions\Soul.Shop.Modules.MessageQueueBus.Abstractions.csproj", "{CC839819-25E2-4D59-AAE9-71C54357036F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.SmsSender", "src\Modules\SmsSend\Soul.Shop.Module.SmsSender\Soul.Shop.Module.SmsSender.csproj", "{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,17 +187,19 @@ Global
 		{B647B436-05D5-4113-AEB6-FB6CBDB27849} = {C4CA5383-C9D8-4436-8906-9EA6B54E4FC1}
 		{D5BFECAF-151A-48B5-B17F-38F5BF561151} = {7E6CD1E6-51FF-499D-AFF3-3D5FECA23FD2}
 		{21CB73CE-AE7D-417C-8A9D-B3F5ABA6CEC6} = {29053304-9593-486D-8EAE-8708E94E5CAB}
-		{1292BD60-2307-4AED-9F5D-857E07A3CB5C} = {B647B436-05D5-4113-AEB6-FB6CBDB27849}
 		{5E8851A3-D327-417C-9E60-7D0D12BF106C} = {19CEAF2E-0461-48D0-A1D0-E69AB845614B}
 		{21BBE37D-FFA8-4068-912A-356533D89972} = {5E8851A3-D327-417C-9E60-7D0D12BF106C}
-		{51BD6602-0109-49B9-A5AF-3F1336046592} = {843E511A-9F81-4E37-8646-8A7B810B179F}
-		{536F9E2A-CF23-4C99-980A-3CAE22D244EA} = {843E511A-9F81-4E37-8646-8A7B810B179F}
 		{1BFAF98B-526D-499D-B16F-D0CD1AABA2D0} = {7CCF3E3A-B9EA-4C02-A3B8-97845595498F}
 		{087DEB74-93F4-41AD-84CB-03F61A0B6461} = {7CCF3E3A-B9EA-4C02-A3B8-97845595498F}
 		{59DF8647-E474-4BF8-BFF7-D4657DCF1C6F} = {68FCC641-D4C2-4BAA-B0D4-0A365C31A574}
 		{05D46AAC-AF76-434A-B83E-453599E38D87} = {68FCC641-D4C2-4BAA-B0D4-0A365C31A574}
 		{C0AAF260-A129-4EFB-94A7-C096FF26130F} = {05D46AAC-AF76-434A-B83E-453599E38D87}
 		{50AB1D42-A070-48AD-8A05-E780D5A330E8} = {05D46AAC-AF76-434A-B83E-453599E38D87}
+		{6172C51E-0935-4032-9EA9-72E00BDEAA33} = {A2274651-916C-4AA1-BF69-20F3FEB2A80F}
+		{6D730188-2210-439A-AA83-6458D2B25F76} = {A2274651-916C-4AA1-BF69-20F3FEB2A80F}
+		{F5BD9AC9-F8CD-4B3A-A349-9A2730A08C7B} = {843E511A-9F81-4E37-8646-8A7B810B179F}
+		{CC839819-25E2-4D59-AAE9-71C54357036F} = {843E511A-9F81-4E37-8646-8A7B810B179F}
+		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9} = {B647B436-05D5-4113-AEB6-FB6CBDB27849}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59B6732E-6E45-4F92-AECE-39844F69504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -288,18 +294,6 @@ Global
 		{21CB73CE-AE7D-417C-8A9D-B3F5ABA6CEC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21CB73CE-AE7D-417C-8A9D-B3F5ABA6CEC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21CB73CE-AE7D-417C-8A9D-B3F5ABA6CEC6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1292BD60-2307-4AED-9F5D-857E07A3CB5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1292BD60-2307-4AED-9F5D-857E07A3CB5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1292BD60-2307-4AED-9F5D-857E07A3CB5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1292BD60-2307-4AED-9F5D-857E07A3CB5C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{51BD6602-0109-49B9-A5AF-3F1336046592}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{51BD6602-0109-49B9-A5AF-3F1336046592}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{51BD6602-0109-49B9-A5AF-3F1336046592}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{51BD6602-0109-49B9-A5AF-3F1336046592}.Release|Any CPU.Build.0 = Release|Any CPU
-		{536F9E2A-CF23-4C99-980A-3CAE22D244EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{536F9E2A-CF23-4C99-980A-3CAE22D244EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{536F9E2A-CF23-4C99-980A-3CAE22D244EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{536F9E2A-CF23-4C99-980A-3CAE22D244EA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1BFAF98B-526D-499D-B16F-D0CD1AABA2D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1BFAF98B-526D-499D-B16F-D0CD1AABA2D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BFAF98B-526D-499D-B16F-D0CD1AABA2D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -320,5 +314,17 @@ Global
 		{50AB1D42-A070-48AD-8A05-E780D5A330E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50AB1D42-A070-48AD-8A05-E780D5A330E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50AB1D42-A070-48AD-8A05-E780D5A330E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5BD9AC9-F8CD-4B3A-A349-9A2730A08C7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5BD9AC9-F8CD-4B3A-A349-9A2730A08C7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5BD9AC9-F8CD-4B3A-A349-9A2730A08C7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5BD9AC9-F8CD-4B3A-A349-9A2730A08C7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC839819-25E2-4D59-AAE9-71C54357036F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC839819-25E2-4D59-AAE9-71C54357036F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC839819-25E2-4D59-AAE9-71C54357036F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC839819-25E2-4D59-AAE9-71C54357036F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -20,7 +20,7 @@ public class ReplyAutoApprovedMQConsumer(
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "回复自动审核消息，处理失败", context?.Message);
+            _logger.LogError(ex, "Reply to automatic review message, processing failed", context?.Message);
         }
     }
 }
