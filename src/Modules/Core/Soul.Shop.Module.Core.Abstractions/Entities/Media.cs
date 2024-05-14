@@ -20,7 +20,7 @@ public class Media : EntityBase
 
     public string Url { get; set; }
 
-    public string Path { get; set; }
+    public string? Path { get; set; }
 
     [StringLength(450)] public string Host { get; set; }
 
