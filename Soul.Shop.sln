@@ -134,6 +134,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Modules.MessageQu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.SmsSender", "src\Modules\SmsSend\Soul.Shop.Module.SmsSender\Soul.Shop.Module.SmsSender.csproj", "{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github", "Github", "{A996571E-09AA-45D2-A935-32825BB89F2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.StorageLocal", "src\Modules\Storage\Local\Soul.Shop.Module.StorageLocal\Soul.Shop.Module.StorageLocal.csproj", "{3A2EF217-934C-4CB4-9CAA-269ACDA2E690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.StorageGitHub", "src\Modules\Storage\Github\Soul.Shop.Module.StorageGitHub\Soul.Shop.Module.StorageGitHub.csproj", "{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -200,6 +206,9 @@ Global
 		{F5BD9AC9-F8CD-4B3A-A349-9A2730A08C7B} = {843E511A-9F81-4E37-8646-8A7B810B179F}
 		{CC839819-25E2-4D59-AAE9-71C54357036F} = {843E511A-9F81-4E37-8646-8A7B810B179F}
 		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9} = {B647B436-05D5-4113-AEB6-FB6CBDB27849}
+		{A996571E-09AA-45D2-A935-32825BB89F2E} = {A2274651-916C-4AA1-BF69-20F3FEB2A80F}
+		{3A2EF217-934C-4CB4-9CAA-269ACDA2E690} = {6D730188-2210-439A-AA83-6458D2B25F76}
+		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41} = {A996571E-09AA-45D2-A935-32825BB89F2E}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59B6732E-6E45-4F92-AECE-39844F69504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -326,5 +335,13 @@ Global
 		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CB2221A-27BC-41DB-9F3B-AFB1F3527CE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A2EF217-934C-4CB4-9CAA-269ACDA2E690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A2EF217-934C-4CB4-9CAA-269ACDA2E690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A2EF217-934C-4CB4-9CAA-269ACDA2E690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A2EF217-934C-4CB4-9CAA-269ACDA2E690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
