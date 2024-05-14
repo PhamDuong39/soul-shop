@@ -140,6 +140,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.StorageLoc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.StorageGitHub", "src\Modules\Storage\Github\Soul.Shop.Module.StorageGitHub\Soul.Shop.Module.StorageGitHub.csproj", "{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Minio.Abstractions", "src\Modules\Storage\Minio\Soul.Shop.Module.Minio.Abstractions\Soul.Shop.Module.Minio.Abstractions.csproj", "{0901811B-016E-4ACF-B4E3-B8F906134DBA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Minio", "src\Modules\Storage\Minio\Soul.Shop.Module.Minio\Soul.Shop.Module.Minio.csproj", "{182B0E9E-3093-4430-97FD-12A18459E6D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -209,6 +213,8 @@ Global
 		{A996571E-09AA-45D2-A935-32825BB89F2E} = {A2274651-916C-4AA1-BF69-20F3FEB2A80F}
 		{3A2EF217-934C-4CB4-9CAA-269ACDA2E690} = {6D730188-2210-439A-AA83-6458D2B25F76}
 		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41} = {A996571E-09AA-45D2-A935-32825BB89F2E}
+		{0901811B-016E-4ACF-B4E3-B8F906134DBA} = {6172C51E-0935-4032-9EA9-72E00BDEAA33}
+		{182B0E9E-3093-4430-97FD-12A18459E6D8} = {6172C51E-0935-4032-9EA9-72E00BDEAA33}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59B6732E-6E45-4F92-AECE-39844F69504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -343,5 +349,13 @@ Global
 		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8EC2955-A6D4-4B14-9E07-748A59D8EE41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0901811B-016E-4ACF-B4E3-B8F906134DBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0901811B-016E-4ACF-B4E3-B8F906134DBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0901811B-016E-4ACF-B4E3-B8F906134DBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0901811B-016E-4ACF-B4E3-B8F906134DBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{182B0E9E-3093-4430-97FD-12A18459E6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{182B0E9E-3093-4430-97FD-12A18459E6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{182B0E9E-3093-4430-97FD-12A18459E6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{182B0E9E-3093-4430-97FD-12A18459E6D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
