@@ -69,7 +69,7 @@ nunit-*.xml
 [Dd]ebugPS/
 [Rr]eleasePS/
 dlldata.c
-
+Soul.Shop.sln.DotSettings.user
 # Benchmark Results
 BenchmarkDotNet.Artifacts/
 

@@ -1,0 +1,88 @@
+<Solution>
+  <Folder Name="/src/tests/">
+    <Project Path="src\tests\Soul.Shop.Tests\Soul.Shop.Tests.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Storage/" />
+  <Folder Name="/src/Modules/SmsSend/">
+    <Project Path="src\Modules\Soul.Shop.Module.SmsSender\Soul.Shop.Module.SmsSender.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Shipping/">
+    <Project Path="src\Modules\Shipping\Soul.Shop.Module.Shipping.Abstractions\Soul.Shop.Module.Shipping.Abstractions.csproj" />
+    <Project Path="src\Modules\Shipping\Soul.Shop.Module.Shipping\Soul.Shop.Module.Shipping.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Shipments/">
+    <Project Path="src\Modules\Shipments\Soul.Shop.Module.Shipments.Abstractions\Soul.Shop.Module.Shipments.Abstractions.csproj" />
+    <Project Path="src\Modules\Shipments\Soul.Shop.Module.Shipments\Soul.Shop.Module.Shipments.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Schedule/">
+    <Project Path="src\Modules\Schedule\Soul.Shop.Module.Hangfire\Soul.Shop.Module.Hangfire.csproj" />
+    <Project Path="src\Modules\Schedule\Soul.Shop.Module.Schedule.Abstractions\Soul.Shop.Module.Schedule.Abstractions.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Reviews/">
+    <Project Path="src\Modules\Reviews\Soul.Shop.Module.Reviews.Abstractions\Soul.Shop.Module.Reviews.Abstractions.csproj" />
+    <Project Path="src\Modules\Reviews\Soul.Shop.Module.Reviews\Soul.Shop.Module.Reviews.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/PaymentGateway/" />
+  <Folder Name="/src/Modules/Orders/">
+    <Project Path="src\Modules\Orders\Soul.Shop.Module.Orders.Abstractions\Soul.Shop.Module.Orders.Abstractions.csproj" />
+    <Project Path="src\Modules\Orders\Soul.Shop.Module.Orders\Soul.Shop.Module.Orders.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/MessageBus/">
+    <Project Path="src\Modules\Soul.Shop.Modules.MessageQueueBus.Abstractions\Soul.Shop.Modules.MessageQueueBus.Abstractions.csproj" />
+    <Project Path="src\Modules\Soul.Shop.Modules.MessageQueueBus\Soul.Shop.Modules.MessageQueueBus.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Inventory/">
+    <Project Path="src\Modules\Inventory\Soul.Shop.Module.Inventory.Abstractions\Soul.Shop.Module.Inventory.Abstractions.csproj" />
+    <Project Path="src\Modules\Inventory\Soul.Shop.Module.Inventory\Soul.Shop.Module.Inventory.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Feedback/">
+    <Project Path="src\Modules\Feedback\Soul.Shop.Module.Feedbacks.Abstractions\Soul.Shop.Module.Feedbacks.Abstractions.csproj" />
+    <Project Path="src\Modules\Feedback\Soul.Shop.Module.Feedbacks\Soul.Shop.Module.Feedbacks.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Email/">
+    <Project Path="src\Modules\Email\Soul.Shop.Module.EmailSenderSmtp\Soul.Shop.Module.EmailSenderSmtp.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Data/">
+    <Project Path="src\Modules\Data\Soul.Shop.Module.SampleData\Soul.Shop.Module.SampleData.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Core/">
+    <Project Path="src\Modules\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj" />
+    <Project Path="src\Modules\Core\Soul.Shop.Module.Core\Soul.Shop.Module.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Catalog/">
+    <Project Path="src\Modules\Catalog\Soul.Shop.Module.Catalog.Abstractions\Soul.Shop.Module.Catalog.Abstractions.csproj" />
+    <Project Path="src\Modules\Catalog\Soul.Shop.Module.Catalog\Soul.Shop.Module.Catalog.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Carts/">
+    <Project Path="src\Modules\Carts\Soul.Shop.Module.ShoppingCart.Abstractions\Soul.Shop.Module.ShoppingCart.Abstractions.csproj" />
+    <Project Path="src\Modules\Carts\Soul.Shop.Module.ShoppingCart\Soul.Shop.Module.ShoppingCart.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Auth/ApiProfiler/">
+    <Project Path="src\Modules\Auth\ApiProfiler\Soul.Shop.Module.ApiProfilerAuth\Soul.Shop.Module.ApiProfilerAuth.csproj" />
+    <Project Path="src\Modules\Auth\ApiProfiler\Soul.Shop.Module.ApiProfiler\Soul.Shop.Module.ApiProfiler.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/Auth/">
+    <Project Path="src\Modules\Auth\Soul.Shop.Module.Auth\Soul.Shop.Module.Auth.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Host/">
+    <Project Path="src\Host\Soul.Shop.Api\Soul.Shop.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Core/">
+    <Project Path="src\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/" />
+  <Folder Name="/build/docker/api/">
+    <File Path="build\docker\api\docker-compose.api.develop.yml" />
+    <File Path="build\docker\api\docker-compose.api.staging.yml" />
+    <File Path="build\docker\api\docker-compose.api.production.yml" />
+  </Folder>
+  <Folder Name="/build/docker/">
+    <File Path="build\docker\docker-compose.setup.develop.yml" />
+    <File Path="build\docker\docker-compose.setup.staging.yml" />
+    <File Path="build\docker\docker-compose.setup.production.yml" />
+  </Folder>
+  <Folder Name="/build/">
+    <File Path="build\.dockerignore" />
+  </Folder>
+</Solution>

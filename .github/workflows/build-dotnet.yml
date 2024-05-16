@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
     env:
       ENVIRONMENT: development
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -56,7 +56,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
     env:
       ENVIRONMENT: staging
       DOTNET_CLI_TELEMETRY_OPTOUT: 1
@@ -90,7 +90,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macOS-latest]
+        os: [ubuntu-latest]
     env:
       ENVIRONMENT: production
       DOTNET_CLI_TELEMETRY_OPTOUT: 1

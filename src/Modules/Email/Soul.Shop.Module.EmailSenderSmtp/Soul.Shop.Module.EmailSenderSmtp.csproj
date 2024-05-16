@@ -7,12 +7,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj" />
+        <ProjectReference Include="..\..\Core\Soul.Shop.Module.Core.Abstractions\Soul.Shop.Module.Core.Abstractions.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="MailKit" Version="4.5.0" />
-      <PackageReference Include="MimeKit" Version="4.5.0" />
+        <PackageReference Include="MailKit" Version="4.5.0"/>
+        <PackageReference Include="MimeKit" Version="4.5.0"/>
     </ItemGroup>
 
 </Project>
