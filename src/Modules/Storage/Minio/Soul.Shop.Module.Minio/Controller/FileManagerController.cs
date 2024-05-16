@@ -211,6 +211,7 @@ public class FileManagerController(IFileManagerService fileManagerService) : Con
             401 => BadRequest(document),
             403 => BadRequest(document),
             404 => NotFound(document),
+            _ => throw new ArgumentOutOfRangeException()
         };
     }
 
