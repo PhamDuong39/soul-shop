@@ -1,6 +1,4 @@
-﻿
-
-using Soul.Shop.Module.Catalog.Abstractions.Entities;
+﻿using Soul.Shop.Module.Catalog.Abstractions.Entities;
 
 namespace Soul.Shop.Module.Catalog.Abstractions.ViewModels;
 

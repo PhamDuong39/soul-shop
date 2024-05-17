@@ -24,14 +24,14 @@
         <PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0"/>
         <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="10.0.0"/>
         <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
         <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.5.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.5.0"/>
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.5.0"/>
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Controllers\" />
+        <Folder Include="Controllers\"/>
         <Folder Include="Middlewares\"/>
     </ItemGroup>
 

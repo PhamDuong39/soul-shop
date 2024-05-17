@@ -21,7 +21,7 @@ public class EntityViewedHandler(
         {
             var model = await recentlyViewedProductRepository.Query()
                 .FirstOrDefaultAsync(x => x.ProductId == notification.EntityId && x.CustomerId == notification.UserId,
-                    cancellationToken: cancellationToken);
+                    cancellationToken);
 
             if (model == null)
             {

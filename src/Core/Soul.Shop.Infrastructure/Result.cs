@@ -1,4 +1,6 @@
-﻿namespace Soul.Shop.Infrastructure;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Soul.Shop.Infrastructure;
 
 public class Result
 {
@@ -6,39 +8,55 @@ public class Result
 
     public string Message { get; }
 
-    protected Result(bool success, string message)
+    public int StatusCode { get; set; }
+
+
+    protected Result(bool success, string message, int statusCode)
     {
         Success = success;
         Message = message;
+        StatusCode = statusCode;
     }
 
     public static Result Fail(string error)
     {
-        return new Result(false, error);
+        return new Result(false, error, StatusCodes.Status400BadRequest);
     }
 
-    public static Result Fail<TValue>(TValue value, string error)
+
+    public static Result Fail<TValue>(TValue value, string error, int statusCode)
     {
-        return new Result<TValue>(value, false, error);
+        return new Result<TValue>(value, false, error, statusCode);
+    }
+
+
+    public static Result SystemError(string error)
+    {
+        return new Result(false, error, StatusCodes.Status500InternalServerError);
+    }
+
+    public static Result SystemError<TValue>(TValue value, string error)
+    {
+        return new Result<TValue>(value, false, error, StatusCodes.Status500InternalServerError);
     }
 
     public static Result Ok()
     {
-        return new Result(true, null);
+        return new Result(true, "", StatusCodes.Status200OK);
     }
 
     public static Result<TValue> Ok<TValue>(TValue value)
     {
-        return new Result<TValue>(value, true, null);
+        return new Result<TValue>(value, true, "", StatusCodes.Status200OK);
     }
 
     public static Result<TValue> Ok<TValue>(TValue value, string message)
     {
-        return new Result<TValue>(value, true, message);
+        return new Result<TValue>(value, true, message, StatusCodes.Status200OK);
     }
 
     public static Result<TValue> Fail<TValue>(string error)
     {
-        return new Result<TValue>(default, false, error);
+        return new Result<TValue>(default, false, error, StatusCodes.Status400BadRequest);
     }
 }

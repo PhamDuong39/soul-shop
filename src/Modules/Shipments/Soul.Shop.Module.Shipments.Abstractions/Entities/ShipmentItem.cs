@@ -18,6 +18,7 @@ public class ShipmentItem : EntityBase
     public Shipment Shipment { get; set; }
 
     public int OrderItemId { get; set; }
+
     // bug: should be OrderItem
     public OrderItem OrderItem { get; set; }
 

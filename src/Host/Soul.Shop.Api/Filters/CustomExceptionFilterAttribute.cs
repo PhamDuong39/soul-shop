@@ -8,8 +8,7 @@ public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
 {
     public override void OnException(ExceptionContext context)
     {
-        if (context.Exception != null)
-            context.Result = new JsonResult(Result.Fail(context.Exception.Message));
+        context.Result = new JsonResult(Result.Fail(context.Exception.Message));
         context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         base.OnException(context);
     }

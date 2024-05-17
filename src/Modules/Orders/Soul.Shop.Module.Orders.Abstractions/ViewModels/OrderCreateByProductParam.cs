@@ -10,6 +10,5 @@ public class OrderCreateByProductParam
 
     public int Quantity { get; set; }
 
-    [StringLength(450)]
-    public string OrderNote { get; set; }
+    [StringLength(450)] public string OrderNote { get; set; }
 }

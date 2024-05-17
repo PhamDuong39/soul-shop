@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Soul.Shop.Infrastructure.Models;
+﻿using Soul.Shop.Infrastructure.Models;
 using Soul.Shop.Module.Core.Abstractions.Entities;
 using Soul.Shop.Module.Orders.Abstractions.Entities;
+using System.ComponentModel.DataAnnotations;
 
 namespace Soul.Shop.Module.Shipments.Abstractions.Entities;
 
@@ -14,6 +14,7 @@ public class Shipment : EntityBase
     }
 
     public int OrderId { get; set; }
+
     //bug: should be Order
     public Order Order { get; set; }
 
@@ -34,6 +35,7 @@ public class Shipment : EntityBase
     public int UpdatedById { get; set; }
 
     public User UpdatedBy { get; set; }
+
 
     public bool IsDeleted { get; set; }
 
