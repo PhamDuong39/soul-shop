@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
+      <ProjectReference Include="..\Soul.Shop.Module.Support.Abstractions\Soul.Shop.Module.Support.Abstractions.csproj" />
+    </ItemGroup>
+
+</Project>
