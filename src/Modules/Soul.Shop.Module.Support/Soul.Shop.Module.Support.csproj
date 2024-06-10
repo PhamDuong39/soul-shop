@@ -7,11 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Soul.Shop.Module.Shipments.Abstractions\Soul.Shop.Module.Shipments.Abstractions.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Controller\" />
+      <ProjectReference Include="..\..\Core\Soul.Shop.Infrastructure\Soul.Shop.Infrastructure.csproj" />
+      <ProjectReference Include="..\Soul.Shop.Module.Support.Abstractions\Soul.Shop.Module.Support.Abstractions.csproj" />
     </ItemGroup>
 
 </Project>
