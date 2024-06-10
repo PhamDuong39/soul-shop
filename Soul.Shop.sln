@@ -150,6 +150,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Support.Ab
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Support", "src\Modules\Soul.Shop.Module.Support\Soul.Shop.Module.Support.csproj", "{423D4428-6231-4702-B305-D70E9FD2628D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Payment.Abstractions", "src\Modules\PaymentGateway\Soul.Shop.Module.Payment.Abstractions\Soul.Shop.Module.Payment.Abstractions.csproj", "{6EACAC38-52AC-45B7-ABBA-55EA157C7309}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soul.Shop.Module.Payment", "src\Modules\PaymentGateway\Soul.Shop.Module.Payment\Soul.Shop.Module.Payment.csproj", "{AC26404A-81E2-4B17-A42C-DEB59B14486D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -224,6 +228,8 @@ Global
 		{803A4E4C-9DFA-46C0-A865-F03F7FAD8A16} = {C4CA5383-C9D8-4436-8906-9EA6B54E4FC1}
 		{BCE4177E-F6A6-4325-8C10-7B91900EFA55} = {803A4E4C-9DFA-46C0-A865-F03F7FAD8A16}
 		{423D4428-6231-4702-B305-D70E9FD2628D} = {803A4E4C-9DFA-46C0-A865-F03F7FAD8A16}
+		{6EACAC38-52AC-45B7-ABBA-55EA157C7309} = {52A6BFBF-EB03-4964-89F5-2B8E80A80697}
+		{AC26404A-81E2-4B17-A42C-DEB59B14486D} = {52A6BFBF-EB03-4964-89F5-2B8E80A80697}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{59B6732E-6E45-4F92-AECE-39844F69504A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -374,5 +380,13 @@ Global
 		{423D4428-6231-4702-B305-D70E9FD2628D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{423D4428-6231-4702-B305-D70E9FD2628D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{423D4428-6231-4702-B305-D70E9FD2628D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EACAC38-52AC-45B7-ABBA-55EA157C7309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EACAC38-52AC-45B7-ABBA-55EA157C7309}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EACAC38-52AC-45B7-ABBA-55EA157C7309}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EACAC38-52AC-45B7-ABBA-55EA157C7309}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC26404A-81E2-4B17-A42C-DEB59B14486D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC26404A-81E2-4B17-A42C-DEB59B14486D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC26404A-81E2-4B17-A42C-DEB59B14486D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC26404A-81E2-4B17-A42C-DEB59B14486D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

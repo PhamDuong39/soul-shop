@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace Soul.Shop.Module.Core.Extensions;
 
-public static class EFConfigurationProviderExtension
+public static class EfConfigurationProviderExtension
 {
     public static IConfigurationBuilder AddEntityFrameworkConfig(this IConfigurationBuilder builder,
         Action<DbContextOptionsBuilder> setup)

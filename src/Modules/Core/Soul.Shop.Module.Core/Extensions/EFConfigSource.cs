@@ -7,6 +7,6 @@ public class EFConfigSource(Action<DbContextOptionsBuilder> optionsAction) : ICo
 {
     public IConfigurationProvider Build(IConfigurationBuilder builder)
     {
-        return new EFConfigProvider(optionsAction);
+        return new EfConfigProvider(optionsAction);
     }
 }

@@ -1,57 +1,56 @@
+using AspNetCoreRateLimit;
 using Serilog;
+using Serilog.Debugging;
 using Soul.Shop.Api.Extension;
+using Soul.Shop.Module.Core.Extensions;
 
+namespace Soul.Shop.Api;
 
-try
+public class Program
 {
-    var builder = WebApplication.CreateBuilder(args);
-    // load up serilog configuraton
-    Log.Logger = new LoggerConfiguration()
-        .ReadFrom.Configuration(builder.Configuration)
-        .Enrich.FromLogContext()
-        .CreateLogger();
-    builder.Host.UseSerilog(Log.Logger);
-
-    Log.Information("Application startup services registration");
-
-    builder.Services.AddSwaggerExtension();
-    builder.Services.AddControllersExtension();
-    builder.Services.AddCorsExtension();
-    builder.Services.AddHealthChecks();
-    builder.Services.AddJWTAuthentication(builder.Configuration);
-    builder.Services.AddAuthorizationPolicies(builder.Configuration);
-    var app = builder.Build();
-
-    Log.Information("Application startup middleware registration");
-
-    if (app.Environment.IsDevelopment())
+    public static async Task Main(string[] args)
     {
-        app.UseDeveloperExceptionPage();
-    }
-    else
-    {
-        app.UseExceptionHandler("/Error");
-        app.UseHsts();
+        var webHost = CreateHostBuilder(args).Build();
+
+        using (var scope = webHost.Services.CreateScope())
+        {
+            // get the ClientPolicyStore instance
+            var clientPolicyStore = scope.ServiceProvider.GetRequiredService<IClientPolicyStore>();
+
+            // seed Client data from appsettings
+            await clientPolicyStore.SeedAsync();
+
+            // get the IpPolicyStore instance
+            var ipPolicyStore = scope.ServiceProvider.GetRequiredService<IIpPolicyStore>();
+
+            // seed IP data from appsettings
+            await ipPolicyStore.SeedAsync();
+        }
+
+        await webHost.RunAsync();
     }
 
-    app.UseSerilogRequestLogging();
-    app.UseHttpsRedirection();
-    app.UseRouting();
-    app.UseAuthentication();
-    app.UseAuthorization();
-    app.UseSwaggerExtension();
-    app.UseHealthChecks("/health");
-    app.MapControllers();
+    public static IHostBuilder CreateHostBuilder(string[] args)
+    {
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); }).ConfigureAppConfiguration(
+                (builderContext, config) =>
+                {
+                    var env = builderContext.HostingEnvironment;
+                    var configuration = config
+                        .AddJsonFile($"appsettings.json", true, true)
+                        .AddJsonFile($"appsettings.Modules.json", true, true)
+                        .AddJsonFile($"appsettings.{env.EnvironmentName}.json", true)
+                        .Build();
 
-    Log.Information("Application Starting");
+                    config.AddEntityFrameworkConfig(opt => opt.UseCustomizedDataStore(configuration));
 
-    app.Run();
-}
-catch (Exception ex)
-{
-    Log.Warning(ex, "An error occurred starting the application");
-}
-finally
-{
-    Log.CloseAndFlush();
+                    // load up serilog configuraton
+                    Log.Logger = new LoggerConfiguration()
+                        .ReadFrom.Configuration(configuration)
+                        .Enrich.FromLogContext()
+                        .CreateLogger();
+                    SelfLog.Enable(Console.WriteLine);
+                }).ConfigureLogging((loggingBuilder) => { loggingBuilder.AddSerilog(); });
+    }
 }
