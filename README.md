@@ -4,7 +4,7 @@
 
 [![Soul shop build with github actions](https://github.com/PhamDuong39/soul-shop/actions/workflows/blank.yml/badge.svg)](https://github.com/PhamDuong39/soul-shop/actions/workflows/blank.yml)
 # Introduction
-- Add your project logo.
+- Add your project logoa
 - Write a short introduction to the project.
 - If you are using badges, add them here.
 
