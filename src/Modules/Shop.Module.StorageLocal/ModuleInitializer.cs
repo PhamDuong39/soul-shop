@@ -11,7 +11,6 @@ public class ModuleInitializer : IModuleInitializer
 {
     public void ConfigureServices(IServiceCollection services, IConfiguration configuration)
     {
-        // 由于ShopDbContext，因此不能使用单例
         services.AddScoped<IStorageService, LocalStorageService>();
     }
 
