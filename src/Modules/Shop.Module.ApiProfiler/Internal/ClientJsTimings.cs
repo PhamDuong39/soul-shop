@@ -11,9 +11,7 @@ namespace Shop.Module.ApiProfiler.Internal;
 /// </summary>
 public class ResultRequest
 {
-    /// <summary>
-    /// The ID of the MiniProfiler both being requested, and that these client results are for.
-    /// </summary>
+
     public Guid? Id { get; set; }
 
     /// <summary>
