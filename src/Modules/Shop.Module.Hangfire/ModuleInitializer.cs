@@ -1,4 +1,5 @@
-﻿using Hangfire;
+﻿using System;
+using Hangfire;
 using Hangfire.Dashboard.BasicAuthorization;
 using Hangfire.MemoryStorage;
 using Hangfire.Redis;
@@ -13,6 +14,7 @@ using Shop.Module.Hangfire.Jobs;
 using Shop.Module.Hangfire.Models;
 using Shop.Module.Hangfire.Services;
 using Shop.Module.Schedule;
+using Shop.Module.Schedule.Abstractions;
 using StackExchange.Redis;
 
 namespace Shop.Module.Hangfire;
@@ -70,7 +72,12 @@ public class ModuleInitializer : IModuleInitializer
                 SslRedirect = false,
                 LoginCaseSensitive = true,
                 Users = new[]
-                    { new BasicAuthAuthorizationUser { Login = config?.Username, PasswordClear = config?.Password } }
+                {
+                    new BasicAuthAuthorizationUser
+                    {
+                        Login = config?.Username, PasswordClear = config?.Password
+                    }
+                }
             };
             app.UseHangfireDashboard(options: new DashboardOptions
             {

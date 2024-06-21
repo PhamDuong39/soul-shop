@@ -7,14 +7,9 @@ using System.Threading.Tasks;
 
 namespace Shop.Module.Hangfire.Jobs;
 
-public class HealthJob : BackgroundService
+public class HealthJob(ILogger<HealthJob> logger) : BackgroundService
 {
-    private readonly ILogger _logger;
-
-    public HealthJob(ILogger<HealthJob> logger)
-    {
-        _logger = logger;
-    }
+    private readonly ILogger _logger = logger;
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
