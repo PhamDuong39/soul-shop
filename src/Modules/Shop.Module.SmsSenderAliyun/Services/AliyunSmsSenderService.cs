@@ -21,12 +21,16 @@ using System.Web;
 
 namespace Shop.Module.SmsSenderAliyun.Services;
 
+
 /// <summary>
-/// https://help.aliyun.com/document_detail/101414.html?spm=a2c4g.11186623.6.612.450fbc45kUV6Vu
-/// https://help.aliyun.com/document_detail/101874.html?spm=a2c4g.11186623.2.11.136134fc4GnNvp
-/// https://github.com/aliyun/aliyun-openapi-net-sdk/blob/master/README_zh.md
+///
 /// </summary>
-public class AliyunSmsSenderService : ISmsSender
+public class AliyunSmsSenderService(
+    ILoggerFactory loggerFactory,
+    IOptionsMonitor<AliyunSmsOptions> options,
+    IRepository<SmsSend> smsSendRepository,
+    IStaticCacheManager cacheManager)
+    : ISmsSender
 {
     private const string SEPARATOR = "&";
 
@@ -35,31 +39,12 @@ public class AliyunSmsSenderService : ISmsSender
     private readonly string action = "SendSms";
     private readonly string format = "JSON";
     private readonly string domain = "dysmsapi.aliyuncs.com";
-    private readonly string regionId;
-    private readonly string accessKeyId;
-    private readonly string accessKeySecret;
-    private readonly bool isTest;
+    private readonly string regionId = options.CurrentValue.RegionId;
+    private readonly string accessKeyId = options.CurrentValue.AccessKeyId;
+    private readonly string accessKeySecret = options.CurrentValue.AccessKeySecret;
+    private readonly bool isTest = options.CurrentValue.IsTest;
 
-    private readonly ILogger _logger;
-    private readonly IRepository<SmsSend> _smsSendRepository;
-    private readonly IStaticCacheManager _cacheManager;
-
-    public AliyunSmsSenderService(
-        ILoggerFactory loggerFactory,
-        IOptionsMonitor<AliyunSmsOptions> options,
-        IRepository<SmsSend> smsSendRepository,
-        IStaticCacheManager cacheManager)
-    {
-        _logger = loggerFactory.CreateLogger<AliyunSmsSenderService>();
-        _smsSendRepository = smsSendRepository;
-        _cacheManager = cacheManager;
-
-
-        regionId = options.CurrentValue.RegionId;
-        accessKeyId = options.CurrentValue.AccessKeyId;
-        accessKeySecret = options.CurrentValue.AccessKeySecret;
-        isTest = options.CurrentValue.IsTest;
-    }
+    private readonly ILogger _logger = loggerFactory.CreateLogger<AliyunSmsSenderService>();
 
     public async Task<bool> SendSmsAsync(SmsSend model)
     {
@@ -119,8 +104,8 @@ public class AliyunSmsSenderService : ISmsSender
             if (model != null)
             {
                 _logger.LogDebug($"sms: {JsonConvert.SerializeObject(model)}");
-                _smsSendRepository.Add(model);
-                await _smsSendRepository.SaveChangesAsync();
+                smsSendRepository.Add(model);
+                await smsSendRepository.SaveChangesAsync();
             }
         }
 
@@ -140,7 +125,7 @@ public class AliyunSmsSenderService : ISmsSender
             return (false, "手机号格式错误");
 
         var cacheKey = ShopKeys.RegisterPhonePrefix + phone;
-        if (_cacheManager.IsSet(cacheKey)) return (false, "请求频繁，请稍后重试");
+        if (cacheManager.IsSet(cacheKey)) return (false, "请求频繁，请稍后重试");
 
         var code = captcha;
         var success = await SendSmsAsync(new SmsSend()
@@ -154,11 +139,11 @@ public class AliyunSmsSenderService : ISmsSender
         });
         if (success)
         {
-            _cacheManager.Set(cacheKey, code, 1);
-            return (true, "发送成功");
+            cacheManager.Set(cacheKey, code, 1);
+            return (true, "Sent successfully");
         }
 
-        return (false, "发送短信验证码失败");
+        return (false, "sent failed");
     }
 
     private static string SignString(string source, string accessSecret)
