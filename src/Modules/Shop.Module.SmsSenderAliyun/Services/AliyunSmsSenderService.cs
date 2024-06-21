@@ -91,7 +91,7 @@ public class AliyunSmsSenderService(
             }
             else
             {
-                model.Message = "发送短信失败";
+                model.Message = "http status code: " + result.StatusCode + ", response: " + result.Response;
             }
         }
         catch (Exception ex)
@@ -122,10 +122,10 @@ public class AliyunSmsSenderService(
         captcha = captcha.Trim();
         var regex = new Regex(@"^\d{11}$");
         if (!regex.IsMatch(phone))
-            return (false, "手机号格式错误");
+            return (false, "Invalid phone number");
 
         var cacheKey = ShopKeys.RegisterPhonePrefix + phone;
-        if (cacheManager.IsSet(cacheKey)) return (false, "请求频繁，请稍后重试");
+        if (cacheManager.IsSet(cacheKey)) return (false, "The verification code has been sent, please try again later.");
 
         var code = captcha;
         var success = await SendSmsAsync(new SmsSend()
@@ -134,7 +134,7 @@ public class AliyunSmsSenderService(
             Value = code,
             TemplateType = SmsTemplateType.Captcha,
             TemplateCode = "SMS_70055704",
-            SignName = "天网",
+            SignName = "Shop",
             TemplateParam = JsonConvert.SerializeObject(new { code })
         });
         if (success)
