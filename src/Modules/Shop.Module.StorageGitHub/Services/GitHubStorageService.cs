@@ -1,4 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.IO;
+using System.Net;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
@@ -8,31 +12,20 @@ using Shop.Module.Core.Entities;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.Services;
 using Shop.Module.StorageGitHub.Models;
-using System;
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
 
-namespace Shop.Module.StorageGitHub;
+namespace Shop.Module.StorageGitHub.Services;
 
 /// <summary>
 /// https://developer.github.com/v3/
 /// https://developer.github.com/v3/repos/contents/
 /// </summary>
-public class GitHubStorageService : IStorageService
+public class GitHubStorageService(
+    IOptionsMonitor<StorageGitHubOptions> options,
+    IRepository<Media> mediaRepository)
+    : IStorageService
 {
+
     private const string ContentHost = "https://raw.githubusercontent.com";
-
-    private readonly IOptionsMonitor<StorageGitHubOptions> _options;
-    private readonly IRepository<Media> _mediaRepository;
-
-    public GitHubStorageService(
-        IOptionsMonitor<StorageGitHubOptions> options,
-        IRepository<Media> mediaRepository)
-    {
-        _options = options;
-        _mediaRepository = mediaRepository;
-    }
 
     public async Task DeleteMediaAsync(string fileName)
     {
@@ -41,16 +34,14 @@ public class GitHubStorageService : IStorageService
 
     public async Task<string> GetMediaUrl(string fileName)
     {
-        var options = _options.CurrentValue;
+        var options1 = options.CurrentValue;
 
-        if (options == null || string.IsNullOrWhiteSpace(fileName))
+        if (options1 == null || string.IsNullOrWhiteSpace(fileName))
             return string.Empty;
-        var res = options.RepositoryName.Trim().Trim('/');
-        var bra = options.BranchName.Trim().Trim('/');
-        var path = options.SavePath.Trim().Trim('/');
+        var res = options1.RepositoryName.Trim().Trim('/');
+        var bra = options1.BranchName.Trim().Trim('/');
+        var path = options1.SavePath.Trim().Trim('/');
         var pathInName = $"{fileName.Substring(0, 2)}/{fileName.Substring(2, 2)}/{fileName.Substring(4, 2)}";
-
-        //https://raw.githubusercontent.com/trueai-org/data/master/images/44/b7/96/44b796c968f4703a871b0f6f06fe85b1636844361657344457.jpg
         return $"{ContentHost.TrimEnd('/')}/{res}/{bra}/{path}/{pathInName}/{fileName}";
     }
 
@@ -63,12 +54,12 @@ public class GitHubStorageService : IStorageService
         }
 
         var hsMd5 = Md5Helper.Encrypt(bytes);
-        var media = await _mediaRepository.Query(c => c.Md5 == hsMd5).FirstOrDefaultAsync();
+        var media = await mediaRepository.Query(c => c.Md5 == hsMd5).FirstOrDefaultAsync();
         if (media != null)
             return media;
 
-        var result = await Task.Run(() => { return Upload(bytes, hsMd5, fileName); });
-        if (result == null || result.Content == null ||
+        var result = await Task.Run(() => Upload(bytes, hsMd5, fileName));
+        if (result?.Content == null ||
             string.IsNullOrWhiteSpace(result.Content.DownloadUrl)) return null;
         media = new Media()
         {
@@ -92,8 +83,8 @@ public class GitHubStorageService : IStorageService
                 media.MediaType = MediaType.File;
         }
 
-        _mediaRepository.Add(media);
-        await _mediaRepository.SaveChangesAsync();
+        mediaRepository.Add(media);
+        await mediaRepository.SaveChangesAsync();
         return media;
     }
 
@@ -104,7 +95,7 @@ public class GitHubStorageService : IStorageService
 
         byte[] bytes;
         var uploadFileName = Path.GetFileName(filePath);
-        using (var fileStream = File.OpenRead(filePath))
+        await using (var fileStream = File.OpenRead(filePath))
         {
             bytes = new byte[fileStream.Length];
             fileStream.Read(bytes, 0, bytes.Length);
@@ -117,24 +108,22 @@ public class GitHubStorageService : IStorageService
 
     private async Task<string> GetHostForUrlFrefix()
     {
-        var options = _options.CurrentValue;
-        if (options == null)
+        var options1 = options.CurrentValue;
+        if (options1 == null)
             return string.Empty;
-        var res = options.RepositoryName.Trim().Trim('/');
-        var bra = options.BranchName.Trim().Trim('/');
+        var res = options1.RepositoryName.Trim().Trim('/');
+        var bra = options1.BranchName.Trim().Trim('/');
         return $"{ContentHost.TrimEnd('/')}/{res}/{bra}";
     }
 
     private async Task<GitHubDataResult> Upload(byte[] bytes, string hsMd5, string uploadFileName)
     {
-        if (bytes == null)
-            throw new ArgumentNullException(nameof(bytes));
+        ArgumentNullException.ThrowIfNull(bytes);
         if (string.IsNullOrWhiteSpace(hsMd5))
             throw new ArgumentNullException(nameof(hsMd5));
-        if (uploadFileName == null)
-            throw new ArgumentNullException(nameof(uploadFileName));
+        ArgumentNullException.ThrowIfNull(uploadFileName);
 
-        var setting = _options.CurrentValue;
+        var setting = options.CurrentValue;
         if (setting == null)
             throw new ArgumentNullException(nameof(setting));
         if (setting.Host == null)

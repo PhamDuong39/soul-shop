@@ -16,14 +16,14 @@ public class LocalStorageService : IStorageService
 {
     private const string MediaRootFoler = "user-content";
 
-    private readonly string host = "";
+    private readonly string _host = "";
     private readonly IRepository<Media> _mediaRepository;
 
     public LocalStorageService(
         IRepository<Media> mediaRepository,
         IOptionsMonitor<ShopOptions> options)
     {
-        host = options.CurrentValue.ApiHost;
+        _host = options.CurrentValue.ApiHost;
         _mediaRepository = mediaRepository;
     }
 
@@ -35,19 +35,19 @@ public class LocalStorageService : IStorageService
 
     public async Task<string> GetMediaUrl(string fileName)
     {
-        if (fileName == GlobalConfiguration.NoImage) return await Task.FromResult($"{host.Trim('/')}/{fileName}");
+        if (fileName == GlobalConfiguration.NoImage) return await Task.FromResult($"{_host.Trim('/')}/{fileName}");
 
-        return await Task.FromResult($"{host.Trim('/')}/{MediaRootFoler}/{fileName}");
+        return await Task.FromResult($"{_host.Trim('/')}/{MediaRootFoler}/{fileName}");
     }
 
     public async Task<Media> SaveMediaAsync(Stream mediaBinaryStream, string fileName, string mimeType = null)
     {
-        var hsMd5 = string.Empty;
+        string hsMd5;
         var size = 0;
         Media media = null;
 
         var filePath = Path.Combine(GlobalConfiguration.WebRootPath, MediaRootFoler, fileName);
-        using (var output = new FileStream(filePath, FileMode.Create))
+        await using (var output = new FileStream(filePath, FileMode.Create))
         {
             //if (!File.Exists(filePath))
 
@@ -70,9 +70,9 @@ public class LocalStorageService : IStorageService
                 FileName = fileName,
                 FileSize = size,
                 Hash = "",
-                Url = $"{host.Trim('/')}/{MediaRootFoler}/{fileName}",
+                Url = $"{_host.Trim('/')}/{MediaRootFoler}/{fileName}",
                 Path = $"/{MediaRootFoler}/{fileName}",
-                Host = host,
+                Host = _host,
                 Md5 = hsMd5
             };
             if (!string.IsNullOrWhiteSpace(mimeType))
@@ -90,9 +90,9 @@ public class LocalStorageService : IStorageService
         }
         else
         {
-            media.Url = $"{host.Trim('/')}/{MediaRootFoler}/{fileName}";
+            media.Url = $"{_host.Trim('/')}/{MediaRootFoler}/{fileName}";
             media.Path = $"/{MediaRootFoler}/{fileName}";
-            media.Host = host;
+            media.Host = _host;
         }
 
         await _mediaRepository.SaveChangesAsync();

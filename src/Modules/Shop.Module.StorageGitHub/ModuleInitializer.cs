@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Shop.Infrastructure.Modules;
 using Shop.Module.Core.Services;
+using Shop.Module.StorageGitHub.Services;
 
 namespace Shop.Module.StorageGitHub;
 
