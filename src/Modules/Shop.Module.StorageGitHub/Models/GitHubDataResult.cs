@@ -4,5 +4,6 @@ namespace Shop.Module.StorageGitHub.Models;
 
 public class GitHubDataResult
 {
-    [JsonProperty("content")] public GitHubDataContentResult Content { get; set; }
+    [JsonProperty("content")]
+    public GitHubDataContentResult Content { get; set; }
 }
