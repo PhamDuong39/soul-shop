@@ -56,26 +56,23 @@ public static class ServiceCollectionExtensions
                 }
             });
 
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
-            {
-                Description = "在下框中输入请求头中需要添加 Jwt 授权 Token: Bearer {Token}",
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
-                BearerFormat = "JWT",
-                Scheme = "Bearer"
-            });
+            c.AddSecurityDefinition("Bearer",
+                new OpenApiSecurityScheme()
+                {
+                    Description = "在下框中输入请求头中需要添加 Jwt 授权 Token: Bearer {Token}",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
 
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
                 {
                     new OpenApiSecurityScheme
                     {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
+                        Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" }
                     },
                     new string[] { }
                 }
@@ -112,8 +109,6 @@ public static class ServiceCollectionExtensions
                     var xmlSubPath = Path.Combine(AppContext.BaseDirectory, xmlSubFile);
                     if (File.Exists(xmlSubPath)) c.IncludeXmlComments(xmlSubPath, true);
                 }
-
-
             }
 
             var xmlPath = Path.Combine(AppContext.BaseDirectory, $"{assemblyMame}.xml");
@@ -223,25 +218,29 @@ public static class ServiceCollectionExtensions
 
     public static void AddCustomizedDataStore(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContextPool<ShopDbContext>(options => options.UseCustomizedDataStore(configuration));
+        services.AddDbContext<ShopDbContext>(options =>
+        {
+            options.UseCustomizedDataStore(configuration);
+            options.EnableDetailedErrors();
+        });
     }
 
     public static void UseCustomizedDataStore(this DbContextOptionsBuilder options, IConfiguration configuration)
     {
-        // SQL Server
-        //options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Shop.WebApi"));
-
-        //// MySql
-        //options.UseMySql(configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("Shop.WebApi"));
-
-        // MySql
         var connectionString = configuration.GetConnectionString("DefaultConnection");
+        var serverVersion = new MySqlServerVersion(new Version(8, 4, 0));
 
-        // ServerVersion(new )
-        var serverVersion = new MySqlServerVersion(new Version(8, 0, 26));
-
-        options.UseMySql(connectionString, serverVersion, b => b.MigrationsAssembly("Shop.WebApi"));
+        options.UseMySql(connectionString, serverVersion, mysqlOptions =>
+        {
+            mysqlOptions.MigrationsAssembly("Shop.WebApi");
+            mysqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null
+            );
+        });
     }
+
 
     public static void AddCustomizedIdentity(this IServiceCollection services, IConfiguration configuration)
     {

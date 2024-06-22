@@ -1,6 +1,14 @@
 ﻿services:
   shop.webapi:
     image: shop.webapi
+    ports:
+      - "9000:8080"
+    networks:
+      - shop-net
+    depends_on:
+      - mysql
+      - redis
+      - rabbitmq
     build:
       context: .
       dockerfile: src/Shop.WebApi/Dockerfile

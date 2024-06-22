@@ -4,6 +4,7 @@
 
 using StackExchange.Redis;
 using System;
+using Microsoft.Extensions.Options;
 using Shop.Module.EmailSenderSmtp;
 
 namespace Shop.Module.Core.Services
@@ -12,22 +13,13 @@ namespace Shop.Module.Core.Services
     {
         private readonly IDatabase _database;
 
-        /// <summary>
-        ///  Constructor
-        /// </summary>
-        /// <param name="redis"></param>
-        /// <param name="options"></param>
-        public RedisService( RedisOption options)
+        public RedisService(IOptions<RedisOption> redisOption)
         {
-            _database =  ConnectionMultiplexer.ConnectAsync(options.RedisCachingConnection).Result.GetDatabase();
+            var options = ConfigurationOptions.Parse(redisOption.Value.RedisCachingConnection);
+            var connection = ConnectionMultiplexer.Connect(options);
+            _database = connection.GetDatabase();
         }
 
-        /// <summary>
-        /// Save key value
-        /// </summary>
-        /// <param name="key"></param>
-        /// <param name="value"></param>
-        /// <param name="expiry"></param>
         public void Set(string key, string value, TimeSpan? expiry = null)
         {
             if (expiry.HasValue)
