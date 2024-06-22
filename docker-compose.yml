@@ -1,6 +1,9 @@
-version: '3.4'
-
-services:
+﻿services:
+  shop.webapi:
+    image: shop.webapi
+    build:
+      context: .
+      dockerfile: src/Shop.WebApi/Dockerfile
   redis:
     image: redis:latest
     container_name: demo-shop-redis

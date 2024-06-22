@@ -1,0 +1,50 @@
+[
+  {
+    "Id": 1,
+    "Name": "China",
+    "TwoLetterIsoCode": "CN",
+    "ThreeLetterIsoCode": "CHN",
+    "NumericIsoCode": 156,
+    "IsBillingEnabled": 0,
+    "IsShippingEnabled": 1,
+    "IsCityEnabled": 1,
+    "IsDistrictEnabled": 1,
+    "DisplayOrder": 0,
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-01-01 00:00:00.000000",
+    "UpdatedOn": "2023-12-04 11:11:03.090021"
+  },
+  {
+    "Id": 2,
+    "Name": "United States",
+    "TwoLetterIsoCode": "US",
+    "ThreeLetterIsoCode": "USA",
+    "NumericIsoCode": 840,
+    "IsBillingEnabled": 0,
+    "IsShippingEnabled": 0,
+    "IsCityEnabled": 1,
+    "IsDistrictEnabled": 1,
+    "DisplayOrder": 0,
+    "IsPublished": 0,
+    "IsDeleted": 1,
+    "CreatedOn": "2019-01-01 00:00:00.000000",
+    "UpdatedOn": "2022-03-02 15:46:05.518020"
+  },
+  {
+    "Id": 3,
+    "Name": "Italia",
+    "TwoLetterIsoCode": "IT",
+    "ThreeLetterIsoCode": "ITA",
+    "NumericIsoCode": 3,
+    "IsBillingEnabled": 0,
+    "IsShippingEnabled": 1,
+    "IsCityEnabled": 1,
+    "IsDistrictEnabled": 1,
+    "DisplayOrder": 2,
+    "IsPublished": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-06-08 04:49:45.500526",
+    "UpdatedOn": "2023-09-11 11:37:16.943934"
+  }
+]

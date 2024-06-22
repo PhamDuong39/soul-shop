@@ -37,7 +37,7 @@ public class ShopDbContext : IdentityDbContext<User, Role, int, IdentityUserClai
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         // Enable sensitive data logging
-        optionsBuilder.EnableSensitiveDataLogging();
+        // optionsBuilder.EnableSensitiveDataLogging();
 
         // Add your other configuration options here
     }

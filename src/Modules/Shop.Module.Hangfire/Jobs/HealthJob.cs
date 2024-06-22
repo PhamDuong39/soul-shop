@@ -19,8 +19,8 @@ public class HealthJob(ILogger<HealthJob> logger) : BackgroundService
 
             _logger.LogInformation("Health Job Starting");
 
-            RecurringJob.AddOrUpdate("HealthJob",
-                () => Console.WriteLine($"Health Job Running {DateTime.Now:yyyy:MM:dd HH:mm:ss.fff}"), Cron.Minutely());
+            // RecurringJob.AddOrUpdate("HealthJob",
+            //     () => Console.WriteLine($"Health Job Running {DateTime.Now:yyyy:MM:dd HH:mm:ss.fff}"), Cron.Minutely());
 
             _logger.LogInformation("Health Job Started");
         }

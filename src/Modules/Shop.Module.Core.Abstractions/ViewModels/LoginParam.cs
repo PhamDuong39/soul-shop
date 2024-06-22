@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Core.ViewModels;
+namespace Shop.Module.Core.Abstractions.ViewModels;
 
 public class LoginParam
 {
-    [Required(ErrorMessage = "请输入用户名/邮箱/手机号码")]
+    [Required(ErrorMessage = "Please enter username, email, mobile phone number")]
     public string Name { get; set; }
 
     [Required]

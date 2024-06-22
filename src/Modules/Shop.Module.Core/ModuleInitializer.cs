@@ -31,6 +31,7 @@ public class ModuleInitializer : IModuleInitializer
         services.AddTransient<IAppSettingService, AppSettingService>();
         services.AddTransient<IWidgetInstanceService, WidgetInstanceService>();
         services.AddTransient<IUserAddressService, UserAddressService>();
+        services.AddTransient<IRedisService, RedisService>();
 
         services.AddScoped<IWorkContext, WorkContext>();
 

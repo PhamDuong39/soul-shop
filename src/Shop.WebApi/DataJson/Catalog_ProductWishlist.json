@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "ProductId": 1,
+    "CustomerId": 1359,
+    "Quantity": 0,
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-03-31 09:13:49.261693",
+    "UpdatedOn": "2022-03-31 09:13:49.267770"
+  },
+  {
+    "Id": 2,
+    "ProductId": 32,
+    "CustomerId": 1359,
+    "Quantity": 0,
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-04-01 17:07:20.536904",
+    "UpdatedOn": "2022-04-01 17:07:20.543048"
+  }
+]

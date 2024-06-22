@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Shop.Module.Core.ViewModels;
+namespace Shop.Module.Core.Abstractions.ViewModels;
 
-public class LoginPhoneGetCaptchaParam
+public class LoginEmailGetCaptchaParam
 {
     [Required]
-    [RegularExpression(@"^\d{11}$", ErrorMessage = "手机号格式错误")]
-    public string Phone { get; set; }
+    [EmailAddress(ErrorMessage = "Invalid email address")]
+    public string Email { get; set; }
 }

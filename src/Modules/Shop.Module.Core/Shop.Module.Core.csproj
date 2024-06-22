@@ -18,6 +18,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj"/>
         <ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj"/>
+        <ProjectReference Include="..\Shop.Module.EmailSenderSmtp\Shop.Module.EmailSenderSmtp.csproj" />
         <ProjectReference Include="..\Shop.Module.Schedule.Abstractions\Shop.Module.Schedule.Abstractions.csproj"/>
     </ItemGroup>
 

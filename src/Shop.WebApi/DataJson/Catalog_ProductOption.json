@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "Name": "Color",
+    "DisplayType": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-01-01 00:00:00.000000",
+    "UpdatedOn": "2019-01-01 00:00:00.000000"
+  },
+  {
+    "Id": 2,
+    "Name": "Size",
+    "DisplayType": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-01-01 00:00:00.000000",
+    "UpdatedOn": "2019-01-01 00:00:00.000000"
+  },
+  {
+    "Id": 3,
+    "Name": "墓碑颜色",
+    "DisplayType": 1,
+    "IsDeleted": 1,
+    "CreatedOn": "2021-05-25 13:49:48.351674",
+    "UpdatedOn": "2022-03-02 15:35:49.783954"
+  },
+  {
+    "Id": 4,
+    "Name": "衣服大小",
+    "DisplayType": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2021-05-25 16:08:30.661510",
+    "UpdatedOn": "2021-05-25 16:08:30.661512"
+  },
+  {
+    "Id": 5,
+    "Name": "云南千珲科技投资有限公司",
+    "DisplayType": 0,
+    "IsDeleted": 1,
+    "CreatedOn": "2021-05-26 10:41:03.635999",
+    "UpdatedOn": "2021-12-03 10:41:13.377411"
+  },
+  {
+    "Id": 6,
+    "Name": "989",
+    "DisplayType": 0,
+    "IsDeleted": 1,
+    "CreatedOn": "2021-05-26 15:21:25.218841",
+    "UpdatedOn": "2022-03-02 15:36:04.746126"
+  },
+  {
+    "Id": 7,
+    "Name": "送达",
+    "DisplayType": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2021-06-18 15:41:17.093547",
+    "UpdatedOn": "2021-06-18 15:41:17.093548"
+  },
+  {
+    "Id": 8,
+    "Name": "fdsfsd",
+    "DisplayType": 0,
+    "IsDeleted": 1,
+    "CreatedOn": "2021-06-24 11:26:34.674323",
+    "UpdatedOn": "2022-03-02 15:35:57.428611"
+  },
+  {
+    "Id": 9,
+    "Name": "男",
+    "DisplayType": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2021-07-24 18:56:38.404505",
+    "UpdatedOn": "2021-07-24 18:56:53.485801"
+  },
+  {
+    "Id": 10,
+    "Name": "衣物颜色",
+    "DisplayType": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2021-12-07 17:18:16.483464",
+    "UpdatedOn": "2022-10-11 17:14:09.868588"
+  },
+  {
+    "Id": 11,
+    "Name": "女",
+    "DisplayType": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-09-22 17:26:38.156973",
+    "UpdatedOn": "2024-04-23 08:57:01.477330"
+  },
+  {
+    "Id": 12,
+    "Name": "女",
+    "DisplayType": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-09-22 17:26:45.731770",
+    "UpdatedOn": "2022-09-22 17:26:45.731771"
+  },
+  {
+    "Id": 13,
+    "Name": "aaa",
+    "DisplayType": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-12-04 16:18:34.803625",
+    "UpdatedOn": "2024-04-04 08:25:25.210534"
+  },
+  {
+    "Id": 14,
+    "Name": "222",
+    "DisplayType": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2024-04-07 00:04:14.069834",
+    "UpdatedOn": "2024-04-07 00:04:14.069836"
+  },
+  {
+    "Id": 15,
+    "Name": "LIU HE",
+    "DisplayType": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2024-04-25 08:21:28.508487",
+    "UpdatedOn": "2024-04-25 08:21:28.508489"
+  }
+]

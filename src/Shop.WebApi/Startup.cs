@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Shop.WebApi.Extensions;
 using System.Reflection;
+using Shop.Module.EmailSenderSmtp;
 
 namespace Shop.WebApi;
 
@@ -35,6 +36,12 @@ public class Startup
         services.AddSwaggerDoc("Module Shop Api");
 
         services.AddControllers();
+
+        //add option bind EmailSmtpOptions
+        services.Configure<EmailSmtpOptions>(Configuration.GetSection("EmailSmtpOptions"));
+
+        //add option bind RedisOption
+        services.Configure<RedisOption>(Configuration.GetSection("RedisOption"));
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

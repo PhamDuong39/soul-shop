@@ -20,7 +20,7 @@ public class EmailSender : IEmailSender
 {
     private readonly EmailSmtpOptions _options;
     private readonly IRepository<EmailSend> _emilSendRepository;
-    private readonly ILogger<EmailSender> _logger
+    private readonly ILogger<EmailSender> _logger;
 
     public EmailSender(
         IRepository<EmailSend> emilSendRepository,

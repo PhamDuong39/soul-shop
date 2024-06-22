@@ -12,6 +12,7 @@ using Microsoft.Extensions.Options;
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Infrastructure.Helpers;
+using Shop.Module.Core.Abstractions.ViewModels;
 using Shop.Module.Core.Entities;
 using Shop.Module.Core.Extensions;
 using Shop.Module.Core.Models;
@@ -21,6 +22,22 @@ using Shop.Module.Schedule.Abstractions;
 
 namespace Shop.Module.Core.Controllers;
 
+/// <summary>
+/// Mục đich dùng để xác thực tài khoản
+/// </summary>
+/// <param name="userManager"></param>
+/// <param name="signInManager"></param>
+/// <param name="smsSendRepository"></param>
+/// <param name="emailSender"></param>
+/// <param name="smsSender"></param>
+/// <param name="loggerFactory"></param>
+/// <param name="userRepository"></param>
+/// <param name="tokenService"></param>
+/// <param name="workContext"></param>
+/// <param name="jobService"></param>
+/// <param name="mediaRepository"></param>
+/// <param name="accountService"></param>
+/// <param name="config"></param>
 [ApiController]
 [Authorize]
 [Route("api/account")]
@@ -34,35 +51,25 @@ public class AccountApiController(
     IRepository<User> userRepository,
     ITokenService tokenService,
     IWorkContext workContext,
+    IRedisService redisService,
     IJobService jobService,
     IRepository<Media> mediaRepository,
     IAccountService accountService,
     IOptionsMonitor<ShopOptions> config) : ControllerBase
 {
-    private readonly IRepository<SmsSend> _smsSendRepository = smsSendRepository;
-    private readonly UserManager<User> _userManager = userManager;
-    private readonly SignInManager<User> _signInManager = signInManager;
-    private readonly IEmailSender _emailSender = emailSender;
-    private readonly ISmsSender _smsSender = smsSender;
     private readonly ILogger _logger = loggerFactory.CreateLogger<AccountApiController>();
-    private readonly IRepository<User> _userRepository = userRepository;
-    private readonly ITokenService _tokenService = tokenService;
-    private readonly IWorkContext _workContext = workContext;
     private readonly string _webHost = config.CurrentValue.WebHost;
-    private readonly IJobService _jobService = jobService;
-    private readonly IRepository<Media> _mediaRepository = mediaRepository;
-    private readonly IAccountService _accountService = accountService;
 
     /// <summary>
-    /// 
+    /// Get information of current user
     /// </summary>
     /// <returns></returns>
     [HttpGet()]
     public async Task<Result> CurrentUser()
     {
-        var user = await _workContext.GetCurrentUserAsync();
+        var user = await workContext.GetCurrentUserAsync();
         if (user == null)
-            return Result.Fail("Error");
+            return Result.Fail("Error when get user");
         var result = new AccountResult()
         {
             UserId = user.Id,
@@ -83,19 +90,20 @@ public class AccountApiController(
     }
 
     /// <summary>
+    ///  Update current user
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
     [HttpPut()]
     public async Task<Result> PutCurrentUser(UserPutParam param)
     {
-        var user = await _workContext.GetCurrentUserAsync();
+        var user = await workContext.GetCurrentUserAsync();
         if (user == null)
-            return Result.Fail("Error");
+            return Result.Fail("Error when put user");
 
         if (param.MediaId.HasValue)
         {
-            var media = await _mediaRepository.FirstOrDefaultAsync(param.MediaId.Value);
+            var media = await mediaRepository.FirstOrDefaultAsync(param.MediaId.Value);
             if (media != null)
             {
                 user.AvatarId = media.Id;
@@ -104,65 +112,27 @@ public class AccountApiController(
         }
 
         user.FullName = param.FullName;
-        //user.AdminRemark = param.AdminRemark;
-
-        await _userManager.UpdateAsync(user);
-        await _signInManager.SignInAsync(user, false);
+        await userManager.UpdateAsync(user);
+        await signInManager.SignInAsync(user, false);
         return Result.Ok();
     }
 
     /// <summary>
+    /// Create account by email password
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-    [HttpPost("register-verify-phone")]
+    [HttpPost("register-by-email")]
     [AllowAnonymous]
-    public async Task<Result> RegisterVerifyPhone(RegisterVerfiyParam model)
+    public async Task<Result> RegisterByPhone(RegisterByEmailParam model)
     {
-        var verify = RegexHelper.VerifyEmail(model.Email);
-        if (!verify.Succeeded)
-            return Result.Fail(verify.Message);
-
-        var anyEmail = _userManager.Users.Any(c => c.Email == model.Email);
-        if (anyEmail)
-            return Result.Fail("Email is ready");
-
-        var code = CodeGen.GenRandomNumber();
-        var result = await _emailSender.SendEmailAsync(model.Email, "Verify code", code, false);
-        if (!result)
-            return Result.Fail("Send email fail");
-        return Result.Ok();
-    }
-
-    /// <summary>
-    /// 注册账号 - 通过手机号
-    /// </summary>
-    /// <param name="model"></param>
-    /// <returns></returns>
-    [HttpPost("register-by-phone")]
-    [AllowAnonymous]
-    public async Task<Result> RegisterByPhone(RegisterByPhoneParam model)
-    {
-        var any = _userManager.Users.Any(c => c.PhoneNumber == model.Phone);
+        var any = userManager.Users.Any(c => c.Email == model.Email);
         if (any)
-            return Result.Fail("此手机号已被注册");
-
-        //5分钟内的验证码
-        //var sms = _smsSendRepository
-        //    .Query(c => c.PhoneNumber == model.Phone && c.IsSucceed && !c.IsUsed && c.TemplateType == SmsTemplateType.Captcha
-        //    && c.CreatedOn >= DateTime.Now.AddMinutes(-5)).OrderByDescending(c => c.CreatedOn).FirstOrDefault();
-        //if (sms == null)
-        //    return Result.Fail("验证码不存在或已失效，请重新获取验证码");
-        //if (sms.Value != model.Captcha)
-        //    return Result.Fail("验证码错误");
-
-        //5分钟内的验证码
-        var sms = await _accountService.ValidateGetLastSms(model?.Phone, model?.Captcha);
-
+            return Result.Fail("this email has been registered");
         var user = new User
         {
             UserName = Guid.NewGuid().ToString("N"),
-            FullName = model.Phone,
+            FullName = model.Email,
             PhoneNumber = model.Phone,
             PhoneNumberConfirmed = true,
             IsActive = true,
@@ -173,161 +143,56 @@ public class AccountApiController(
             var verify = RegexHelper.VerifyEmail(model.Email);
             if (!verify.Succeeded)
                 return Result.Fail(verify.Message);
-            var anyEmail = _userManager.Users.Any(c => c.Email == model.Email);
+            var anyEmail = userManager.Users.Any(c => c.Email == model.Email);
             if (anyEmail)
-                return Result.Fail("此邮箱已被使用");
+                return Result.Fail("This email is already in use");
             user.Email = model.Email;
             user.EmailConfirmed = false;
         }
 
-        var transaction = _userRepository.BeginTransaction();
-        var result = await _userManager.CreateAsync(user, model.Password);
-        if (result.Succeeded)
+        var transaction = userRepository.BeginTransaction();
+        var result = await userManager.CreateAsync(user, model.Password);
+        if (!result.Succeeded)
         {
-            await _userManager.AddToRoleAsync(user, RoleWithId.customer.ToString());
+            return Result.Fail(result.Errors?.Select(c => c.Description).FirstOrDefault());
+        }
 
-            // 通过手机号注册成功的用户不自动登录，因为是JWT认证
-            // await _signInManager.SignInAsync(user, isPersistent: false);
-
-            sms.IsUsed = true;
-            sms.OutId = user.Id.ToString();
-            _smsSendRepository.SaveChanges();
-            transaction.Commit();
-
-            if (!string.IsNullOrEmpty(user.Email))
-            {
-                // 发送邮箱激活码，激活则绑定邮箱
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                // Send an email with this link
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                await SendEmailConfirmation(user.Email, user.Id, code);
-            }
-
+        await userManager.AddToRoleAsync(user, RoleWithId.customer.ToString());
+        await smsSendRepository.SaveChangesAsync();
+        await transaction.CommitAsync();
+        if (string.IsNullOrEmpty(user.Email))
+        {
             return Result.Ok();
         }
 
-        return Result.Fail(result.Errors?.Select(c => c.Description).FirstOrDefault());
+        var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+        await SendEmailConfirmation(user.Email, user.Id, code);
+
+        return Result.Ok("Create account successfully");
     }
 
     /// <summary>
-    /// 手机号登录 - 获取手机验证码
+    /// Login by email with captcha
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
-    [HttpPost("login-phone-captcha")]
+    [HttpPost("send-request-login-email-code")]
     [AllowAnonymous]
-    public async Task<Result> LoginPhoneGetCaptcha(LoginPhoneGetCaptchaParam model)
+    public async Task<Result> LoginEmailGetCaptcha(LoginEmailGetCaptchaParam model)
     {
-        if (!_userManager.Users.Any(c => c.PhoneNumber == model.Phone))
-            return Result.Fail("此手机未注册");
+        if (!userManager.Users.Any(c => c.Email == model.Email))
+            return Result.Fail("User does not exist");
         var code = CodeGen.GenRandomNumber();
-        var result = await _smsSender.SendCaptchaAsync(model.Phone, code);
-        if (!result.Success)
-            return Result.Fail(result.Message);
+        var result = await emailSender.SendEmailAsync(model.Email, "Captcha", code, false);
+        //save code in redis and set expire time 15 p + email
+
+        redisService.Set(model.Email, code, TimeSpan.FromMinutes(15));
+
+        if (!result)
+            return Result.Fail("Send email fail");
         return Result.Ok();
     }
 
-    /// <summary>
-    /// 手机号登录
-    /// </summary>
-    /// <param name="model"></param>
-    /// <param name="returnUrl"></param>
-    /// <returns></returns>
-    [HttpPost("login-phone")]
-    [AllowAnonymous]
-    public async Task<Result> LoginPhone(LoginPhoneParam model, string returnUrl = null)
-    {
-        var phone = model.Phone;
-
-        //5分钟内的验证码
-        var sms = await _accountService.ValidateGetLastSms(phone, model?.Code);
-
-        //设置验证码被使用
-        sms.IsUsed = true;
-        await _smsSendRepository.SaveChangesAsync();
-
-        var user = await _userManager.Users.FirstOrDefaultAsync(c => c.PhoneNumber == phone);
-        if (user == null)
-            return Result.Fail("用户不存在");
-        if (!user.IsActive)
-            return Result.Fail("用户已禁用");
-
-        //如果手机没有验证，则自动验证
-        if (!user.PhoneNumberConfirmed)
-        {
-            user.PhoneNumberConfirmed = true;
-            await _userManager.UpdateAsync(user);
-        }
-
-        var isLockedOut = await _userManager.IsLockedOutAsync(user);
-        if (isLockedOut) throw new Exception("用户已锁定，请稍后重试");
-
-        if (!await _signInManager.CanSignInAsync(user)) throw new Exception("用户不允许登录，请稍后重试");
-
-        // 如果手机没有验证，则自动验证
-        if (!user.PhoneNumberConfirmed)
-        {
-            user.PhoneNumberConfirmed = true;
-            await _userManager.UpdateAsync(user);
-        }
-
-        // 如果用手机登录且双因子=true时，则设置双因子=false
-        if (user.TwoFactorEnabled) await _userManager.SetTwoFactorEnabledAsync(user, false);
-
-        // 重置错误次数计数器
-        var failedCount = await _userManager.GetAccessFailedCountAsync(user);
-        if (failedCount > 0) await _userManager.ResetAccessFailedCountAsync(user);
-
-        var token = await _tokenService.GenerateAccessToken(user);
-        var loginResult = new LoginResult()
-        {
-            Token = token,
-            Avatar = user.AvatarUrl,
-            Email = user.Email,
-            Name = user.FullName,
-            Phone = user.PhoneNumber
-        };
-        return Result.Ok(loginResult);
-
-        //var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
-        //if (!userFactors.Any(c => c == nameof(model.Phone)))
-        //    return Result.Fail("手机未验证，不允许用手机登录");
-        //var isLockedOut = _userManager.IsLockedOutAsync(user);
-
-        //var signInResult = await _shopSignInManager.SignInCheck(user);
-        //if (signInResult == null || signInResult.Succeeded)
-        //{
-        //    //如果返回null，说明被允许登录
-        //    //如果用手机登录且双因子=true时，则设置双因子=false
-        //    if (user.TwoFactorEnabled)
-        //    {
-        //        await _userManager.SetTwoFactorEnabledAsync(user, false);
-        //    }
-        //    var token = await _tokenService.GenerateAccessToken(user);
-        //    var loginResult = new LoginResult()
-        //    {
-        //        Token = token,
-        //        Avatar = user.AvatarUrl,
-        //        Email = user.Email,
-        //        Name = user.FullName,
-        //        Phone = user.PhoneNumber
-        //    };
-        //    return Result.Ok(loginResult);
-        //}
-        //else if (signInResult.IsLockedOut)
-        //{
-        //    return Result.Fail("用户已锁定，请稍后重试");
-        //}
-        //return Result.Fail("用户登录失败，请稍后重试");
-    }
-
-    /// <summary>
-    /// 用户名/邮箱/手机号登录
-    /// https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.identity.signinresult.isnotallowed?view=aspnetcore-2.2
-    /// </summary>
-    /// <param name="model"></param>
-    /// <param name="returnUrl"></param>
-    /// <returns></returns>
     [HttpPost("login")]
     [AllowAnonymous]
     public async Task<Result> Login(LoginParam model, bool includeRefreshToken)
@@ -335,62 +200,54 @@ public class AccountApiController(
         User user = null;
         if (RegexHelper.VerifyPhone(model.Name).Succeeded)
         {
-            // 手机号验证
-            user = await _userManager.Users.FirstOrDefaultAsync(c => c.PhoneNumber == model.Name);
+            user = await userManager.Users.FirstOrDefaultAsync(c => c.PhoneNumber == model.Name);
             if (!user.PhoneNumberConfirmed)
-                return Result.Fail("手机未验证，不允许用手机登录");
+                return Result.Fail("Phone number is not verified, not allowed to log in");
         }
         else if (RegexHelper.VerifyEmail(model.Name).Succeeded)
         {
-            // 邮箱验证
-            user = await _userManager.FindByEmailAsync(model.Name);
+            user = await userManager.FindByEmailAsync(model.Name);
             if (!user.EmailConfirmed)
-                return Result.Fail("邮箱未验证，不允许用邮箱登录");
+                return Result.Fail("Email is not verified, not allowed to log in");
         }
         else
         {
-            // 用户名登录验证
-            user = await _userManager.FindByNameAsync(model.Name);
+            user = await userManager.FindByNameAsync(model.Name);
         }
 
         if (user == null)
-            return Result.Fail("用户不存在");
+            return Result.Fail("User does not exist");
         if (!user.IsActive)
-            return Result.Fail("用户已禁用");
+            return Result.Fail("User is disabled");
 
-        // This doesn't count login failures towards account lockout
-        // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-        // update false -> set lockoutOnFailure: true
-        var signInResult = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, true);
+        var signInResult = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, true);
         if (signInResult.IsLockedOut)
         {
-            return Result.Fail("用户已锁定，请稍后重试");
+            return Result.Fail("User is locked, please try again later");
         }
         else if (signInResult.IsNotAllowed)
         {
-            return Result.Fail("用户邮箱未验证或手机未验证，不允许登录");
+            return Result.Fail("User email is not verified or phone is not verified, not allowed to log in");
         }
         else if (signInResult.RequiresTwoFactor)
         {
-            // 当手机或邮箱验证通过时，TwoFactorEnabled才会生效，否则，则RequiresTwoFactor不可能=true。
-            // 设置启用双因素身份验证。
-            // 用户帐户已启用双因素身份验证，因此您必须提供第二个身份验证因素。
-            var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
-            //return Result.Fail(userFactors.Select(c => c), "当前账号存在安全风险，请进一步验证");
+            var userFactors = await userManager.GetValidTwoFactorProvidersAsync(user);
+
             var ls = new List<(string, string)>();
             foreach (var item in userFactors)
                 if (item == "Phone")
                     ls.Add((item, StringHelper.PhoneEncryption(user.PhoneNumber)));
                 else if (item == "Email") ls.Add((item, StringHelper.EmailEncryption(user.Email)));
-            return Result.Fail(new
-            {
-                Providers = ls.Select(c => new { key = c.Item1, value = c.Item2 }),
-                signInResult.RequiresTwoFactor
-            }, "当前账号存在安全风险，请进一步验证身份");
+            return Result.Fail(
+                new
+                {
+                    Providers = ls.Select(c => new { key = c.Item1, value = c.Item2 }),
+                    signInResult.RequiresTwoFactor
+                }, "Two-factor authentication is required");
         }
         else if (signInResult.Succeeded)
         {
-            var token = await _tokenService.GenerateAccessToken(user);
+            var token = await tokenService.GenerateAccessToken(user);
             var loginResult = new LoginResult()
             {
                 Token = token,
@@ -401,45 +258,44 @@ public class AccountApiController(
             };
             if (includeRefreshToken)
             {
-                var refreshToken = _tokenService.GenerateRefreshToken();
-                user.RefreshTokenHash = _userManager.PasswordHasher.HashPassword(user, refreshToken);
-                await _userManager.UpdateAsync(user);
+                var refreshToken = tokenService.GenerateRefreshToken();
+                user.RefreshTokenHash = userManager.PasswordHasher.HashPassword(user, refreshToken);
+                await userManager.UpdateAsync(user);
                 loginResult.RefreshToken = refreshToken;
             }
 
             return Result.Ok(loginResult);
         }
 
-        return Result.Fail("用户登录失败，用户名或密码错误");
+        return Result.Fail("Incorrect username or password");
     }
-
     /// <summary>
-    /// 登录双因子验证，并发送验证码
-    /// two-factor authentication
+    /// Login by phone with captcha (not recommend)
     /// </summary>
     /// <param name="model"></param>
+    /// <param name="returnUrl"></param>
     /// <returns></returns>
     [HttpPost("login-verify-two-factor")]
     [AllowAnonymous]
-    public async Task<Result> LoginVerifyPhone(LoginTwoFactorParam model)
+    public async Task<Result> LoginVerify(LoginTwoFactorParam model)
     {
-        var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+        var user = await signInManager.GetTwoFactorAuthenticationUserAsync();
         if (user == null) return Result.Fail("Error");
-        var userFactors = await _userManager.GetValidTwoFactorProvidersAsync(user);
-        if (!userFactors.Any(c => c == model.SelectedProvider)) return Result.Fail("Error");
+        var userFactors = await userManager.GetValidTwoFactorProvidersAsync(user);
+        if (userFactors.All(c => c != model.SelectedProvider)) return Result.Fail("Error");
 
-        var code = await _userManager.GenerateTwoFactorTokenAsync(user, model.SelectedProvider);
+        var code = await userManager.GenerateTwoFactorTokenAsync(user, model.SelectedProvider);
         if (model.SelectedProvider == "Phone")
         {
-            var phone = await _userManager.GetPhoneNumberAsync(user);
-            var send = await _smsSender.SendCaptchaAsync(phone, code);
+            var phone = await userManager.GetPhoneNumberAsync(user);
+            var send = await smsSender.SendCaptchaAsync(phone, code);
             if (!send.Success) return Result.Fail(send.Message);
         }
         else if (model.SelectedProvider == "Email")
         {
-            var email = await _userManager.GetEmailAsync(user);
+            var email = await userManager.GetEmailAsync(user);
             var message = "Your security code is: " + code;
-            await _emailSender.SendEmailAsync(email, "Security Code", message);
+            await emailSender.SendEmailAsync(email, "Security Code", message);
         }
         else
         {
@@ -450,7 +306,7 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 登录双因子验证
+    /// Login two-factor authentication
     /// </summary>
     /// <param name="model"></param>
     /// <param name="returnUrl"></param>
@@ -459,50 +315,54 @@ public class AccountApiController(
     [AllowAnonymous]
     public async Task<Result> LoginTwoFactor(LoginTwoFactorParam model, string returnUrl = null)
     {
-        var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+        var user = await signInManager.GetTwoFactorAuthenticationUserAsync();
         if (user == null) return Result.Fail("Error");
 
         // The following code protects for brute force attacks against the two factor codes.
         // If a user enters incorrect codes for a specified amount of time then the user account
         // will be locked out for a specified amount of time.
-        var result = await _signInManager.TwoFactorSignInAsync(model.SelectedProvider, model.Code, model.RememberMe,
+        var result = await signInManager.TwoFactorSignInAsync(model.SelectedProvider, model.Code, model.RememberMe,
             model.RememberBrowser);
         if (result.IsLockedOut)
         {
-            return Result.Fail("用户已锁定，请稍后重试");
+            return Result.Fail("User is locked, please try again later");
         }
         else if (result.IsNotAllowed)
         {
-            return Result.Fail("用户邮箱未验证或手机未验证，不允许登录");
+            return Result.Fail("User email is not verified or phone is not verified, not allowed to log in");
         }
         else if (result.Succeeded)
         {
-            // 如果双因子验证通过，则暂时设置false
-            // 如果异地登录则设置true
-            // 注意：双因子验证通过后，即便设置为true，在不切换用户的前提下，也不会再次进行双因子验证
-            await _userManager.SetTwoFactorEnabledAsync(user, false);
-            var token = await _tokenService.GenerateAccessToken(user);
+
+            await userManager.SetTwoFactorEnabledAsync(user, false);
+            var token = await tokenService.GenerateAccessToken(user);
             return Result.Ok(new
-            { token, name = user.FullName, phone = user.PhoneNumber, email = user.Email, returnUrl });
+            {
+                token,
+                name = user.FullName,
+                phone = user.PhoneNumber,
+                email = user.Email,
+                returnUrl
+            });
         }
         else
         {
-            return Result.Fail("验证码错误");
+            return Result.Fail("Incorrect code");
         }
     }
 
     /// <summary>
-    /// 启用双因子验证
+    /// Enable two-factor authentication
     /// </summary>
     /// <returns></returns>
     [HttpPost("enable-two-factor")]
     public async Task<Result> EnableTwoFactorAuthentication()
     {
-        var user = await _userManager.GetUserAsync(HttpContext.User);
+        var user = await userManager.GetUserAsync(HttpContext.User);
         if (user != null)
         {
-            await _userManager.SetTwoFactorEnabledAsync(user, true);
-            await _signInManager.SignInAsync(user, false);
+            await userManager.SetTwoFactorEnabledAsync(user, true);
+            await signInManager.SignInAsync(user, false);
             _logger.LogInformation(1, "User enabled two-factor authentication.");
         }
 
@@ -510,17 +370,17 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 禁用双因子验证
+    /// disable two-factor authentication
     /// </summary>
     /// <returns></returns>
     [HttpPost("disable-two-factor")]
     public async Task<Result> DisableTwoFactorAuthentication()
     {
-        var user = await _userManager.GetUserAsync(HttpContext.User);
+        var user = await userManager.GetUserAsync(HttpContext.User);
         if (user != null)
         {
-            await _userManager.SetTwoFactorEnabledAsync(user, false);
-            await _signInManager.SignInAsync(user, false);
+            await userManager.SetTwoFactorEnabledAsync(user, false);
+            await signInManager.SignInAsync(user, false);
             _logger.LogInformation(2, "User disabled two-factor authentication.");
         }
 
@@ -528,35 +388,31 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 发送确认邮件
+    /// Send confirmation emai
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
     [HttpPost("send-confirm-email")]
     public async Task<Result> SendConfirmEmail()
     {
-        var currentUser = await _workContext.GetCurrentUserAsync();
+        var currentUser = await workContext.GetCurrentUserAsync();
         if (currentUser == null)
-            throw new Exception("用户信息异常，请重新登录");
-        var user = await _userManager.FindByIdAsync(currentUser.Id.ToString());
+            throw new Exception("User information is abnormal, please log in again");
+        var user = await userManager.FindByIdAsync(currentUser.Id.ToString());
         if (user == null)
-            throw new Exception("用户信息异常，请重新登录");
+            throw new Exception("User information is abnormal, please log in again");
 
         if (string.IsNullOrWhiteSpace(user.Email))
-            return Result.Fail("邮箱未设置");
+            return Result.Fail("Email is not bound, please bind email first");
         if (user.EmailConfirmed)
-            return Result.Fail("邮箱已激活,请勿重复发送邮件");
-
-        // 发送邮箱激活码，激活则绑定邮箱
-        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-        // Send an email with this link
-        var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            return Result.Fail("Email has been activated");
+        var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
         await SendEmailConfirmation(user.Email, user.Id, code);
         return Result.Ok();
     }
 
     /// <summary>
-    /// 确认邮件 - 激活邮箱
+    /// Confirmation email - activation email
     /// </summary>
     /// <param name="id"></param>
     /// <param name="param"></param>
@@ -565,14 +421,14 @@ public class AccountApiController(
     [AllowAnonymous]
     public async Task<Result> ConfirmEmail([FromBody] ConfirmEmailParam param)
     {
-        var user = await _userManager.FindByIdAsync(param.UserId.ToString());
+        var user = await userManager.FindByIdAsync(param.UserId.ToString());
         if (user == null)
-            return Result.Fail("用户不存在或链接已失效");
+            return Result.Fail("The user does not exist or the link has expired");
 
         if (user.EmailConfirmed)
-            return Result.Ok("邮箱已激活");
+            return Result.Ok("Email is activate");
 
-        var result = await _userManager.ConfirmEmailAsync(user, param.Code);
+        var result = await userManager.ConfirmEmailAsync(user, param.Code);
         if (result.Succeeded)
             return Result.Ok();
 
@@ -580,25 +436,25 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 修改密码
+    /// change Password
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
     [HttpPut("change-password")]
     public async Task<Result> ChangePassword(ChangePasswordParam model)
     {
-        var currentUser = await _workContext.GetCurrentUserAsync();
+        var currentUser = await workContext.GetCurrentUserAsync();
         if (currentUser == null)
-            throw new Exception("用户信息异常，请重新登录");
-        var user = await _userManager.FindByIdAsync(currentUser.Id.ToString());
+            throw new Exception("User information is abnormal, please log in again");
+        var user = await userManager.FindByIdAsync(currentUser.Id.ToString());
         if (user == null)
-            throw new Exception("用户信息异常，请重新登录");
-        var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+            throw new Exception("User information is abnormal, please log in again");
+        var result = await userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
         if (result.Succeeded)
         {
             // await _signInManager.SignInAsync(user, isPersistent: false);
-            await _signInManager.SignOutAsync();
-            _tokenService.RemoveUserToken(user.Id);
+            await signInManager.SignOutAsync();
+            tokenService.RemoveUserToken(user.Id);
             return Result.Ok();
         }
 
@@ -606,7 +462,7 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 忘记密码 - 获取找回密码的方式(邮箱/手机)
+    /// Forgot your password - How to retrieve your password (email or mobile phone)
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -615,29 +471,25 @@ public class AccountApiController(
     public async Task<Result<ForgotPasswordGetResult>> ForgotPassword(string name)
     {
         if (string.IsNullOrWhiteSpace(name))
-            throw new Exception("请输入用户名/邮箱/手机号码");
+            throw new Exception("Please enter your username, email, and mobile phone number");
         name = name.Trim();
 
         User user = null;
         if (RegexHelper.VerifyPhone(name).Succeeded)
-            // 手机号验证
-            user = await _userManager.Users.FirstOrDefaultAsync(c => c.PhoneNumber == name);
+            user = await userManager.Users.FirstOrDefaultAsync(c => c.PhoneNumber == name);
         else if (RegexHelper.VerifyEmail(name).Succeeded)
-            // 邮箱验证
-            user = await _userManager.FindByEmailAsync(name);
+            user = await userManager.FindByEmailAsync(name);
         else
-            // 用户名登录验证
-            user = await _userManager.FindByNameAsync(name);
+            user = await userManager.FindByNameAsync(name);
         if (user == null)
-            throw new Exception("用户不存在，请确认用户名/邮箱/手机号码是否输入错误");
+            throw new Exception("The user does not exist. Please confirm whether the user name, email address and mobile phone number are entered incorrectly.");
         if (!user.IsActive)
-            throw new Exception("用户已禁用");
+            throw new Exception("User disabled");
         if (string.IsNullOrWhiteSpace(user.PhoneNumber) && string.IsNullOrWhiteSpace(user.Email))
-            throw new Exception("用户未绑定邮箱和手机，无法进行找回密码，如需帮助请联系人工客服");
+            throw new Exception("The user has not bound his email address and mobile phone, so he cannot retrieve his password. If you need help, please contact customer service.");
 
         var result = new ForgotPasswordGetResult()
         {
-            //UserId = user.Id, //由于UserId有序性，因此不返回UserId，返回UserName
             UserName = user.UserName,
             Email = StringHelper.EmailEncryption(user.Email),
             Phone = StringHelper.PhoneEncryption(user.PhoneNumber)
@@ -646,7 +498,7 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 邮箱找回 - 发送密码重置邮件
+    /// Email retrieval - send password reset email
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -654,26 +506,26 @@ public class AccountApiController(
     [AllowAnonymous]
     public async Task<Result> ForgotPasswordSendEmail([FromBody] ResetPasswordPostParam param)
     {
-        var user = await _userManager.FindByNameAsync(param.UserName);
+        var user = await userManager.FindByNameAsync(param.UserName);
         if (user == null)
-            throw new Exception("用户不存在");
+            throw new Exception("user not found");
         if (!user.IsActive)
-            throw new Exception("用户已禁用");
+            throw new Exception("User disabled");
         if (string.IsNullOrWhiteSpace(user.Email))
-            throw new Exception("用户未绑定邮箱，无法通过邮箱找回密码");
+            throw new Exception("The user is not bound to his email address and cannot retrieve his password through his email address.");
 
         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
         // Send an email with this link
-        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+        var code = await userManager.GeneratePasswordResetTokenAsync(user);
         var callbackUrl =
             $"{_webHost.Trim('/')}/user/reset-password?userName={user.UserName}&email={StringHelper.EmailEncryption(user.Email)}&code={HttpUtility.UrlEncode(code)}";
-        await _jobService.Enqueue(() => _emailSender.SendEmailAsync(user.Email, "Reset Password",
+        await jobService.Enqueue(() => emailSender.SendEmailAsync(user.Email, "Reset Password",
             $"Please reset your password by clicking here: <a href='{callbackUrl}'>REST PASSWORD</a>", true));
         return Result.Ok();
     }
 
     /// <summary>
-    /// 邮箱找回 - 重置密码
+    /// Email retrieval - reset password
     /// </summary>
     /// <param name="id"></param>
     /// <param name="param"></param>
@@ -682,23 +534,22 @@ public class AccountApiController(
     [AllowAnonymous]
     public async Task<Result> ResetPasswordByEmail([FromBody] ResetPasswordPutParam param)
     {
-        var user = await _userManager.FindByNameAsync(param.UserName);
+        var user = await userManager.FindByNameAsync(param.UserName);
         if (user == null)
-            throw new Exception("用户不存在");
+            throw new Exception("User does not exist");
         if (!user.IsActive)
-            throw new Exception("用户已禁用");
+            throw new Exception("User disabled");
 
-        var result = await _userManager.ResetPasswordAsync(user, param.Code, param.Password);
+        var result = await userManager.ResetPasswordAsync(user, param.Code, param.Password);
         if (result.Succeeded)
         {
-            // 通过邮箱找回密码时，如果邮箱未确认，则自动确认
             if (!user.EmailConfirmed)
             {
                 user.EmailConfirmed = true;
-                await _userManager.UpdateAsync(user);
+                await userManager.UpdateAsync(user);
             }
 
-            _tokenService.RemoveUserToken(user.Id);
+            tokenService.RemoveUserToken(user.Id);
             return Result.Ok();
         }
 
@@ -706,7 +557,7 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 手机找回 - 发送验证码
+    /// Phone retrieval - send verification code
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
@@ -714,149 +565,82 @@ public class AccountApiController(
     [AllowAnonymous]
     public async Task<Result> ForgotPasswordSendPhone([FromBody] ResetPasswordPostParam param)
     {
-        var user = await _userManager.FindByNameAsync(param.UserName);
+        var user = await userManager.FindByNameAsync(param.UserName);
         if (user == null)
-            throw new Exception("用户不存在");
+            throw new Exception("User does not exist");
         if (!user.IsActive)
-            throw new Exception("用户已禁用");
+            throw new Exception("User disabled");
         if (string.IsNullOrWhiteSpace(user.PhoneNumber))
-            throw new Exception("用户未绑定手机，无法通过手机找回密码");
+            throw new Exception("The user has not bound his mobile phone and cannot retrieve his password through his mobile phone.");
 
         var code = CodeGen.GenRandomNumber();
-        var result = await _smsSender.SendCaptchaAsync(user.PhoneNumber, code);
+        var result = await smsSender.SendCaptchaAsync(user.PhoneNumber, code);
         if (!result.Success)
             return Result.Fail(result.Message);
         return Result.Ok();
     }
 
-    /// <summary>
-    /// 手机找回 - 重置密码
-    /// </summary>
-    /// <param name="param"></param>
-    /// <returns></returns>
-    [HttpPut("reset-password-phone")]
-    [AllowAnonymous]
-    public async Task<Result> ResetPasswordByPhone([FromBody] ResetPasswordPutParam param)
-    {
-        var user = await _userManager.FindByNameAsync(param.UserName);
-        if (user == null)
-            throw new Exception("用户不存在");
-        if (!user.IsActive)
-            throw new Exception("用户已禁用");
-        if (string.IsNullOrWhiteSpace(user.PhoneNumber))
-            throw new Exception("用户未绑定手机，无法通过手机找回密码");
-
-        //5分钟内的验证码
-        var sms = _smsSendRepository
-            .Query(c => c.PhoneNumber == user.PhoneNumber && c.IsSucceed && !c.IsUsed &&
-                        c.TemplateType == SmsTemplateType.Captcha
-                        && c.CreatedOn >= DateTime.Now.AddMinutes(-5)).OrderByDescending(c => c.CreatedOn)
-            .FirstOrDefault();
-        if (sms == null)
-            return Result.Fail("验证码不存在或已失效，请重新获取验证码");
-
-        if (sms.Value != param.Code)
-            return Result.Fail("验证码错误");
-
-        //设置验证码被使用
-        sms.IsUsed = true;
-        await _smsSendRepository.SaveChangesAsync();
-
-        //重新生成重置密码的令牌
-        var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-        var result = await _userManager.ResetPasswordAsync(user, code, param.Password);
-        if (result.Succeeded)
-        {
-            _tokenService.RemoveUserToken(user.Id);
-            return Result.Ok();
-        }
-
-        return Result.Fail("重置密码失败，验证码错误或链接已失效，请稍后重试");
-    }
 
     /// <summary>
-    /// 移除手机绑定
+    /// Remove mobile phone binding
     /// </summary>
     /// <returns></returns>
     [HttpPost("remove-phone")]
     public async Task<Result> RemovePhoneNumber()
     {
-        var user = await _workContext.GetCurrentUserAsync();
+        var user = await workContext.GetCurrentUserAsync();
         if (user != null)
         {
-            var result = await _userManager.SetPhoneNumberAsync(user, null);
+            var result = await userManager.SetPhoneNumberAsync(user, null);
             if (result.Succeeded)
                 //await _signInManager.SignInAsync(user, isPersistent: false);
                 return Result.Ok();
         }
 
-        return Result.Fail("解绑失败");
+        return Result.Fail("Unbinding failed");
     }
 
     /// <summary>
-    /// 移除邮箱绑定
+    /// Remove email binding
     /// </summary>
     /// <returns></returns>
     [HttpPost("remove-email")]
     public async Task<Result> RemoveEmail()
     {
-        var user = await _workContext.GetCurrentUserAsync();
+        var user = await workContext.GetCurrentUserAsync();
         if (user != null)
         {
-            var result = await _userManager.SetEmailAsync(user, null);
+            var result = await userManager.SetEmailAsync(user, null);
             if (result.Succeeded)
                 //await _signInManager.SignInAsync(user, isPersistent: false);
                 return Result.Ok();
         }
 
-        return Result.Fail("解绑失败");
+        return Result.Fail("Unbinding failed");
     }
 
-    /// <summary>
-    /// 添加手机绑定 - 获取验证码
-    /// </summary>
-    /// <param name="param"></param>
-    /// <returns></returns>
-    [HttpPost("add-phone-captcha")]
-    public async Task<Result> AddPhoneGetCaptcha(AddPhoneGetCaptchaParam param)
-    {
-        var currentUser = await _workContext.GetCurrentUserAsync();
-        var user = await _userManager.FindByNameAsync(currentUser.UserName);
-        if (!string.IsNullOrWhiteSpace(user.PhoneNumber))
-            return Result.Fail("已绑定手机,无法再次绑定");
-
-        var any = _userManager.Users.Any(c => c.PhoneNumber == param.Phone);
-        if (any)
-            return Result.Fail("此手机号已被使用");
-
-        var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, param.Phone);
-        var result = await _smsSender.SendCaptchaAsync(param.Phone, code);
-        if (!result.Success)
-            return Result.Fail(result.Message);
-        return Result.Ok();
-    }
 
     /// <summary>
-    /// 添加手机绑定
+    /// add phone
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
     [HttpPut("add-phone")]
     public async Task<Result> AddPhone(AddPhoneParam param)
     {
-        var currentUser = await _workContext.GetCurrentUserAsync();
-        var user = await _userManager.FindByNameAsync(currentUser.UserName);
+        var currentUser = await workContext.GetCurrentUserAsync();
+        var user = await userManager.FindByNameAsync(currentUser.UserName);
         if (!string.IsNullOrWhiteSpace(user.PhoneNumber))
-            return Result.Fail("已绑定手机,无法再次绑定");
+            return Result.Fail("The mobile phone has been bound and cannot be bound again");
 
-        var any = _userManager.Users.Any(c => c.PhoneNumber == param.Phone);
+        var any = userManager.Users.Any(c => c.PhoneNumber == param.Phone);
         if (any)
-            return Result.Fail("此手机号已被使用");
+            return Result.Fail("This mobile number is already in use");
 
-        var result = await _userManager.ChangePhoneNumberAsync(user, param.Phone, param.Code);
+        var result = await userManager.ChangePhoneNumberAsync(user, param.Phone, param.Code);
         if (result.Succeeded)
         {
-            await _signInManager.SignInAsync(user, false);
+            await signInManager.SignInAsync(user, false);
             return Result.Ok();
         }
 
@@ -864,36 +648,36 @@ public class AccountApiController(
     }
 
     /// <summary>
-    /// 添加邮箱绑定 - 发送绑定链接
+    /// Add email binding - send binding link
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
     [HttpPost("add-email")]
     public async Task<Result> AddEmailSendToken(AddEmailPostParam param)
     {
-        var currentUser = await _workContext.GetCurrentUserAsync();
-        var user = await _userManager.FindByNameAsync(currentUser.UserName);
+        var currentUser = await workContext.GetCurrentUserAsync();
+        var user = await userManager.FindByNameAsync(currentUser.UserName);
         if (!string.IsNullOrWhiteSpace(user.Email))
-            return Result.Fail("已绑定邮箱,无法再次绑定");
+            return Result.Fail("Email has been bound and cannot be bound again");
 
         var verify = RegexHelper.VerifyEmail(param.Email);
         if (!verify.Succeeded)
             return Result.Fail(verify.Message);
-        var anyEmail = _userManager.Users.Any(c => c.Email == param.Email);
+        var anyEmail = userManager.Users.Any(c => c.Email == param.Email);
         if (anyEmail)
-            return Result.Fail("此邮箱已被使用");
+            return Result.Fail("This email is already in use");
 
-        var code = await _userManager.GenerateChangeEmailTokenAsync(user, param.Email);
+        var code = await userManager.GenerateChangeEmailTokenAsync(user, param.Email);
         var webHost = _webHost.Trim('/');
         var callbackUrl =
             $"{webHost}/user/add-email?id={user.Id}&email={StringHelper.EmailEncryption(param.Email)}&code={HttpUtility.UrlEncode(code)}";
-        await _jobService.Enqueue(() => _emailSender.SendEmailAsync(param.Email, "Confirm your account",
+        await jobService.Enqueue(() => emailSender.SendEmailAsync(param.Email, "Confirm your account",
             $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>VERIFY</a>", true));
         return Result.Ok();
     }
 
     /// <summary>
-    /// 添加邮箱绑定
+    /// Add email binding
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
@@ -902,42 +686,43 @@ public class AccountApiController(
     public async Task<Result> AddEmail(AddEmailPutParam param)
     {
         //var currentUser = await _workContext.GetCurrentUser();
-        var user = await _userManager.FindByIdAsync(param.UserId.ToString());
+        var user = await userManager.FindByIdAsync(param.UserId.ToString());
         if (user == null)
-            return Result.Fail("用户不存在");
+            return Result.Fail("User does not exist");
 
         if (!string.IsNullOrWhiteSpace(user.Email))
-            return Result.Fail("已绑定邮箱,无法再次绑定");
+            return Result.Fail("Email has been bound and cannot be bound again");
 
         var verify = RegexHelper.VerifyEmail(param.Email);
         if (!verify.Succeeded)
             return Result.Fail(verify.Message);
-        var anyEmail = _userManager.Users.Any(c => c.Email == param.Email);
+        var anyEmail = userManager.Users.Any(c => c.Email == param.Email);
         if (anyEmail)
-            return Result.Fail("此邮箱已被使用");
+            return Result.Fail("This email is already in use");
 
-        var result = await _userManager.ChangeEmailAsync(user, param.Email, param.Code);
-        if (result.Succeeded)
+        var result = await userManager.ChangeEmailAsync(user, param.Email, param.Code);
+        if (!result.Succeeded)
         {
-            await _signInManager.SignInAsync(user, false);
-            return Result.Ok();
+            return Result.Fail(result?.Errors?.FirstOrDefault()?.Description);
         }
 
-        return Result.Fail(result?.Errors?.FirstOrDefault()?.Description);
+        await signInManager.SignInAsync(user, false);
+        return Result.Ok();
+
     }
 
     /// <summary>
-    /// 退出登录
+    /// sign out
     /// </summary>
     /// <returns></returns>
     [HttpPost("logout")]
     [AllowAnonymous]
     public async Task<Result> LogOff()
     {
-        var user = await _workContext.GetCurrentUserAsync();
-        await _signInManager.SignOutAsync();
+        var user = await workContext.GetCurrentUserAsync();
+        await signInManager.SignOutAsync();
         if (user != null)
-            _tokenService.RemoveUserToken(user.Id);
+            tokenService.RemoveUserToken(user.Id);
         _logger.LogInformation(4, "User logged out.");
         return Result.Ok();
     }
@@ -949,7 +734,7 @@ public class AccountApiController(
         var webHost = _webHost.Trim('/');
         var callbackUrl =
             $"{webHost}/user/confirm-email?id={userId}&email={StringHelper.EmailEncryption(email)}&code={HttpUtility.UrlEncode(code)}";
-        await _jobService.Enqueue(() => _emailSender.SendEmailAsync(email, "Confirm your account",
+        await jobService.Enqueue(() => emailSender.SendEmailAsync(email, "Confirm your account",
             $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>VERIFY</a>", true));
     }
 }
