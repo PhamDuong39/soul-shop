@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+// See the LICENSE file in the project root for more information.
+
+using System.Web;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,66 +17,44 @@ using Shop.Module.Core.Extensions;
 using Shop.Module.Core.Models;
 using Shop.Module.Core.Services;
 using Shop.Module.Core.ViewModels;
-using Shop.Module.Schedule;
-using System.Web;
 using Shop.Module.Schedule.Abstractions;
 
 namespace Shop.Module.Core.Controllers;
 
-/// <summary>
-/// 账户API控制器，提供账号、登录、用户信息等功能。
-/// </summary>
 [ApiController]
 [Authorize]
 [Route("api/account")]
-public class AccountApiController : ControllerBase
+public class AccountApiController(
+    UserManager<User> userManager,
+    SignInManager<User> signInManager,
+    IRepository<SmsSend> smsSendRepository,
+    IEmailSender emailSender,
+    ISmsSender smsSender,
+    ILoggerFactory loggerFactory,
+    IRepository<User> userRepository,
+    ITokenService tokenService,
+    IWorkContext workContext,
+    IJobService jobService,
+    IRepository<Media> mediaRepository,
+    IAccountService accountService,
+    IOptionsMonitor<ShopOptions> config) : ControllerBase
 {
-    private readonly IRepository<SmsSend> _smsSendRepository;
-    private readonly UserManager<User> _userManager;
-    private readonly SignInManager<User> _signInManager;
-    private readonly IEmailSender _emailSender;
-    private readonly ISmsSender _smsSender;
-    private readonly ILogger _logger;
-    private readonly IRepository<User> _userRepository;
-    private readonly ITokenService _tokenService;
-    private readonly IWorkContext _workContext;
-    private readonly string _webHost;
-    private readonly IJobService _jobService;
-    private readonly IRepository<Media> _mediaRepository;
-    private readonly IAccountService _accountService;
-
-    public AccountApiController(
-        UserManager<User> userManager,
-        SignInManager<User> signInManager,
-        IRepository<SmsSend> smsSendRepository,
-        IEmailSender emailSender,
-        ISmsSender smsSender,
-        ILoggerFactory loggerFactory,
-        IRepository<User> userRepository,
-        ITokenService tokenService,
-        IWorkContext workContext,
-        IJobService jobService,
-        IRepository<Media> mediaRepository,
-        IAccountService accountService,
-        IOptionsMonitor<ShopOptions> config)
-    {
-        _smsSendRepository = smsSendRepository;
-        _userManager = userManager;
-        _signInManager = signInManager;
-        _emailSender = emailSender;
-        _smsSender = smsSender;
-        _logger = loggerFactory.CreateLogger<AccountApiController>();
-        _userRepository = userRepository;
-        _tokenService = tokenService;
-        _workContext = workContext;
-        _webHost = config.CurrentValue.WebHost;
-        _jobService = jobService;
-        _mediaRepository = mediaRepository;
-        _accountService = accountService;
-    }
+    private readonly IRepository<SmsSend> _smsSendRepository = smsSendRepository;
+    private readonly UserManager<User> _userManager = userManager;
+    private readonly SignInManager<User> _signInManager = signInManager;
+    private readonly IEmailSender _emailSender = emailSender;
+    private readonly ISmsSender _smsSender = smsSender;
+    private readonly ILogger _logger = loggerFactory.CreateLogger<AccountApiController>();
+    private readonly IRepository<User> _userRepository = userRepository;
+    private readonly ITokenService _tokenService = tokenService;
+    private readonly IWorkContext _workContext = workContext;
+    private readonly string _webHost = config.CurrentValue.WebHost;
+    private readonly IJobService _jobService = jobService;
+    private readonly IRepository<Media> _mediaRepository = mediaRepository;
+    private readonly IAccountService _accountService = accountService;
 
     /// <summary>
-    /// 获取当前登录用户信息
+    /// 
     /// </summary>
     /// <returns></returns>
     [HttpGet()]
@@ -100,7 +83,6 @@ public class AccountApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新用户信息
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
@@ -130,7 +112,6 @@ public class AccountApiController : ControllerBase
     }
 
     /// <summary>
-    /// 注册验证手机号，并发送注册短信验证码
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>
@@ -138,18 +119,18 @@ public class AccountApiController : ControllerBase
     [AllowAnonymous]
     public async Task<Result> RegisterVerifyPhone(RegisterVerfiyParam model)
     {
-        var verify = RegexHelper.VerifyPhone(model.Phone);
+        var verify = RegexHelper.VerifyEmail(model.Email);
         if (!verify.Succeeded)
             return Result.Fail(verify.Message);
 
-        var anyPhone = _userManager.Users.Any(c => c.PhoneNumber == model.Phone);
-        if (anyPhone)
-            return Result.Fail("此手机号已被注册");
+        var anyEmail = _userManager.Users.Any(c => c.Email == model.Email);
+        if (anyEmail)
+            return Result.Fail("Email is ready");
 
         var code = CodeGen.GenRandomNumber();
-        var result = await _smsSender.SendCaptchaAsync(model.Phone, code);
-        if (!result.Success)
-            return Result.Fail(result.Message);
+        var result = await _emailSender.SendEmailAsync(model.Email, "Verify code", code, false);
+        if (!result)
+            return Result.Fail("Send email fail");
         return Result.Ok();
     }
 
@@ -502,7 +483,7 @@ public class AccountApiController : ControllerBase
             await _userManager.SetTwoFactorEnabledAsync(user, false);
             var token = await _tokenService.GenerateAccessToken(user);
             return Result.Ok(new
-                { token, name = user.FullName, phone = user.PhoneNumber, email = user.Email, returnUrl });
+            { token, name = user.FullName, phone = user.PhoneNumber, email = user.Email, returnUrl });
         }
         else
         {
