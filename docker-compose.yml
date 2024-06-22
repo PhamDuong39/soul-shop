@@ -54,20 +54,20 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=admin
       - RABBITMQ_DEFAULT_PASS=7BKq9vFAqz6Puzjj
-  shop.api:
-    build:
-      context: .
-      dockerfile: src/Shop.WebApi/Dockerfile
-    container_name: shop-api
-    ports:
-      - "9000:8080"
-    restart: always
-    networks:
-      - shop-net
-    volumes:
-      - /home/shop/shop-api/user-content:/app/wwwroot/user-content/
-      - /home/shop/shop-api/logs:/app/logsdev
-      - /etc/localtime:/etc/localtime:ro
+  # shop.api:
+  #   build:
+  #     context: .
+  #     dockerfile: src/Shop.WebApi/Dockerfile
+  #   container_name: shop-api
+  #   ports:
+  #     - "9000:8080"
+  #   restart: always
+  #   networks:
+  #     - shop-net
+  #   volumes:
+  #     - /home/shop/shop-api/user-content:/app/wwwroot/user-content/
+  #     - /home/shop/shop-api/logs:/app/logsdev
+  #     - /etc/localtime:/etc/localtime:ro
 
 networks:
   shop-net:
