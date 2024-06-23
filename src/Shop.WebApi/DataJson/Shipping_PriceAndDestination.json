@@ -1,0 +1,67 @@
+[
+  {
+    "Id": 1,
+    "FreightTemplateId": 1,
+    "CountryId": 1,
+    "StateOrProvinceId": 13,
+    "MinOrderSubtotal": 35.000000000000000000000000000000,
+    "ShippingPrice": 5.000000000000000000000000000000,
+    "Note": null,
+    "IsEnabled": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2021-06-07 07:56:45.400122",
+    "UpdatedOn": "2021-06-07 07:56:45.400149"
+  },
+  {
+    "Id": 2,
+    "FreightTemplateId": 2,
+    "CountryId": 1,
+    "StateOrProvinceId": 350,
+    "MinOrderSubtotal": 0.000000000000000000000000000000,
+    "ShippingPrice": 0.000000000000000000000000000000,
+    "Note": null,
+    "IsEnabled": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2021-12-09 19:59:05.127009",
+    "UpdatedOn": "2021-12-09 19:59:05.127035"
+  },
+  {
+    "Id": 3,
+    "FreightTemplateId": 2,
+    "CountryId": 1,
+    "StateOrProvinceId": 215,
+    "MinOrderSubtotal": 0.000000000000000000000000000000,
+    "ShippingPrice": 0.000000000000000000000000000000,
+    "Note": null,
+    "IsEnabled": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-11-25 18:13:05.409794",
+    "UpdatedOn": "2023-09-11 13:55:46.656186"
+  },
+  {
+    "Id": 4,
+    "FreightTemplateId": 7,
+    "CountryId": 1,
+    "StateOrProvinceId": 1,
+    "MinOrderSubtotal": 0.000000000000000000000000000000,
+    "ShippingPrice": 9.000000000000000000000000000000,
+    "Note": null,
+    "IsEnabled": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2024-03-26 09:54:58.119190",
+    "UpdatedOn": "2024-03-26 09:54:58.119287"
+  },
+  {
+    "Id": 5,
+    "FreightTemplateId": 8,
+    "CountryId": 1,
+    "StateOrProvinceId": 12,
+    "MinOrderSubtotal": 0.000000000000000000000000000000,
+    "ShippingPrice": 2000.000000000000000000000000000000,
+    "Note": null,
+    "IsEnabled": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2024-03-27 16:52:02.706739",
+    "UpdatedOn": "2024-03-27 16:52:02.706743"
+  }
+]

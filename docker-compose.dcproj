@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" Sdk="Microsoft.Docker.Sdk">
+    <PropertyGroup Label="Globals">
+        <ProjectVersion>2.1</ProjectVersion>
+        <DockerTargetOS>Linux</DockerTargetOS>
+        <ProjectGuid>961155c0-6024-4299-97d6-305a00871081</ProjectGuid>
+        <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
+        <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/api/values</DockerServiceUrl>
+        <DockerServiceName>shop.webapi</DockerServiceName>
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="build.sh"/>
+        <None Include=".dockerignore"/>
+    </ItemGroup>
+</Project>
