@@ -14,7 +14,7 @@ using Shop.Module.Inventory.ViewModels;
 namespace Shop.Module.Inventory.Areas.Inventory.Controllers;
 
 /// <summary>
-/// 仓库管理API控制器，提供仓库的增删改查等功能
+/// Bộ điều khiển API quản lý kho, cung cấp các chức năng như thêm, xóa, sửa, truy vấn kho
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/warehouses")]
@@ -42,9 +42,9 @@ public class WarehouseApiController : ControllerBase
 
 
     /// <summary>
-    /// 获取所有仓库的简要信息
+    /// Nhận thông tin ngắn gọn về tất cả các kho
     /// </summary>
-    /// <returns>返回操作结果，包含仓库的简要信息列表</returns>
+    /// <returns>Trả về kết quả thao tác, bao gồm danh sách thông tin tóm tắt về kho</returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -59,10 +59,10 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据分页参数获取仓库数据列表
+    /// Lấy danh sách dữ liệu kho dựa trên tham số phân trang
     /// </summary>
-    /// <param name="param">标准表格参数，包含分页、排序等信息</param>
-    /// <returns>返回操作结果，包含分页的仓库数据列表</returns>
+    /// <param name="param">Các tham số bảng tiêu chuẩn, bao gồm phân trang, sắp xếp và các thông tin khác</param>
+    /// <returns>Trả về kết quả hoạt động, bao gồm danh sách dữ liệu kho được phân trang</returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<WarehouseQueryResult>>> DataList([FromBody] StandardTableParam param)
     {
@@ -87,17 +87,17 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据仓库ID获取仓库详细信息
+    /// Lấy thông tin chi tiết kho dựa trên ID kho
     /// </summary>
-    /// <param name="id">仓库ID</param>
-    /// <returns>返回操作结果，包含指定ID的仓库详细信息</returns>
+    /// <param name="id">ID kho</param>
+    /// <returns>Trả về kết quả hoạt động, bao gồm chi tiết kho của ID đã chỉ định</returns>
     [HttpGet("{id}")]
     public async Task<Result> Get(int id)
     {
         var currentUser = await _workContext.GetCurrentUserAsync();
         var warehouse = await _warehouseRepository.Query().Include(w => w.Address).FirstOrDefaultAsync(w => w.Id == id);
         if (warehouse == null)
-            throw new Exception("仓库不存在");
+            throw new Exception("Kho không tồn tại");
         var address = warehouse.Address ?? new Address();
         var result = new WarehouseQueryResult
         {
@@ -118,21 +118,21 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建新仓库
+    /// Tạo kho mới
     /// </summary>
-    /// <param name="model">仓库创建参数</param>
-    /// <returns>返回操作结果，表示是否创建成功</returns>
+    /// <param name="model">Thông số tạo kho</param>
+    /// <returns>Trả về kết quả phép toán, cho biết việc tạo có thành công hay không</returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] WarehouseCreateParam model)
     {
         var currentUser = await _workContext.GetCurrentUserAsync();
 
-        //验证所选择省市区是否属于国家
+        //Xác minh xem tỉnh hoặc thành phố được chọn có thuộc quốc gia hay không
         var province = await _provinceRepository.FirstOrDefaultAsync(model.StateOrProvinceId);
         if (province == null)
-            throw new Exception("省市区不存在");
+            throw new Exception("Tỉnh hoặc thành phố không tồn tại");
         if (province.CountryId != model.CountryId)
-            throw new Exception("所选择省市区不属于当前选择的国家");
+            throw new Exception("Tỉnh hoặc thành phố được chọn không thuộc quốc gia hiện được chọn");
 
         var address = new Address
         {
@@ -157,7 +157,7 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新仓库
+    /// Cập nhật kho lưu trữ
     /// </summary>
     /// <param name="id"></param>
     /// <param name="model"></param>
@@ -171,14 +171,14 @@ public class WarehouseApiController : ControllerBase
             .Include(x => x.Address)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (warehouse == null)
-            throw new Exception("仓库不存在");
+            throw new Exception("Kho không tồn tại");
 
-        //验证所选择省市区是否属于国家
+        //Xác minh xem tỉnh hoặc thành phố được chọn có thuộc quốc gia hay không
         var province = await _provinceRepository.FirstOrDefaultAsync(model.StateOrProvinceId);
         if (province == null)
-            throw new Exception("省市区不存在");
+            throw new Exception("Tỉnh hoặc thành phố không tồn tại");
         if (province.CountryId != model.CountryId)
-            throw new Exception("所选择省市区不属于当前选择的国家");
+            throw new Exception("Tỉnh hoặc thành phố được chọn không thuộc quốc gia hiện được chọn");
 
         warehouse.Name = model.Name;
         warehouse.AdminRemark = model.AdminRemark;
@@ -203,7 +203,7 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除仓库
+    /// Xóa kho
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -215,11 +215,11 @@ public class WarehouseApiController : ControllerBase
             .Include(x => x.Address)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (warehouse == null)
-            return Result.Fail("仓库不存在");
+            return Result.Fail("Kho không tồn tại");
 
         //var any = _productRepository.Query().Any(c => c.DefaultWarehouseId == id);
         //if (any)
-        //    return Result.Fail("仓库已被产品引用，不允许删除");
+        //    return Result.Fail("Kho đã được sản phẩm tham chiếu và không được phép xóa.");
 
         warehouse.IsDeleted = true;
         warehouse.UpdatedOn = DateTime.Now;

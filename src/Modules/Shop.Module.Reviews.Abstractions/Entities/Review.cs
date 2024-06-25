@@ -36,12 +36,12 @@ public class Review : EntityBase
     public int EntityId { get; set; }
 
     /// <summary>
-    /// 评论来源Id 例如:订单Id
+    /// ID nguồn nhận xét (Ví dụ: ID đơn hàng)
     /// </summary>
     public int? SourceId { get; set; }
 
     /// <summary>
-    /// 评论来源类型 Order = 0
+    /// Loại nguồn bình luận Thứ tự = 0
     /// </summary>
     public ReviewSourceType? SourceType { get; set; }
 
@@ -50,7 +50,7 @@ public class Review : EntityBase
     public int SupportCount { get; set; }
 
     /// <summary>
-    /// 是否由系统自动生成的评论
+    /// Liệu các bình luận có được hệ thống tự động tạo ra hay không
     /// </summary>
     public bool IsSystem { get; set; }
 

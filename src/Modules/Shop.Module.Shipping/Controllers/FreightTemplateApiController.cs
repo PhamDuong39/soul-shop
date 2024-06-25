@@ -14,7 +14,7 @@ using Shop.Module.Shipping.ViewModels;
 namespace Shop.Module.Shipping.Controllers;
 
 /// <summary>
-/// 运费模板 API 控制器，负责管理运费模板相关的操作。
+/// Bộ điều khiển API mẫu vận chuyển hàng hóa, chịu trách nhiệm quản lý các hoạt động liên quan đến mẫu vận chuyển hàng hóa.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/shippings/freight-templates")]
@@ -42,9 +42,9 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有运费模板的列表。
+    /// Nhận danh sách tất cả các mẫu vận chuyển.
     /// </summary>
-    /// <returns>运费模板的列表。</returns>
+    /// <returns>Danh sách các mẫu vận chuyển.</returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -61,10 +61,11 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据给定的参数分页获取运费模板的列表。
+    /// Nhận danh sách các mẫu vận chuyển hàng hóa trong các trang dựa trên các thông số đã cho.
     /// </summary>
-    /// <param name="param">分页和查询参数。</param>
-    /// <returns>分页的运费模板列表。</returns>
+    /// <param name="param">Các tham số phân trang và truy vấn. </param>
+    /// <returns>Danh sách phân trang của các mẫu vận chuyển.</returns> 
+    /// 
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<FreightTemplateQueryResult>>> DataList(
         [FromBody] StandardTableParam param)
@@ -83,10 +84,11 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建一个新的运费模板。
+    /// Tạo mẫu giá vận chuyển mới.
     /// </summary>
-    /// <param name="model">运费模板的创建参数。</param>
-    /// <returns>创建操作的结果。</returns>
+    /// <param name="model">Tạo các thông số của mẫu vận chuyển hàng hóa. </param>
+    /// <returns>Tạo kết quả của hoạt động. </returns> 
+    /// 
     [HttpPost]
     public async Task<Result> Post([FromBody] FreightTemplateCreateParam model)
     {
@@ -100,11 +102,11 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定的运费模板。
+    /// Cập nhật mẫu vận chuyển được chỉ định.
     /// </summary>
-    /// <param name="id">要更新的运费模板的ID。</param>
-    /// <param name="model">运费模板的更新参数。</param>
-    /// <returns>更新操作的结果。</returns>
+    /// <param name="id">ID của mẫu vận chuyển cần cập nhật.</param>
+    /// <param name="model">Cập nhật thông số cho mẫu cước vận chuyển.</param>
+    /// <returns>Kết quả của hoạt động cập nhật. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] FreightTemplateCreateParam model)
     {
@@ -119,24 +121,25 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定的运费模板。
+    /// Xóa mẫu vận chuyển hàng hóa được chỉ định.
     /// </summary>
-    /// <param name="id">要删除的运费模板的ID。</param>
-    /// <returns>删除操作的结果。</returns>
+    /// <param name="id">ID của mẫu vận chuyển sẽ bị xóa. </param>
+    /// <returns> Kết quả của thao tác xóa. </returns>
+    /// 
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var template = await _freightTemplateRepository.FirstOrDefaultAsync(id);
         if (template == null)
-            return Result.Fail("运费模板不存在");
+            return Result.Fail("Mẫu vận chuyển hàng hóa không tồn tại");
 
         var any = _priceAndDestinationRepository.Query().Any(c => c.FreightTemplateId == id);
         if (any)
-            return Result.Fail("运费模板已被引用，不允许删除");
+            return Result.Fail("Mẫu vận chuyển hàng hóa đã được tham chiếu và không được phép xóa.");
 
         var anyProduct = _productRepository.Query().Any(c => c.FreightTemplateId == id);
         if (anyProduct)
-            return Result.Fail("运费模板已被产品引用，不允许删除");
+            return Result.Fail("Mẫu vận chuyển hàng hóa đã được sản phẩm tham chiếu và không được phép xóa.");
 
         template.IsDeleted = true;
         template.UpdatedOn = DateTime.Now;

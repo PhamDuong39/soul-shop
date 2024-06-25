@@ -17,7 +17,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// 评论回复 API 控制器，用于处理评论的回复操作。
+/// Bộ điều khiển API trả lời nhận xét, được sử dụng để xử lý các hoạt động trả lời nhận xét.
 /// </summary>
 [Route("api/replies")]
 [Authorize()]
@@ -48,10 +48,10 @@ public class ReplyApiController : ControllerBase
 
 
     /// <summary>
-    /// 发布一条评论回复。
+    /// Đăng bài trả lời bình luận.
     /// </summary>
-    /// <param name="param">评论回复的参数。</param>
-    /// <returns>操作的结果。</returns>
+    /// <param name="param">Thông số trả lời bình luận. </param>
+    /// <returns>Kết quả của thao tác. </return>
     [HttpPost()]
     public async Task<Result> Post([FromBody] ReplyAddParam param)
     {
@@ -69,7 +69,7 @@ public class ReplyApiController : ControllerBase
         if (param.ToReplyId != null)
         {
             var toReply = await _replyRepository.FirstOrDefaultAsync(param.ToReplyId.Value);
-            if (toReply == null) throw new Exception("回复信息不存在");
+            if (toReply == null) throw new Exception("Tin nhắn trả lời không tồn tại");
             reply.ToUserId = toReply.UserId;
             reply.ToUserName = toReply.ReplierName;
             reply.ParentId = toReply.ParentId ?? toReply.Id;
@@ -88,10 +88,10 @@ public class ReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取指定评论的所有通过审核的回复。
+    /// Nhận tất cả các câu trả lời đã được phê duyệt của nhận xét được chỉ định trong phân trang.
     /// </summary>
-    /// <param name="param">分页和筛选参数。</param>
-    /// <returns>指定评论的回复列表。</returns>
+    /// <param name="param">Các tham số phân trang và lọc. </param>
+    /// <returns>Chỉ định danh sách trả lời các bình luận. </return>
     [HttpPost("grid")]
     [AllowAnonymous]
     public async Task<Result<StandardTableResult<ReplyListResult>>> Grid(
@@ -99,7 +99,7 @@ public class ReplyApiController : ControllerBase
     {
         var search = param?.Search;
         if (search == null)
-            throw new ArgumentNullException("参数异常");
+            throw new ArgumentNullException("Ngoại lệ tham số");
 
         var query = _replyRepository.Query()
             .Where(c => c.Status == ReplyStatus.Approved && c.ParentId == null && c.ReviewId == search.ReviewId);

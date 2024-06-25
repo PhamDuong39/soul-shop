@@ -10,7 +10,7 @@ using Shop.Module.Inventory.ViewModels;
 namespace Shop.Module.Inventory.Areas.Inventory.Controllers;
 
 /// <summary>
-/// 库存历史 API 控制器，用于管理和查询库存变更历史记录。
+/// Bộ điều khiển API lịch sử hàng tồn kho để quản lý và truy vấn lịch sử thay đổi hàng tồn kho.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("/api/stocks-histories")]
@@ -24,10 +24,10 @@ public class StockHistoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页查询库存历史记录。
+    /// Truy vấn lịch sử hàng tồn kho theo trang.
     /// </summary>
-    /// <param name="param">分页查询参数，可包括仓库 ID 和产品 ID 过滤条件。</param>
-    /// <returns>分页的库存历史记录列表。</returns>
+    /// <param name="param">Tham số truy vấn phân trang, có thể bao gồm các điều kiện lọc ID kho và ID sản phẩm. </param>
+    /// <returns>Danh sách lịch sử hàng tồn kho được phân trang. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<StockHistoryQueryResult>>> List(
         [FromBody] StandardTableParam<StockHistoryQueryParam> param)

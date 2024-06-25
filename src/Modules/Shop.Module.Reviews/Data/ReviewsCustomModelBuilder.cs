@@ -36,12 +36,12 @@ public class ReviewsCustomModelBuilder : ICustomModelBuilder
             new AppSetting(ReviewKeys.IsReviewAutoApproved)
             {
                 Module = module, IsVisibleInCommonSettingPage = true, Value = "false", Type = typeof(bool).FullName,
-                Note = "启用评论自动审核功能"
+                Note = "Bật kiểm duyệt bình luận tự động"
             },
             new AppSetting(ReviewKeys.IsReplyAutoApproved)
             {
                 Module = module, IsVisibleInCommonSettingPage = true, Value = "true", Type = typeof(bool).FullName,
-                Note = "启用回复自动审核功能"
+                Note = "Bật tự động xem lại câu trả lời"
             }
         );
     }

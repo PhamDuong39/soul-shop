@@ -13,22 +13,22 @@ public class ShipmentQueryItemResult
     public int ProductId { get; set; }
 
     /// <summary>
-    /// 产品名称（快照）
+    /// Tên sản phẩm (ảnh chụp nhanh)
     /// </summary>
     public string ProductName { get; set; }
 
     /// <summary>
-    /// 产品图片（快照）
+    /// Hình ảnh sản phẩm (ảnh chụp nhanh)
     /// </summary>
     public string ProductMediaUrl { get; set; }
 
     /// <summary>
-    /// 下单数量
+    /// Số lượng đặt hàng
     /// </summary>
     public int OrderedQuantity { get; set; }
 
     /// <summary>
-    /// 已发货数量
+    /// Số lượng vận chuyển
     /// </summary>
     public int ShippedQuantity { get; set; }
 

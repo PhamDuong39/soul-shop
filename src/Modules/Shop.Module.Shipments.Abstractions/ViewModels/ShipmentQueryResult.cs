@@ -15,7 +15,7 @@ public class ShipmentQueryResult
     public OrderStatus OrderStatus { get; set; }
 
     /// <summary>
-    /// 运输状态
+    /// Tình trạng giao hàng
     /// </summary>
     public ShippingStatus? ShippingStatus { get; set; }
 
@@ -24,12 +24,12 @@ public class ShipmentQueryResult
     public decimal TotalWeight { get; set; }
 
     /// <summary>
-    /// 发货时间
+    /// thời gian vận chuyển
     /// </summary>
     public DateTime? ShippedOn { get; set; }
 
     /// <summary>
-    /// 收货时间
+    /// Thời điểm nhận
     /// </summary>
     public DateTime? DeliveredOn { get; set; }
 

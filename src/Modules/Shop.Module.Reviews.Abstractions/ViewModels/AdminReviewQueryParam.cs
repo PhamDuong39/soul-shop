@@ -12,7 +12,7 @@ public class AdminReviewQueryParam
     public ReviewStatus? Status { get; set; }
 
     /// <summary>
-    /// 有图
+    /// Có những hình ảnh
     /// </summary>
     public bool? IsMedia { get; set; }
 

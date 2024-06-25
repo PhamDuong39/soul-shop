@@ -7,12 +7,12 @@ public class ReviewKeys : ShopKeys
     public static string Module = System + ":review";
 
     /// <summary>
-    /// 启用评论自动审核功能
+    /// Bật kiểm duyệt bình luận tự động
     /// </summary>
     public const string IsReviewAutoApproved = "IsReviewAutoApproved";
 
     /// <summary>
-    /// 启用回复自动审核功能
+    /// Bật tự động xem lại câu trả lời
     /// </summary>
     public const string IsReplyAutoApproved = "IsReplyAutoApproved";
 }

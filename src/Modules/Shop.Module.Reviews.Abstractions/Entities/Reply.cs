@@ -35,19 +35,19 @@ public class Reply : EntityBase
     [StringLength(450)] public string ReplierName { get; set; }
 
     /// <summary>
-    /// 当前用户回复的用户
+    /// Người dùng mà người dùng hiện tại trả lời
     /// </summary>
     [ForeignKey("ToUser")]
     public int? ToUserId { get; set; }
 
     /// <summary>
-    /// 当前用户回复的用户
+    /// Người dùng mà người dùng hiện tại trả lời
     /// </summary>
     [ForeignKey("ToUserId")]
     public User ToUser { get; set; }
 
     /// <summary>
-    /// 当前用户回复的用户
+    /// Người dùng mà người dùng hiện tại trả lời
     /// </summary>
     [StringLength(450)]
     public string ToUserName { get; set; }

@@ -43,7 +43,7 @@ public class ReviewService : IReviewService
     }
 
     /// <summary>
-    /// 自动好评
+    /// Khen ngợi tự động
     /// </summary>
     /// <param name="entityId"></param>
     /// <param name="entityTypeId"></param>
@@ -70,9 +70,9 @@ public class ReviewService : IReviewService
                 user = await _userRepository.FirstOrDefaultAsync(order.CustomerId);
             }
 
-        // 一个用户
-        // 评论 某订单 某商品只能一次
-        // 评论 无订单关联 评论商品只能一次
+        // một người dùng
+        // bình luận về một đơn hàng và một sản phẩm nhất định chỉ có thể được thực hiện một lần
+        // bình luận không liên quan đến đơn hàng. Bạn chỉ có thể bình luận về một sản phẩm một lần.
         var any = await _reviewRepository.Query().AnyAsync(c =>
             c.EntityTypeId == (int)entityTypeId && c.EntityId == entityId && c.SourceId == sourceId &&
             c.SourceType == sourceType);
@@ -81,7 +81,7 @@ public class ReviewService : IReviewService
         var review = new Review
         {
             Rating = 5,
-            Comment = "默认好评",
+            Comment = "Mặc định tích cực",
             EntityId = entityId,
             EntityTypeId = (int)entityTypeId,
             SourceId = sourceId,

@@ -12,7 +12,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// 管理员评论 API 控制器，用于管理商品评论。
+/// Bộ điều khiển API đánh giá của quản trị viên, được sử dụng để quản lý đánh giá sản phẩm.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/admin-reviews")]
@@ -34,10 +34,10 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取评论列表。
+    /// Lấy danh sách bình luận trong phân trang.
     /// </summary>
-    /// <param name="param">分页参数以及过滤条件。</param>
-    /// <returns>基于条件过滤后的评论分页列表。</returns>
+    /// <param name="param">Thông số phân trang và điều kiện lọc. </param>
+    /// <returns>Danh sách các bình luận được phân trang được lọc dựa trên các điều kiện. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<AdminReviewListResult>>> Grid(
         [FromBody] StandardTableParam<AdminReviewQueryParam> param)
@@ -49,7 +49,7 @@ public class AdminReviewApiController : ControllerBase
             if (search.EntityTypeId.HasValue)
             {
                 if (!entityTypeIds.Any(c => c == search.EntityTypeId.Value))
-                    throw new Exception("参数不支持");
+                    throw new Exception("Thông số không được hỗ trợ");
                 query = query.Where(c => c.EntityTypeId == (int)search.EntityTypeId.Value);
             }
 
@@ -90,11 +90,11 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定评论的状态。
+    /// Cập nhật trạng thái của bình luận được chỉ định.
     /// </summary>
-    /// <param name="id">评论 ID。</param>
-    /// <param name="param">评论更新参数。</param>
-    /// <returns>更新操作的结果。</returns>
+    /// <param name="id">ID nhận xét. </param>
+    /// <param name="param">Thông số cập nhật bình luận. </param>
+    /// <returns>Kết quả của thao tác cập nhật. </return>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] AdminReviewUpdateParam param)
     {
@@ -111,10 +111,10 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定的评论。
+    /// Xóa nhận xét đã chỉ định.
     /// </summary>
-    /// <param name="id">评论 ID。</param>
-    /// <returns>删除操作的结果。</returns>
+    /// <param name="id">ID nhận xét. </param>
+    /// <returns>Kết quả của thao tác xóa. </return>
     [HttpDelete("{id}")]
     public async Task<Result> Delete(int id)
     {

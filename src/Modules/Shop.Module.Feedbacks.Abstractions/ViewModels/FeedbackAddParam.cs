@@ -8,8 +8,8 @@ public class FeedbackAddParam
     [StringLength(450)] public string Contact { get; set; }
 
     [StringLength(450)]
-    [Required(ErrorMessage = "请输入内容，且内容长度不能超过450")]
+    [Required(ErrorMessage = "Vui lòng nhập nội dung và độ dài nội dung không được vượt quá 450 ký tự")]
     public string Content { get; set; }
 
-    [Required(ErrorMessage = "请选择反馈类型")] public FeedbackType? Type { get; set; }
+    [Required(ErrorMessage = "Vui lòng chọn loại phản hồi")] public FeedbackType? Type { get; set; }
 }

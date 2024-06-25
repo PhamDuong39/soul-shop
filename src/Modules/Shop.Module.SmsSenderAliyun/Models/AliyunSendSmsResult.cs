@@ -3,25 +3,26 @@
 public class AliyunSendSmsResult
 {
     /// <summary>
-    /// 发送回执ID，可根据该ID在接口QuerySendDetails中查询具体的发送状态。
+    /// Gửi ID biên nhận
+    /// Bạn có thể truy vấn trạng thái gửi cụ thể trong giao diện QuerySendDetails dựa trên ID này.
     /// 900619746936498440^0
     /// </summary>
     public string BizId { get; set; }
 
     /// <summary>
-    /// 请求状态码。
+    /// Yêu cầu mã trạng thái.
     /// OK
     /// </summary>
     public string Code { get; set; }
 
     /// <summary>
-    /// 状态码的描述。
+    /// Mô tả mã trạng thái。
     /// OK
     /// </summary>
     public string Message { get; set; }
 
     /// <summary>
-    /// 请求ID。
+    /// Yêu cầu ID。
     /// F655A8D5-B967-440B-8683-DAD6FF8DE990
     /// </summary>
     public string RequestId { get; set; }

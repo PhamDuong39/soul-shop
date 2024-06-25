@@ -12,7 +12,7 @@ using Shop.Module.Shipments.ViewModels;
 namespace Shop.Module.Shipments.Controllers;
 
 /// <summary>
-/// 发货 API 控制器，负责管理发货单相关操作。
+/// Bộ điều khiển API vận chuyển, chịu trách nhiệm quản lý các hoạt động liên quan đến đơn hàng vận chuyển.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/shipments")]
@@ -33,10 +33,10 @@ public class ShipmentApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取指定发货单的详细信息。
+    /// Nhận thông tin chi tiết của một hóa đơn được chỉ định.
     /// </summary>
-    /// <param name="id">发货单 ID。</param>
-    /// <returns>发货单详细信息。</returns>
+    /// <param name="id">ID hóa đơn.</param>
+    /// <returns>Chi tiết hóa đơn. </return>
     [HttpGet("{id}")]
     public async Task<Result<ShipmentQueryResult>> Get(long id)
     {
@@ -79,10 +79,10 @@ public class ShipmentApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取所有发货单信息。
+    /// Lấy toàn bộ thông tin hóa đơn trong các trang.
     /// </summary>
-    /// <param name="param">分页和筛选参数。</param>
-    /// <returns>分页的发货单列表。</returns>
+    /// <param name="param">Các tham số phân trang và lọc. </param>
+    /// <returns> Danh sách hóa đơn được đánh số trang. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<ShipmentQueryResult>>> List(
         [FromBody] StandardTableParam<ShipmentQueryParam> param)
