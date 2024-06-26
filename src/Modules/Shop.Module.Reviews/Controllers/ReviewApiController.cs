@@ -20,7 +20,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API nhận xét, chịu trách nhiệm xử lý các hoạt động liên quan đến nhận xét.
+/// Comments API controller, responsible for handling comment-related operations.
 /// </summary>
 [Route("api/reviews")]
 [Authorize()]
@@ -54,40 +54,40 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// thêm bình luận
+    /// add comment
     /// </summary>
-    /// <param name="param">Nhận xét các tham số được thêm vào. </param>
-    /// <returns>Kết quả của thao tác thêm chú thích. </return>
+    /// <param name="param">Comment out the added parameters. </param>
+    /// <returns>Result of adding comment. </return>
     [HttpPost]
     public async Task<Result> AddReview([FromBody] ReviewAddParam param)
     {
         var user = await _workContext.GetCurrentOrThrowAsync();
         var anyType = entityTypeIds.Any(c => c == param.EntityTypeId);
-        if (!anyType) throw new Exception("Ngoại lệ tham số");
+        if (!anyType) throw new Exception("Parameter exception");
 
         if (param.SourceType == null && param.SourceId != null)
-            throw new Exception("Loại nguồn bình luận không bình thường");
+            throw new Exception("Unusual comment source type");
         else if (param.SourceType != null && param.SourceId != null)
             if (param.SourceType == ReviewSourceType.Order && param.EntityTypeId == EntityTypeWithId.Product)
             {
                 var anyProduct = _orderRepository.Query().Any(c =>
-                    c.Id == param.SourceId.Value && c.OrderItems.Any(x => x.ProductId == param.EntityId));
-                if (!anyProduct) throw new Exception("Sản phẩm được đánh giá không tồn tại");
+                c.Id == param.SourceId.Value && c.OrderItems.Any(x => x.ProductId == param.EntityId));
+                if (!anyProduct) throw new Exception("The product being evaluated does not exist");
                 var order = await _orderRepository.Query().FirstOrDefaultAsync(c => c.Id == param.SourceId);
                 if (order == null)
-                    throw new Exception("Đơn hàng không tồn tại");
+                    throw new Exception("Order does not exist");
                 if (order.OrderStatus != OrderStatus.Complete)
-                    throw new Exception("Đơn hàng chưa được hoàn thành và không thể đánh giá được.");
+                    throw new Exception("The order has not been completed and cannot be evaluated.");
             }
 
-        // một người dùng bình luận về một đơn hàng và một sản phẩm nhất định chỉ có thể được thực hiện một lần
-        // bình luận không liên quan đến đơn hàng. Bạn chỉ có thể bình luận về một sản phẩm một lần.
+        // a user comments on an order and a certain product can only be fulfilled once
+        // comments not related to the order. You can only comment on a product once.
         var any = await _reviewRepository.Query()
             .AnyAsync(c =>
                 c.UserId == user.Id && c.EntityTypeId == (int)param.EntityTypeId && c.EntityId == param.EntityId &&
                 c.SourceId == param.SourceId && c.SourceType == param.SourceType);
         if (any)
-            throw new Exception("Bạn đã bình luận");
+            throw new Exception("You have commented");
 
         var review = new Review
         {
@@ -132,17 +132,17 @@ public class ReviewApiController : ControllerBase
 
 
     /// <summary>
-    /// Lấy thông tin đánh giá của một thực thể cụ thể, chẳng hạn như tổng số đánh giá và số lượng đánh giá cho mỗi xếp hạng sao.
+    /// Gets review information for a specific entity, such as the total number of reviews and the number of reviews for each star rating.
     /// </summary>
-    /// <param name="param">Tham số cho truy vấn thông tin bình luận. </param>
-    /// <returns>Thông tin nhận xét của các thực thể cụ thể. </return>
+    /// <param name="param">Parameters for comment information query. </param>
+    /// <returns>Comment information of specific entities. </return>
     [HttpPost("info")]
     [AllowAnonymous]
     public async Task<Result> Info([FromBody] ReviewInfoParam param)
     {
         var any = entityTypeIds.Any(c => c == param.EntityTypeId);
         if (!any)
-            throw new Exception("Thông số không được hỗ trợ");
+            throw new Exception("Parameter not supported");
 
         var query = _reviewRepository.Query()
             .Where(c => c.EntityId == param.EntityId && c.EntityTypeId == (int)param.EntityTypeId &&
@@ -168,17 +168,17 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// Liệt kê các chú thích cho một thực thể cụ thể.
+    /// Lists annotations for a specific entity.
     /// </summary>
-    /// <param name="param">Tham số cho truy vấn danh sách nhận xét. </param>
-    /// <returns>Danh sách các nhận xét cho một thực thể cụ thể. </return>
+    /// <param name="param">Parameters for comment list query. </param>
+    /// <returns>List of comments for a specific entity. </return>
     [HttpPost("list")]
     [AllowAnonymous]
     public async Task<Result> List([FromBody] ReviewListQueryParam param)
     {
         var any = entityTypeIds.Any(c => c == param.EntityTypeId);
         if (!any)
-            throw new Exception("Thông số không được hỗ trợ");
+            throw new Exception("Parameter not supported");
 
         var query = _reviewRepository.Query()
             .Where(c => c.Status == ReviewStatus.Approved && c.EntityId == param.EntityId &&
@@ -213,7 +213,7 @@ public class ReviewApiController : ControllerBase
                 //})
             }).Take(param.Take).ToListAsync();
 
-        // bug todo Để được tối ưu hóa
+        // bug todo to be optimized
         result.ForEach(c =>
         {
             if (c.ReplieCount > 0)
@@ -234,10 +234,10 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy danh sách bình luận trong phân trang.
+    /// Get the list of comments in pagination.
     /// </summary>
-    /// <param name="param">Tham số truy vấn phân trang. </param>
-    /// <returns> Danh sách bình luận được đánh số trang. </return>
+    /// <param name="param">Pagination query parameters. </param>
+    /// <returns> Paged list of comments. </return>
     [HttpPost("grid")]
     [AllowAnonymous]
     public async Task<Result<StandardTableResult<ReviewListResult>>> Grid(
@@ -245,11 +245,11 @@ public class ReviewApiController : ControllerBase
     {
         var search = param?.Search;
         if (search == null)
-            throw new ArgumentNullException("Ngoại lệ tham số");
+            throw new ArgumentNullException("Parameter exception");
 
         var any = entityTypeIds.Any(c => c == search.EntityTypeId);
         if (!any)
-            throw new Exception("Thông số không được hỗ trợ");
+            throw new Exception("Parameter not supported");
 
         var query = _reviewRepository.Query()
             .Where(c => c.Status == ReviewStatus.Approved && c.EntityId == search.EntityId &&
@@ -303,7 +303,7 @@ public class ReviewApiController : ControllerBase
             });
 
         if (result?.List?.Count() > 0)
-            // bug todo Để được tối ưu hóa
+            // bug todo to be optimized
             result.List.ToList().ForEach(c =>
             {
                 if (c.ReplieCount > 0)
@@ -324,10 +324,10 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy thông tin chi tiết cho một bình luận cụ thể.
+    /// Get details for a specific comment.
     /// </summary>
-    /// <param name="id">ID nhận xét. </param>
-    /// <returns>Chi tiết về nhận xét cụ thể. </return>
+    /// <param name="id">Comment ID. </param>
+    /// <returns>Details about the specific comment. </return>
     [HttpGet("{id:int:min(1)}")]
     [AllowAnonymous]
     public async Task<Result> Get(int id)

@@ -1,7 +1,7 @@
 ﻿namespace Shop.Module.Reviews.Models;
 
 /// <summary>
-/// Loại nguồn bình luận Thứ tự = 0
+/// Comment source type Order = 0
 /// </summary>
 public enum ReviewSourceType
 {

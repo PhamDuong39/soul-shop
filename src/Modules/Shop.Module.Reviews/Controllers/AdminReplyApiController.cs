@@ -12,7 +12,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API trả lời của quản trị viên, được sử dụng để xử lý các hoạt động trả lời nhận xét của quản trị viên.
+/// Admin Reply API Controller, used to handle admin comment replies.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/admin-replies")]
@@ -39,10 +39,10 @@ public class AdminReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy danh sách trả lời của quản trị viên trong phân trang.
+    /// Get the list of admin responses in pagination.
     /// </summary>
-    /// <param name="param">Các tham số phân trang và lọc. </param>
-    /// <returns>Danh sách được đánh số trang các phản hồi của quản trị viên. </return>
+    /// <param name="param">Paging and filtering parameters. </param>
+    /// <returns>A paginated list of admin responses. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<AdminReplyListResult>>> Grid(
         [FromBody] StandardTableParam<AdminReplyQueryParam> param)
@@ -78,11 +78,11 @@ public class AdminReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// Cập nhật trạng thái trả lời của quản trị viên với ID được chỉ định.
+    /// Updates the admin response status with the specified ID.
     /// </summary>
-    /// <param name="id">ID trả lời của quản trị viên. </param>
-    /// <param name="param">Trả lời thông số cập nhật. </param>
-    /// <returns>Kết quả của thao tác cập nhật. </return>
+    /// <param name="id">Administrator response ID. </param>
+    /// <param name="param">Reply to update parameters. </param>
+    /// <returns>The result of the update operation. </return>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] AdminReplyUpdateParam param)
     {
@@ -99,10 +99,10 @@ public class AdminReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// Xóa câu trả lời của quản trị viên với ID được chỉ định.
+    /// Delete the admin response with the specified ID.
     /// </summary>
-    /// <param name="id">ID trả lời của quản trị viên. </param>
-    /// <returns>Kết quả của thao tác xóa. </return>
+    /// <param name="id">Administrator response ID. </param>
+    /// <returns>Result of the delete operation. </return>
     [HttpDelete("{id}")]
     public async Task<Result> Delete(int id)
     {
@@ -111,7 +111,7 @@ public class AdminReplyApiController : ControllerBase
         if (model != null)
         {
             var any = _replyRepository.Query().Any(c => c.ParentId == model.Id);
-            if (any) throw new Exception("Có một câu trả lời phụ bên dưới câu trả lời hiện tại và không được phép xóa.");
+            if (any) throw new Exception("There is a sub answer below the current answer and deletion is not allowed.");
 
             model.IsDeleted = true;
             model.UpdatedOn = DateTime.Now;

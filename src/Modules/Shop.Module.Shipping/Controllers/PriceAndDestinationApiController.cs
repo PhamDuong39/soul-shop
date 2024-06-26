@@ -14,7 +14,7 @@ using Shop.Module.Shipping.ViewModels;
 namespace Shop.Module.Shipping.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API giá cước và điểm đến chịu trách nhiệm quản lý các quy tắc vận chuyển hàng hóa cụ thể trong mẫu vận chuyển hàng hóa.
+/// The rate and destination API controller is responsible for managing the specific freight rules in the freight template.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/shippings/price-destinations")]
@@ -38,12 +38,12 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// Nhận danh sách chiến lược vận chuyển hàng hóa trong các trang dựa trên ID mẫu vận chuyển hàng hóa.
+    /// Get a list of freight strategies in pages based on the freight template ID.
     /// </summary>
-    /// <param name="freightTemplateId">ID mẫu vận chuyển hàng hóa. </param>
-    /// <param name="param">Thông số phân trang. </param>
-    /// <returns> Danh sách các chiến lược vận chuyển được đánh số trang. </return>
-    
+    /// <param name="freightTemplateId">Freight template ID. </param>
+    /// <param name="param">Paging parameters. </param>
+    /// <returns> Paged list of shipping strategies. </return>
+
     [HttpPost("grid/{freightTemplateId:int:min(1)}")]
     public async Task<Result<StandardTableResult<PriceAndDestinationQueryResult>>> DataList(int freightTemplateId,
         [FromBody] StandardTableParam param)
@@ -74,12 +74,12 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// Tạo chiến lược vận chuyển hàng hóa mới theo mẫu vận chuyển hàng hóa đã chỉ định.
+    /// Create a new freight strategy according to the specified freight template.
     /// </summary>
-    /// <param name="freightTemplateId">ID mẫu vận chuyển hàng hóa. </param>
-    /// <param name="model">Xây dựng các tham số của chiến lược vận chuyển hàng hóa. </param>
-    /// <returns>Kết quả của thao tác tạo. </return>
-    
+    /// <param name="freightTemplateId">Freight template ID. </param>
+    /// <param name="model">Build the parameters of the freight strategy. </param>
+    /// <returns>The result of the create operation. </return>
+
     public async Task<Result> Post(int freightTemplateId, [FromBody] PriceAndDestinationCreateParam model)
     {
         var entity = new PriceAndDestination()
@@ -97,7 +97,7 @@ public class PriceAndDestinationApiController : ControllerBase
             && c.CountryId == model.CountryId
             && c.StateOrProvinceId == model.StateOrProvinceId);
         if (any)
-            return Result.Fail("Chính sách vận chuyển hàng hóa đã tồn tại. Chỉ có thể có một chính sách vận chuyển hàng hóa cho cùng một quốc gia, tỉnh, thành phố hoặc thành phố.");
+            return Result.Fail("Freight policy already exists. There can only be one freight policy for the same country, province, city or city.");
 
         _priceAndDestinationRepository.Add(entity);
         await _priceAndDestinationRepository.SaveChangesAsync();
@@ -105,17 +105,17 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// Cập nhật chính sách vận chuyển cho ID được chỉ định.
+    /// Updates the shipping policy for the specified ID.
     /// </summary>
-    /// <param name="id">ID chính sách vận chuyển. </param>
-    /// <param name="model">Cập nhật các thông số của chiến lược vận chuyển hàng hóa. </param>
-    /// <returns>Kết quả của thao tác cập nhật. </return>
+    /// <param name="id">Shipping policy ID. </param>
+    /// <param name="model">Updates the freight strategy parameters. </param>
+    /// <returns>The result of the update operation. </return>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] PriceAndDestinationCreateParam model)
     {
         var entity = await _priceAndDestinationRepository.FirstOrDefaultAsync(id);
         if (entity == null)
-            return Result.Fail("Tài liệu không tồn tại");
+            return Result.Fail("Documentation does not exist");
 
         var any = await _priceAndDestinationRepository.Query().AnyAsync(c =>
             c.FreightTemplateId == entity.FreightTemplateId
@@ -123,7 +123,7 @@ public class PriceAndDestinationApiController : ControllerBase
             && c.StateOrProvinceId == model.StateOrProvinceId
             && c.Id != entity.Id);
         if (any)
-            return Result.Fail("Chính sách vận chuyển hàng hóa đã tồn tại. Chỉ có thể có một chính sách vận chuyển hàng hóa cho cùng một quốc gia, tỉnh, thành phố hoặc thành phố.");
+            return Result.Fail("Freight policy already exists. There can only be a freight policy for the same country, province, city or municipality.");
 
         entity.CountryId = model.CountryId;
         entity.MinOrderSubtotal = model.MinOrderSubtotal;
@@ -137,16 +137,16 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// Xóa chính sách vận chuyển với ID được chỉ định.
+    /// Delete the shipping policy with the specified ID.
     /// </summary>
-    /// <param name="id">ID chính sách vận chuyển. </param>
-    /// <returns>Kết quả của thao tác xóa. </return>
+    /// <param name="id">Shipping policy ID. </param>
+    /// <returns>Result of the delete operation. </return>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var entity = await _priceAndDestinationRepository.FirstOrDefaultAsync(id);
         if (entity == null)
-            return Result.Fail("Tài liệu không tồn tại");
+            return Result.Fail("Documentation does not exist");
 
         entity.IsDeleted = true;
         entity.UpdatedOn = DateTime.Now;

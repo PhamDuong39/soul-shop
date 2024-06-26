@@ -16,7 +16,7 @@ public class AdminReplyListResult
     public DateTime CreatedOn { get; set; }
 
     /// <summary>
-    /// Người dùng mà người dùng hiện tại trả lời
+    /// User to whom the current user replies
     /// </summary>
     public string ToUserName { get; set; }
 
@@ -27,7 +27,7 @@ public class AdminReplyListResult
     public int UserId { get; set; }
 
     /// <summary>
-    /// Người dùng mà người dùng hiện tại trả lời
+    /// User to whom the current user replies
     /// </summary>
     public int? ToUserId { get; set; }
 

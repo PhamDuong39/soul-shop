@@ -10,7 +10,7 @@ public class ReviewQueryParam
     public EntityTypeWithId EntityTypeId { get; set; }
 
     /// <summary>
-    /// Có những hình ảnh
+    /// There are images
     /// </summary>
     public bool? IsMedia { get; set; }
 

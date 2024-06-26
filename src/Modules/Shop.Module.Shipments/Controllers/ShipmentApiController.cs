@@ -12,7 +12,7 @@ using Shop.Module.Shipments.ViewModels;
 namespace Shop.Module.Shipments.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API vận chuyển, chịu trách nhiệm quản lý các hoạt động liên quan đến đơn hàng vận chuyển.
+/// Shipping API controller, responsible for managing activities related to shipping orders.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/shipments")]
@@ -33,10 +33,10 @@ public class ShipmentApiController : ControllerBase
     }
 
     /// <summary>
-    /// Nhận thông tin chi tiết của một hóa đơn được chỉ định.
+    /// Get details of a specified invoice.
     /// </summary>
-    /// <param name="id">ID hóa đơn.</param>
-    /// <returns>Chi tiết hóa đơn. </return>
+    /// <param name="id">Invoice ID.</param>
+    /// <returns>Invoice details. </return>
     [HttpGet("{id}")]
     public async Task<Result<ShipmentQueryResult>> Get(long id)
     {
@@ -79,10 +79,10 @@ public class ShipmentApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy toàn bộ thông tin hóa đơn trong các trang.
+    /// Get all invoice information in pages.
     /// </summary>
-    /// <param name="param">Các tham số phân trang và lọc. </param>
-    /// <returns> Danh sách hóa đơn được đánh số trang. </return>
+    /// <param name="param">Paging and filtering parameters. </param>
+    /// <returns> List of invoices with page numbers. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<ShipmentQueryResult>>> List(
         [FromBody] StandardTableParam<ShipmentQueryParam> param)

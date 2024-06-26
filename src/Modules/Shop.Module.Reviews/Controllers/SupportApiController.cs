@@ -12,7 +12,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// Giống như bộ điều khiển API, chịu trách nhiệm xử lý các hoạt động liên quan đến tương tự.
+/// Like API controller, responsible for handling the operations related to the same.
 /// </summary>
 [Route("api/supports")]
 [Authorize()]
@@ -39,7 +39,7 @@ public class SupportApiController : ControllerBase
     }
 
     /// <summary>
-    /// Thích(Hỗ trợ)/Không thích
+    /// Like(Support)/Dislike
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
@@ -49,7 +49,7 @@ public class SupportApiController : ControllerBase
         var user = await _workContext.GetCurrentOrThrowAsync();
         var any = supportEntityTypeIds.Any(c => c == param.EntityTypeId);
         if (!any)
-            throw new Exception("Thông số không được hỗ trợ");
+            throw new Exception("Parameter not supported");
 
         var model = await _supportRepository
             .Query(c => c.UserId == user.Id && c.EntityId == param.EntityId &&
@@ -76,28 +76,28 @@ public class SupportApiController : ControllerBase
         {
             case EntityTypeWithId.Review:
             {
-                var review = await _reviewRepository.FirstOrDefaultAsync(param.EntityId);
-                if (review == null)
-                    throw new Exception("Thông tin bình luận không tồn tại");
-                review.SupportCount += model.IsDeleted ? -1 : 1;
-                review.UpdatedOn = DateTime.Now;
-                supportCount = review.SupportCount;
-            }
+                    var review = await _reviewRepository.FirstOrDefaultAsync(param.EntityId);
+                    if (review == null)
+                        throw new Exception("Comment information does not exist");
+                    review.SupportCount += model.IsDeleted ? -1 : 1;
+                    review.UpdatedOn = DateTime.Now;
+                    supportCount = review.SupportCount;
+                }
                 break;
 
             case EntityTypeWithId.Reply:
-            {
-                var reply = await _replyRepository.FirstOrDefaultAsync(param.EntityId);
-                if (reply == null)
-                    throw new Exception("Thông tin bình luận không tồn tại");
-                reply.SupportCount += model.IsDeleted ? -1 : 1;
-                reply.UpdatedOn = DateTime.Now;
-                supportCount = reply.SupportCount;
-            }
+                {
+                    var reply = await _replyRepository.FirstOrDefaultAsync(param.EntityId);
+                    if (reply == null)
+                        throw new Exception("Comment information does not exist");
+                    reply.SupportCount += model.IsDeleted ? -1 : 1;
+                    reply.UpdatedOn = DateTime.Now;
+                    supportCount = reply.SupportCount;
+                }
                 break;
 
             default:
-                throw new Exception("Thông số không được hỗ trợ");
+                throw new Exception("Parameter not supported");
         }
 
         using (var tran = _supportRepository.BeginTransaction())

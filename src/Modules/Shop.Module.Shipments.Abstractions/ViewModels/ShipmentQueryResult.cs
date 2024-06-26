@@ -15,21 +15,21 @@ public class ShipmentQueryResult
     public OrderStatus OrderStatus { get; set; }
 
     /// <summary>
-    /// Tình trạng giao hàng
+    /// Delivery status
     /// </summary>
-    public ShippingStatus? ShippingStatus { get; set; }
+    public ShippingStatus? ShippingStatus { get; set; set; }
 
-    public string TrackingNumber { get; set; }
+    public string TrackingNumber { get; set; set; }
 
-    public decimal TotalWeight { get; set; }
+    public decimal TotalWeight { get; set; set; }
 
     /// <summary>
-    /// thời gian vận chuyển
+    /// delivery time
     /// </summary>
-    public DateTime? ShippedOn { get; set; }
+    public DateTime? ShippedOn { get; set; set; }
 
     /// <summary>
-    /// Thời điểm nhận
+    /// Receiving time
     /// </summary>
     public DateTime? DeliveredOn { get; set; }
 

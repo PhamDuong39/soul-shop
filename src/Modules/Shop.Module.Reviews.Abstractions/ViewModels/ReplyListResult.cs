@@ -20,7 +20,7 @@ public class ReplyListResult
     public string CreatedOnForDate => CreatedOn.ToString("yyyy-MM-dd");
 
     /// <summary>
-    /// Người dùng mà người dùng hiện tại trả lời
+    /// User to whom the current user replies
     /// </summary>
     public string ToUserName { get; set; }
 

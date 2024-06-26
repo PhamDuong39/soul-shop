@@ -18,7 +18,7 @@ public class WarehouseCreateParam
 
     public string ZipCode { get; set; }
 
-    [Range(1, int.MaxValue, ErrorMessage = "Tiểu bang hoặc tỉnh là bắt buộc")]
+    [Range(1, int.MaxValue, ErrorMessage = "State or province is required")]
     public int StateOrProvinceId { get; set; }
 
     [Required] public int CountryId { get; set; }

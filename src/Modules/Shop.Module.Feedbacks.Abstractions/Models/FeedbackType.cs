@@ -4,11 +4,11 @@ namespace Shop.Module.Feedbacks.Models;
 
 public enum FeedbackType
 {
-    [Description("Liên quan đến sản phẩm")] Product = 0,
-    [Description("Liên quan đến hậu cần")] Logistics = 1,
-    [Description("Dịch vụ khách hàng")] Customer = 2,
-    [Description("Khuyến mãi")] Discounts = 3,
-    [Description("Chức năng bất thường")] Dysfunction = 4,
-    [Description("Đề xuất sản phẩm")] ProductProposal = 5,
-    [Description("Khác")] Other = 6
+    [Description("Product Related")] Product = 0,
+    [Description("Logistics related")] Logistics = 1,
+    [Description("Customer Service")] Customer = 2,
+    [Description("Promotion")] Discounts = 3,
+    [Description("Abnormal function")] Dysfunction = 4,
+    [Description("Product recommendation")] ProductProposal = 5,
+    [Description("Other")] Other = 6
 }

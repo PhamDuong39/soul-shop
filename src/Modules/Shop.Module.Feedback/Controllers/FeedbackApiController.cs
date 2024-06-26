@@ -8,7 +8,7 @@ using Shop.Module.Feedbacks.ViewModels;
 namespace Shop.Module.Feedbacks.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API phản hồi, được sử dụng để xử lý các yêu cầu liên quan đến phản hồi của người dùng
+/// Response API controller, used to handle requests related to user responses
 /// </summary>
 [Route("api/feedbacks")]
 public class FeedbackApiController : ControllerBase
@@ -25,10 +25,10 @@ public class FeedbackApiController : ControllerBase
     }
 
     /// <summary>
-    /// Nhận và lưu phản hồi của người dùng
+    /// Receive and save user responses
     /// </summary>
-    /// <param name="param">Thêm tham số cho phản hồi của người dùng, bao gồm thông tin liên hệ, nội dung và loại</param>
-    /// <returns>Trả về kết quả phép toán, cho biết thông tin phản hồi đã được lưu thành công hay chưa</returns>
+    /// <param name="param">Add parameters for user responses, including contact information, content, and type</param>
+    /// <returns>Returns the result of the operation, indicating whether the response information has been saved successfully or not</returns>
     [HttpPost()]
     public async Task<Result> Post([FromBody] FeedbackAddParam param)
     {

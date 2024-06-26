@@ -122,10 +122,10 @@ public class AliyunSmsSenderService(
         captcha = captcha.Trim();
         var regex = new Regex(@"^\d{11}$");
         if (!regex.IsMatch(phone))
-            return (false, "Số điện thoại không hợp lệ");
+            return (false, "Invalid phone number");
 
         var cacheKey = ShopKeys.RegisterPhonePrefix + phone;
-        if (cacheManager.IsSet(cacheKey)) return (false, "Mã xác minh đã được gửi, vui lòng thử lại sau.");
+        if (cacheManager.IsSet(cacheKey)) return (false, "Verification code has been sent, please try again later.");
 
         var code = captcha;
         var success = await SendSmsAsync(new SmsSend()
@@ -140,10 +140,10 @@ public class AliyunSmsSenderService(
         if (success)
         {
             cacheManager.Set(cacheKey, code, 1);
-            return (true, "Gửi thành công");
+            return (true, "Submitted successfully");
         }
 
-        return (false, "Gửi không thành công");
+        return (false, "Send failed");
     }
 
     private static string SignString(string source, string accessSecret)

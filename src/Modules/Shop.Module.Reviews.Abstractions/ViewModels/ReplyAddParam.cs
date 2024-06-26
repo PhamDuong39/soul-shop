@@ -7,7 +7,7 @@ public class ReplyAddParam
     public int ReviewId { get; set; }
 
     /// <summary>
-    /// hồi đáp
+    /// reply
     /// </summary>
     public int? ToReplyId { get; set; }
 

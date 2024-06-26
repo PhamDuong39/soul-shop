@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Shop.Module.ShoppingCart.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API giỏ hàng, chịu trách nhiệm xử lý các hoạt động liên quan đến giỏ hàng.
+/// Shopping cart API controller, responsible for handling shopping cart related operations.
 /// </summary>
 [Authorize()]
 [Route("api/cart")]
@@ -34,9 +34,9 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy danh sách giỏ hàng của người dùng hiện tại và trả lại giỏ hàng trống cho người dùng chưa đăng nhập.
+    /// Get the current user's cart list and return an empty cart for the non-logged in user.
     /// </summary>
-    /// <returns>Nội dung giỏ hàng. </returns>
+    /// <returns>Cart content. </returns>
     [HttpGet()]
     [AllowAnonymous]
     public async Task<Result> List()
@@ -48,10 +48,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// Thêm mặt hàng vào giỏ hàng.
+    /// Add items to cart.
     /// </summary>
-    /// <param name="model">Thông tin sản phẩm đã được thêm vào giỏ hàng. </param>
-    /// <returns>Cập nhật nội dung giỏ hàng. </returns>
+    /// <param name="model">Product information has been added to the cart. </param>
+    /// <returns>Update cart content. </returns>
     [HttpPost("add-item")]
     public async Task<Result> AddToCart([FromBody] AddToCartParam model)
     {
@@ -62,10 +62,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// Cập nhật số lượng sản phẩm trong giỏ hàng.
+    /// Update the number of products in the cart.
     /// </summary>
-    /// <param name="model">Thông tin sản phẩm và số lượng mới. </param>
-    /// <returns>Cập nhật nội dung giỏ hàng.</returns>
+    /// <param name="model">New product information and quantity. </param>
+    /// <returns>Update cart content.</returns>
     [HttpPut("update-item-quantity")]
     public async Task<Result> UpdateItemQuantity([FromBody] AddToCartParam model)
     {
@@ -76,10 +76,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// Kiểm tra hoặc bỏ chọn các mục trong giỏ hàng của bạn.
+    /// Check or uncheck items in your cart.
     /// </summary>
-    /// <param name="model">Thông tin về trạng thái đã chọn của mặt hàng sản phẩm. </param>
-    /// <returns>Cập nhật nội dung giỏ hàng. </returns>
+    /// <param name="model">Information about the selected status of the product item. </param>
+    /// <returns>Update cart content. </returns>
     [HttpPut("checked")]
     public async Task<Result> CheckedItem([FromBody] CheckedItemParam model)
     {
@@ -90,10 +90,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// Xóa một hoặc nhiều mặt hàng khỏi giỏ hàng của bạn.
+    /// Remove one or more items from your cart.
     /// </summary>
-    /// <param name="model">Danh sách ID sản phẩm cần xóa. </param>
-    /// <returns>Cập nhật nội dung giỏ hàng. </returns>
+    /// <param name="model">List of product IDs to delete. </param>
+    /// <returns>Update cart content. </returns>
     [HttpDelete("remove-items")]
     public async Task<Result> Remove([FromBody] DeleteItemParam model)
     {

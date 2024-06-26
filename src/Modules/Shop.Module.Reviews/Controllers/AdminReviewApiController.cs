@@ -12,7 +12,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API đánh giá của quản trị viên, được sử dụng để quản lý đánh giá sản phẩm.
+/// Admin Reviews API Controller, used to manage product reviews.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/admin-reviews")]
@@ -34,10 +34,10 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy danh sách bình luận trong phân trang.
+    /// Get the list of comments in pagination.
     /// </summary>
-    /// <param name="param">Thông số phân trang và điều kiện lọc. </param>
-    /// <returns>Danh sách các bình luận được phân trang được lọc dựa trên các điều kiện. </return>
+    /// <param name="param">Paging parameters and filtering conditions. </param>
+    /// <returns>Paginated list of comments filtered based on conditions. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<AdminReviewListResult>>> Grid(
         [FromBody] StandardTableParam<AdminReviewQueryParam> param)
@@ -49,7 +49,7 @@ public class AdminReviewApiController : ControllerBase
             if (search.EntityTypeId.HasValue)
             {
                 if (!entityTypeIds.Any(c => c == search.EntityTypeId.Value))
-                    throw new Exception("Thông số không được hỗ trợ");
+                    throw new Exception("Parameter not supported");
                 query = query.Where(c => c.EntityTypeId == (int)search.EntityTypeId.Value);
             }
 
@@ -90,11 +90,11 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// Cập nhật trạng thái của bình luận được chỉ định.
+    /// Updates the status of the specified comment.
     /// </summary>
-    /// <param name="id">ID nhận xét. </param>
-    /// <param name="param">Thông số cập nhật bình luận. </param>
-    /// <returns>Kết quả của thao tác cập nhật. </return>
+    /// <param name="id">Comment ID. </param>
+    /// <param name="param">Comment update parameters. </param>
+    /// <returns>The result of the update operation. </return>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] AdminReviewUpdateParam param)
     {
@@ -111,10 +111,10 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// Xóa nhận xét đã chỉ định.
+    /// Delete the specified comment.
     /// </summary>
-    /// <param name="id">ID nhận xét. </param>
-    /// <returns>Kết quả của thao tác xóa. </return>
+    /// <param name="id">Comment ID. </param>
+    /// <returns>Result of the delete operation. </return>
     [HttpDelete("{id}")]
     public async Task<Result> Delete(int id)
     {

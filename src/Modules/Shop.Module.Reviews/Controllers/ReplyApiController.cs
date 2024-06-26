@@ -17,7 +17,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API trả lời nhận xét, được sử dụng để xử lý các hoạt động trả lời nhận xét.
+/// Comment Reply API controller, used to handle comment reply operations.
 /// </summary>
 [Route("api/replies")]
 [Authorize()]
@@ -48,10 +48,10 @@ public class ReplyApiController : ControllerBase
 
 
     /// <summary>
-    /// Đăng bài trả lời bình luận.
+    /// Post a reply to a comment.
     /// </summary>
-    /// <param name="param">Thông số trả lời bình luận. </param>
-    /// <returns>Kết quả của thao tác. </return>
+    /// <param name="param">Comment reply parameters. </param>
+    /// <returns>Result of the operation. </return>
     [HttpPost()]
     public async Task<Result> Post([FromBody] ReplyAddParam param)
     {
@@ -69,7 +69,7 @@ public class ReplyApiController : ControllerBase
         if (param.ToReplyId != null)
         {
             var toReply = await _replyRepository.FirstOrDefaultAsync(param.ToReplyId.Value);
-            if (toReply == null) throw new Exception("Tin nhắn trả lời không tồn tại");
+            if (toReply == null) throw new Exception("Reply message does not exist");
             reply.ToUserId = toReply.UserId;
             reply.ToUserName = toReply.ReplierName;
             reply.ParentId = toReply.ParentId ?? toReply.Id;
@@ -88,10 +88,10 @@ public class ReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// Nhận tất cả các câu trả lời đã được phê duyệt của nhận xét được chỉ định trong phân trang.
+    /// Get all approved replies of the comment specified in the pagination.
     /// </summary>
-    /// <param name="param">Các tham số phân trang và lọc. </param>
-    /// <returns>Chỉ định danh sách trả lời các bình luận. </return>
+    /// <param name="param">Paging and filtering parameters. </param>
+    /// <returns>Specifies the list of replies to comments. </return>
     [HttpPost("grid")]
     [AllowAnonymous]
     public async Task<Result<StandardTableResult<ReplyListResult>>> Grid(
@@ -99,7 +99,7 @@ public class ReplyApiController : ControllerBase
     {
         var search = param?.Search;
         if (search == null)
-            throw new ArgumentNullException("Ngoại lệ tham số");
+            throw new ArgumentNullException("Parameter exception");
 
         var query = _replyRepository.Query()
             .Where(c => c.Status == ReplyStatus.Approved && c.ParentId == null && c.ReviewId == search.ReviewId);

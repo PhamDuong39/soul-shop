@@ -7,7 +7,7 @@ namespace Shop.Module.Reviews.Services;
 public interface IReviewService
 {
     /// <summary>
-    /// Khen ngợi tự động
+    /// Automatic praise
     /// </summary>
     /// <param name="entityId"></param>
     /// <param name="entityTypeId"></param>

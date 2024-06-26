@@ -70,9 +70,9 @@ public class ReviewService : IReviewService
                 user = await _userRepository.FirstOrDefaultAsync(order.CustomerId);
             }
 
-        // một người dùng
-        // bình luận về một đơn hàng và một sản phẩm nhất định chỉ có thể được thực hiện một lần
-        // bình luận không liên quan đến đơn hàng. Bạn chỉ có thể bình luận về một sản phẩm một lần.
+        // a user
+        // comments on a given order and product can only be made once
+        // comments not related to the order. You can only comment on a product once.
         var any = await _reviewRepository.Query().AnyAsync(c =>
             c.EntityTypeId == (int)entityTypeId && c.EntityId == entityId && c.SourceId == sourceId &&
             c.SourceType == sourceType);
@@ -81,7 +81,7 @@ public class ReviewService : IReviewService
         var review = new Review
         {
             Rating = 5,
-            Comment = "Mặc định tích cực",
+            Comment = "Default positive",
             EntityId = entityId,
             EntityTypeId = (int)entityTypeId,
             SourceId = sourceId,

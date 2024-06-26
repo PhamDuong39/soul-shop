@@ -10,7 +10,7 @@ using Shop.Module.Inventory.ViewModels;
 namespace Shop.Module.Inventory.Areas.Inventory.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API lịch sử hàng tồn kho để quản lý và truy vấn lịch sử thay đổi hàng tồn kho.
+/// Inventory history API controller to manage and query inventory change history.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("/api/stocks-histories")]
@@ -24,10 +24,10 @@ public class StockHistoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// Truy vấn lịch sử hàng tồn kho theo trang.
+    /// Query inventory history by page.
     /// </summary>
-    /// <param name="param">Tham số truy vấn phân trang, có thể bao gồm các điều kiện lọc ID kho và ID sản phẩm. </param>
-    /// <returns>Danh sách lịch sử hàng tồn kho được phân trang. </return>
+    /// <param name="param">Pagination query parameters, which can include warehouse ID and product ID filter conditions. </param>
+    /// <returns>Paginated inventory history list. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<StockHistoryQueryResult>>> List(
         [FromBody] StandardTableParam<StockHistoryQueryParam> param)

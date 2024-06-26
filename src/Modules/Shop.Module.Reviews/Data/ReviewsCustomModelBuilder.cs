@@ -35,14 +35,20 @@ public class ReviewsCustomModelBuilder : ICustomModelBuilder
         modelBuilder.Entity<AppSetting>().HasData(
             new AppSetting(ReviewKeys.IsReviewAutoApproved)
             {
-                Module = module, IsVisibleInCommonSettingPage = true, Value = "false", Type = typeof(bool).FullName,
-                Note = "Bật kiểm duyệt bình luận tự động"
+                Module = module,
+                IsVisibleInCommonSettingPage = true,
+                Value = "false",
+                Type = typeof(bool).FullName,
+                Note = "Enable automatic comment moderation"
             },
-            new AppSetting(ReviewKeys.IsReplyAutoApproved)
-            {
-                Module = module, IsVisibleInCommonSettingPage = true, Value = "true", Type = typeof(bool).FullName,
-                Note = "Bật tự động xem lại câu trả lời"
-            }
+             new AppSetting(ReviewKeys.IsReplyAutoApproved)
+             {
+                 Module = module,
+                 IsVisibleInCommonSettingPage = true,
+                 Value = "true",
+                 Type = typeof(bool).FullName,
+                 Note = "Enable automatic review of answers"
+             }
         );
     }
 }

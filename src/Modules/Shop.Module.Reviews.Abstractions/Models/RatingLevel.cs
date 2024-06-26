@@ -4,7 +4,7 @@ namespace Shop.Module.Reviews.Models;
 
 public enum RatingLevel
 {
-    [Description("đánh giá xấu")] Bad = 1,
-    [Description("đánh giá trung bình")] Medium = 3,
-    [Description("tích cực")] Positive = 5
+    [Description("bad review")] Bad = 1,
+    [Description("average rating")] Medium = 3,
+    [Description("positive")] Positive = 5
 }

@@ -14,7 +14,7 @@ using Shop.Module.Inventory.ViewModels;
 namespace Shop.Module.Inventory.Areas.Inventory.Controllers;
 
 /// <summary>
-/// Bộ điều khiển API quản lý kho, cung cấp các chức năng như thêm, xóa, sửa, truy vấn kho
+/// The warehouse management API controller provides functions such as adding, deleting, editing, and querying the warehouse
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/warehouses")]
@@ -42,9 +42,9 @@ public class WarehouseApiController : ControllerBase
 
 
     /// <summary>
-    /// Nhận thông tin ngắn gọn về tất cả các kho
+    /// Get brief information about all warehouses
     /// </summary>
-    /// <returns>Trả về kết quả thao tác, bao gồm danh sách thông tin tóm tắt về kho</returns>
+    /// <returns>Returns the results of the operation, including a list of summary information about the warehouse</returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -59,10 +59,10 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy danh sách dữ liệu kho dựa trên tham số phân trang
+    /// Get a list of warehouse data based on the pagination parameter
     /// </summary>
-    /// <param name="param">Các tham số bảng tiêu chuẩn, bao gồm phân trang, sắp xếp và các thông tin khác</param>
-    /// <returns>Trả về kết quả hoạt động, bao gồm danh sách dữ liệu kho được phân trang</returns>
+    /// <param name="param">Standard table parameters, including paging, sorting, and more</param>
+    /// <returns>Returns the results of the operation, including a paginated list of warehouse data</returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<WarehouseQueryResult>>> DataList([FromBody] StandardTableParam param)
     {
@@ -87,17 +87,17 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// Lấy thông tin chi tiết kho dựa trên ID kho
+    /// Get warehouse details based on warehouse ID
     /// </summary>
-    /// <param name="id">ID kho</param>
-    /// <returns>Trả về kết quả hoạt động, bao gồm chi tiết kho của ID đã chỉ định</returns>
+    /// <param name="id">Repository ID</param>
+    /// <returns>Returns the results of the operation, including inventory details of the specified ID</returns>
     [HttpGet("{id}")]
     public async Task<Result> Get(int id)
     {
         var currentUser = await _workContext.GetCurrentUserAsync();
         var warehouse = await _warehouseRepository.Query().Include(w => w.Address).FirstOrDefaultAsync(w => w.Id == id);
         if (warehouse == null)
-            throw new Exception("Kho không tồn tại");
+            throw new Exception("Warehouse does not exist");
         var address = warehouse.Address ?? new Address();
         var result = new WarehouseQueryResult
         {
@@ -118,21 +118,21 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// Tạo kho mới
+    /// Create a new repository
     /// </summary>
-    /// <param name="model">Thông số tạo kho</param>
-    /// <returns>Trả về kết quả phép toán, cho biết việc tạo có thành công hay không</returns>
+    /// <param name="model">Repository creation parameters</param>
+    /// <returns>Returns the result of the operation, indicating whether the creation was successful or not</returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] WarehouseCreateParam model)
     {
         var currentUser = await _workContext.GetCurrentUserAsync();
 
-        //Xác minh xem tỉnh hoặc thành phố được chọn có thuộc quốc gia hay không
+        //Verify whether the selected province or city is part of the country
         var province = await _provinceRepository.FirstOrDefaultAsync(model.StateOrProvinceId);
         if (province == null)
-            throw new Exception("Tỉnh hoặc thành phố không tồn tại");
+            throw new Exception("The province or city does not exist");
         if (province.CountryId != model.CountryId)
-            throw new Exception("Tỉnh hoặc thành phố được chọn không thuộc quốc gia hiện được chọn");
+            throw new Exception("The selected province or city is not part of the currently selected country");
 
         var address = new Address
         {
@@ -157,12 +157,13 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// Cập nhật kho lưu trữ
+    /// Update the repository
     /// </summary>
     /// <param name="id"></param>
     /// <param name="model"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
+    
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] WarehouseCreateParam model)
     {
@@ -171,14 +172,14 @@ public class WarehouseApiController : ControllerBase
             .Include(x => x.Address)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (warehouse == null)
-            throw new Exception("Kho không tồn tại");
+            throw new Exception("Repository does not exist");
 
-        //Xác minh xem tỉnh hoặc thành phố được chọn có thuộc quốc gia hay không
+        //Verify whether the selected province or city belongs to the country
         var province = await _provinceRepository.FirstOrDefaultAsync(model.StateOrProvinceId);
         if (province == null)
-            throw new Exception("Tỉnh hoặc thành phố không tồn tại");
+            throw new Exception("The province or city does not exist");
         if (province.CountryId != model.CountryId)
-            throw new Exception("Tỉnh hoặc thành phố được chọn không thuộc quốc gia hiện được chọn");
+            throw new Exception("The selected province or city is not part of the currently selected country");
 
         warehouse.Name = model.Name;
         warehouse.AdminRemark = model.AdminRemark;
@@ -215,11 +216,11 @@ public class WarehouseApiController : ControllerBase
             .Include(x => x.Address)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (warehouse == null)
-            return Result.Fail("Kho không tồn tại");
+            return Result.Fail("Repository does not exist");
 
         //var any = _productRepository.Query().Any(c => c.DefaultWarehouseId == id);
         //if (any)
-        //    return Result.Fail("Kho đã được sản phẩm tham chiếu và không được phép xóa.");
+        // return Result.Fail("The warehouse has been referenced by the product and cannot be deleted.");
 
         warehouse.IsDeleted = true;
         warehouse.UpdatedOn = DateTime.Now;
