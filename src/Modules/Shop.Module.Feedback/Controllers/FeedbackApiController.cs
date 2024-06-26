@@ -8,7 +8,7 @@ using Shop.Module.Feedbacks.ViewModels;
 namespace Shop.Module.Feedbacks.Controllers;
 
 /// <summary>
-/// 反馈API控制器，用于处理用户反馈相关的请求
+/// Response API controller, used to handle requests related to user responses
 /// </summary>
 [Route("api/feedbacks")]
 public class FeedbackApiController : ControllerBase
@@ -25,10 +25,10 @@ public class FeedbackApiController : ControllerBase
     }
 
     /// <summary>
-    /// 接收并保存用户反馈信息
+    /// Receive and save user responses
     /// </summary>
-    /// <param name="param">用户反馈添加参数，包含联系方式、内容和类型</param>
-    /// <returns>返回操作结果，表示反馈信息是否成功保存</returns>
+    /// <param name="param">Add parameters for user responses, including contact information, content, and type</param>
+    /// <returns>Returns the result of the operation, indicating whether the response information has been saved successfully or not</returns>
     [HttpPost()]
     public async Task<Result> Post([FromBody] FeedbackAddParam param)
     {

@@ -10,15 +10,15 @@ public class CustomActionFilterAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
-        // 由于PermissionHandler暂时无法直接返回401,暂时调整为在方法执行前验证401
+        // Vì PermissionHandler không thể trực tiếp trả về 401 trong thời điểm hiện tại nên nó tạm thời được điều chỉnh để xác minh 401 trước khi thực thi phương thức.
         if (context.HttpContext.Response.StatusCode == StatusCodes.Status401Unauthorized)
         {
-            var result = Result.Fail("登录已失效，请重新登录");
+            var result = Result.Fail("Đăng nhập đã hết hạn, vui lòng đăng nhập lại");
             context.Result = new JsonResult(result);
         }
         else if (context.HttpContext.Response.StatusCode == StatusCodes.Status403Forbidden)
         {
-            var result = Result.Fail("您无权限访问");
+            var result = Result.Fail("Bạn không có quyền truy cập");
             context.Result = new JsonResult(result);
         }
         else
@@ -26,7 +26,7 @@ public class CustomActionFilterAttribute : ActionFilterAttribute
             if (!context.ModelState.IsValid)
             {
                 var error = context.ModelState.Values.FirstOrDefault()?.Errors?.FirstOrDefault()?.ErrorMessage ??
-                            "参数异常";
+                            "Ngoại lệ tham số";
                 context.Result = new JsonResult(Result.Fail(error));
             }
         }

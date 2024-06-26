@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Shop.WebApi.Controllers;
 
 /// <summary>
-/// 商品 API 控制器，提供商品相关的 API 接口。
+/// Bộ điều khiển API sản phẩm cung cấp giao diện API liên quan đến sản phẩm.
 /// </summary>
 [ApiController]
 [Route("api/goods")]
@@ -22,10 +22,10 @@ public class GoodsApiController
     private readonly IStaticCacheManager _staticCacheManager;
 
     /// <summary>
-    /// 构造函数，注入商品服务和静态缓存管理器。
+    /// Trình xây dựng, tiêm dịch vụ hàng hóa và trình quản lý bộ nhớ đệm tĩnh.
     /// </summary>
-    /// <param name="productService">商品服务接口。</param>
-    /// <param name="staticCacheManager">静态缓存管理器接口。</param>
+    /// <param name="productService">Giao diện dịch vụ sản phẩm.</param>
+    /// <param name="staticCacheManager">Giao diện quản lý bộ đệm tĩnh</param>
     public GoodsApiController(
         IProductService productService,
         IStaticCacheManager staticCacheManager)
@@ -35,10 +35,10 @@ public class GoodsApiController
     }
 
     /// <summary>
-    /// 根据商品 ID 获取商品详细信息。
+    /// Nhận chi tiết sản phẩm dựa trên ID sản phẩm.
     /// </summary>
-    /// <param name="id">商品 ID。</param>
-    /// <returns>商品详细信息。</returns>
+    /// <param name="id">ID sản phẩm.</param>
+    /// <returns>Thông tin chi tiết sản phẩm.</returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
@@ -47,10 +47,10 @@ public class GoodsApiController
     }
 
     /// <summary>
-    /// 获取与指定商品相关的商品列表。
+    /// Nhận danh sách các sản phẩm liên quan đến sản phẩm được chỉ định.
     /// </summary>
-    /// <param name="id">商品 ID。</param>
-    /// <returns>相关商品列表。</returns>
+    /// <param name="id">ID sản phẩm.</param>
+    /// <returns>Danh sách các sản phẩm liên quan.</returns>
     [HttpGet("related/{id:int:min(1)}")]
     public async Task<Result> Related(int id)
     {
@@ -59,10 +59,10 @@ public class GoodsApiController
     }
 
     /// <summary>
-    /// 获取指定商品的库存信息。
+    /// Nhận thông tin tồn kho của sản phẩm được chỉ định.
     /// </summary>
-    /// <param name="id">商品 ID。</param>
-    /// <returns>商品库存信息。</returns>
+    /// <param name="id">ID sản phẩm. </param>
+    /// <returns>Thông tin tồn kho sản phẩm. </returns>
     [HttpGet("stocks/{id:int:min(1)}")]
     public async Task<Result> GoodsStocks(int id)
     {
@@ -71,10 +71,10 @@ public class GoodsApiController
     }
 
     /// <summary>
-    /// 根据查询参数获取商品列表，支持分页。
+    /// Lấy danh sách sản phẩm dựa trên các tham số truy vấn và phân trang hỗ trợ.
     /// </summary>
-    /// <param name="param">商品列表查询参数。</param>
-    /// <returns>标准表格结果，包含商品列表。</returns>
+    /// <param name="param">Tham số truy vấn danh sách sản phẩm. </param>
+    /// <returns>Kết quả bảng tiêu chuẩn, chứa danh sách sản phẩm. </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<GoodsListResult>>> Grid(
         [FromBody] StandardTableParam<GoodsListQueryParam> param)
@@ -98,9 +98,9 @@ public class GoodsApiController
     }
 
     /// <summary>
-    /// 获取热门关键词和搜索历史。
+    /// Nhận các từ khóa phổ biến và lịch sử tìm kiếm.
     /// </summary>
-    /// <returns>关键词结果，包含热门关键词和搜索历史。</returns>
+    /// <returns>Kết quả từ khóa, bao gồm các từ khóa phổ biến và lịch sử tìm kiếm. </returns>
     [HttpGet("keywords")]
     public async Task<Result> Keywords()
     {
@@ -109,9 +109,9 @@ public class GoodsApiController
     }
 
     /// <summary>
-    /// 清除搜索历史。
+    /// Xóa lịch sử tìm kiếm.
     /// </summary>
-    /// <returns>操作结果。</returns>
+    /// <returns>Kết quả hoạt động. </returns>
     [HttpPost("keywords/clear-histories")]
     public async Task<Result> ClearHistoryKeywords()
     {
@@ -123,9 +123,9 @@ public class GoodsApiController
     }
 
     /// <summary>
-    /// 异步获取关键词结果，包含热门关键词和搜索历史。
+    /// Nhận kết quả từ khóa một cách không đồng bộ, bao gồm các từ khóa phổ biến và lịch sử tìm kiếm.
     /// </summary>
-    /// <returns>关键词结果。</returns>
+    /// <returns>Kết quả từ khóa. </returns>
     private async Task<KeywordResult> GetKeywordAsync()
     {
         var key = ShopKeys.System + "keywords";
@@ -144,7 +144,7 @@ public class GoodsApiController
 }
 
 /// <summary>
-/// 关键词实体，用于搜索功能。
+/// Thực thể từ khóa, được sử dụng cho chức năng tìm kiếm.
 /// </summary>
 public class Keyword
 {
@@ -153,11 +153,11 @@ public class Keyword
 }
 
 /// <summary>
-/// 关键词结果实体，包含默认关键词、历史关键词和热门关键词。
+/// Thực thể kết quả từ khóa, bao gồm từ khóa mặc định, từ khóa lịch sử và từ khóa phổ biến.
 /// </summary>
 public class KeywordResult
 {
-    public Keyword DefaultKeyword { get; set; } = new() { Name = "测试" };
+    public Keyword DefaultKeyword { get; set; } = new() { Name = "Bài kiểm tra" };
     public IList<Keyword> HistoryKeywords { get; set; } = new List<Keyword>();
     public IList<Keyword> HotKeywords { get; set; } = new List<Keyword>();
 }

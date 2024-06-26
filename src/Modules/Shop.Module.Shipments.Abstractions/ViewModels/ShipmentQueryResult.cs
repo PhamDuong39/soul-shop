@@ -15,21 +15,21 @@ public class ShipmentQueryResult
     public OrderStatus OrderStatus { get; set; }
 
     /// <summary>
-    /// 运输状态
+    /// Delivery status
     /// </summary>
-    public ShippingStatus? ShippingStatus { get; set; }
+    public ShippingStatus? ShippingStatus { get; set; set; }
 
-    public string TrackingNumber { get; set; }
+    public string TrackingNumber { get; set; set; }
 
-    public decimal TotalWeight { get; set; }
+    public decimal TotalWeight { get; set; set; }
 
     /// <summary>
-    /// 发货时间
+    /// delivery time
     /// </summary>
-    public DateTime? ShippedOn { get; set; }
+    public DateTime? ShippedOn { get; set; set; }
 
     /// <summary>
-    /// 收货时间
+    /// Receiving time
     /// </summary>
     public DateTime? DeliveredOn { get; set; }
 

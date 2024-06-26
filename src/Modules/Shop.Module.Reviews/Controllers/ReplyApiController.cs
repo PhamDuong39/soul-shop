@@ -17,7 +17,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// 评论回复 API 控制器，用于处理评论的回复操作。
+/// Comment Reply API controller, used to handle comment reply operations.
 /// </summary>
 [Route("api/replies")]
 [Authorize()]
@@ -48,10 +48,10 @@ public class ReplyApiController : ControllerBase
 
 
     /// <summary>
-    /// 发布一条评论回复。
+    /// Post a reply to a comment.
     /// </summary>
-    /// <param name="param">评论回复的参数。</param>
-    /// <returns>操作的结果。</returns>
+    /// <param name="param">Comment reply parameters. </param>
+    /// <returns>Result of the operation. </return>
     [HttpPost()]
     public async Task<Result> Post([FromBody] ReplyAddParam param)
     {
@@ -69,7 +69,7 @@ public class ReplyApiController : ControllerBase
         if (param.ToReplyId != null)
         {
             var toReply = await _replyRepository.FirstOrDefaultAsync(param.ToReplyId.Value);
-            if (toReply == null) throw new Exception("回复信息不存在");
+            if (toReply == null) throw new Exception("Reply message does not exist");
             reply.ToUserId = toReply.UserId;
             reply.ToUserName = toReply.ReplierName;
             reply.ParentId = toReply.ParentId ?? toReply.Id;
@@ -88,10 +88,10 @@ public class ReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取指定评论的所有通过审核的回复。
+    /// Get all approved replies of the comment specified in the pagination.
     /// </summary>
-    /// <param name="param">分页和筛选参数。</param>
-    /// <returns>指定评论的回复列表。</returns>
+    /// <param name="param">Paging and filtering parameters. </param>
+    /// <returns>Specifies the list of replies to comments. </return>
     [HttpPost("grid")]
     [AllowAnonymous]
     public async Task<Result<StandardTableResult<ReplyListResult>>> Grid(
@@ -99,7 +99,7 @@ public class ReplyApiController : ControllerBase
     {
         var search = param?.Search;
         if (search == null)
-            throw new ArgumentNullException("参数异常");
+            throw new ArgumentNullException("Parameter exception");
 
         var query = _replyRepository.Query()
             .Where(c => c.Status == ReplyStatus.Approved && c.ParentId == null && c.ReviewId == search.ReviewId);

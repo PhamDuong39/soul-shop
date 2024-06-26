@@ -9,7 +9,7 @@ namespace Shop.Infrastructure;
 public static partial class GlobalConfiguration
 {
     /// <summary>
-    /// 数据初始化时间
+    /// Thời gian khởi tạo dữ liệu
     /// </summary>
     public static DateTime InitialOn = new(2019, 1, 1, 0, 0, 0, DateTimeKind.Local);
 

@@ -14,7 +14,7 @@ using Shop.Module.Shipping.ViewModels;
 namespace Shop.Module.Shipping.Controllers;
 
 /// <summary>
-/// 运费模板 API 控制器，负责管理运费模板相关的操作。
+/// Freight template API controller, responsible for managing operations related to the freight template.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/shippings/freight-templates")]
@@ -42,9 +42,9 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有运费模板的列表。
+    /// Get a list of all shipping patterns.
     /// </summary>
-    /// <returns>运费模板的列表。</returns>
+    /// <returns>List of shipping models.</returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -61,10 +61,11 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据给定的参数分页获取运费模板的列表。
+    /// Get a list of freight patterns in pages based on the given parameters.
     /// </summary>
-    /// <param name="param">分页和查询参数。</param>
-    /// <returns>分页的运费模板列表。</returns>
+    /// <param name="param">Paging and query parameters. </param>
+    /// <returns>Paginated list of shipping templates.</returns>
+    /// 
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<FreightTemplateQueryResult>>> DataList(
         [FromBody] StandardTableParam param)
@@ -83,10 +84,11 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建一个新的运费模板。
+    /// Create a new shipping rate template.
     /// </summary>
-    /// <param name="model">运费模板的创建参数。</param>
-    /// <returns>创建操作的结果。</returns>
+    /// <param name="model">Creates the parameters of the freight model. </param>
+    /// <returns>Create the results of the operation. </returns>
+    /// 
     [HttpPost]
     public async Task<Result> Post([FromBody] FreightTemplateCreateParam model)
     {
@@ -100,17 +102,17 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定的运费模板。
+    /// Updates the specified shipping template.
     /// </summary>
-    /// <param name="id">要更新的运费模板的ID。</param>
-    /// <param name="model">运费模板的更新参数。</param>
-    /// <returns>更新操作的结果。</returns>
+    /// <param name="id">ID of the shipping template to update.</param>
+    /// <param name="model">Update parameters for freight model.</param>
+    /// <returns>The result of the update operation. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] FreightTemplateCreateParam model)
     {
         var template = await _freightTemplateRepository.FirstOrDefaultAsync(id);
         if (template == null)
-            return Result.Fail("运费模板不存在");
+            return Result.Fail("Shipping template does not exist");
         template.Name = model.Name;
         template.Note = model.Note;
         template.UpdatedOn = DateTime.Now;
@@ -119,24 +121,25 @@ public class FreightTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定的运费模板。
+    /// Delete the specified freight template.
     /// </summary>
-    /// <param name="id">要删除的运费模板的ID。</param>
-    /// <returns>删除操作的结果。</returns>
+    /// <param name="id">ID of the shipping sample to be deleted. </param>
+    /// <returns> The result of the delete operation. </returns>
+    /// 
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var template = await _freightTemplateRepository.FirstOrDefaultAsync(id);
         if (template == null)
-            return Result.Fail("运费模板不存在");
+            return Result.Fail("Mẫu vận chuyển hàng hóa không tồn tại");
 
         var any = _priceAndDestinationRepository.Query().Any(c => c.FreightTemplateId == id);
         if (any)
-            return Result.Fail("运费模板已被引用，不允许删除");
+            return Result.Fail("Mẫu vận chuyển hàng hóa đã được tham chiếu và không được phép xóa.");
 
         var anyProduct = _productRepository.Query().Any(c => c.FreightTemplateId == id);
         if (anyProduct)
-            return Result.Fail("运费模板已被产品引用，不允许删除");
+            return Result.Fail("Mẫu vận chuyển hàng hóa đã được sản phẩm tham chiếu và không được phép xóa.");
 
         template.IsDeleted = true;
         template.UpdatedOn = DateTime.Now;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Shop.WebApi.Controllers;
 
 /// <summary>
-/// 商品目录 API 控制器，提供商品目录相关的 API 接口。
+/// Bộ điều khiển API danh mục sản phẩm cung cấp các giao diện API liên quan đến danh mục sản phẩm.
 /// </summary>
 [ApiController]
 [Route("api/catalogs")]
@@ -15,18 +15,18 @@ public class CatalogApiController
     private readonly ICategoryService _categoryService;
 
     /// <summary>
-    /// 构造函数，注入商品类别服务接口。
+    /// Trình xây dựng, đưa vào giao diện dịch vụ danh mục sản phẩm.
     /// </summary>
-    /// <param name="categoryService">商品类别服务接口。</param>
+    /// <param name="categoryService">Giao diện dịch vụ danh mục sản phẩm. </param>
     public CatalogApiController(ICategoryService categoryService)
     {
         _categoryService = categoryService;
     }
 
     /// <summary>
-    /// 获取两个子类别的信息。
+    /// Lấy thông tin về hai danh mục con.
     /// </summary>
-    /// <returns>操作结果，包含两个子类别的信息。</returns>
+    /// <returns>Kết quả phép toán chứa thông tin của hai danh mục con.</returns>
     [HttpGet()]
     public async Task<Result> GetTwoSubCategories()
     {
@@ -35,10 +35,10 @@ public class CatalogApiController
     }
 
     /// <summary>
-    /// 根据父类别 ID 获取其下只有两个子类别的信息。
+    /// Nhận thông tin về chỉ hai danh mục con trong ID danh mục chính.
     /// </summary>
-    /// <param name="parentId">父类别的 ID，如果为空则获取最顶层类别。</param>
-    /// <returns>操作结果，包含子类别的信息。</returns>
+    /// <param name="parentId">ID của danh mục chính, nếu trống sẽ là danh mục cao nhất.</param>
+    /// <returns>Kết quả hoạt động, bao gồm thông tin danh mục con.</returns>
     [HttpGet("sub-categories")]
     public async Task<Result> GetTwoOnlyCategories(int? parentId = null)
     {

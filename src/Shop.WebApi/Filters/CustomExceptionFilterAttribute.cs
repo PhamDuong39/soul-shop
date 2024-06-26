@@ -9,9 +9,9 @@ public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     public override void OnException(ExceptionContext context)
     {
         if (context.Exception != null)
-            // 内部异常
+            // Ngoại lệ nội bộ
             context.Result = new JsonResult(Result.Fail(context.Exception.Message));
-        // 暂不使用500
+        // Chưa sử dụng 500
         // context.HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         base.OnException(context);
     }

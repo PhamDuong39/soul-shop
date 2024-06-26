@@ -12,7 +12,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// 点赞 API 控制器，负责处理点赞相关操作。
+/// Like API controller, responsible for handling the operations related to the same.
 /// </summary>
 [Route("api/supports")]
 [Authorize()]
@@ -39,7 +39,7 @@ public class SupportApiController : ControllerBase
     }
 
     /// <summary>
-    /// 赞(支持)/取消赞
+    /// Like(Support)/Dislike
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
@@ -49,7 +49,7 @@ public class SupportApiController : ControllerBase
         var user = await _workContext.GetCurrentOrThrowAsync();
         var any = supportEntityTypeIds.Any(c => c == param.EntityTypeId);
         if (!any)
-            throw new Exception("参数不支持");
+            throw new Exception("Parameter not supported");
 
         var model = await _supportRepository
             .Query(c => c.UserId == user.Id && c.EntityId == param.EntityId &&
@@ -76,28 +76,28 @@ public class SupportApiController : ControllerBase
         {
             case EntityTypeWithId.Review:
             {
-                var review = await _reviewRepository.FirstOrDefaultAsync(param.EntityId);
-                if (review == null)
-                    throw new Exception("评论信息不存在");
-                review.SupportCount += model.IsDeleted ? -1 : 1;
-                review.UpdatedOn = DateTime.Now;
-                supportCount = review.SupportCount;
-            }
+                    var review = await _reviewRepository.FirstOrDefaultAsync(param.EntityId);
+                    if (review == null)
+                        throw new Exception("Comment information does not exist");
+                    review.SupportCount += model.IsDeleted ? -1 : 1;
+                    review.UpdatedOn = DateTime.Now;
+                    supportCount = review.SupportCount;
+                }
                 break;
 
             case EntityTypeWithId.Reply:
-            {
-                var reply = await _replyRepository.FirstOrDefaultAsync(param.EntityId);
-                if (reply == null)
-                    throw new Exception("评论信息不存在");
-                reply.SupportCount += model.IsDeleted ? -1 : 1;
-                reply.UpdatedOn = DateTime.Now;
-                supportCount = reply.SupportCount;
-            }
+                {
+                    var reply = await _replyRepository.FirstOrDefaultAsync(param.EntityId);
+                    if (reply == null)
+                        throw new Exception("Comment information does not exist");
+                    reply.SupportCount += model.IsDeleted ? -1 : 1;
+                    reply.UpdatedOn = DateTime.Now;
+                    supportCount = reply.SupportCount;
+                }
                 break;
 
             default:
-                throw new Exception("参数不支持");
+                throw new Exception("Parameter not supported");
         }
 
         using (var tran = _supportRepository.BeginTransaction())

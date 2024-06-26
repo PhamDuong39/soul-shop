@@ -16,7 +16,7 @@ public class PermissionHandler(IWorkContext workContext, IHttpContextAccessor ht
         var isAuthenticated = context.User?.Identity?.IsAuthenticated;
         if (isAuthenticated == true)
         {
-            // 注意：令牌失效，需返回401。默认返回403
+            // Lưu ý: Mã thông báo không hợp lệ và cần phải trả lại 401. Trả về 403 theo mặc định
             //if (context.Resource is AuthorizationFilterContext)
             //{
             //    var httpContext = (context.Resource as AuthorizationFilterContext).HttpContext;
@@ -50,7 +50,7 @@ public class PermissionHandler(IWorkContext workContext, IHttpContextAccessor ht
 
                 path = $"{httpContext.Request.Method}:/{path?.Trim().Trim('/')}";
 
-                // 访问期间验证令牌并自动续签
+                // Mã thông báo được xác minh trong quá trình truy cập và tự động gia hạn
                 if (!workContext.ValidateToken(userId,
                         token.Substring($"{JwtBearerDefaults.AuthenticationScheme} ".Length).Trim(), out var statusCode,
                         path))

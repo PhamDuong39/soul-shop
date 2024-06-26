@@ -12,7 +12,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// 管理员评论 API 控制器，用于管理商品评论。
+/// Admin Reviews API Controller, used to manage product reviews.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/admin-reviews")]
@@ -34,10 +34,10 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取评论列表。
+    /// Get the list of comments in pagination.
     /// </summary>
-    /// <param name="param">分页参数以及过滤条件。</param>
-    /// <returns>基于条件过滤后的评论分页列表。</returns>
+    /// <param name="param">Paging parameters and filtering conditions. </param>
+    /// <returns>Paginated list of comments filtered based on conditions. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<AdminReviewListResult>>> Grid(
         [FromBody] StandardTableParam<AdminReviewQueryParam> param)
@@ -49,7 +49,7 @@ public class AdminReviewApiController : ControllerBase
             if (search.EntityTypeId.HasValue)
             {
                 if (!entityTypeIds.Any(c => c == search.EntityTypeId.Value))
-                    throw new Exception("参数不支持");
+                    throw new Exception("Parameter not supported");
                 query = query.Where(c => c.EntityTypeId == (int)search.EntityTypeId.Value);
             }
 
@@ -90,11 +90,11 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定评论的状态。
+    /// Updates the status of the specified comment.
     /// </summary>
-    /// <param name="id">评论 ID。</param>
-    /// <param name="param">评论更新参数。</param>
-    /// <returns>更新操作的结果。</returns>
+    /// <param name="id">Comment ID. </param>
+    /// <param name="param">Comment update parameters. </param>
+    /// <returns>The result of the update operation. </return>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] AdminReviewUpdateParam param)
     {
@@ -111,10 +111,10 @@ public class AdminReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定的评论。
+    /// Delete the specified comment.
     /// </summary>
-    /// <param name="id">评论 ID。</param>
-    /// <returns>删除操作的结果。</returns>
+    /// <param name="id">Comment ID. </param>
+    /// <returns>Result of the delete operation. </return>
     [HttpDelete("{id}")]
     public async Task<Result> Delete(int id)
     {

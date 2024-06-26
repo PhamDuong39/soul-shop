@@ -23,7 +23,7 @@ namespace Shop.WebApi.Extensions;
 public static class ServiceCollectionExtensions
 {
     /// <summary>
-    /// 添加 swagger 文档
+    /// Thêm tài liệu vênh vang
     /// </summary>
     /// <param name="services"></param>
     /// <param name="title"></param>
@@ -42,7 +42,7 @@ public static class ServiceCollectionExtensions
                 Title = title,
                 Version = version,
                 Description =
-                    "一个基于 .NET 8.0 构建的简单、跨平台、模块化的商城系统。<br />支持 Swagger 免输入 token 直接调用接口，请使用 MockApi 模拟用户登录，在线调试和调用 API。",
+                    "Một hệ thống trung tâm mô-đun đơn giản, đa nền tảng được xây dựng trên .NET 8.0. <br />Hỗ trợ Swagger gọi trực tiếp giao diện mà không cần nhập token. Vui lòng sử dụng MockApi để mô phỏng hoạt động đăng nhập của người dùng, gỡ lỗi trực tuyến và gọi API. ",
                 Contact = new OpenApiContact
                 {
                     Name = "Circle",
@@ -56,16 +56,6 @@ public static class ServiceCollectionExtensions
                 }
             });
 
-            c.AddSecurityDefinition("Bearer",
-                new OpenApiSecurityScheme()
-                {
-                    Description = "在下框中输入请求头中需要添加 Jwt 授权 Token: Bearer {Token}",
-                    Name = "Authorization",
-                    In = ParameterLocation.Header,
-                    Type = SecuritySchemeType.ApiKey,
-                    BearerFormat = "JWT",
-                    Scheme = "Bearer"
-                });
 
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
@@ -94,15 +84,15 @@ public static class ServiceCollectionExtensions
             //    }
             //}
 
-            // 获取当前应用程序加载的所有程序集
+            // Nhận tất cả các cụm được tải bởi ứng dụng hiện tại
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            // 遍历程序集以查找和包含 XML 注释文件
+            // Duyệt qua tập hợp để tìm và bao gồm các tệp chú thích XML
             foreach (var assembly in assemblies)
             {
                 var assemblyName = assembly.GetName().Name;
 
-                // 仅包括包含 "Module" 关键词的程序集的 XML
+                // Chỉ bao gồm XML cho các tập hợp có chứa từ khóa "Module"
                 if (assemblyName.StartsWith("Shop.Module."))
                 {
                     var xmlSubFile = $"{assemblyName}.xml";
@@ -150,46 +140,46 @@ public static class ServiceCollectionExtensions
             })
             .AddNewtonsoftJson(options =>
             {
-                // 忽略循环引用
+                // Bỏ qua các tham chiếu vòng tròn
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 
-                // 不使用驼峰样式的key
+                // Không sử dụng key vỏ lạc đà
                 //options.SerializerSettings.ContractResolver = new DefaultContractResolver();
 
-                // 设置输入/输出时间格式
+                // Đặt định dạng thời gian đầu vào/đầu ra
                 options.SerializerSettings.DateTimeZoneHandling =
                     DateTimeZoneHandling.Local; // json to datetime 2019-02-26T22:34:13.000Z -> 2019-02-27 06:34:13
                 options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-        // 验证错误会自动触发HTTP 400响应。禁止ModelState无效时自动返回错误，仅在api项目中配置。
+        // Lỗi xác thực tự động kích hoạt phản hồi HTTP 400. Tắt tính năng tự động trả về lỗi khi ModelState không hợp lệ, chỉ được định cấu hình trong các dự án api.
         services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
 
         services.Configure<IdentityOptions>(options =>
         {
             // https://docs.microsoft.com/zh-cn/aspnet/core/security/authentication/identity-configuration?view=aspnetcore-2.2
-            // 在用户名中允许的字符。
-            // 由于允许用户名、邮箱、手机号登录，因此用户名不能与邮箱命名冲突
+            // Ký tự được phép trong tên người dùng.
+            // Vì tên người dùng, email và số điện thoại di động được phép đăng nhập nên tên người dùng không được xung đột với cách đặt tên email.
             options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_";
-            // 如果设置为true则邮箱不能为空，因此不设置此值
+            // Nếu được đặt thành true thì hộp thư không thể trống, do đó giá trị này không được đặt
             //options.User.RequireUniqueEmail = true;
 
             // https://docs.microsoft.com/en-us/aspnet/core/security/authentication/2fa?view=aspnetcore-1.1&viewFallbackFrom=aspnetcore-2.2
-            // 用于防止暴力攻击的帐户锁定
+            // Khóa tài khoản để ngăn chặn các cuộc tấn công vũ phu
             // Default Lockout settings.
-            // 用户已被锁定，如果启用了锁定前的失败的访问尝试数。
+            // Số lần truy cập không thành công trước khi người dùng bị khóa, nếu khóa được bật.
             // options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            // 时间量用户已锁定时在锁定时发生。
+            // Khoảng thời gian người dùng đã bị khóa trong khi khóa xảy ra.
             // options.Lockout.MaxFailedAccessAttempts = 5;
-            // 确定是否新用户启用锁定功能。默认：true
+            // Xác định xem chức năng khóa có được bật cho người dùng mới hay không. mặc định：true
             // options.Lockout.AllowedForNewUsers = false;
 
-            // 单一登录
-            // IsNotAllowed控制，如果全部设置为true，则必须邮箱和手机必须全部验证通过才允许登录。因此暂不开启。
+            // dấu hiệu duy nhất trên
+            // Kiểm soát IsNotAllowed, nếu tất cả được đặt thành true, email và điện thoại di động phải được xác minh trước khi cho phép đăng nhập. Vì vậy nó chưa được kích hoạt.
             // Default SignIn settings.
-            // 需要已确认的电子邮件，登录。
+            // Yêu cầu xác nhận email, đăng nhập.
             //options.SignIn.RequireConfirmedEmail = true;
-            //// 需要确认的电话号码进行登录。
+            //// Cần có số điện thoại được xác nhận để đăng nhập.
             //options.SignIn.RequireConfirmedPhoneNumber = true;
         });
 
@@ -230,15 +220,6 @@ public static class ServiceCollectionExtensions
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         var serverVersion = new MySqlServerVersion(new Version(8, 4, 0));
 
-        options.UseMySql(connectionString, serverVersion, mysqlOptions =>
-        {
-            mysqlOptions.MigrationsAssembly("Shop.WebApi");
-            mysqlOptions.EnableRetryOnFailure(
-                maxRetryCount: 5,
-                maxRetryDelay: TimeSpan.FromSeconds(10),
-                errorNumbersToAdd: null
-            );
-        });
     }
 
 
@@ -269,8 +250,8 @@ public static class ServiceCollectionExtensions
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidateAudience = false, // 允许匿名
-                    ValidateLifetime = false, // in this case, we don't care about the token's expiration date
+                    ValidateAudience = false, // Cho phép ẩn danh
+                    ValidateLifetime = false, // Trong trường hợp này, chúng tôi không quan tâm đến ngày hết hạn của mã thông báo
                     ValidateIssuerSigningKey = true,
                     ValidIssuer = configuration[$"{nameof(AuthenticationOptions)}:Jwt:Issuer"],
                     IssuerSigningKey =
@@ -278,7 +259,7 @@ public static class ServiceCollectionExtensions
                             Encoding.UTF8.GetBytes(configuration[$"{nameof(AuthenticationOptions)}:Jwt:Key"]))
                 };
 
-                // 某些场景下，我们可能会使用Url来传递Token
+                // Trong một số trường hợp, chúng tôi có thể sử dụng Url để chuyển Token
                 options.Events = new JwtBearerEvents()
                 {
                     OnMessageReceived = context =>

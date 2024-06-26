@@ -1,7 +1,7 @@
 ﻿namespace Shop.Module.Reviews.Models;
 
 /// <summary>
-/// 评论来源类型 Order = 0
+/// Comment source type Order = 0
 /// </summary>
 public enum ReviewSourceType
 {
