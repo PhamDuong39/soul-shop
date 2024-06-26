@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "Name": "李宁",
+    "Slug": "lining",
+    "Description": null,
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 09:59:59.000000",
+    "UpdatedOn": "2019-04-23 09:59:59.000000"
+  },
+  {
+    "Id": 2,
+    "Name": "阿迪达斯",
+    "Slug": "Adidas",
+    "Description": null,
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:00:48.000000",
+    "UpdatedOn": "2019-04-23 10:00:48.000000"
+  },
+  {
+    "Id": 3,
+    "Name": "宝姿",
+    "Slug": "ports",
+    "Description": null,
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:28:04.000000",
+    "UpdatedOn": "2019-04-24 15:28:04.000000"
+  }
+]

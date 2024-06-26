@@ -1,10 +1,10 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
-FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
+﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+USER $APP_UID
 WORKDIR /app
 EXPOSE 8080
 EXPOSE 8081
+ENV ASPNETCORE_URLS=http://+:8080
+ENV ASPNETCORE_ENVIRONMENT=DevelopmentDocker
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
@@ -45,14 +45,14 @@ COPY ["src/Modules/Shop.Module.ShoppingCart/Shop.Module.ShoppingCart.csproj", "s
 COPY ["src/Modules/Shop.Module.SmsSenderAliyun/Shop.Module.SmsSenderAliyun.csproj", "src/Modules/Shop.Module.SmsSenderAliyun/"]
 COPY ["src/Modules/Shop.Module.StorageGitHub/Shop.Module.StorageGitHub.csproj", "src/Modules/Shop.Module.StorageGitHub/"]
 COPY ["src/Modules/Shop.Module.StorageLocal/Shop.Module.StorageLocal.csproj", "src/Modules/Shop.Module.StorageLocal/"]
-RUN dotnet restore "./src/Shop.WebApi/./Shop.WebApi.csproj"
+RUN dotnet restore "src/Shop.WebApi/Shop.WebApi.csproj"
 COPY . .
 WORKDIR "/src/src/Shop.WebApi"
-RUN dotnet build "./Shop.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "Shop.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Shop.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Shop.WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

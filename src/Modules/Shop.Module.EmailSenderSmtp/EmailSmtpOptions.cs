@@ -10,3 +10,8 @@ public class EmailSmtpOptions
 
     public int SmtpPort { get; set; } = 587;
 }
+
+public class RedisOption
+{
+    public string RedisCachingConnection { get; set; }
+}

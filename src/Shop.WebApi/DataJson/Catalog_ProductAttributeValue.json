@@ -1,0 +1,1912 @@
+[
+  {
+    "Id": 1,
+    "AttributeId": 7,
+    "ProductId": 1,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:37:08.000000",
+    "UpdatedOn": "2019-04-24 15:37:08.000000"
+  },
+  {
+    "Id": 2,
+    "AttributeId": 6,
+    "ProductId": 1,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:37:08.000000",
+    "UpdatedOn": "2019-04-24 15:37:08.000000"
+  },
+  {
+    "Id": 3,
+    "AttributeId": 5,
+    "ProductId": 1,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:37:08.000000",
+    "UpdatedOn": "2019-04-24 15:37:08.000000"
+  },
+  {
+    "Id": 4,
+    "AttributeId": 4,
+    "ProductId": 1,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:37:08.000000",
+    "UpdatedOn": "2019-04-24 15:37:08.000000"
+  },
+  {
+    "Id": 5,
+    "AttributeId": 3,
+    "ProductId": 1,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:37:08.000000",
+    "UpdatedOn": "2019-04-24 15:37:08.000000"
+  },
+  {
+    "Id": 6,
+    "AttributeId": 3,
+    "ProductId": 1,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:37:08.000000",
+    "UpdatedOn": "2019-04-24 15:37:08.000000"
+  },
+  {
+    "Id": 7,
+    "AttributeId": 1,
+    "ProductId": 1,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:37:08.000000",
+    "UpdatedOn": "2019-04-24 15:37:08.000000"
+  },
+  {
+    "Id": 8,
+    "AttributeId": 7,
+    "ProductId": 21,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 9,
+    "AttributeId": 6,
+    "ProductId": 13,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 10,
+    "AttributeId": 7,
+    "ProductId": 13,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 11,
+    "AttributeId": 3,
+    "ProductId": 19,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 12,
+    "AttributeId": 1,
+    "ProductId": 14,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 13,
+    "AttributeId": 3,
+    "ProductId": 14,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 14,
+    "AttributeId": 3,
+    "ProductId": 14,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 15,
+    "AttributeId": 4,
+    "ProductId": 14,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 16,
+    "AttributeId": 5,
+    "ProductId": 13,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 17,
+    "AttributeId": 5,
+    "ProductId": 14,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 18,
+    "AttributeId": 7,
+    "ProductId": 14,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 19,
+    "AttributeId": 1,
+    "ProductId": 15,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 20,
+    "AttributeId": 6,
+    "ProductId": 19,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 21,
+    "AttributeId": 3,
+    "ProductId": 15,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 22,
+    "AttributeId": 4,
+    "ProductId": 15,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 23,
+    "AttributeId": 5,
+    "ProductId": 15,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 24,
+    "AttributeId": 6,
+    "ProductId": 15,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 25,
+    "AttributeId": 6,
+    "ProductId": 14,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 26,
+    "AttributeId": 4,
+    "ProductId": 13,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 27,
+    "AttributeId": 3,
+    "ProductId": 13,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 28,
+    "AttributeId": 3,
+    "ProductId": 13,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 29,
+    "AttributeId": 1,
+    "ProductId": 20,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 30,
+    "AttributeId": 3,
+    "ProductId": 20,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 31,
+    "AttributeId": 3,
+    "ProductId": 20,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 32,
+    "AttributeId": 4,
+    "ProductId": 20,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 33,
+    "AttributeId": 5,
+    "ProductId": 20,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 34,
+    "AttributeId": 6,
+    "ProductId": 20,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 35,
+    "AttributeId": 7,
+    "ProductId": 20,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 36,
+    "AttributeId": 5,
+    "ProductId": 19,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 37,
+    "AttributeId": 1,
+    "ProductId": 12,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 38,
+    "AttributeId": 3,
+    "ProductId": 12,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 39,
+    "AttributeId": 3,
+    "ProductId": 12,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 40,
+    "AttributeId": 4,
+    "ProductId": 12,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 41,
+    "AttributeId": 5,
+    "ProductId": 12,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 42,
+    "AttributeId": 6,
+    "ProductId": 12,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 43,
+    "AttributeId": 7,
+    "ProductId": 12,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 44,
+    "AttributeId": 4,
+    "ProductId": 19,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 45,
+    "AttributeId": 1,
+    "ProductId": 13,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 46,
+    "AttributeId": 7,
+    "ProductId": 15,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 47,
+    "AttributeId": 3,
+    "ProductId": 19,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 48,
+    "AttributeId": 3,
+    "ProductId": 15,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 49,
+    "AttributeId": 7,
+    "ProductId": 19,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 50,
+    "AttributeId": 1,
+    "ProductId": 21,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 51,
+    "AttributeId": 7,
+    "ProductId": 17,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 52,
+    "AttributeId": 6,
+    "ProductId": 17,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 53,
+    "AttributeId": 5,
+    "ProductId": 17,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 54,
+    "AttributeId": 3,
+    "ProductId": 21,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 55,
+    "AttributeId": 3,
+    "ProductId": 21,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 56,
+    "AttributeId": 3,
+    "ProductId": 18,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 57,
+    "AttributeId": 4,
+    "ProductId": 17,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 58,
+    "AttributeId": 3,
+    "ProductId": 17,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 59,
+    "AttributeId": 3,
+    "ProductId": 17,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 60,
+    "AttributeId": 1,
+    "ProductId": 17,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 61,
+    "AttributeId": 3,
+    "ProductId": 18,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 62,
+    "AttributeId": 5,
+    "ProductId": 21,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 63,
+    "AttributeId": 4,
+    "ProductId": 21,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 64,
+    "AttributeId": 4,
+    "ProductId": 18,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 65,
+    "AttributeId": 5,
+    "ProductId": 18,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 66,
+    "AttributeId": 6,
+    "ProductId": 18,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 67,
+    "AttributeId": 1,
+    "ProductId": 19,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 68,
+    "AttributeId": 7,
+    "ProductId": 16,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 69,
+    "AttributeId": 6,
+    "ProductId": 16,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 70,
+    "AttributeId": 5,
+    "ProductId": 16,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 71,
+    "AttributeId": 4,
+    "ProductId": 16,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 72,
+    "AttributeId": 3,
+    "ProductId": 16,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 73,
+    "AttributeId": 3,
+    "ProductId": 16,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 74,
+    "AttributeId": 1,
+    "ProductId": 16,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 75,
+    "AttributeId": 7,
+    "ProductId": 18,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 76,
+    "AttributeId": 6,
+    "ProductId": 21,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 77,
+    "AttributeId": 1,
+    "ProductId": 18,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 15:40:17.000000",
+    "UpdatedOn": "2019-04-24 15:40:17.000000"
+  },
+  {
+    "Id": 78,
+    "AttributeId": 7,
+    "ProductId": 29,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 79,
+    "AttributeId": 6,
+    "ProductId": 23,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 80,
+    "AttributeId": 7,
+    "ProductId": 23,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 81,
+    "AttributeId": 3,
+    "ProductId": 31,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 82,
+    "AttributeId": 1,
+    "ProductId": 24,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 83,
+    "AttributeId": 3,
+    "ProductId": 24,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 84,
+    "AttributeId": 3,
+    "ProductId": 24,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 85,
+    "AttributeId": 4,
+    "ProductId": 24,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 86,
+    "AttributeId": 5,
+    "ProductId": 23,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 87,
+    "AttributeId": 5,
+    "ProductId": 24,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 88,
+    "AttributeId": 7,
+    "ProductId": 24,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 89,
+    "AttributeId": 1,
+    "ProductId": 25,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 90,
+    "AttributeId": 6,
+    "ProductId": 31,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 91,
+    "AttributeId": 3,
+    "ProductId": 25,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 92,
+    "AttributeId": 4,
+    "ProductId": 25,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 93,
+    "AttributeId": 5,
+    "ProductId": 25,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 94,
+    "AttributeId": 6,
+    "ProductId": 25,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 95,
+    "AttributeId": 6,
+    "ProductId": 24,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 96,
+    "AttributeId": 4,
+    "ProductId": 23,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 97,
+    "AttributeId": 3,
+    "ProductId": 23,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 98,
+    "AttributeId": 3,
+    "ProductId": 23,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 99,
+    "AttributeId": 1,
+    "ProductId": 30,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 100,
+    "AttributeId": 3,
+    "ProductId": 30,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 101,
+    "AttributeId": 3,
+    "ProductId": 30,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 102,
+    "AttributeId": 4,
+    "ProductId": 30,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 103,
+    "AttributeId": 5,
+    "ProductId": 30,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 104,
+    "AttributeId": 6,
+    "ProductId": 30,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 105,
+    "AttributeId": 7,
+    "ProductId": 30,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 106,
+    "AttributeId": 5,
+    "ProductId": 31,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 107,
+    "AttributeId": 1,
+    "ProductId": 22,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 108,
+    "AttributeId": 3,
+    "ProductId": 22,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 109,
+    "AttributeId": 3,
+    "ProductId": 22,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 110,
+    "AttributeId": 4,
+    "ProductId": 22,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 111,
+    "AttributeId": 5,
+    "ProductId": 22,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 112,
+    "AttributeId": 6,
+    "ProductId": 22,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 113,
+    "AttributeId": 7,
+    "ProductId": 22,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 114,
+    "AttributeId": 4,
+    "ProductId": 31,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 115,
+    "AttributeId": 1,
+    "ProductId": 23,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 116,
+    "AttributeId": 7,
+    "ProductId": 25,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 117,
+    "AttributeId": 3,
+    "ProductId": 31,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 118,
+    "AttributeId": 3,
+    "ProductId": 25,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 119,
+    "AttributeId": 7,
+    "ProductId": 31,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 120,
+    "AttributeId": 1,
+    "ProductId": 29,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 121,
+    "AttributeId": 7,
+    "ProductId": 27,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 122,
+    "AttributeId": 6,
+    "ProductId": 27,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 123,
+    "AttributeId": 5,
+    "ProductId": 27,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 124,
+    "AttributeId": 3,
+    "ProductId": 29,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 125,
+    "AttributeId": 3,
+    "ProductId": 29,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 126,
+    "AttributeId": 3,
+    "ProductId": 28,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 127,
+    "AttributeId": 4,
+    "ProductId": 27,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 128,
+    "AttributeId": 3,
+    "ProductId": 27,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 129,
+    "AttributeId": 3,
+    "ProductId": 27,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 130,
+    "AttributeId": 1,
+    "ProductId": 27,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 131,
+    "AttributeId": 3,
+    "ProductId": 28,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 132,
+    "AttributeId": 5,
+    "ProductId": 29,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 133,
+    "AttributeId": 4,
+    "ProductId": 29,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 134,
+    "AttributeId": 4,
+    "ProductId": 28,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 135,
+    "AttributeId": 5,
+    "ProductId": 28,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 136,
+    "AttributeId": 6,
+    "ProductId": 28,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 137,
+    "AttributeId": 1,
+    "ProductId": 31,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 138,
+    "AttributeId": 7,
+    "ProductId": 26,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 139,
+    "AttributeId": 6,
+    "ProductId": 26,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 140,
+    "AttributeId": 5,
+    "ProductId": 26,
+    "Value": "原创设计",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 141,
+    "AttributeId": 4,
+    "ProductId": 26,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 142,
+    "AttributeId": 3,
+    "ProductId": 26,
+    "Value": "涤纶",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 143,
+    "AttributeId": 3,
+    "ProductId": 26,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 144,
+    "AttributeId": 1,
+    "ProductId": 26,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 145,
+    "AttributeId": 7,
+    "ProductId": 28,
+    "Value": "纯色",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 146,
+    "AttributeId": 6,
+    "ProductId": 29,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 147,
+    "AttributeId": 1,
+    "ProductId": 28,
+    "Value": "高腰型",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:01:35.000000",
+    "UpdatedOn": "2019-04-24 17:01:35.000000"
+  },
+  {
+    "Id": 148,
+    "AttributeId": 4,
+    "ProductId": 32,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:11:22.000000",
+    "UpdatedOn": "2019-04-24 17:11:22.000000"
+  },
+  {
+    "Id": 149,
+    "AttributeId": 4,
+    "ProductId": 32,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:11:22.000000",
+    "UpdatedOn": "2019-04-24 17:11:22.000000"
+  },
+  {
+    "Id": 150,
+    "AttributeId": 5,
+    "ProductId": 32,
+    "Value": "甜美",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:11:22.000000",
+    "UpdatedOn": "2019-04-24 17:11:22.000000"
+  },
+  {
+    "Id": 151,
+    "AttributeId": 6,
+    "ProductId": 32,
+    "Value": "短袖",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:11:22.000000",
+    "UpdatedOn": "2019-04-24 17:11:22.000000"
+  },
+  {
+    "Id": 152,
+    "AttributeId": 4,
+    "ProductId": 33,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:18:02.000000",
+    "UpdatedOn": "2019-04-24 17:18:02.000000"
+  },
+  {
+    "Id": 153,
+    "AttributeId": 4,
+    "ProductId": 33,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:18:02.000000",
+    "UpdatedOn": "2019-04-24 17:18:02.000000"
+  },
+  {
+    "Id": 154,
+    "AttributeId": 4,
+    "ProductId": 34,
+    "Value": "17周岁以下",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:27:11.000000",
+    "UpdatedOn": "2019-04-24 17:27:11.000000"
+  },
+  {
+    "Id": 155,
+    "AttributeId": 4,
+    "ProductId": 34,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:27:11.000000",
+    "UpdatedOn": "2019-04-24 17:27:11.000000"
+  },
+  {
+    "Id": 156,
+    "AttributeId": 4,
+    "ProductId": 34,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:27:11.000000",
+    "UpdatedOn": "2019-04-24 17:27:11.000000"
+  },
+  {
+    "Id": 157,
+    "AttributeId": 4,
+    "ProductId": 34,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:27:11.000000",
+    "UpdatedOn": "2019-04-24 17:27:11.000000"
+  },
+  {
+    "Id": 158,
+    "AttributeId": 4,
+    "ProductId": 35,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:30:48.000000",
+    "UpdatedOn": "2019-04-24 17:30:48.000000"
+  },
+  {
+    "Id": 159,
+    "AttributeId": 4,
+    "ProductId": 35,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:30:48.000000",
+    "UpdatedOn": "2019-04-24 17:30:48.000000"
+  },
+  {
+    "Id": 160,
+    "AttributeId": 3,
+    "ProductId": 36,
+    "Value": "羊毛",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:34:27.000000",
+    "UpdatedOn": "2019-04-24 17:34:27.000000"
+  },
+  {
+    "Id": 161,
+    "AttributeId": 3,
+    "ProductId": 36,
+    "Value": "羊绒",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:34:27.000000",
+    "UpdatedOn": "2019-04-24 17:34:27.000000"
+  },
+  {
+    "Id": 162,
+    "AttributeId": 4,
+    "ProductId": 36,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:34:27.000000",
+    "UpdatedOn": "2019-04-24 17:34:27.000000"
+  },
+  {
+    "Id": 163,
+    "AttributeId": 4,
+    "ProductId": 36,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:34:27.000000",
+    "UpdatedOn": "2019-04-24 17:34:27.000000"
+  },
+  {
+    "Id": 164,
+    "AttributeId": 3,
+    "ProductId": 37,
+    "Value": "蚕丝",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:38:09.000000",
+    "UpdatedOn": "2019-04-24 17:38:09.000000"
+  },
+  {
+    "Id": 165,
+    "AttributeId": 5,
+    "ProductId": 37,
+    "Value": "甜美",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 17:38:09.000000",
+    "UpdatedOn": "2019-04-24 17:38:09.000000"
+  },
+  {
+    "Id": 166,
+    "AttributeId": 2,
+    "ProductId": 38,
+    "Value": "标准",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:16:16.000000",
+    "UpdatedOn": "2019-04-24 18:16:16.000000"
+  },
+  {
+    "Id": 167,
+    "AttributeId": 3,
+    "ProductId": 38,
+    "Value": "棉",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:16:16.000000",
+    "UpdatedOn": "2019-04-24 18:16:16.000000"
+  },
+  {
+    "Id": 168,
+    "AttributeId": 4,
+    "ProductId": 38,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:16:16.000000",
+    "UpdatedOn": "2019-04-24 18:16:16.000000"
+  },
+  {
+    "Id": 169,
+    "AttributeId": 4,
+    "ProductId": 38,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:16:16.000000",
+    "UpdatedOn": "2019-04-24 18:16:16.000000"
+  },
+  {
+    "Id": 170,
+    "AttributeId": 4,
+    "ProductId": 38,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:16:16.000000",
+    "UpdatedOn": "2019-04-24 18:16:16.000000"
+  },
+  {
+    "Id": 171,
+    "AttributeId": 5,
+    "ProductId": 38,
+    "Value": "其他",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:16:16.000000",
+    "UpdatedOn": "2019-04-24 18:16:16.000000"
+  },
+  {
+    "Id": 172,
+    "AttributeId": 2,
+    "ProductId": 39,
+    "Value": "宽松",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:22:01.000000",
+    "UpdatedOn": "2019-04-24 18:22:01.000000"
+  },
+  {
+    "Id": 173,
+    "AttributeId": 3,
+    "ProductId": 39,
+    "Value": "羊绒",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:22:01.000000",
+    "UpdatedOn": "2019-04-24 18:22:01.000000"
+  },
+  {
+    "Id": 174,
+    "AttributeId": 4,
+    "ProductId": 39,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:22:01.000000",
+    "UpdatedOn": "2019-04-24 18:22:01.000000"
+  },
+  {
+    "Id": 175,
+    "AttributeId": 4,
+    "ProductId": 39,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:22:01.000000",
+    "UpdatedOn": "2019-04-24 18:22:01.000000"
+  },
+  {
+    "Id": 176,
+    "AttributeId": 4,
+    "ProductId": 39,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:22:01.000000",
+    "UpdatedOn": "2019-04-24 18:22:01.000000"
+  },
+  {
+    "Id": 177,
+    "AttributeId": 4,
+    "ProductId": 39,
+    "Value": "40-49周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:22:01.000000",
+    "UpdatedOn": "2019-04-24 18:22:01.000000"
+  },
+  {
+    "Id": 178,
+    "AttributeId": 5,
+    "ProductId": 39,
+    "Value": "其他",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 18:22:01.000000",
+    "UpdatedOn": "2019-04-24 18:22:01.000000"
+  },
+  {
+    "Id": 179,
+    "AttributeId": 8,
+    "ProductId": 40,
+    "Value": "板鞋",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 19:52:18.000000",
+    "UpdatedOn": "2019-04-24 19:52:18.000000"
+  },
+  {
+    "Id": 180,
+    "AttributeId": 4,
+    "ProductId": 40,
+    "Value": "17周岁以下",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 19:52:18.000000",
+    "UpdatedOn": "2019-04-24 19:52:18.000000"
+  },
+  {
+    "Id": 181,
+    "AttributeId": 4,
+    "ProductId": 40,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 19:52:18.000000",
+    "UpdatedOn": "2019-04-24 19:52:18.000000"
+  },
+  {
+    "Id": 182,
+    "AttributeId": 9,
+    "ProductId": 41,
+    "Value": "圆头",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 19:56:26.000000",
+    "UpdatedOn": "2019-04-24 19:56:26.000000"
+  },
+  {
+    "Id": 183,
+    "AttributeId": 4,
+    "ProductId": 41,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 19:56:26.000000",
+    "UpdatedOn": "2019-04-24 19:56:26.000000"
+  },
+  {
+    "Id": 184,
+    "AttributeId": 4,
+    "ProductId": 41,
+    "Value": "40-49周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 19:56:26.000000",
+    "UpdatedOn": "2019-04-24 19:56:26.000000"
+  },
+  {
+    "Id": 185,
+    "AttributeId": 4,
+    "ProductId": 41,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 19:56:26.000000",
+    "UpdatedOn": "2019-04-24 19:56:26.000000"
+  },
+  {
+    "Id": 186,
+    "AttributeId": 4,
+    "ProductId": 42,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 20:03:20.000000",
+    "UpdatedOn": "2019-04-24 20:03:20.000000"
+  },
+  {
+    "Id": 187,
+    "AttributeId": 4,
+    "ProductId": 42,
+    "Value": "25-29周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 20:03:20.000000",
+    "UpdatedOn": "2019-04-24 20:03:20.000000"
+  },
+  {
+    "Id": 188,
+    "AttributeId": 4,
+    "ProductId": 42,
+    "Value": "40-49周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 20:03:20.000000",
+    "UpdatedOn": "2019-04-24 20:03:20.000000"
+  },
+  {
+    "Id": 189,
+    "AttributeId": 4,
+    "ProductId": 42,
+    "Value": "18-24周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 20:03:20.000000",
+    "UpdatedOn": "2019-04-24 20:03:20.000000"
+  },
+  {
+    "Id": 190,
+    "AttributeId": 4,
+    "ProductId": 43,
+    "Value": "30-34周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 20:08:38.000000",
+    "UpdatedOn": "2019-04-24 20:08:38.000000"
+  },
+  {
+    "Id": 191,
+    "AttributeId": 4,
+    "ProductId": 43,
+    "Value": "40-49周岁",
+    "Description": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-24 20:08:38.000000",
+    "UpdatedOn": "2019-04-24 20:08:38.000000"
+  }
+]

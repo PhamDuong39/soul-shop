@@ -1,0 +1,18 @@
+[
+  {
+    "Id": 1,
+    "UserId": 10,
+    "AddressId": 3,
+    "AddressType": 0,
+    "LastUsedOn": null,
+    "IsDeleted": 0
+  },
+  {
+    "Id": 2,
+    "UserId": 2984,
+    "AddressId": 5,
+    "AddressType": 0,
+    "LastUsedOn": null,
+    "IsDeleted": 0
+  }
+]
