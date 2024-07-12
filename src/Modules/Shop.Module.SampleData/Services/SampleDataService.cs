@@ -33,7 +33,7 @@ public class SampleDataService : ISampleDataService
 
     public async Task ResetToSampleData(SampleDataOption model)
     {
-        if (_options.Value.ShopEnv == ShopEnv.PRO) throw new Exception("正式环境不允许此操作！");
+        if (_options.Value.ShopEnv == ShopEnv.PRO) throw new Exception("In production environment, this operation is not allowed！");
 
         var usePostgres = _sqlRepository.GetDbConnectionType() == "Npgsql.NpgsqlConnection";
         var useSQLite = _sqlRepository.GetDbConnectionType() == "Microsoft.Data.Sqlite.SqliteConnection";

@@ -2,6 +2,6 @@
 
 public class MiniProgramDefaults
 {
-    public const string AuthenticationScheme = "WeChatMiniProgram";
-    public const string DisplayName = "微信小程序";
+    public const string AuthenticationScheme = "MiniProgram";
+    public const string DisplayName = "MiniProgram";
 }

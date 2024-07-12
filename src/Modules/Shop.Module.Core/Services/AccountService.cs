@@ -19,7 +19,7 @@ public class AccountService : IAccountService
     }
 
     /// <summary>
-    /// 验证并获取最后一条验证码
+    /// Validate and retrieve the last verification code
     /// </summary>
     /// <param name="phone"></param>
     /// <param name="captcha"></param>
@@ -36,9 +36,9 @@ public class AccountService : IAccountService
             .OrderByDescending(c => c.CreatedOn)
             .FirstOrDefaultAsync();
 
-        if (sms == null || sms.IsUsed) throw new Exception("验证码不存在或已失效，请重新获取验证码");
+        if (sms == null || sms.IsUsed) throw new Exception("The verification code does not exist or has expired. Please obtain a new verification code");
 
-        if (sms.Value != captcha) throw new Exception("验证码错误");
+        if (sms.Value != captcha) throw new Exception("The verification code is incorrect");
 
         return sms;
     }

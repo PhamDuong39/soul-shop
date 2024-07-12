@@ -70,7 +70,7 @@ public class CountryService : ICountryService
     }
 
     /// <summary>
-    /// 省市区 例：8 转换为 ['1', '6', '8']
+    /// Province, city, district example: 8 converts to ['1', '6', '8'].
     /// </summary>
     /// <param name="provinces"></param>
     /// <param name="stateOrProvinceId"></param>

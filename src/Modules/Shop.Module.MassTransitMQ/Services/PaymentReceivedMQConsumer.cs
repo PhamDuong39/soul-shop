@@ -28,7 +28,7 @@ public class PaymentReceivedMQConsumer : IConsumer<PaymentReceived>
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "收到付款消息，处理失败", context?.Message);
+            _logger.LogError(ex, "Received payment message，Processing failed", context?.Message);
         }
     }
 }

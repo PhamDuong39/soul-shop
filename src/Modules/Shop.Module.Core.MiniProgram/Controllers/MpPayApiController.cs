@@ -13,7 +13,7 @@ using Shop.Module.Orders.Models;
 namespace Shop.Module.Core.MiniProgram.Controllers;
 
 /// <summary>
-/// 微信支付API控制器，用于处理微信支付相关的通知和请求。
+/// Website payment API controller, used to handle notifications and requests related to website payments.
 /// </summary>
 [ApiController]
 [Route("api/mp/pay")]
@@ -38,10 +38,10 @@ public class MpPayApiController : ControllerBase
     }
 
     /// <summary>
-    /// 接收并处理微信支付成功后的异步通知。验证通知的真实性，并且处理业务逻辑，如更新订单状态、记录支付信息等。
+    /// Receive and process asynchronous notifications after a successful website payment. Verify the authenticity of the notification and handle business logic such as updating order status, recording payment information, etc.
     /// </summary>
-    /// <param name="no">订单编号，用于标识支付通知对应的订单。</param>
-    /// <returns>返回处理结果。若处理成功，返回微信服务器期望的成功响应，否则返回无内容响应。</returns>
+    /// <param name="no"> Order number, used to identify the order corresponding to the payment notification. </param>
+    /// <returns> Return the processing result. If successful, return the expected success response to the WeChat server; otherwise, return an empty response. </returns>
     [AllowAnonymous]
     [HttpPost("notify/{no}")]
     public async Task<IActionResult> NotifyByOrderNo(string no)
@@ -63,7 +63,7 @@ public class MpPayApiController : ControllerBase
                 {
                     await _mqService.Send(QueueKeys.PaymentReceived, new PaymentReceived()
                     {
-                        Note = "微信支付成功结果通知",
+                        Note = "Website payment successful result notification",
                         OrderNo = no,
                         PaymentFeeAmount = notify.TotalFee / 100M,
                         PaymentMethod = PaymentMethod.WeChat,
@@ -81,7 +81,7 @@ public class MpPayApiController : ControllerBase
         }
         finally
         {
-            _logger.LogInformation("参数：{@no}", no);
+            _logger.LogInformation("Parameters：{@no}", no);
         }
     }
 }

@@ -16,9 +16,9 @@ public class CacheApiController(IStaticCacheManager cache) : ControllerBase
 {
 
     /// <summary>
-    /// 清除所有缓存。
+    /// Clear all caches
     /// </summary>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <returns> Indicating the operation result <see cref="Result"/> object </returns>
     [HttpDelete("clear")]
     public async Task<Result> Upload()
     {

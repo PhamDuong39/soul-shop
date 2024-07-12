@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 小部件实例 API 控制器，提供部件实例相关的接口操作。
+/// Widget instance API controller, providing interface operations related to widget instances
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/widget-instances")]
@@ -29,9 +29,9 @@ public class WidgetInstanceApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有部件实例。
+    /// Retrieve all widget instances
     /// </summary>
-    /// <returns>所有部件实例的信息。</returns>
+    /// <returns>All widget instances information </returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -55,10 +55,10 @@ public class WidgetInstanceApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据部件实例ID删除部件实例。
+    /// Delete widget instance based on widget instance ID
     /// </summary>
-    /// <param name="id">部件实例ID。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">widget instance ID </param>
+    /// <returns>Operation result </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
@@ -74,9 +74,9 @@ public class WidgetInstanceApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取部件实例数量。
+    /// Retrieve the number of widget instances
     /// </summary>
-    /// <returns>部件实例的数量。</returns>
+    /// <returns>Number of widget instances </returns>
     [HttpGet("number-of-widgets")]
     public async Task<Result> GetNumberOfWidgets()
     {

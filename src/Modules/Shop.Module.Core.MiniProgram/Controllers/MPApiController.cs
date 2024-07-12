@@ -18,7 +18,7 @@ using Shop.Module.Core.ViewModels;
 namespace Shop.Module.Core.MiniProgram.Controllers;
 
 /// <summary>
-/// 微信小程序API控制器，用于处理微信小程序相关的请求，如登录。
+/// Website API controller, used for handling requests related to websites, such as login
 /// </summary>
 [ApiController]
 [Route("api/mp")]
@@ -56,11 +56,11 @@ public class MPApiController : ControllerBase
     }
 
     /// <summary>
-    /// 处理微信小程序的登录请求。通过微信小程序传来的code与微信服务器通信以获取用户的唯一标识符。
-    /// 若用户是首次登录，则会创建一个新的用户账号。登录成功后，会返回包含访问令牌在内的登录信息。
+    /// Handling login requests for websites. Communicating with the server using the code received from the website to obtain the user's unique identifier.
+    /// If the user is logging in for the first time, a new user account will be created. Upon successful login, login information including the access token will be returned.
     /// </summary>
-    /// <param name="param">包含微信小程序登录所需信息的参数，例如code。</param>
-    /// <returns>返回操作结果，如果登录成功，则包含用户的登录信息，如访问令牌和用户信息。</returns>
+    /// <param name="param">The parameters containing the necessary information for website login, such as 'code'.</param>
+    /// <returns>Return the operation result. If login is successful, it includes the user's login information such as access token and user details.</returns>
     [HttpPost("login")]
     public async Task<Result> Login([FromBody] LoginByMpParam param)
     {
@@ -68,7 +68,7 @@ public class MPApiController : ControllerBase
             $"{Code2SessionUrl}?appid={_option.AppId}&secret={_option.AppSecret}&js_code={param.Code}&grant_type=authorization_code";
         var httpClient = new HttpClient();
         var content = await httpClient.GetStringAsync(url);
-        if (string.IsNullOrWhiteSpace(content)) return Result.Fail("登录失败");
+        if (string.IsNullOrWhiteSpace(content)) return Result.Fail("Login failed");
 
         var result = JsonConvert.DeserializeObject<Code2SessionGetResult>(content);
         if (result.ErrCode != 0) return Result.Fail(result.ErrMessage);
@@ -79,7 +79,7 @@ public class MPApiController : ControllerBase
                 c.LoginProvider == MiniProgramDefaults.AuthenticationScheme && c.ProviderKey == result.OpenId);
         if (model == null)
         {
-            // 创建用户
+            // Create user
             var userName = Guid.NewGuid().ToString("N");
             user = new User
             {
@@ -94,7 +94,7 @@ public class MPApiController : ControllerBase
             if (!createResult.Succeeded)
             {
                 transaction.Rollback();
-                return Result.Fail("创建用户失败");
+                return Result.Fail("User creation failed");
             }
 
             await _userManager.AddToRoleAsync(user, RoleWithId.customer.ToString());
@@ -114,7 +114,7 @@ public class MPApiController : ControllerBase
             user = await _userManager.FindByIdAsync(model.UserId.ToString());
         }
 
-        if (user == null) return Result.Fail("登录失败，请稍后重试");
+        if (user == null) return Result.Fail("Login failed，Please try again later");
 
         // var providers = await _signInManager.GetExternalAuthenticationSchemesAsync();
         var signInResult =
@@ -123,11 +123,11 @@ public class MPApiController : ControllerBase
 
         if (signInResult.IsLockedOut)
         {
-            return Result.Fail("用户已锁定，请稍后重试");
+            return Result.Fail("The user is locked，Please try again later");
         }
         else if (signInResult.IsNotAllowed)
         {
-            return Result.Fail("用户邮箱未验证或手机未验证，不允许登录");
+            return Result.Fail("User email or phone number is not verified，Login is not permitted");
         }
         else if (signInResult.Succeeded)
         {
@@ -143,6 +143,6 @@ public class MPApiController : ControllerBase
             return Result.Ok(loginResult);
         }
 
-        return Result.Fail("用户登录失败");
+        return Result.Fail("User login failed");
     }
 }

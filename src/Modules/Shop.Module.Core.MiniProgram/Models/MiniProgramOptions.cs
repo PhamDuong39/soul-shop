@@ -3,19 +3,19 @@
 public class MiniProgramOptions
 {
     /// <summary>
-    /// 微信分配的小程序ID
+    /// Website assigned mini-program ID. Please remember this change.
     /// </summary>
     public string AppId { get; set; }
 
     public string AppSecret { get; set; }
 
     /// <summary>
-    /// 微信支付分配的商户号
+    /// The merchant number assigned.
     /// </summary>
     public string MchId { get; set; }
 
     /// <summary>
-    /// 商户API密钥
+    /// Merchant API key
     /// </summary>
     public string Key { get; set; }
 }

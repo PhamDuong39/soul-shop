@@ -69,9 +69,7 @@ public class PaymentService : IPaymentService
             {
                 Package = $"prepay_id={response.PrepayId}"
             };
-
-            // https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5
-            // 将参数(parameter)给 小程序前端 让他调起支付API
+            // Pass the parameters to the mini-program frontend to invoke the payment API.
             var parameter = await _client.ExecuteAsync(req, opt);
 
             var json = JsonConvert.SerializeObject(parameter);

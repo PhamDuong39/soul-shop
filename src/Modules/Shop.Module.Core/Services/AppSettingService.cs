@@ -9,7 +9,7 @@ namespace Shop.Module.Core.Services;
 
 public class AppSettingService : IAppSettingService
 {
-    private const int cacheTimeForSecond = 60; // 默认缓存时间, 绝对过期时间 * 10
+    private const int cacheTimeForSecond = 60; // Default cache time, absolute expiration time * 10
     private readonly IMemoryCache _cache;
     private readonly IConfiguration _configuration;
 

@@ -24,7 +24,7 @@ public class SqlRepository : ISqlRepository
 
         //_dbContext.Database.ExecuteSqlCommand(command);
 
-        // 使用 ExecuteSqlRaw 替换 ExecuteSqlCommand
+        // ExecuteSqlRaw  ExecuteSqlCommand
         _dbContext.Database.ExecuteSqlRaw(command);
     }
 
@@ -34,7 +34,7 @@ public class SqlRepository : ISqlRepository
         {
             foreach (var command in commands)
                 //_dbContext.Database.ExecuteSqlCommand(command);
-                // 使用 ExecuteSqlRaw 替换 ExecuteSqlCommand
+                // ExecuteSqlRaw  ExecuteSqlCommand
                 _dbContext.Database.ExecuteSqlRaw(command);
             tran.Commit();
         }
@@ -49,7 +49,7 @@ public class SqlRepository : ISqlRepository
             {
                 if (sb.Length > 0)
                 {
-                    // JSON 特殊处理 
+                    // JSON Special handling 
                     // N'{"CategoryIds":[9,10,15,14,5]}'
                     // N'{{"CategoryIds":[9,10,15,14,5]}}'
                     var sql = sb.ToString().Replace("{", "{{").Replace("}", "}}");
