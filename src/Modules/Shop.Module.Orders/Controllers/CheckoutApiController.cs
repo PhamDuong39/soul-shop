@@ -13,7 +13,7 @@ using Shop.Module.ShoppingCart.Entities;
 namespace Shop.Module.Orders.Controllers;
 
 /// <summary>
-/// 结算 API 控制器，用于处理购物车、单个商品和订单的结算操作。
+/// Checkout API controller, used to handle checkout operations for shopping carts, individual items, and orders.
 /// </summary>
 [Authorize()]
 [Route("api/checkout")]
@@ -37,10 +37,10 @@ public class CheckoutApiController : ControllerBase
     }
 
     /// <summary>
-    /// 通过购物车结算。
+    /// Checkout through the shopping cart.
     /// </summary>
-    /// <param name="userAddressId">用户地址 ID（可选）。</param>
-    /// <returns>结算结果。</returns>
+    /// <param name="userAddressId">User address ID (optional). </param>
+    /// <returns>Checkout result. </returns>
     [HttpGet("cart")]
     public async Task<Result> CheckoutByCart(int? userAddressId)
     {
@@ -52,8 +52,8 @@ public class CheckoutApiController : ControllerBase
             .FirstOrDefaultAsync();
 
         if (cart == null || cart.Items == null || cart.Items.Where(c => c.IsChecked).Count() <= 0)
-            throw new Exception("请选择商品");
-        if (cart.Items.Where(c => c.IsChecked).Any(c => c.Quantity <= 0)) throw new Exception("商品数量必须大于0");
+            throw new Exception("Please select product");
+        if (cart.Items.Where(c => c.IsChecked).Any(c => c.Quantity <= 0)) throw new Exception("The quantity of the product must be greater than 0");
         var param = new CheckoutParam()
         {
             CustomerId = customerId,
@@ -70,12 +70,12 @@ public class CheckoutApiController : ControllerBase
     }
 
     /// <summary>
-    /// 通过单个商品直接结算。
+    /// Direct settlement through a single product.
     /// </summary>
-    /// <param name="userAddressId">用户地址 ID（可选）。</param>
-    /// <param name="productId">产品 ID。</param>
-    /// <param name="quantity">购买数量。</param>
-    /// <returns>结算结果。</returns>
+    /// <param name="userAddressId">User address ID (optional). </param>
+    /// <param name="productId">Product ID. </param>
+    /// <param name="quantity">Purchase quantity. </param>
+    /// <returns>Settlement result. </returns>
     [HttpGet("product")]
     public async Task<Result> CheckoutByProduct(int? userAddressId, int productId, int quantity)
     {
@@ -91,11 +91,11 @@ public class CheckoutApiController : ControllerBase
     }
 
     /// <summary>
-    /// 通过现有订单结算。
+    /// Settle via existing order.
     /// </summary>
-    /// <param name="userAddressId">用户地址 ID（可选）。</param>
-    /// <param name="orderId">订单 ID。</param>
-    /// <returns>结算结果。</returns>
+    /// <param name="userAddressId">User address ID (optional). </param>
+    /// <param name="orderId">Order ID. </param>
+    /// <returns>Settlement result. </returns>
     [HttpGet("order")]
     public async Task<Result> CheckoutByOrder(int? userAddressId, int orderId)
     {
@@ -103,7 +103,7 @@ public class CheckoutApiController : ControllerBase
         var order = await _orderRepository.Query()
             .Include(c => c.OrderItems)
             .FirstOrDefaultAsync(c => c.Id == orderId && c.CustomerId == user.Id);
-        if (order == null) throw new Exception("订单不存在");
+        if (order == null) throw new Exception("The order does not exist");
         var param = new CheckoutParam()
         {
             CustomerId = user.Id,
@@ -119,17 +119,17 @@ public class CheckoutApiController : ControllerBase
     }
 
     /// <summary>
-    /// 提交购物车结算生成订单。
+    /// Submit the shopping cart to settle the order.
     /// </summary>
-    /// <param name="model">购物车结算参数。</param>
-    /// <returns>订单创建结果。</returns>
+    /// <param name="model">Shopping cart settlement parameters. </param>
+    /// <returns>Order creation results. </returns>
     [HttpPost("cart")]
     public async Task<Result> PostByCart([FromBody] OrderCreateByCartParam model)
     {
         var user = await _workContext.GetCurrentUserAsync();
         var cart = await _cartRepository.Query().FirstOrDefaultAsync(x => x.CustomerId == user.Id && x.IsActive);
         if (cart == null)
-            throw new Exception("购物车信息不存在");
+            throw new Exception("Shopping cart information does not exist");
 
         var result = await _orderService.OrderCreateByCart(cart.Id, new OrderCreateBaseParam()
         {
@@ -145,10 +145,10 @@ public class CheckoutApiController : ControllerBase
     }
 
     /// <summary>
-    /// 提交单个商品结算生成订单。
+    /// Submit a single product settlement to generate an order.
     /// </summary>
-    /// <param name="model">单个商品结算参数。</param>
-    /// <returns>订单创建结果。</returns>
+    /// <param name="model">Single product settlement parameters. </param>
+    /// <returns>Order creation results. </returns>
     [HttpPost("product")]
     public async Task<Result> PostByProduct([FromBody] OrderCreateByProductParam model)
     {
@@ -179,10 +179,10 @@ public class CheckoutApiController : ControllerBase
     }
 
     /// <summary>
-    /// 提交现有订单结算生成新订单。
+    /// Submit the existing order settlement to generate a new order.
     /// </summary>
-    /// <param name="model">现有订单结算参数。</param>
-    /// <returns>新订单创建结果。</returns>
+    /// <param name="model">Existing order settlement parameters. </param>
+    /// <returns>New order creation results. </returns>
     [HttpPost("order")]
     public async Task<Result> PostByOrder([FromBody] OrderCreateByOrderParam model)
     {
@@ -190,7 +190,7 @@ public class CheckoutApiController : ControllerBase
         var oldOrder = await _orderRepository.Query()
             .Include(c => c.OrderItems)
             .FirstOrDefaultAsync(c => c.Id == model.OrderId && c.CustomerId == user.Id);
-        if (oldOrder == null) throw new Exception("订单不存在");
+        if (oldOrder == null) throw new Exception("The order does not exist");
         var param = new OrderCreateBaseParam()
         {
             CustomerId = user.Id,

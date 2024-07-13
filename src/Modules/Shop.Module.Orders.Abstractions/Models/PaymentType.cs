@@ -1,17 +1,17 @@
 ﻿namespace Shop.Module.Orders.Models;
 
 /// <summary>
-/// 付款类型
+/// Payment type
 /// </summary>
 public enum PaymentType
 {
     /// <summary>
-    /// 在线支付
+    /// Online payment
     /// </summary>
     OnlinePayment = 0,
 
     /// <summary>
-    /// 货到付款
+    /// Cash on delivery
     /// </summary>
     CashOnDelivery = 1
 }

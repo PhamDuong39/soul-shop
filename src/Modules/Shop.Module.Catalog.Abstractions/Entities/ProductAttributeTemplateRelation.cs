@@ -4,7 +4,7 @@ using System;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品属性模板与产品属性关联表（多对多关系）
+/// Product attribute template and product attribute association table (many-to-many relationship)
 /// </summary>
 public class ProductAttributeTemplateRelation : EntityBase
 {

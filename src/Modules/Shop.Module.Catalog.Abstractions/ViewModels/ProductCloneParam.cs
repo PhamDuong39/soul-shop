@@ -9,12 +9,12 @@ public class ProductCloneParam
     [Required] public string Slug { get; set; }
 
     /// <summary>
-    /// 复制图片
+    /// Copy images
     /// </summary>
     public bool IsCopyImages { get; set; }
 
     /// <summary>
-    /// 复制库存 
+    /// Copy inventory
     /// </summary>
     public bool IsCopyStock { get; set; }
 }

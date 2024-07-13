@@ -9,7 +9,7 @@ using Shop.Module.Catalog.ViewModels;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 商品属性组API控制器，负责商品属性组的管理操作，如查询、创建、更新和删除。
+/// Product attribute group API controller, responsible for the management operations of product attribute groups, such as query, create, update and delete.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("/api/product-attribute-groups")]
@@ -26,9 +26,9 @@ public class ProductAttributeGroupApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有商品属性组的列表。
+    /// Get a list of all product attribute groups.
     /// </summary>
-    /// <returns>返回商品属性组的列表。</returns>
+    /// <returns> Return a list of product attribute groups. </returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -42,16 +42,16 @@ public class ProductAttributeGroupApiController : ControllerBase
 
 
     /// <summary>
-    /// 根据商品属性组ID获取指定商品属性组的详细信息。
+    /// Get detailed information of the specified product attribute group according to the product attribute group ID.
     /// </summary>
-    /// <param name="id">商品属性组ID。</param>
-    /// <returns>返回指定商品属性组的详细信息。</returns>
+    /// <param name="id">Product attribute group ID. </param>
+    /// <returns>Return detailed information of the specified product attribute group. </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
         var group = await _productAttrGroupRepository.FirstOrDefaultAsync(id);
         if (group == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
         var model = new ProductAttributeGroupParam
         {
             Id = group.Id,
@@ -61,10 +61,10 @@ public class ProductAttributeGroupApiController : ControllerBase
     }
 
     /// <summary>
-    /// 添加新商品属性组。
+    /// Add a new product attribute group.
     /// </summary>
-    /// <param name="model">包含商品属性组信息的参数对象。</param>
-    /// <returns>返回操作结果。</returns>
+    /// <param name="model">Parameter object containing product attribute group information. </param>
+    /// <returns>Return the operation result. </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] ProductAttributeGroupParam model)
     {
@@ -78,17 +78,17 @@ public class ProductAttributeGroupApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定ID的商品属性组信息。
+    /// Update the product attribute group information of the specified ID.
     /// </summary>
-    /// <param name="id">商品属性组ID。</param>
-    /// <param name="model">包含商品属性组更新信息的参数对象。</param>
-    /// <returns>返回操作结果。</returns>
+    /// <param name="id">Product attribute group ID. </param>
+    /// <param name="model">Parameter object containing the updated information of the product attribute group. </param>
+    /// <returns>Return the operation result. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] ProductAttributeGroupParam model)
     {
         var group = await _productAttrGroupRepository.FirstOrDefaultAsync(id);
         if (group == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
         group.Name = model.Name;
         group.UpdatedOn = DateTime.Now;
         await _productAttrGroupRepository.SaveChangesAsync();
@@ -96,18 +96,18 @@ public class ProductAttributeGroupApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定ID的商品属性组。
+    /// Delete the product attribute group with the specified ID.
     /// </summary>
-    /// <param name="id">商品属性组ID。</param>
-    /// <returns>返回操作结果。</returns>
+    /// <param name="id">Product attribute group ID. </param>
+    /// <returns>Return the operation result. </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var group = await _productAttrGroupRepository.FirstOrDefaultAsync(id);
         if (group == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
 
-        // 验证组是否被属性使用
+        // Verify that the group is used by the attribute
         var any = await _productAttrRepository.Query().AnyAsync(c => c.GroupId == group.Id);
         if (any)
             return Result.Fail("Please make sure this group not used");

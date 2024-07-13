@@ -11,7 +11,7 @@ public class OrderCreateByProductParam
     public int Quantity { get; set; }
 
     /// <summary>
-    /// 下单备注
+    /// Order notes
     /// </summary>
     [StringLength(450)]
     public string OrderNote { get; set; }

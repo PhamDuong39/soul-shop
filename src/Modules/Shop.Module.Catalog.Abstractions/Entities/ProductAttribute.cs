@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品属性
+/// Product attributes
 /// </summary>
 public class ProductAttribute : EntityBase
 {

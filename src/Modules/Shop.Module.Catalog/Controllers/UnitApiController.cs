@@ -11,7 +11,7 @@ using Shop.Module.Core.Cache;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 单位API控制器，负责管理商品单位。
+/// Unit API controller, responsible for managing commodity units.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("/api/units")]
@@ -33,9 +33,9 @@ public class UnitApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有单位信息。
+    /// Get all unit information.
     /// </summary>
-    /// <returns>所有单位的列表。</returns>
+    /// <returns> List of all units. </returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -45,10 +45,10 @@ public class UnitApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建一个新的单位。
+    /// Create a new unit.
     /// </summary>
-    /// <param name="model">包含单位名称的参数对象。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="model">Parameter object containing the unit name. </param>
+    /// <returns>Operation results. </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] NameParam model)
     {
@@ -59,17 +59,17 @@ public class UnitApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定ID的单位名称。
+    /// Update the unit name of the specified ID.
     /// </summary>
-    /// <param name="id">要更新的单位ID。</param>
-    /// <param name="model">包含新单位名称的参数对象。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">The unit ID to be updated. </param>
+    /// <param name="model">The parameter object containing the new unit name. </param>
+    /// <returns>The operation result. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] NameParam model)
     {
         var unit = await _unitRepository.FirstOrDefaultAsync(id);
         if (unit == null)
-            return Result.Fail("单位不存在");
+            return Result.Fail("Unit does not exist");
         unit.Name = model.Name;
         unit.UpdatedOn = DateTime.Now;
         await _unitRepository.SaveChangesAsync();
@@ -78,20 +78,20 @@ public class UnitApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定ID的单位。
+    /// Delete the unit with the specified ID.
     /// </summary>
-    /// <param name="id">要删除的单位ID。</param>
-    /// <returns>操作结果，如果单位已被使用，则不允许删除。</returns>
+    /// <param name="id">The ID of the unit to be deleted. </param>
+    /// <returns>The result of the operation. If the unit is already in use, deletion is not allowed. </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var unit = await _unitRepository.FirstOrDefaultAsync(id);
         if (unit == null)
-            return Result.Fail("单位不存在");
+            return Result.Fail("Unit does not exist");
 
         var any = await _productRepository.Query().AnyAsync(c => c.UnitId == id);
         if (any)
-            return Result.Fail("单位已被使用，不允许删除");
+            return Result.Fail("The unit is already in use, deletion is not allowed");
 
         unit.IsDeleted = true;
         unit.UpdatedOn = DateTime.Now;
@@ -101,9 +101,9 @@ public class UnitApiController : ControllerBase
     }
 
     /// <summary>
-    /// 清除所有单位信息的缓存。
+    /// Clear the cache of all unit information.
     /// </summary>
-    /// <returns>操作结果。</returns>
+    /// <returns>Operation results. </returns>
     [HttpPost("clear-cache")]
     public async Task<Result> ClearAllCache()
     {

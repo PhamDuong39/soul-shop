@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品属性模板（例：女装属性模板、连衣裙属性模板）
+/// Product attribute template (e.g. women's clothing attribute template, dress attribute template)
 /// </summary>
 public class ProductAttributeTemplate : EntityBase
 {

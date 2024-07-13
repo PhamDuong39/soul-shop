@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品选项（销售属性，尺码、颜色等）
+/// Product options (sales attributes, size, color, etc.)
 /// </summary>
 public class ProductOption : EntityBase
 {

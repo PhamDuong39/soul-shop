@@ -6,34 +6,34 @@ namespace Shop.Module.Orders.ViewModels;
 public class PaymentReceivedParam
 {
     /// <summary>
-    /// OrderId 与 OrderNo 必填其一，如果都填了，则优先使用Id
+    /// OrderId and OrderNo must be filled in one, if both are filled in, Id is used first
     /// </summary>
     public int? OrderId { get; set; }
 
     /// <summary>
-    /// OrderId 与 OrderNo 必填其一，如果都填了，则优先使用Id
+    /// OrderId and OrderNo must be filled in one, if both are filled in, Id is used first
     /// </summary>
     public string OrderNo { get; set; }
 
     /// <summary>
-    /// 支付方式
+    /// Payment method
     /// </summary>
     public PaymentMethod? PaymentMethod { get; set; }
 
     /// <summary>
-    /// 支付金额
+    /// Payment amount
     /// </summary>
     public decimal? PaymentFeeAmount { get; set; }
 
     /// <summary>
-    /// 支付时间
+    /// Payment time
     /// </summary>
     public DateTime? PaymentOn { get; set; }
 
     /// <summary>
-    /// 备注
-    /// 标记付款
-    /// 微信小程序支付回调通知
+    /// Note
+    /// Mark payment
+    /// WeChat applet payment callback notification
     /// </summary>
     public string Note { get; set; }
 }

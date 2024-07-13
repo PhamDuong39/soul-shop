@@ -10,7 +10,7 @@ using Shop.Module.Catalog.ViewModels;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 品牌管理API控制器，提供品牌的增删改查等功能。
+/// Brand management API controller, providing functions such as adding, deleting, modifying and checking brands.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("/api/brands")]
@@ -27,10 +27,10 @@ public class BrandApiController : ControllerBase
 
 
     /// <summary>
-    /// 获取品牌列表，支持分页、排序等功能。
+    /// Get the brand list, support paging, sorting and other functions.
     /// </summary>
-    /// <param name="param">标准表格参数，包含分页、排序等信息。</param>
-    /// <returns>返回分页的品牌列表数据。</returns>
+    /// <param name="param">Standard table parameters, including paging, sorting and other information. </param>
+    /// <returns>Return the paginated brand list data. </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<BrandResult>>> List([FromBody] StandardTableParam param)
     {
@@ -39,9 +39,9 @@ public class BrandApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有品牌的简要信息列表。
+    /// Get a brief information list of all brands.
     /// </summary>
-    /// <returns>返回所有品牌的简要信息列表。</returns>
+    /// <returns> Return a brief information list of all brands. </returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -50,15 +50,15 @@ public class BrandApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据品牌ID获取品牌详细信息。
+    /// Get brand details based on brand ID.
     /// </summary>
-    /// <param name="id">品牌ID。</param>
-    /// <returns>返回指定品牌的详细信息，如果品牌不存在则返回错误信息。</returns>
+    /// <param name="id">Brand ID. </param>
+    /// <returns>Returns detailed information of the specified brand. If the brand does not exist, an error message is returned. </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
         var brand = await _brandRepository.FirstOrDefaultAsync(id);
-        if (brand == null) return Result.Fail("单据不存在");
+        if (brand == null) return Result.Fail("The document does not exist");
         var model = new BrandParam
         {
             Id = brand.Id,
@@ -71,10 +71,10 @@ public class BrandApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建新品牌。
+    /// Create a new brand.
     /// </summary>
-    /// <param name="model">包含品牌信息的参数模型。</param>
-    /// <returns>返回操作结果，表示品牌是否成功创建。</returns>
+    /// <param name="model">Parameter model containing brand information. </param>
+    /// <returns>Return the operation result, indicating whether the brand is successfully created. </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] BrandParam model)
     {
@@ -90,16 +90,16 @@ public class BrandApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定ID的品牌信息。
+    /// Update the brand information of the specified ID.
     /// </summary>
-    /// <param name="id">品牌ID。</param>
-    /// <param name="model">包含品牌更新信息的参数模型。</param>
-    /// <returns>返回操作结果，表示品牌信息是否成功更新。</returns>
+    /// <param name="id">Brand ID. </param>
+    /// <param name="model">Parameter model containing brand update information. </param>
+    /// <returns>Return the operation result, indicating whether the brand information is successfully updated. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] BrandParam model)
     {
         var brand = await _brandRepository.FirstOrDefaultAsync(id);
-        if (brand == null) return Result.Fail("单据不存在");
+        if (brand == null) return Result.Fail("The document does not exist");
         brand.Description = model.Description;
         brand.Name = model.Name;
         brand.Slug = model.Slug;
@@ -109,15 +109,15 @@ public class BrandApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定ID的品牌。
+    /// Delete the brand with the specified ID.
     /// </summary>
-    /// <param name="id">品牌ID。</param>
-    /// <returns>返回操作结果，表示品牌是否成功删除。</returns>
+    /// <param name="id">Brand ID. </param>
+    /// <returns>Returns the operation result, indicating whether the brand is successfully deleted. </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var brand = await _brandRepository.FirstOrDefaultAsync(id);
-        if (brand == null) return Result.Fail("单据不存在");
+        if (brand == null) return Result.Fail("The document does not exist");
         brand.IsDeleted = true;
         brand.UpdatedOn = DateTime.Now;
         await _brandService.Update(brand);
@@ -125,9 +125,9 @@ public class BrandApiController : ControllerBase
     }
 
     /// <summary>
-    /// 清除品牌缓存。
+    /// Clear the brand cache.
     /// </summary>
-    /// <returns>返回操作结果，表示品牌缓存是否成功清除。</returns>
+    /// <returns>Returns the operation result, indicating whether the brand cache is successfully cleared. </returns>
     [HttpPost("clear-cache")]
     public async Task<Result> ClearCache()
     {

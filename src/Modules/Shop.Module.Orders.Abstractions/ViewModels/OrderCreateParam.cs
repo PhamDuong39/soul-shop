@@ -7,7 +7,7 @@ namespace Shop.Module.Orders.ViewModels;
 public class OrderCreateParam
 {
     /// <summary>
-    /// 客户
+    /// Customer
     /// </summary>
     [Required]
     public int CustomerId { get; set; }
@@ -21,43 +21,43 @@ public class OrderCreateParam
     public PaymentType PaymentType { get; set; }
 
     /// <summary>
-    /// 配送方式
+    /// Shipping method
     /// </summary>
     public ShippingMethod ShippingMethod { get; set; }
 
     /// <summary>
-    /// 配送/运费金额
+    /// Shipping/shipping amount
     /// </summary>
     public decimal ShippingFeeAmount { get; set; }
 
     /// <summary>
-    /// 订单明细 产品总额 Sum(ProductPrice * Quantity)
+    /// Order details Product total Sum(ProductPrice * Quantity)
     /// </summary>
     public decimal SubTotal { get; set; }
 
     /// <summary>
-    /// 订单明细 折扣总额 Sum(DiscountAmount)
+    /// Order details Discount total Sum(DiscountAmount)
     /// </summary>
     public decimal SubTotalWithDiscount { get; set; }
 
     /// <summary>
-    /// 订单总金额 SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount 
+    /// Order total SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount
     /// </summary>
     public decimal OrderTotal { get; set; }
 
     /// <summary>
-    /// 订单折扣总额（运费券、满减券等）
+    /// Order discount total (shipping coupons, full discount coupons, etc.)
     /// </summary>
     public decimal DiscountAmount { get; set; }
 
     /// <summary>
-    /// 下单备注
+    /// Order Notes
     /// </summary>
     [StringLength(450)]
     public string OrderNote { get; set; }
 
     /// <summary>
-    /// 管理员备注（仅内部使用）
+    /// Administrator Notes (internal use only)
     /// </summary>
     [StringLength(450)]
     public string AdminNote { get; set; }

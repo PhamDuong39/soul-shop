@@ -23,7 +23,7 @@ using Shop.Module.Shipments.Entities;
 namespace Shop.Module.Orders.Controllers;
 
 /// <summary>
-/// 管理员订单 API 控制器，处理订单的管理和操作。
+/// Admin Order API Controller, handles order management and operations.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/orders")]
@@ -74,10 +74,10 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据订单 ID 获取订单详细信息。
+    /// Get order details based on order ID.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <returns>订单详细信息。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <returns>Order details. </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result<OrderGetResult>> Get(int id)
     {
@@ -86,10 +86,10 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据订单号获取订单详细信息。
+    /// Get order details based on the order number.
     /// </summary>
-    /// <param name="no">订单号。</param>
-    /// <returns>订单详细信息。</returns>
+    /// <param name="no">Order number. </param>
+    /// <returns>Order details. </returns>
     [HttpGet("{no:long:min(1)}/no")]
     public async Task<Result<OrderGetResult>> GetByNo(long no)
     {
@@ -98,25 +98,25 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建新订单。
+    /// Create a new order.
     /// </summary>
-    /// <param name="model">订单创建参数。</param>
-    /// <returns>创建操作的结果。</returns>
+    /// <param name="model">Order creation parameters. </param>
+    /// <returns>The result of the creation operation. </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] OrderCreateParam model)
     {
         if (model == null)
-            throw new Exception("参数异常");
+            throw new Exception("Parameter abnormality");
         if (model.Items == null || model.Items.Count <= 0)
-            throw new Exception("请添加商品");
+            throw new Exception("Please add a product");
         if (model.Items.Any(c => c.Quantity <= 0))
-            throw new Exception("购买商品数量必须>0");
+            throw new Exception("Quantity of goods to be purchased > 0");
 
         var user = await _workContext.GetCurrentUserAsync();
 
         var customer = await _userRepository.FirstOrDefaultAsync(model.CustomerId);
         if (customer == null)
-            throw new Exception("客户不存在");
+            throw new Exception("Customer does not exist");
 
         var order = new Order()
         {
@@ -181,7 +181,7 @@ public class OrderApiController : ControllerBase
             .Where(c => productIds.Contains(c.Id)).ToListAsync();
 
         if (productIds.Count() <= 0)
-            throw new Exception("商品不存在");
+            throw new Exception("Product does not exist");
 
         var stocks = await _stockRepository.Query().Where(c => productIds.Contains(c.ProductId)).ToListAsync();
         var addStockHistories = new List<StockHistory>();
@@ -189,14 +189,14 @@ public class OrderApiController : ControllerBase
         {
             var first = model.Items.FirstOrDefault(c => c.Id == item.Id);
             if (first == null)
-                throw new Exception($"产品[{item.Name}]不存在");
+                throw new Exception($"product[{item.Name}]does not exist");
 
             if (!item.IsPublished)
-                throw new Exception($"产品[{item.Name}]未发布");
+                throw new Exception($"product[{item.Name}]Unpublished");
             if (!item.IsAllowToOrder)
-                throw new Exception($"产品[{item.Name}]不允许购买");
+                throw new Exception($"product[{item.Name}]No purchase allowed");
 
-            OrderStockDoWorker(stocks, addStockHistories, item, user, -first.Quantity, order, "创建订单");
+            OrderStockDoWorker(stocks, addStockHistories, item, user, -first.Quantity, order, "Create Order");
 
             var orderItem = new OrderItem()
             {
@@ -259,20 +259,20 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新订单信息。
+    /// Update order information.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <param name="model">订单编辑参数。</param>
-    /// <returns>更新操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <param name="model">Order editing parameters. </param>
+    /// <returns>The result of the update operation. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] OrderEditParam model)
     {
         if (model == null)
-            throw new Exception("参数异常");
+            throw new Exception("Parameter abnormality");
         if (model.Items == null || model.Items.Count <= 0)
-            throw new Exception("请添加商品");
+            throw new Exception("Please add a product");
         if (model.Items.Any(c => c.Quantity <= 0))
-            throw new Exception("购买商品数量必须>0");
+            throw new Exception("Quantity of goods to be purchased > 0");
 
         var currentUser = await _workContext.GetCurrentUserAsync();
         var order = await _orderRepository
@@ -283,7 +283,7 @@ public class OrderApiController : ControllerBase
             .Include(c => c.OrderItems)
             .Where(c => c.Id == id).FirstOrDefaultAsync();
         if (order == null)
-            throw new Exception("订单不存在");
+            throw new Exception("The order does not exist");
 
         var user = await _workContext.GetCurrentUserAsync();
         var oldStatus = order.OrderStatus;
@@ -368,7 +368,7 @@ public class OrderApiController : ControllerBase
             .Include(c => c.ThumbnailImage)
             .Where(c => productIds.Contains(c.Id)).ToListAsync();
         if (productIds.Count() <= 0)
-            throw new Exception("商品不存在");
+            throw new Exception("Product does not exist");
 
         var stocks = await _stockRepository.Query().Where(c => productIds.Contains(c.ProductId)).ToListAsync();
         var addStockHistories = new List<StockHistory>();
@@ -376,12 +376,12 @@ public class OrderApiController : ControllerBase
         {
             var first = model.Items.FirstOrDefault(c => c.Id == item.Id);
             if (first == null)
-                throw new Exception($"产品[{item.Name}]不存在");
+                throw new Exception($"Product[{item.Name}]does not exist");
 
             if (!item.IsPublished)
-                throw new Exception($"产品[{item.Name}]未发布");
+                throw new Exception($"Product[{item.Name}]Unpublished");
             if (!item.IsAllowToOrder)
-                throw new Exception($"产品[{item.Name}]不允许购买");
+                throw new Exception($"Product[{item.Name}]No purchase allowed");
 
             var productStocks = stocks.Where(c => c.ProductId == item.Id);
 
@@ -390,7 +390,7 @@ public class OrderApiController : ControllerBase
                 var orderItem = order.OrderItems.First(c => c.ProductId == item.Id);
 
                 OrderStockDoWorker(stocks, addStockHistories, item, user, orderItem.Quantity - first.Quantity, order,
-                    "修改下单商品数量");
+                    "Modify the quantity of ordered goods");
 
                 orderItem.ItemWeight = 0;
                 orderItem.ItemAmount = first.Quantity * first.ProductPrice - first.DiscountAmount;
@@ -404,7 +404,7 @@ public class OrderApiController : ControllerBase
             }
             else
             {
-                OrderStockDoWorker(stocks, addStockHistories, item, user, -first.Quantity, order, "修改订单，增加商品");
+                OrderStockDoWorker(stocks, addStockHistories, item, user, -first.Quantity, order, "Modify order and add products");
 
                 var orderItem = new OrderItem()
                 {
@@ -484,10 +484,10 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定订单。
+    /// Delete the specified order.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <returns>删除操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <returns>The result of the delete operation. </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
@@ -498,9 +498,9 @@ public class OrderApiController : ControllerBase
             .Include(c => c.ShippingAddress)
             .Include(c => c.OrderItems).ThenInclude(c => c.Product)
             .Where(c => c.Id == id).FirstOrDefaultAsync();
-        if (order == null) return Result.Fail("订单不存在");
+        if (order == null) return Result.Fail("The order does not exist");
         var orderSs = new OrderStatus[] { OrderStatus.Complete, OrderStatus.Canceled };
-        if (!orderSs.Contains(order.OrderStatus)) return Result.Fail("当前订单状态不允许删除");
+        if (!orderSs.Contains(order.OrderStatus)) return Result.Fail("The current order status does not allow deletion");
 
         if (order.ShippingAddress != null)
         {
@@ -521,7 +521,7 @@ public class OrderApiController : ControllerBase
             item.UpdatedBy = currentUser;
         }
 
-        //删除订单暂不删除历史
+        //Deleting an order does not delete the history.
 
         order.IsDeleted = true;
         order.UpdatedOn = DateTime.Now;
@@ -532,11 +532,11 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 取消指定订单。
+    /// Cancel the specified order.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <param name="reason">取消订单的原因。</param>
-    /// <returns>取消操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <param name="reason">Reason for canceling the order. </param>
+    /// <returns>Result of the cancel operation. </returns>
     [HttpPut("{id:int:min(1)}/cancel")]
     public async Task<Result> Cancel(int id, [FromBody] OrderCancelParam reason)
     {
@@ -546,11 +546,11 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 将指定订单挂起。
+    /// Suspend the specified order.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <param name="param">挂起订单的参数。</param>
-    /// <returns>挂起操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <param name="param">Parameters of the suspended order. </param>
+    /// <returns>Results of the suspension operation. </returns>
     [HttpPut("{id:int:min(1)}/on-hold")]
     public async Task<Result> OnHold(int id, [FromBody] OrderOnHoldParam param)
     {
@@ -559,14 +559,14 @@ public class OrderApiController : ControllerBase
             .Query()
             .Where(c => c.Id == id).FirstOrDefaultAsync();
         if (order == null)
-            return Result.Fail("订单不存在");
+            return Result.Fail("The order does not exist");
 
         if (order.OrderStatus == OrderStatus.OnHold)
-            return Result.Fail("订单已挂起");
+            return Result.Fail("Order is suspended");
 
         var orderNotSs = new OrderStatus[] { OrderStatus.Canceled, OrderStatus.Complete };
         if (orderNotSs.Contains(order.OrderStatus))
-            return Result.Fail("当前订单状态不允许挂起");
+            return Result.Fail("The current order status does not allow suspension");
 
         var oldStatus = order.OrderStatus;
 
@@ -583,7 +583,7 @@ public class OrderApiController : ControllerBase
             NewStatus = order.OrderStatus,
             Order = order,
             UserId = currentUser.Id,
-            Note = "挂起订单"
+            Note = "Pending Orders"
         };
         await _mediator.Publish(orderStatusChanged);
 
@@ -591,35 +591,35 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 标记指定订单为已支付。
+    /// Marks the specified order as paid.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <returns>标记操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <returns>Marks the result of the operation. </returns>
     [HttpPut("{id:int:min(1)}/payment")]
     public async Task<Result> AdminPayment(int id)
     {
         var currentUser = await _workContext.GetCurrentOrThrowAsync();
         var order = await _orderRepository.Query().Where(c => c.Id == id).FirstOrDefaultAsync();
         if (order == null)
-            return Result.Fail("订单不存在");
+            return Result.Fail("The order does not exist");
 
         var orderSs = new OrderStatus[] { OrderStatus.New, OrderStatus.PendingPayment, OrderStatus.PaymentFailed };
-        if (!orderSs.Contains(order.OrderStatus)) return Result.Fail("当前订单状态不允许标记付款");
+        if (!orderSs.Contains(order.OrderStatus)) return Result.Fail("The current order status does not allow marking for payment");
 
         await _orderService.PaymentReceived(new PaymentReceivedParam()
         {
             OrderId = order.Id,
-            Note = "标记付款"
+            Note = "Mark Payment"
         });
 
         return Result.Ok();
     }
 
     /// <summary>
-    /// 分页获取订单列表。
+    /// Get the order list by page.
     /// </summary>
-    /// <param name="param">分页查询参数。</param>
-    /// <returns>分页的订单列表。</returns>
+    /// <param name="param">Page query parameters. </param>
+    /// <returns>Paged order list. </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<OrderQueryResult>>> List(
         [FromBody] StandardTableParam<OrderQueryParam> param)
@@ -677,11 +677,11 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 为指定订单创建发货记录。
+    /// Create a shipping record for the specified order.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <param name="param">订单发货参数。</param>
-    /// <returns>创建发货记录操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <param name="param">Order shipping parameters. </param>
+    /// <returns>The result of creating a shipping record. </returns>
     [HttpPost("{id:int:min(1)}/shipment")]
     public async Task<Result> Post(int id, [FromBody] OrderShipmentParam param)
     {
@@ -690,15 +690,15 @@ public class OrderApiController : ControllerBase
             .Include(c => c.OrderItems).ThenInclude(c => c.Product)
             .FirstOrDefaultAsync(c => c.Id == id);
         if (order == null)
-            return Result.Fail("订单不存在");
+            return Result.Fail("The order does not exist");
         if (order.OrderStatus != OrderStatus.Shipping && order.OrderStatus != OrderStatus.PaymentReceived)
-            return Result.Fail($"订单状态处于[{order.OrderStatus}]，不允许发货");
+            return Result.Fail($"The order status is[{order.OrderStatus}]，No shipment allowed");
 
         switch (order.ShippingStatus)
         {
             case ShippingStatus.NoShipping:
             {
-                //无物流
+                //No logistics
                 order.OrderStatus = OrderStatus.Shipped;
                 await _orderRepository.SaveChangesAsync();
                 return Result.Ok();
@@ -710,13 +710,13 @@ public class OrderApiController : ControllerBase
                 break;
 
             case ShippingStatus.Shipped:
-                return Result.Fail($"订单已发货");
+                return Result.Fail($"Order shipped");
 
             case ShippingStatus.Delivered:
-                return Result.Fail($"订单已收货");
+                return Result.Fail($"Order received");
 
             default:
-                return Result.Fail($"配送状态异常");
+                return Result.Fail($"Abnormal delivery status");
         }
 
         if (order.OrderStatus == OrderStatus.PaymentReceived)
@@ -742,9 +742,9 @@ public class OrderApiController : ControllerBase
 
             var orderItem = order.OrderItems.First(c => c.Id == item.OrderItemId);
             if (orderItem.ShippedQuantity >= orderItem.Quantity)
-                throw new Exception($"订单商品[{orderItem.Product.Name}]，已全部发货");
+                throw new Exception($"Order Items[{orderItem.Product.Name}]，All shipped");
             if (orderItem.ShippedQuantity + item.QuantityToShip > orderItem.Quantity)
-                throw new Exception($"订单商品[{orderItem.Product.Name}]，发货数量不能>下单数量");
+                throw new Exception($"Order Items[{orderItem.Product.Name}]，The quantity of shipment cannot>Order quantity");
 
             var shipmentItem = new ShipmentItem
             {
@@ -763,7 +763,7 @@ public class OrderApiController : ControllerBase
         {
             var timeFromMin = await _appSettingService.Get<int>(OrderKeys.OrderAutoCompleteTimeForMinute);
 
-            //全部发货
+            //All Shipments
             order.ShippingStatus = ShippingStatus.Shipped;
             order.OrderStatus = OrderStatus.Shipped;
             order.ShippedOn = DateTime.Now;
@@ -790,7 +790,7 @@ public class OrderApiController : ControllerBase
             .Include(c => c.Address)
             .Where(c => c.Id == userAddressId && c.UserId == userId && c.AddressType == addressType)
             .FirstOrDefaultAsync();
-        var shipping = userAddress ?? throw new Exception("配送地址不存在");
+        var shipping = userAddress ?? throw new Exception("The delivery address does not exist");
         var orderAddress = new OrderAddress()
         {
             Order = order,
@@ -820,7 +820,7 @@ public class OrderApiController : ControllerBase
             .Include(c => c.ShippingAddress)
             .Include(c => c.OrderItems);
         if (id <= 0 && no <= 0)
-            throw new Exception("参数异常");
+            throw new Exception("Parameter abnormality");
 
         if (id > 0)
             order = await orderQuery.Where(c => c.Id == id).FirstOrDefaultAsync();
@@ -828,7 +828,7 @@ public class OrderApiController : ControllerBase
             order = await orderQuery.Where(c => c.No == no).FirstOrDefaultAsync();
 
         if (order == null)
-            throw new Exception("订单不存在");
+            throw new Exception("The order does not exist");
 
         var result = new OrderGetResult
         {
@@ -931,13 +931,13 @@ public class OrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 库增加/存减少规则
-    /// 当增加下单数量时减少库存
-    /// 当减少下单数量时增加库存
+    /// Stock increase/stock decrease rules
+    /// When increasing the order quantity, reduce the stock
+    /// When decreasing the order quantity, increase the stock
     /// </summary>
     /// <param name="stocks"></param>
     /// <param name="product"></param>
-    /// <param name="quantity">减少或增加库存数量，减少库存负数，增加库存整数</param>
+    /// <param name="quantity">Reduce or increase the stock quantity, reduce the negative stock, increase the stock integer</param>
     /// <param name="orderId"></param>
     /// <param name="note"></param>
     private void OrderStockDoWorker(IList<Stock> stocks, IList<StockHistory> addStockHistories, Product product,
@@ -946,60 +946,60 @@ public class OrderApiController : ControllerBase
         if (product?.StockTrackingIsEnabled != true || quantity == 0)
             return;
 
-        // 交易取消、交易完成的订单修改下单数量不修改库存
+        // For orders that have been cancelled or completed, modify the order quantity without changing the inventory
         var notStockOrderStatus = new OrderStatus[] { OrderStatus.Canceled, OrderStatus.Complete };
         if (order == null || notStockOrderStatus.Contains(order.OrderStatus))
             return;
 
         if (stocks.Count <= 0)
-            throw new Exception("商品库存不存在");
+            throw new Exception("Product inventory does not exist");
 
         var productStocks = stocks.Where(c => c.ProductId == product.Id && c.IsEnabled);
         if (productStocks.Count() <= 0)
-            throw new Exception($"商品：{product.Name}，无可用库存");
+            throw new Exception($"merchandise：{product.Name}，No stock available");
 
         switch (product.StockReduceStrategy)
         {
             case StockReduceStrategy.PlaceOrderWithhold:
-                //下单减库存时，支持成功，不减少库存
+                //When placing an order to reduce inventory, support is successful without reducing inventory
                 if (order.OrderStatus == OrderStatus.PaymentReceived)
                     return;
                 break;
 
             case StockReduceStrategy.PaymentSuccessDeduct:
-                //支付减库存时，下单、待支付、支付失败，不减少库存
+                //When payment reduces inventory, if the order is placed, payment is pending, or payment fails, the inventory will not be reduced
                 var oss = new OrderStatus[] { OrderStatus.New, OrderStatus.PendingPayment, OrderStatus.PaymentFailed };
                 if (oss.Contains(order.OrderStatus))
                     return;
                 break;
 
             default:
-                throw new Exception("库存扣减策略不存在");
+                throw new Exception("Inventory deduction policy does not exist");
         }
 
-        //分布式锁，重新获取库存
+        //Distributed lock, re-acquire inventory
         //todo
 
         if (quantity < 0)
         {
-            //减少库存
+            //Decrease stock
             var absQuantity = Math.Abs(quantity);
             if (productStocks.Sum(c => c.StockQuantity) < absQuantity)
-                throw new Exception($"商品[{product.Name}]库存不足，库存剩余：{productStocks.Sum(c => c.StockQuantity)}");
+                throw new Exception($"merchandise[{product.Name}]Inventory shortage，Inventory remaining：{productStocks.Sum(c => c.StockQuantity)}");
             do
             {
                 var firstStock = productStocks.Where(c => c.StockQuantity > 0).OrderBy(c => c.DisplayOrder)
                     .FirstOrDefault();
                 if (firstStock == null)
-                    throw new Exception($"商品[{product.Name}]库存不足");
+                    throw new Exception($"Merchandise[{product.Name}]Inventory shortage");
                 if (firstStock.StockQuantity >= absQuantity)
                 {
                     firstStock.StockQuantity = firstStock.StockQuantity - absQuantity;
                     if (firstStock.StockQuantity < 0)
-                        throw new Exception($"商品[{product.Name}]库存不足");
+                        throw new Exception($"Merchandise[{product.Name}]Inventory shortage");
                     addStockHistories.Add(new StockHistory()
                     {
-                        Note = $"订单：{order.No}，商品：{product.Name}，减少库存：{absQuantity}。备注：{note}",
+                        Note = $"Order：{order.No}，merchandise：{product.Name}，decrease stock：{absQuantity}。Note：{note}",
                         CreatedBy = user,
                         UpdatedBy = user,
                         AdjustedQuantity = -absQuantity,
@@ -1013,10 +1013,10 @@ public class OrderApiController : ControllerBase
                 {
                     absQuantity = absQuantity - firstStock.StockQuantity;
                     if (absQuantity < 0)
-                        throw new Exception($"库存扣减异常，请重试");
+                        throw new Exception($"Abnormal inventory deduction，Please try again");
                     addStockHistories.Add(new StockHistory()
                     {
-                        Note = $"订单：{order.No}，商品：{product.Name}，减少库存：{absQuantity}。备注：{note}",
+                        Note = $"Order：{order.No}，merchandise：{product.Name}，decrease stock：{absQuantity}。Note：{note}",
                         CreatedBy = user,
                         UpdatedBy = user,
                         AdjustedQuantity = -firstStock.StockQuantity,
@@ -1030,15 +1030,15 @@ public class OrderApiController : ControllerBase
         }
         else if (quantity > 0)
         {
-            //增加库存
+            //Increase inventory
             var firstStock = productStocks.OrderBy(c => c.DisplayOrder).FirstOrDefault();
             if (firstStock == null)
-                throw new Exception($"商品：{product.Name}，无可用库存");
+                throw new Exception($"merchandise：{product.Name}，No stock available");
             firstStock.StockQuantity += quantity;
 
             addStockHistories.Add(new StockHistory()
             {
-                Note = $"订单：{order.No}，商品：{product.Name}，增加库存（减少下单商品数量）：{quantity}。备注：{note}",
+                Note = $"Order：{order.No}，merchandise：{product.Name}，Increase inventory (reduce the number of items ordered): {quantity}. Note: {note}",
                 CreatedBy = user,
                 UpdatedBy = user,
                 AdjustedQuantity = quantity,

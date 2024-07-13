@@ -1,34 +1,34 @@
 ﻿namespace Shop.Module.Orders.Models;
 
 /// <summary>
-/// 配送方式
+/// Shipping method
 /// </summary>
 public enum ShippingMethod
 {
     /// <summary>
-    /// 免费
+    /// Free
     /// </summary>
     Free = 0,
 
     /// <summary>
-    /// 标准
+    /// Standard
     /// </summary>
     Standard = 1
 
     ///// <summary>
-    ///// 快递
+    ///// Express
     ///// </summary>
     //Express = 1,
     ///// <summary>
-    ///// 邮政特快专递服务（Express Mail Service）
+    ///// Express Mail
     ///// </summary>
     //EMS = 2,
     ///// <summary>
-    ///// 平邮
+    ///// Surface Mail
     ///// </summary>
     //Post = 3,
     ///// <summary>
-    ///// 货到付款
+    ///// Cash on Delivery
     ///// </summary>
     //Cod = 4
 }

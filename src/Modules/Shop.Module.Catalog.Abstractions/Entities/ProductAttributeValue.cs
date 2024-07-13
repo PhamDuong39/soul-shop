@@ -4,7 +4,7 @@ using System;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品属性值
+/// Product attribute value
 /// </summary>
 public class ProductAttributeValue : EntityBase
 {

@@ -10,7 +10,7 @@ using Shop.Module.Catalog.ViewModels;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 产品属性模板的API控制器，负责管理产品属性模板的相关操作。
+/// The API controller of the product attribute template is responsible for managing the related operations of the product attribute template.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("/api/product-attribute-templates")]
@@ -31,9 +31,9 @@ public class ProductAttributeTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有产品属性模板的列表。
+    /// Get a list of all product attribute templates.
     /// </summary>
-    /// <returns>返回产品属性模板的列表。</returns>
+    /// <returns> Returns a list of product attribute templates. </returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -46,10 +46,10 @@ public class ProductAttributeTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据给定的参数获取产品属性模板的分页列表。
+    /// Get the paginated list of product attribute templates according to the given parameters.
     /// </summary>
-    /// <param name="param">分页和筛选参数。</param>
-    /// <returns>返回满足条件的产品属性模板的分页结果。</returns>
+    /// <param name="param">Pagination and filtering parameters. </param>
+    /// <returns>Return the paginated results of product attribute templates that meet the conditions. </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<ProductAttributeTemplateResult>>> DataList(
         [FromBody] StandardTableParam param)
@@ -75,10 +75,10 @@ public class ProductAttributeTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据指定的ID获取一个产品属性模板。
+    /// Get a product attribute template based on the specified ID.
     /// </summary>
-    /// <param name="id">产品属性模板的ID。</param>
-    /// <returns>返回指定ID的产品属性模板。</returns>
+    /// <param name="id">The ID of the product attribute template. </param>
+    /// <returns>Return the product attribute template with the specified ID. </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
@@ -88,7 +88,7 @@ public class ProductAttributeTemplateApiController : ControllerBase
             .ThenInclude(c => c.Group)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (first == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
         var model = new ProductAttributeTemplateResult
         {
             Id = first.Id,
@@ -105,10 +105,10 @@ public class ProductAttributeTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 添加一个新的产品属性模板。
+    /// Add a new product attribute template.
     /// </summary>
-    /// <param name="model">包含产品属性模板信息的参数对象。</param>
-    /// <returns>返回添加操作的结果。</returns>
+    /// <param name="model">Parameter object containing product attribute template information. </param>
+    /// <returns>Return the result of the add operation. </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] ProductAttributeTemplateParam model)
     {
@@ -132,11 +132,11 @@ public class ProductAttributeTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定ID的产品属性模板。
+    /// Update the product attribute template of the specified ID.
     /// </summary>
-    /// <param name="id">需要更新的产品属性模板ID。</param>
-    /// <param name="model">包含更新信息的产品属性模板参数对象。</param>
-    /// <returns>返回更新操作的结果。</returns>
+    /// <param name="id">The ID of the product attribute template that needs to be updated. </param>
+    /// <param name="model">The product attribute template parameter object containing the update information. </param>
+    /// <returns>Return the result of the update operation. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] ProductAttributeTemplateParam model)
     {
@@ -145,7 +145,7 @@ public class ProductAttributeTemplateApiController : ControllerBase
             .Include(x => x.ProductAttributes)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (productTemplate == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
 
         productTemplate.Name = model.Name;
         productTemplate.UpdatedOn = DateTime.Now;
@@ -178,7 +178,7 @@ public class ProductAttributeTemplateApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定ID的产品属性模板。
+    /// Delete the product attribute template with the specified ID.
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -188,7 +188,7 @@ public class ProductAttributeTemplateApiController : ControllerBase
         var first = await _productAttrTempRepo.Query().Include(c => c.ProductAttributes)
             .FirstOrDefaultAsync(c => c.Id == id);
         if (first == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
 
         foreach (var item in first.ProductAttributes)
         {

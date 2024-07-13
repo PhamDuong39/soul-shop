@@ -16,7 +16,7 @@ public interface IOrderService
     Task<OrderAddressResult> GetOrderAddress(int orderAddressId);
 
     /// <summary>
-    /// 获取订单预支付信息
+    /// Get order prepayment information
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
@@ -25,7 +25,7 @@ public interface IOrderService
     Task PaymentReceived(PaymentReceivedParam param);
 
     /// <summary>
-    /// 验证并获取预下单信息
+    /// Verify and obtain pre-order information
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>

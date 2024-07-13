@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 品牌
+/// Brand
 /// </summary>
 public class Brand : EntityBase
 {

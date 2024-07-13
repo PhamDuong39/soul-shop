@@ -73,7 +73,7 @@ public class ProductService : IProductService
             {
                 var ids = new List<int>();
                 ids.Add(search.CategoryId.Value);
-                //递归获取子分类
+                //Recursively get subcategories
                 var all = await _categoryService.GetAll();
                 ids.AddRange(_categoryService.GetChildrens(search.CategoryId.Value, all).Select(c => c.Id));
                 var subQuery = from c in query
@@ -110,7 +110,7 @@ public class ProductService : IProductService
 
     public async Task<IList<GoodsListResult>> RelatedList(int id)
     {
-        // 推荐商品暂时随机取商品
+        // Recommended products are temporarily randomly selected
         var result = await _productRepository.Query()
             .Include(x => x.ThumbnailImage)
             .Where(c => c.IsPublished && c.IsAllowToOrder && c.IsVisibleIndividually)
@@ -158,7 +158,7 @@ public class ProductService : IProductService
     {
         _staticCacheManager.Remove(CatalogKeys.GoodsById + id);
 
-        // 清理子商品缓存时,同时清理父级商品缓存
+        //When clearing the child product cache, clear the parent product cache at the same time
         var parentId = await _productRepository.Query().Where(c => c.Id == id && c.ParentGroupedProductId > 0)
             .Select(c => c.ParentGroupedProductId).FirstOrDefaultAsync();
         if (parentId.HasValue)
@@ -169,7 +169,7 @@ public class ProductService : IProductService
     {
         var anyProduct = await _productRepository.Query().AnyAsync(c => c.Id == id && c.IsPublished);
         if (!anyProduct)
-            throw new Exception("商品不存在或商品已下架");
+            throw new Exception("The product does not exist or has been removed from the shelves");
 
         var product = await _productRepository.Query()
             .Include(x => x.ThumbnailImage)
@@ -183,10 +183,10 @@ public class ProductService : IProductService
             .Include(x => x.Categories)
             .Include(x => x.ParentProduct)
             .FirstOrDefaultAsync(x =>
-                x.Id == id && x.IsPublished); // 子商品必须已发布 && x.Childrens.Any(c => c.IsPublished) 这样查询是错误的
+                x.Id == id && x.IsPublished); // The child product must be published && x.Childrens.Any(c => c.IsPublished) This query is wrong
 
         if (product == null)
-            throw new Exception("商品不存在或商品已下架");
+            throw new Exception("The product does not exist or has been removed from the shelves");
 
         var productVm = new GoodsGetResult
         {
@@ -240,7 +240,7 @@ public class ProductService : IProductService
                 MediaId = productMedia.MediaId,
                 MediaUrl = productMedia.Media.Url
             });
-        // 添加主图
+        // Add a main image
         if (product.ThumbnailImage != null && product.ThumbnailImageId.HasValue)
         {
             var first = productVm.ProductImages.FirstOrDefault(c => c.MediaId == product.ThumbnailImageId.Value);
@@ -281,7 +281,7 @@ public class ProductService : IProductService
             productVm.Options.Add(result);
         }
 
-        // 子商品必须已发布 过滤方法待优化
+        // Sub-items must be published. Filtering method needs to be optimized.
         productVm.Variations = product.Childrens.Where(c => c.IsPublished).Select(x =>
             new ProductGetVariationResult
             {
@@ -323,7 +323,7 @@ public class ProductService : IProductService
     {
         var anyProduct = await _productRepository.Query().AnyAsync(c => c.Id == id && c.IsPublished);
         if (!anyProduct)
-            throw new Exception("产品不存在或产品已下架");
+            throw new Exception("The product does not exist or has been removed from the shelves");
 
         var product = await _productRepository.Query()
             .Include(x => x.OptionCombinations)
@@ -331,7 +331,7 @@ public class ProductService : IProductService
             .FirstOrDefaultAsync(x => x.Id == id && x.IsPublished);
 
         if (product == null)
-            throw new Exception("产品不存在或产品已下架");
+            throw new Exception("The product does not exist or has been removed from the shelves");
 
         var productIds = new List<int>() { id };
         productIds.AddRange(product.Childrens.Select(c => c.Id));
@@ -387,7 +387,7 @@ public class ProductService : IProductService
                 }
                 else
                 {
-                    if (!c.DisplayStockQuantity) c.StockQuantity = 0; // 不显示库存量
+                    if (!c.DisplayStockQuantity) c.StockQuantity = 0; // Do not display inventory
                 }
             }
         });

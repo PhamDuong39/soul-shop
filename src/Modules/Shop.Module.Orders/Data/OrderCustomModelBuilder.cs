@@ -43,7 +43,7 @@ public class OrderCustomModelBuilder : ICustomModelBuilder
                 IsVisibleInCommonSettingPage = true,
                 Value = opt.OrderAutoCanceledTimeForMinute.ToString(),
                 Type = typeof(int).FullName,
-                Note = "订单下单后超时自动取消订单时间（单位：分钟）"
+                Note = "Time for automatic cancellation of order after order placement (unit: minutes)"
             },
             new AppSetting(OrderKeys.OrderAutoCompleteTimeForMinute)
             {
@@ -51,7 +51,7 @@ public class OrderCustomModelBuilder : ICustomModelBuilder
                 IsVisibleInCommonSettingPage = true,
                 Value = opt.OrderAutoCompleteTimeForMinute.ToString(),
                 Type = typeof(int).FullName,
-                Note = "订单支付后超时自动完成订单时间（买家未在指定的时间内确认收货,则系统自动确认收货完成订单，单位：分钟）"
+                Note = "Time to automatically complete the order after the order is paid (if the buyer does not confirm receipt within the specified time, the system will automatically confirm receipt and complete the order, unit: minutes)"
             },
             new AppSetting(OrderKeys.OrderCompleteAutoReviewTimeForMinute)
             {
@@ -59,7 +59,7 @@ public class OrderCustomModelBuilder : ICustomModelBuilder
                 IsVisibleInCommonSettingPage = true,
                 Value = opt.OrderCompleteAutoReviewTimeForMinute.ToString(),
                 Type = typeof(int).FullName,
-                Note = "订单完成后超时自动好评时间（买家未在指定的时间内评价,则系统自动好评，单位：分钟）"
+                Note = "Timeout for automatic positive review after order completion (if the buyer does not review within the specified time, the system will automatically give a positive review, unit: minutes)"
             });
     }
 }

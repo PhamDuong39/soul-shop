@@ -10,7 +10,7 @@ using Shop.Module.Core.Extensions;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 控制器用于处理心愿单相关操作的 API 请求。
+/// The controller is used to handle API requests for wishlist-related operations.
 /// </summary>
 [Authorize()]
 [Route("api/wishlist")]
@@ -28,10 +28,10 @@ public class WishlistApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据产品 ID 获取心愿单收藏状态。
+    /// Get the wish list collection status based on the product ID.
     /// </summary>
-    /// <param name="productId">产品 ID。</param>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <param name="productId">Product ID. </param>
+    /// <returns>The <see cref="Result"/> object representing the operation result. </returns>
     [HttpGet("collect-status/{productId:int:min(1)}")]
     [AllowAnonymous]
     public async Task<Result> CollectStatus(int productId)
@@ -48,9 +48,9 @@ public class WishlistApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取当前用户的心愿单列表。
+    /// Get the current user's wish list.
     /// </summary>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <returns>The <see cref="Result"/> object representing the result of the operation. </returns>
     [HttpGet()]
     public async Task<Result> List()
     {
@@ -81,10 +81,10 @@ public class WishlistApiController : ControllerBase
     }
 
     /// <summary>
-    /// 将指定产品添加到心愿单。
+    /// Add the specified product to the wishlist.
     /// </summary>
-    /// <param name="param">要添加到心愿单的参数。</param>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <param name="param">Parameter to add to the wishlist. </param>
+    /// <returns>A <see cref="Result"/> object representing the result of the operation. </returns>
     [HttpPost()]
     public async Task<Result> Add([FromBody] WishlistAddParam param)
     {
@@ -107,10 +107,10 @@ public class WishlistApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据产品 ID 从心愿单中移除产品。
+    /// Remove a product from the wishlist based on its product ID.
     /// </summary>
-    /// <param name="productId">产品 ID。</param>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <param name="productId">Product ID. </param>
+    /// <returns>A <see cref="Result"/> object representing the result of the operation. </returns>
     [HttpDelete("{productId:int:min(1)}")]
     public async Task<Result> Delete(int productId)
     {

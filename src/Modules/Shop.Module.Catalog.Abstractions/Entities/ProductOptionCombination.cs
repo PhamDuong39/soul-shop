@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品属性组合
+/// Product attribute combination
 /// </summary>
 public class ProductOptionCombination : EntityBase
 {

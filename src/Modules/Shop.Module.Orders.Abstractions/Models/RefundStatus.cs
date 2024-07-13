@@ -1,32 +1,32 @@
 ﻿namespace Shop.Module.Orders.Models;
 
 /// <summary>
-/// 退款状态
+/// Refund status
 /// </summary>
 public enum RefundStatus
 {
     /// <summary>
-    /// 等待退款
+    /// Waiting for refund
     /// </summary>
     WaitRefund = 0,
 
     /// <summary>
-    /// 退款成功
+    /// Refund successful
     /// </summary>
     RefundOk = 10,
 
     /// <summary>
-    /// 退款取消
+    /// Refund canceled
     /// </summary>
     RefundCancel = 20,
 
     /// <summary>
-    /// 关闭
+    /// Close
     /// </summary>
     Close = 30,
 
     /// <summary>
-    /// 退款冻结
+    /// Refund frozen
     /// </summary>
     RefundFrozen = 40
 }

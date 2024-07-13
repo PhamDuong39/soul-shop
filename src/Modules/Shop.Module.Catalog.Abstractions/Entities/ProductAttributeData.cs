@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品属性数据（季节：春季、夏季、秋季、冬季）
+/// Product attribute data (season: spring, summer, autumn, winter)
 /// </summary>
 public class ProductAttributeData : EntityBase
 {

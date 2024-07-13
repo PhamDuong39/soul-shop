@@ -13,41 +13,41 @@ public class CustomerOrderItemQueryResult
     public string ProductMediaUrl { get; set; }
 
     /// <summary>
-    /// 产品价格（原价）
+    /// Product price (original price)
     /// </summary>
     public decimal ProductPrice { get; set; }
 
     /// <summary>
-    /// 数量
+    /// Quantity
     /// </summary>
     public int Quantity { get; set; }
 
     /// <summary>
-    /// 折扣小计（折扣总金额）
+    /// Discount subtotal (discount total amount)
     /// </summary>
     public decimal DiscountAmount { get; set; }
 
     /// <summary>
-    /// 金额小计（产品价格*数量 - 折扣总金额）
+    /// Amount subtotal (product price * quantity - Total amount of discount)
     /// </summary>
     public decimal ItemAmount { get; set; }
 
     /// <summary>
-    /// 重量小计
+    /// Subtotal weight
     /// </summary>
     public decimal ItemWeight { get; set; }
 
     /// <summary>
-    /// 备注、折扣备注
-    /// 例如：满2件8折；满3件6折；活动价90；6折；活动1xxx，活动2xxx
-    /// 活动信息
+    /// Notes, discount notes
+    /// For example: 20% off for 2 items or more; 40% off for 3 items or more; event price 90; 40% off; event 1xxx, event 2xxx
+    /// Event information
     /// </summary>
     public string Note { get; set; }
 
     public int ShippedQuantity { get; set; }
 
     /// <summary>
-    /// 是否已评论
+    /// Has it been reviewed?
     /// </summary>
     public bool IsReviewed { get; set; }
 }

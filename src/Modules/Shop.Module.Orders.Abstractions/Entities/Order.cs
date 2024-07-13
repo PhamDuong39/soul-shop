@@ -40,141 +40,141 @@ public class Order : EntityBase
     public PaymentType PaymentType { get; set; }
 
     /// <summary>
-    /// 运输状态
+    /// Transportation status
     /// </summary>
     public ShippingStatus? ShippingStatus { get; set; }
 
     /// <summary>
-    /// 发货时间
+    /// Delivery time
     /// </summary>
     public DateTime? ShippedOn { get; set; }
 
     /// <summary>
-    /// 收货时间
+    /// Delivery time
     /// </summary>
     public DateTime? DeliveredOn { get; set; }
 
     /// <summary>
-    /// 买家确认收货结束时间（卖家发货后生成 T+7X，买家可延长确认收货时间，最大发货后时间+60d）
+    /// Buyer confirms the end time of receipt (T+7X is generated after the seller ships, and the buyer can extend the confirmation time of receipt, the maximum time after shipping + 60d)
     /// </summary>
     public DateTime? DeliveredEndOn { get; set; }
 
     /// <summary>
-    /// 退款状态
+    /// Refund status
     /// </summary>
     public RefundStatus? RefundStatus { get; set; }
 
     /// <summary>
-    /// 退款原因
+    /// Refund reason
     /// </summary>
     public string RefundReason { get; set; }
 
     /// <summary>
-    /// 退款时间
+    /// Refund time
     /// </summary>
     public DateTime? RefundOn { get; set; }
 
     /// <summary>
-    /// 退款金额
+    /// Refund amount
     /// </summary>
     public decimal RefundAmount { get; set; }
 
     /// <summary>
-    /// 配送方式
+    /// Shipping method
     /// </summary>
     public ShippingMethod ShippingMethod { get; set; }
 
     /// <summary>
-    /// 配送/运费金额
+    /// Shipping/shipping amount
     /// </summary>
     public decimal ShippingFeeAmount { get; set; }
 
     /// <summary>
-    /// 支付方式
+    /// Payment method
     /// </summary>
     public PaymentMethod? PaymentMethod { get; set; }
 
     /// <summary>
-    /// 支付金额
+    /// Payment amount
     /// </summary>
     public decimal PaymentFeeAmount { get; set; }
 
     /// <summary>
-    /// 支付时间
+    /// Payment time
     /// </summary>
     public DateTime? PaymentOn { get; set; }
 
     /// <summary>
-    /// 买家支付结束时间（买家剩余支付时间 T+120mX，买家下单时生成）
+    /// Buyer payment end time (buyer's remaining payment time T+120mX, generated when the buyer places an order)
     /// </summary>
     public DateTime? PaymentEndOn { get; set; }
 
     /// <summary>
-    /// 优惠码、折扣代码
+    /// Coupon code, discount code
     /// </summary>
     public string CouponCode { get; set; }
 
     /// <summary>
-    /// 优惠码、折扣代码规则名称
+    /// Coupon code, discount code rule name
     /// </summary>
     public string CouponRuleName { get; set; }
 
     /// <summary>
-    /// 订单明细 产品总额 Sum(ProductPrice * Quantity)
+    /// Order details Product total Sum(ProductPrice * Quantity)
     /// </summary>
     public decimal SubTotal { get; set; }
 
     /// <summary>
-    /// 订单明细 折扣总额 Sum(DiscountAmount)
+    /// Order details Discount total Sum(DiscountAmount)
     /// </summary>
     public decimal SubTotalWithDiscount { get; set; }
 
     /// <summary>
-    /// 订单总金额 SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount 
+    /// Order total SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount
     /// </summary>
     public decimal OrderTotal { get; set; }
 
     /// <summary>
-    /// 订单折扣总额（运费券、满减券等）
+    /// Order discount total (shipping coupons, discount coupons, etc.)
     /// </summary>
     public decimal DiscountAmount { get; set; }
 
     /// <summary>
-    /// 下单备注
+    /// Order notes
     /// </summary>
     [StringLength(450)]
     public string OrderNote { get; set; }
 
     /// <summary>
-    /// 管理员备注（仅内部使用）
+    /// Admin Note (internal use only)
     /// </summary>
     [StringLength(450)]
     public string AdminNote { get; set; }
 
     /// <summary>
-    /// 交易关闭/交易取消原因
-    /// 可以选择的理由有：
-    /// 1、未及时付款
-    /// 2、买家不想买了
-    /// 3、买家信息填写错误，重新拍
-    /// 4、恶意买家/同行捣乱
-    /// 5、缺货
-    /// 6、买家拍错了
-    /// 7、同城见面交易
+    /// Transaction closure/transaction cancellation reason
+    /// The reasons you can choose are:
+    /// 1. Failure to pay on time
+    /// 2. Buyer does not want to buy
+    /// 3. Buyer information is incorrect, re-bid
+    /// 4. Malicious buyer/companion troublemaker
+    /// 5. Out of stock
+    /// 6. Buyer bid the wrong item
+    /// 7. Meet-up transaction in the same city
     /// ...
     /// </summary>
     [StringLength(450)]
     public string CancelReason { get; set; }
 
     /// <summary>
-    /// 挂起原因
-    /// 冻结中的订单、纠纷中的订单、退款中的订单
+    /// Suspended reason
+    /// Frozen orders, orders in dispute, orders in refund
     /// </summary>
     [StringLength(450)]
     public string OnHoldReason { get; set; }
 
     /// <summary>
-    /// 交易关闭/交易取消时间
+    /// Transaction closing/transaction cancellation time
     /// </summary>
     public DateTime? CancelOn { get; set; }
 

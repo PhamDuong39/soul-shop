@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品属性组（鞋子属性、运动鞋属性、女装属性、男装属性、公共属性、关键属性、首饰属性、电子产品属性等）
+/// Product attribute groups (shoe attributes, sports shoe attributes, women's clothing attributes, men's clothing attributes, common attributes, key attributes, jewelry attributes, electronic product attributes, etc.)
 /// </summary>
 public class ProductAttributeGroup : EntityBase
 {

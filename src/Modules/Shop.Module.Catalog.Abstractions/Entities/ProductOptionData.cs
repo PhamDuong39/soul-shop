@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Shop.Module.Catalog.Entities;
 
 /// <summary>
-/// 产品选项数据（例：X、M、L、XXL、XXXL、RED、yellow、#FFFFFF、#000）
+/// Product option data (e.g. X, M, L, XXL, XXXL, RED, yellow, #FFFFFF, #000)
 /// </summary>
 public class ProductOptionData : EntityBase
 {

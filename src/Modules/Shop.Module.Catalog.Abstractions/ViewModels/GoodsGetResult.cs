@@ -48,12 +48,12 @@ public class GoodsGetResult
     public string BrandName { get; set; }
 
     /// <summary>
-    /// 商品条形码
+    /// Product barcode
     /// </summary>
     public string Barcode { get; set; }
 
     /// <summary>
-    /// 备货期。取值范围:1-60;单位:天。
+    /// Stocking period. Value range: 1-60; unit: day.
     /// </summary>
     public int? DeliveryTime { get; set; }
 
@@ -114,11 +114,11 @@ public class GoodsGetResult
 
     public IList<GoodsGetIssueResult> Issues { get; set; } = new List<GoodsGetIssueResult>()
     {
-        new() { Id = 1, Answer = "1.自收到商品之日起30日内，顾客可申请无忧退货，退款将原路返还，不同的银行处理时间不同，", ProductId = 0, Question = "如何申请退货？" },
-        new() { Id = 1, Answer = "1.如需开具普通发票，请在下单时选择“我要开发票”并填写相关信息（APP仅限2.4.0及以", ProductId = 0, Question = "如何开具发票？" },
+        new() { Id = 1, Answer = "1. Within 30 days from the date of receipt of the goods, customers can apply for worry-free returns. The refund will be returned to the original route. Different banks have different processing times.", ProductId = 0, Question = "How to apply for a return?" },
+        new() { Id = 1, Answer = "1.If you need to issue a general invoice，Please select when placing an order“I want to issue an invoice”And fill in the relevant information（APP is limited to 2.4.0 and above", ProductId = 0, Question = "How to issue an invoice？" },
         new()
         {
-            Id = 1, Answer = "严选默认使用顺丰快递发货（个别商品使用其他快递），配送范围覆盖全国大部分地区（港澳台地区除", ProductId = 0, Question = "使用什么快递发货？"
+            Id = 1, Answer = "Yanxuan uses SF Express by default for delivery（Some products use other couriers），The delivery range covers most areas of the country（Except Hong Kong, Macau and Taiwan", ProductId = 0, Question = "What courier to use for delivery？"
         }
     };
 }

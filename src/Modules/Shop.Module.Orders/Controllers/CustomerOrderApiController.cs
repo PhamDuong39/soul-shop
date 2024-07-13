@@ -28,7 +28,7 @@ using Shop.Module.Shipments.Entities;
 namespace Shop.Module.Orders.Controllers;
 
 /// <summary>
-/// 客户订单 API 控制器，用于处理客户订单相关的操作。
+/// Customer order API controller, used to handle operations related to customer orders.
 /// </summary>
 [Authorize()]
 [Route("api/customer-orders")]
@@ -94,10 +94,10 @@ public class CustomerOrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取指定客户订单的详细信息。
+    /// Get detailed information of the specified customer's order.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <returns>指定订单的详细信息。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <returns>Detailed information of the specified order. </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
@@ -161,10 +161,10 @@ public class CustomerOrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取客户的订单列表。
+    /// Get the customer's order list by page.
     /// </summary>
-    /// <param name="param">分页查询参数。</param>
-    /// <returns>分页的客户订单列表。</returns>
+    /// <param name="param">Page query parameter. </param>
+    /// <returns>Paged customer order list. </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<CustomerOrderQueryResult>>> List(
         [FromBody] StandardTableParam<CustomerOrderQueryParam> param)
@@ -222,7 +222,7 @@ public class CustomerOrderApiController : ControllerBase
                     ProductPrice = x.ProductPrice,
                     Quantity = x.Quantity,
                     ShippedQuantity = x.ShippedQuantity
-                }), // EF CORE 子查询列表 top bug, 不允许此操作.Take(2), // 列表中最多显示2个商品
+                }), // EF CORE subquery list top bug, this operation is not allowed.Take(2), // Display at most 2 products in the list
                 ItemsTotal = c.OrderItems.Sum(x => x.Quantity),
                 ItemsCount = c.OrderItems.Count,
                 PaymentEndOn = c.PaymentEndOn,
@@ -238,11 +238,11 @@ public class CustomerOrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 客户取消订单。
+    /// The customer canceled the order.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <param name="reason">取消订单的原因。</param>
-    /// <returns>取消订单操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <param name="reason">Reason for canceling the order. </param>
+    /// <returns>Result of canceling the order. </returns>
     [HttpPut("{id:int:min(1)}/cancel")]
     public async Task<Result> Cancel(int id, [FromBody] OrderCancelParam reason)
     {
@@ -250,12 +250,12 @@ public class CustomerOrderApiController : ControllerBase
         var order = await _orderRepository.Query()
             .FirstOrDefaultAsync(c => c.CustomerId == user.Id && c.Id == id);
         if (order == null)
-            return Result.Fail("订单不存在");
-        else if (order.OrderStatus == OrderStatus.Canceled) return Result.Fail("订单已取消");
+            return Result.Fail("The order does not exist");
+        else if (order.OrderStatus == OrderStatus.Canceled) return Result.Fail("Order Cancelled");
         var orderSs = new OrderStatus[] { OrderStatus.New, OrderStatus.PendingPayment, OrderStatus.PaymentFailed };
         if (!orderSs.Contains(order.OrderStatus))
         {
-            return Result.Fail("当前订单无法取消");
+            return Result.Fail("The current order cannot be cancelled");
             ;
         }
 
@@ -264,10 +264,10 @@ public class CustomerOrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 客户删除订单。
+    /// The customer deleted the order.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <returns>删除订单操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <returns>The result of the delete order operation. </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
@@ -278,9 +278,9 @@ public class CustomerOrderApiController : ControllerBase
             .Include(c => c.ShippingAddress)
             .Include(c => c.OrderItems).ThenInclude(c => c.Product)
             .Where(c => c.Id == id && c.CustomerId == currentUser.Id).FirstOrDefaultAsync();
-        if (order == null) return Result.Fail("订单不存在");
+        if (order == null) return Result.Fail("The order does not exist");
         var orderSs = new OrderStatus[] { OrderStatus.Complete, OrderStatus.Canceled };
-        if (!orderSs.Contains(order.OrderStatus)) return Result.Fail("当前订单状态不允许删除");
+        if (!orderSs.Contains(order.OrderStatus)) return Result.Fail("The current order status does not allow deletion");
 
         if (order.ShippingAddress != null)
         {
@@ -301,7 +301,7 @@ public class CustomerOrderApiController : ControllerBase
             item.UpdatedBy = currentUser;
         }
 
-        //删除订单暂不删除历史
+        //Deleting an order does not delete the history.
 
         order.IsDeleted = true;
         order.UpdatedOn = DateTime.Now;
@@ -312,10 +312,10 @@ public class CustomerOrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 客户确认收货。
+    /// The customer confirms receipt.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <returns>确认收货操作的结果。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <returns>The result of confirming receipt. </returns>
     [HttpPut("{id:int:min(1)}/cinfirm-receipt")]
     public async Task<Result> CinfirmReceipt(int id)
     {
@@ -323,12 +323,12 @@ public class CustomerOrderApiController : ControllerBase
         var order = await _orderRepository.Query()
             .FirstOrDefaultAsync(c => c.CustomerId == user.Id && c.Id == id);
         if (order == null)
-            return Result.Fail("订单不存在");
-        else if (order.OrderStatus == OrderStatus.Canceled) return Result.Fail("订单已取消");
+            return Result.Fail("The order does not exist");
+        else if (order.OrderStatus == OrderStatus.Canceled) return Result.Fail("Order Cancelled");
         var orderSs = new OrderStatus[] { OrderStatus.PaymentReceived, OrderStatus.Shipping, OrderStatus.Shipped };
         if (!orderSs.Contains(order.OrderStatus))
         {
-            return Result.Fail("当前订单无法确认收货");
+            return Result.Fail("The current order cannot be confirmed for delivery");
             ;
         }
 
@@ -339,7 +339,7 @@ public class CustomerOrderApiController : ControllerBase
         order.UpdatedById = user.Id;
         await _orderRepository.SaveChangesAsync();
 
-        // 自动好评
+        // Automatic positive reviews
         var min = await _appSettingService.Get<int>(OrderKeys.OrderCompleteAutoReviewTimeForMinute);
         foreach (var item in order.OrderItems)
             await _jobService.Schedule(() =>
@@ -351,7 +351,7 @@ public class CustomerOrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 买家延长确认收货+7天，最大不超过60d
+    /// The buyer extends the confirmation of receipt by +7 days, with a maximum of 60 days
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -362,12 +362,12 @@ public class CustomerOrderApiController : ControllerBase
         var order = await _orderRepository.Query()
             .FirstOrDefaultAsync(c => c.CustomerId == user.Id && c.Id == id);
         if (order == null)
-            return Result.Fail("订单不存在");
-        else if (order.OrderStatus == OrderStatus.Canceled) return Result.Fail("订单已取消");
+            return Result.Fail("The order does not exist");
+        else if (order.OrderStatus == OrderStatus.Canceled) return Result.Fail("Order Cancelled");
         var orderSs = new OrderStatus[] { OrderStatus.PaymentReceived, OrderStatus.Shipping, OrderStatus.Shipped };
         if (!orderSs.Contains(order.OrderStatus))
         {
-            return Result.Fail("当前订单无法延长确认收货时间");
+            return Result.Fail("The current order cannot extend the confirmation receipt time");
             ;
         }
 
@@ -375,7 +375,7 @@ public class CustomerOrderApiController : ControllerBase
         if (order.DeliveredEndOn == null) order.DeliveredEndOn = DateTime.Now;
         order.DeliveredEndOn = order.DeliveredEndOn.Value.AddMinutes(timeFromMin);
 
-        if (order.DeliveredEndOn > order.CreatedOn.AddDays(60)) return Result.Fail("延长确认收货时间最大不可超过60天");
+        if (order.DeliveredEndOn > order.CreatedOn.AddDays(60)) return Result.Fail("The maximum extension time for confirming receipt cannot exceed 60 days");
 
         order.UpdatedOn = DateTime.Now;
         order.UpdatedById = user.Id;
@@ -384,10 +384,10 @@ public class CustomerOrderApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取订单支付信息。
+    /// Get order payment information.
     /// </summary>
-    /// <param name="id">订单 ID。</param>
-    /// <returns>订单支付信息。</returns>
+    /// <param name="id">Order ID. </param>
+    /// <returns>Order payment information. </returns>
     [HttpGet("{id:int:min(1)}/pay")]
     public async Task<Result> PayInfo(int id)
     {

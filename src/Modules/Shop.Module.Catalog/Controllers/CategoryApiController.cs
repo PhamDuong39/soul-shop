@@ -13,7 +13,7 @@ using Shop.Module.Core.Services;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 商品分类API控制器，负责商品分类的管理操作，如查询、创建、更新和删除。
+/// Product classification API controller, responsible for product classification management operations, such as query, create, update and delete.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/categories")]
@@ -41,9 +41,9 @@ public class CategoryApiController : ControllerBase
 
 
     /// <summary>
-    /// 获取所有商品分类的信息。
+    /// Get information about all product categories.
     /// </summary>
-    /// <returns>返回所有商品分类的信息列表。</returns>
+    /// <returns> Returns a list of information about all product categories. </returns>
     [HttpGet]
     public async Task<Result<IList<CategoryResult>>> Get()
     {
@@ -52,10 +52,10 @@ public class CategoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据商品分类ID获取指定商品分类的详细信息。
+    /// Get detailed information of the specified product category according to the product category ID.
     /// </summary>
-    /// <param name="id">商品分类ID。</param>
-    /// <returns>返回指定商品分类的详细信息。</returns>
+    /// <param name="id">Product category ID. </param>
+    /// <returns>Return detailed information of the specified product category. </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
@@ -80,10 +80,10 @@ public class CategoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取商品分类列表。
+    /// Get the product category list by page.
     /// </summary>
-    /// <param name="param">包含分页和排序参数的对象。</param>
-    /// <returns>返回分页的商品分类列表。</returns>
+    /// <param name="param">An object containing paging and sorting parameters. </param>
+    /// <returns>Return the paginated product category list. </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<CategoryResult>>> List([FromBody] StandardTableParam param)
     {
@@ -92,9 +92,9 @@ public class CategoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 清除商品分类的缓存。
+    /// Clear the cache of product categories.
     /// </summary>
-    /// <returns>返回操作结果。</returns>
+    /// <returns>Return the operation result. </returns>
     [HttpPost("clear-cache")]
     public async Task<Result> ClearCache()
     {
@@ -103,10 +103,10 @@ public class CategoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 切换指定商品分类在菜单中的显示状态。
+    /// Switch the display status of the specified product category in the menu.
     /// </summary>
-    /// <param name="id">商品分类ID。</param>
-    /// <returns>返回操作结果。</returns>
+    /// <param name="id">Product category ID. </param>
+    /// <returns>Return the operation result. </returns>
     [HttpPut("switch/{id:int:min(1)}")]
     public async Task<Result> SwitchInMenu(int id)
     {
@@ -115,29 +115,29 @@ public class CategoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定ID的商品分类。
+    /// Delete the product category with the specified ID.
     /// </summary>
-    /// <param name="id">商品分类ID。</param>
-    /// <returns>返回操作结果。</returns>
+    /// <param name="id">Product category ID. </param>
+    /// <returns>Return the operation result. </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var category = await _categoryRepository.Query().Include(x => x.Children)
             .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
         if (category == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist ");
 
-        if (category.Children.Count > 0) return Result.Fail("请确保此类别不包含子类别");
+        if (category.Children.Count > 0) return Result.Fail("Please make sure this category does not contain subcategories");
 
         await _categoryService.Delete(category);
         return Result.Ok();
     }
 
     /// <summary>
-    /// 创建新的商品分类。
+    /// Create a new product category.
     /// </summary>
-    /// <param name="model">包含商品分类信息的参数对象。</param>
-    /// <returns>返回操作结果。</returns>
+    /// <param name="model">Parameter object containing product category information. </param>
+    /// <returns>Return the operation result. </returns>
     [HttpPost]
     public async Task<Result> Create([FromBody] CategoryParam model)
     {
@@ -162,16 +162,16 @@ public class CategoryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定ID的商品分类信息。
+    /// Update the product category information of the specified ID.
     /// </summary>
-    /// <param name="model">包含商品分类更新信息的参数对象。</param>
-    /// <param name="id">商品分类ID。</param>
-    /// <returns>返回操作结果。</returns>
+    /// <param name="model">Parameter object containing the updated product category information. </param>
+    /// <param name="id">Product category ID. </param>
+    /// <returns>Return the operation result. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Update([FromBody] CategoryParam model, int id)
     {
         var category = await _categoryRepository.FirstOrDefaultAsync(id);
-        if (category == null) return Result.Fail("单据不存在");
+        if (category == null) return Result.Fail("The document does not exist");
 
         category.Name = model.Name;
         category.Slug = model.Slug;

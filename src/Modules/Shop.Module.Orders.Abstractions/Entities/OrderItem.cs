@@ -23,49 +23,49 @@ public class OrderItem : EntityBase
     [JsonIgnore] public Product Product { get; set; }
 
     /// <summary>
-    /// 产品价格（原价）（允许修改）
+    /// Product price (original price) (modification allowed)
     /// </summary>
     public decimal ProductPrice { get; set; }
 
     /// <summary>
-    /// 产品名称（快照）
+    /// Product name (snapshot)
     /// </summary>
     public string ProductName { get; set; }
 
     /// <summary>
-    /// 产品图片（快照）
+    /// Product image (snapshot)
     /// </summary>
     public string ProductMediaUrl { get; set; }
 
     /// <summary>
-    /// 数量（允许修改）
+    /// Quantity (modification allowed)
     /// </summary>
     public int Quantity { get; set; }
 
     /// <summary>
-    /// 已发货数量
+    /// Shipped quantity
     /// </summary>
     public int ShippedQuantity { get; set; }
 
     /// <summary>
-    /// 折扣小计（折扣总金额）（允许修改）
+    /// Discount subtotal (total amount of discount) (modification allowed)
     /// </summary>
     public decimal DiscountAmount { get; set; }
 
     /// <summary>
-    /// 金额小计（产品价格*数量 - 折扣总金额）（允许修改）
+    /// Amount subtotal (product price * quantity - total amount of discount) (modification allowed)
     /// </summary>
     public decimal ItemAmount { get; set; }
 
     /// <summary>
-    /// 重量小计
+    /// Weight subtotal
     /// </summary>
     public decimal ItemWeight { get; set; }
 
     /// <summary>
-    /// 备注、折扣备注
-    /// 例如：满2件8折；满3件6折；活动价90；6折；活动1xxx，活动2xxx
-    /// 活动信息
+    /// Remarks, discount remarks
+    /// For example: 20% off for 2 pieces or more; 40% off for 3 pieces or more; Promotion price 90; 40% off; Promotion 1xxx, Promotion 2xxx
+    /// Promotion information
     /// </summary>
     public string Note { get; set; }
 

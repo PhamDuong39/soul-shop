@@ -25,66 +25,66 @@ public class CustomerOrderQueryResult
     public PaymentType PaymentType { get; set; }
 
     /// <summary>
-    /// 运输状态
+    /// Shipping status
     /// </summary>
     public ShippingStatus? ShippingStatus { get; set; }
 
     /// <summary>
-    /// 配送方式
+    /// Shipping method
     /// </summary>
     public ShippingMethod ShippingMethod { get; set; }
 
     /// <summary>
-    /// 配送/运费金额
+    /// Shipping/shipping amount
     /// </summary>
     public decimal ShippingFeeAmount { get; set; }
 
     /// <summary>
-    /// 支付方式
+    /// Payment method
     /// </summary>
     public PaymentMethod? PaymentMethod { get; set; }
 
     /// <summary>
-    /// 支付金额
+    /// Payment amount
     /// </summary>
     public decimal PaymentFeeAmount { get; set; }
 
     /// <summary>
-    /// 支付时间
+    /// Payment time
     /// </summary>
     public DateTime? PaymentOn { get; set; }
 
     /// <summary>
-    /// 订单总金额 SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount 
+    /// Order total amount SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount
     /// </summary>
     public decimal OrderTotal { get; set; }
 
     /// <summary>
-    /// 订单折扣总额（运费券、满减券等）
+    /// Order discount total (shipping coupon, discount coupon, etc.)
     /// </summary>
     public decimal DiscountAmount { get; set; }
 
     /// <summary>
-    /// 下单备注
+    /// Order notes
     /// </summary>
     public string OrderNote { get; set; }
 
     /// <summary>
-    /// 交易关闭/交易取消原因
-    /// 可以选择的理由有：
-    /// 1、未及时付款
-    /// 2、买家不想买了
-    /// 3、买家信息填写错误，重新拍
-    /// 4、恶意买家/同行捣乱
-    /// 5、缺货
-    /// 6、买家拍错了
-    /// 7、同城见面交易
+    /// Transaction closed/Transaction cancellation reason
+    /// The reasons you can choose are:
+    /// 1. Failure to pay on time
+    /// 2. Buyer does not want to buy
+    /// 3. Buyer’s information is incorrect, please bid again
+    /// 4. Malicious buyer/companion disrupts
+    /// 5. Out of stock
+    /// 6. Buyer bid the wrong item
+    /// 7. Meet-up transaction in the same city
     /// ...
     /// </summary>
     public string CancelReason { get; set; }
 
     /// <summary>
-    /// 交易关闭/交易取消时间
+    /// Transaction closing/transaction cancellation time
     /// </summary>
     public DateTime? CancelOn { get; set; }
 
@@ -106,30 +106,30 @@ public class CustomerOrderQueryResult
     public IEnumerable<CustomerOrderItemQueryResult> Items { get; set; } = new List<CustomerOrderItemQueryResult>();
 
     /// <summary>
-    /// 商品总数
+    /// Total number of items
     /// </summary>
     public int ItemsTotal { get; set; }
 
     /// <summary>
-    /// 商品品类数量
+    /// Quantity of commodity categories
     /// </summary>
     public int ItemsCount { get; set; }
 
     /// <summary>
-    /// 买家支付结束时间（买家剩余支付时间 T+120mX，买家下单时生成）
+    /// Buyer payment end time (buyer's remaining payment time T+120mX, generated when the buyer places an order)
     /// </summary>
     public DateTime? PaymentEndOn { get; set; }
 
     /// <summary>
-    /// 买家支付结束时间 
+    /// Buyer payment end time
     /// </summary>
     public int PaymentEndOnForSecond
     {
         get
         {
             if (PaymentEndOn.HasValue && PaymentEndOn > DateTime.Now &&
-                (OrderStatus == OrderStatus.New || OrderStatus == OrderStatus.PendingPayment ||
-                 OrderStatus == OrderStatus.PaymentFailed))
+            (OrderStatus == OrderStatus.New || OrderStatus == OrderStatus.PendingPayment ||
+            OrderStatus == OrderStatus.PaymentFailed))
             {
                 var totalSec = (PaymentEndOn - DateTime.Now).Value.TotalSeconds;
                 if (totalSec > 0) return Convert.ToInt32(totalSec);
@@ -140,22 +140,22 @@ public class CustomerOrderQueryResult
     }
 
     /// <summary>
-    /// 买家确认收货结束时间（卖家发货后生成 T+7X）
+    /// Buyer confirms the end time of receipt (generated after the seller ships T+7X)
     /// </summary>
     public DateTime? DeliveredEndOn { get; set; }
 
     /// <summary>
-    /// 买家确认收货结束时间
+    /// Buyer confirms the end time of receipt
     /// </summary>
     public int DeliveredEndOnForSecond
     {
         get
         {
             if (DeliveredEndOn.HasValue && DeliveredEndOn > DateTime.Now &&
-                (OrderStatus == OrderStatus.Shipping || OrderStatus == OrderStatus.Shipped) &&
-                (ShippingStatus == Models.ShippingStatus.NoShipping ||
-                 ShippingStatus == Models.ShippingStatus.PartiallyShipped ||
-                 ShippingStatus == Models.ShippingStatus.Shipped))
+            (OrderStatus == OrderStatus.Shipping || OrderStatus == OrderStatus.Shipped) &&
+            (ShippingStatus == Models.ShippingStatus.NoShipping ||
+            ShippingStatus == Models.ShippingStatus.PartiallyShipped ||
+            ShippingStatus == Models.ShippingStatus.Shipped))
             {
                 var totalSec = (DeliveredEndOn - DateTime.Now).Value.TotalSeconds;
                 if (totalSec > 0) return Convert.ToInt32(totalSec);

@@ -23,71 +23,71 @@ public class OrderGetResult
     public PaymentType PaymentType { get; set; }
 
     /// <summary>
-    /// 运输状态
+    /// Shipping status
     /// </summary>
     public ShippingStatus? ShippingStatus { get; set; }
 
     /// <summary>
-    /// 配送方式
+    /// Delivery method
     /// </summary>
     public ShippingMethod ShippingMethod { get; set; }
 
     /// <summary>
-    /// 配送/运费金额
+    /// Shipping/Freight Amount
     /// </summary>
     public decimal ShippingFeeAmount { get; set; }
 
     /// <summary>
-    /// 支付方式
+    /// Payment Method
     /// </summary>
     public PaymentMethod? PaymentMethod { get; set; }
 
     /// <summary>
-    /// 支付金额
+    /// Payment Amount
     /// </summary>
     public decimal PaymentFeeAmount { get; set; }
 
     /// <summary>
-    /// 支付时间
+    /// Payment Time
     /// </summary>
     public DateTime? PaymentOn { get; set; }
 
     /// <summary>
-    /// 订单总金额 SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount 
+    /// Total Order Amount SubTotal + ShippingFeeAmount - SubTotalWithDiscount - DiscountAmount
     /// </summary>
     public decimal OrderTotal { get; set; }
 
     /// <summary>
-    /// 订单折扣总额（运费券、满减券等）
+    /// Total order discount (shipping coupons, discount coupons, etc.)
     /// </summary>
     public decimal DiscountAmount { get; set; }
 
     /// <summary>
-    /// 下单备注
+    /// Order notes
     /// </summary>
     public string OrderNote { get; set; }
 
     /// <summary>
-    /// 管理员备注（仅内部使用）
+    /// Administrator notes (internal use only)
     /// </summary>
     public string AdminNote { get; set; }
 
     /// <summary>
-    /// 交易关闭/交易取消原因
-    /// 可以选择的理由有：
-    /// 1、未及时付款
-    /// 2、买家不想买了
-    /// 3、买家信息填写错误，重新拍
-    /// 4、恶意买家/同行捣乱
-    /// 5、缺货
-    /// 6、买家拍错了
-    /// 7、同城见面交易
+    /// Transaction closure/transaction cancellation reason
+    /// The reasons you can choose are:
+    /// 1. Failure to pay on time
+    /// 2. The buyer does not want to buy
+    /// 3. The buyer's information is incorrect, please bid again
+    /// 4. Malicious buyers/companies make trouble
+    /// 5. Out of stock
+    /// 6. The buyer bid the wrong amount
+    /// 7. Meet in person in the same city
     /// ...
     /// </summary>
     public string CancelReason { get; set; }
 
     /// <summary>
-    /// 交易关闭/交易取消时间
+    /// Transaction closing/transaction cancellation time
     /// </summary>
     public DateTime? CancelOn { get; set; }
 
@@ -106,32 +106,32 @@ public class OrderGetResult
     public OrderGetAddressResult ShippingAddress { get; set; }
 
     /// <summary>
-    /// 发货时间
+    /// Shipping time
     /// </summary>
     public DateTime? ShippedOn { get; set; }
 
     /// <summary>
-    /// 收货时间
+    /// Receipt time
     /// </summary>
     public DateTime? DeliveredOn { get; set; }
 
     /// <summary>
-    /// 退款状态
+    /// Refund status
     /// </summary>
     public RefundStatus? RefundStatus { get; set; }
 
     /// <summary>
-    /// 退款原因
+    /// Refund reason
     /// </summary>
     public string RefundReason { get; set; }
 
     /// <summary>
-    /// 退款时间
+    /// Refund time
     /// </summary>
     public DateTime? RefundOn { get; set; }
 
     /// <summary>
-    /// 退款金额
+    /// Refund amount
     /// </summary>
     public decimal RefundAmount { get; set; }
 }

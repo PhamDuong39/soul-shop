@@ -179,7 +179,7 @@ public class CategoryService : ICategoryService
     }
 
     /// <summary>
-    /// 获取一级分类和对应子分类
+    /// Get the first-level category and the corresponding sub-category
     /// </summary>
     /// <returns></returns>
     public async Task<IList<CategoryTwoSubResult>> GetTwoSubCategories(int? parentId = null, bool isPublished = true,
@@ -221,7 +221,7 @@ public class CategoryService : ICategoryService
     }
 
     /// <summary>
-    /// 仅获取二级分类
+    /// Get only the secondary classification
     /// </summary>
     /// <returns></returns>
     public async Task<IList<CategoryTwoSubResult>> GetTwoOnlyCategories(int? parentId = null, bool isPublished = true,

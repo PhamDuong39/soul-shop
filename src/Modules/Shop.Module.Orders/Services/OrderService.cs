@@ -104,20 +104,20 @@ public class OrderService : IOrderService
         string adminNote = null)
     {
         if (param == null)
-            throw new Exception("参数异常");
+            throw new Exception("Parameter abnormality");
 
         var user = await _workContext.GetCurrentUserAsync();
         var customerId = param.CustomerId;
 
         return await OrderCrateByCart2(cartId, param, adminNote);
 
-        // TODO 下单锁
+        // TODO order lock
         //var isLocker = _locker.PerformActionWithLock(OrderKeys.CustomerCreateOrderLock + customerId, TimeSpan.FromSeconds(10),
-        //    async () => await OrderCrateByCart2(cartId, param, adminNote));
+        // async () => await OrderCrateByCart2(cartId, param, adminNote));
 
         //if (!isLocker)
         //{
-        //    throw new Exception("正在下单,请勿重复操作");
+        // throw new Exception("Order is being placed, please do not repeat the operation");
         //}
     }
 
@@ -126,7 +126,7 @@ public class OrderService : IOrderService
         string adminNote = null)
     {
         if (param == null)
-            throw new Exception("参数异常");
+            throw new Exception("Parameter abnormality");
 
         var user = await _workContext.GetCurrentOrThrowAsync();
         var customerId = param.CustomerId;
@@ -135,8 +135,8 @@ public class OrderService : IOrderService
             .FirstOrDefaultAsync(x => x.CustomerId == customerId && x.IsActive && x.Id == cartId);
 
         if (cart == null || cart.Items == null || cart.Items.Where(c => c.IsChecked).Count() <= 0)
-            throw new Exception("请选择商品");
-        if (cart.Items.Where(c => c.IsChecked).Any(c => c.Quantity <= 0)) throw new Exception("商品数量必须大于0");
+            throw new Exception("Please select product");
+        if (cart.Items.Where(c => c.IsChecked).Any(c => c.Quantity <= 0)) throw new Exception("The quantity of the product must be greater than 0");
         param.Items = cart.Items.Where(c => c.IsChecked).Select(c => new OrderCreateBaseItemParam()
         {
             ProductId = c.ProductId,
@@ -145,7 +145,7 @@ public class OrderService : IOrderService
 
         var order = await OrderCreate(user.Id, param, adminNote);
 
-        // 清除已下单的商品
+        // Clear ordered items
         foreach (var item in cart.Items.Where(c => c.IsChecked))
             if (order.OrderItems.Any(c => c.ProductId == item.ProductId))
             {
@@ -166,11 +166,11 @@ public class OrderService : IOrderService
     public async Task<Order> OrderCreate(int userId, OrderCreateBaseParam param, string adminNote = null)
     {
         if (param == null)
-            throw new Exception("参数异常");
+            throw new Exception("Parameter abnormality");
         if (param.Items == null || param.Items.Count <= 0)
-            throw new Exception("购买商品不存在或已下架");
+            throw new Exception("The purchased product does not exist or has been removed from the shelves");
         if (param.Items.Any(c => c.Quantity <= 0))
-            throw new Exception("购买商品数量必须>0");
+            throw new Exception("Quantity of goods to be purchased > 0");
 
         param.Items = param.Items.GroupBy(c => c.ProductId).Select(c => new OrderCreateBaseItemParam()
         {
@@ -186,12 +186,12 @@ public class OrderService : IOrderService
             .Include(c => c.ThumbnailImage)
             .ToListAsync();
         if (products == null || products.Count <= 0)
-            throw new Exception("购买商品不存在或已下架");
+            throw new Exception("The purchased product does not exist or has been removed from the shelves");
 
         var stocks = await _stockRepository.Query().Where(c => productIds.Contains(c.ProductId)).ToListAsync();
         var order = new Order()
         {
-            OrderStatus = OrderStatus.PendingPayment, // 默认创建订单，待付款
+            OrderStatus = OrderStatus.PendingPayment, // Create an order by default, waiting for payment
             CreatedById = userId,
             UpdatedById = userId,
             CustomerId = customerId,
@@ -218,7 +218,7 @@ public class OrderService : IOrderService
             if (product == null)
                 continue;
 
-            OrderStockDoWorker(stocks, addStockHistories, product, userId, -item.Quantity, order, "创建订单");
+            OrderStockDoWorker(stocks, addStockHistories, product, userId, -item.Quantity, order, "Create Order");
 
             var orderItem = new OrderItem()
             {
@@ -271,9 +271,9 @@ public class OrderService : IOrderService
                 await _stockHistoryRepository.SaveChangesAsync();
             }
 
-            // 订单取消任务 如果n分钟内用户支付或主动取消订单时,则自动取消此任务
+            // Order cancellation task If the user pays or actively cancels the order within n minutes, this task will be automatically canceled
             var min = await _appSettingService.Get<int>(OrderKeys.OrderAutoCanceledTimeForMinute);
-            await _jobService.Schedule(() => Cancel(order.Id, (int)UserWithId.System, "超时自动取消"),
+            await _jobService.Schedule(() => Cancel(order.Id, (int)UserWithId.System, "Automatic cancellation after timeout"),
                 TimeSpan.FromMinutes(min));
 
             transaction.Commit();
@@ -302,9 +302,9 @@ public class OrderService : IOrderService
         var productIds = order.OrderItems.Select(c => c.ProductId).Distinct();
         var stocks = await _stockRepository.Query().Where(c => productIds.Contains(c.ProductId)).ToListAsync();
         var addStockHistories = new List<StockHistory>();
-        //取消订单增加库存
+        //Cancel orders and increase inventory
         foreach (var item in order.OrderItems)
-            OrderStockDoWorker(stocks, addStockHistories, item.Product, userId, item.Quantity, order, "取消订单");
+            OrderStockDoWorker(stocks, addStockHistories, item.Product, userId, item.Quantity, order, "cancel order");
         var oldStatus = order.OrderStatus;
         order.OrderStatus = OrderStatus.Canceled;
         order.CancelReason = reason;
@@ -321,7 +321,7 @@ public class OrderService : IOrderService
                 NewStatus = order.OrderStatus,
                 Order = order,
                 UserId = userId,
-                Note = "取消订单"
+                Note = "cancel order"
             };
             await _mediator.Publish(orderStatusChanged);
 
@@ -342,12 +342,12 @@ public class OrderService : IOrderService
         //    //{
         //    //    item.Product.StockQuantity = item.Product.StockQuantity + item.Quantity;
         //    //}
-        //    // 库存处理
+        //    // Inventory handling
         //}
     }
 
     /// <summary>
-    /// 获取订单预支付信息
+    /// Get order prepayment information
     /// </summary>
     /// <param name="orderId"></param>
     /// <returns></returns>
@@ -356,19 +356,19 @@ public class OrderService : IOrderService
         var user = await _workContext.GetCurrentOrThrowAsync();
         var order = await _orderRepository.Query().FirstOrDefaultAsync(c => c.Id == orderId && c.CustomerId == user.Id);
         if (order == null)
-            throw new Exception("订单不存在");
+            throw new Exception("The order does not exist");
         else if (order.OrderStatus != OrderStatus.New && order.OrderStatus != OrderStatus.PendingPayment &&
-                 order.OrderStatus != OrderStatus.PaymentFailed) throw new Exception("当前订单状态不允许支付");
+                 order.OrderStatus != OrderStatus.PaymentFailed) throw new Exception("The current order status does not allow payment");
 
         var userLogin =
             await _userLoginRepository.Query().FirstOrDefaultAsync(c => c.UserId == user.Id); // && c.LoginProvider ==
-        if (string.IsNullOrWhiteSpace(userLogin?.ProviderKey)) throw new Exception("买家信息信息异常");
+        if (string.IsNullOrWhiteSpace(userLogin?.ProviderKey)) throw new Exception("Buyer information is abnormal");
 
         var shopConfig = _shopConfig;
         if (string.IsNullOrWhiteSpace(shopConfig?.ShopName))
             throw new ArgumentNullException(nameof(ShopOptions.ShopName));
 
-        // 生成第三方预支付订单信息
+        // Generate third-party prepaid order information
         var result = await _paymentService.GeneratePaymentOrder(new PaymentOrderRequest()
         {
             OrderNo = order.No.ToString(),
@@ -387,7 +387,7 @@ public class OrderService : IOrderService
             .Include(c => c.Address)
             .Where(c => c.Id == userAddressId && c.UserId == userId && c.AddressType == addressType)
             .FirstOrDefaultAsync();
-        var shipping = userAddress ?? throw new Exception("配送地址不存在");
+        var shipping = userAddress ?? throw new Exception("The delivery address does not exist");
         var orderAddress = new OrderAddress()
         {
             Order = order,
@@ -407,13 +407,13 @@ public class OrderService : IOrderService
     }
 
     /// <summary>
-    /// 库增加/存减少规则
-    /// 当增加下单数量时减少库存
-    /// 当减少下单数量时增加库存
+    /// Stock increase/stock decrease rules
+    /// When increasing the order quantity, reduce the stock
+    /// When decreasing the order quantity, increase the stock
     /// </summary>
     /// <param name="stocks"></param>
     /// <param name="product"></param>
-    /// <param name="quantity">减少或增加库存数量，减少库存负数，增加库存整数</param>
+    /// <param name="quantity">Reduce or increase the stock quantity, reduce the negative stock, increase the stock integer</param>
     /// <param name="orderId"></param>
     /// <param name="note"></param>
     private void OrderStockDoWorker(IList<Stock> stocks, IList<StockHistory> addStockHistories, Product product,
@@ -422,58 +422,58 @@ public class OrderService : IOrderService
         if (product?.StockTrackingIsEnabled != true || quantity == 0)
             return;
 
-        // 交易取消、交易完成的订单修改下单数量不修改库存
+        // For orders that have been cancelled or completed, modify the order quantity without changing the inventory
         var notStockOrderStatus = new OrderStatus[] { OrderStatus.Canceled, OrderStatus.Complete };
         if (order == null || notStockOrderStatus.Contains(order.OrderStatus))
             return;
 
         if (stocks.Count <= 0)
-            throw new Exception("商品库存不存在");
+            throw new Exception("Product inventory does not exist");
 
         var productStocks = stocks.Where(c => c.ProductId == product.Id && c.IsEnabled);
         if (productStocks.Count() <= 0)
-            throw new Exception($"商品：{product.Name}，无可用库存");
+            throw new Exception($"merchandise：{product.Name}，No stock available");
 
         switch (product.StockReduceStrategy)
         {
             case StockReduceStrategy.PlaceOrderWithhold:
-                //下单减库存时，支持成功，不减少库存
+                //When placing an order to reduce inventory, support is successful without reducing inventory
                 if (order.OrderStatus == OrderStatus.PaymentReceived)
                     return;
                 break;
             case StockReduceStrategy.PaymentSuccessDeduct:
-                //支付减库存时，下单、待支付、支付失败，不减少库存
+                //When payment reduces inventory, if the order is placed, payment is pending, or payment fails, the inventory will not be reduced.
                 var oss = new OrderStatus[] { OrderStatus.New, OrderStatus.PendingPayment, OrderStatus.PaymentFailed };
                 if (oss.Contains(order.OrderStatus))
                     return;
                 break;
             default:
-                throw new Exception("库存扣减策略不存在");
+                throw new Exception("Inventory deduction policy does not exist");
         }
 
-        //分布式锁，重新获取库存
+        //Distributed lock, re-acquire inventory
         //todo
 
         if (quantity < 0)
         {
-            //减少库存
+            //decrease stock
             var absQuantity = Math.Abs(quantity);
             if (productStocks.Sum(c => c.StockQuantity) < absQuantity)
-                throw new Exception($"商品[{product.Name}]库存不足，库存剩余：{productStocks.Sum(c => c.StockQuantity)}");
+                throw new Exception($"merchandise[{product.Name}]Insufficient stock, excess stock：{productStocks.Sum(c => c.StockQuantity)}");
             do
             {
                 var firstStock = productStocks.Where(c => c.StockQuantity > 0).OrderBy(c => c.DisplayOrder)
                     .FirstOrDefault();
                 if (firstStock == null)
-                    throw new Exception($"商品[{product.Name}]库存不足");
+                    throw new Exception($"merchandise[{product.Name}]Inventory shortage");
                 if (firstStock.StockQuantity >= absQuantity)
                 {
                     firstStock.StockQuantity = firstStock.StockQuantity - absQuantity;
                     if (firstStock.StockQuantity < 0)
-                        throw new Exception($"商品[{product.Name}]库存不足");
+                        throw new Exception($"merchandise[{product.Name}]Inventory shortage");
                     addStockHistories.Add(new StockHistory()
                     {
-                        Note = $"订单：{order.No}，商品：{product.Name}，减少库存：{absQuantity}。备注：{note}",
+                        Note = $"Order: {order.No}, Item: {product.Name}, Reduced stock: {absQuantity}. Note: {note}",
                         CreatedById = userId,
                         UpdatedById = userId,
                         AdjustedQuantity = -absQuantity,
@@ -487,10 +487,10 @@ public class OrderService : IOrderService
                 {
                     absQuantity = absQuantity - firstStock.StockQuantity;
                     if (absQuantity < 0)
-                        throw new Exception($"库存扣减异常，请重试");
+                        throw new Exception($"Inventory deduction exception, please try again");
                     addStockHistories.Add(new StockHistory()
                     {
-                        Note = $"订单：{order.No}，商品：{product.Name}，减少库存：{absQuantity}。备注：{note}",
+                        Note = $"Order: {order.No}, Item: {product.Name}, Reduced stock: {absQuantity}. Note: {note}",
                         CreatedById = userId,
                         UpdatedById = userId,
                         AdjustedQuantity = -firstStock.StockQuantity,
@@ -504,15 +504,15 @@ public class OrderService : IOrderService
         }
         else if (quantity > 0)
         {
-            //增加库存
+            //Increase inventory
             var firstStock = productStocks.OrderBy(c => c.DisplayOrder).FirstOrDefault();
             if (firstStock == null)
-                throw new Exception($"商品：{product.Name}，无可用库存");
+                throw new Exception($"Product: {product.Name}, no stock available");
             firstStock.StockQuantity += quantity;
 
             addStockHistories.Add(new StockHistory()
             {
-                Note = $"订单：{order.No}，商品：{product.Name}，增加库存（减少下单商品数量）：{quantity}。备注：{note}",
+                Note = $"Order: {order.No}, Product: {product.Name}, Increase inventory (reduce the number of ordered products): {quantity}. Note: {note}",
                 CreatedById = userId,
                 UpdatedById = userId,
                 AdjustedQuantity = quantity,
@@ -529,7 +529,7 @@ public class OrderService : IOrderService
         var countryId = (int)CountryWithId.China;
         var provinces = await _countryService.GetProvinceByCache(countryId);
         if (provinces == null || provinces.Count <= 0)
-            throw new Exception("省市区数据异常，请联系管理员");
+            throw new Exception("Province, city, district data is abnormal, please contact the administrator");
 
         var query = _orderAddressRepository
             .Query()
@@ -618,12 +618,12 @@ public class OrderService : IOrderService
         order.UpdatedOn = DateTime.Now;
         order.UpdatedById = userId;
 
-        //标记付款，付款减少库存商品，减少库存
+        //Mark payment, payment to reduce inventory items, reduce inventory
         var productIds = order.OrderItems.Select(c => c.ProductId).Distinct();
         var stocks = await _stockRepository.Query().Where(c => productIds.Contains(c.ProductId)).ToListAsync();
         var addStockHistories = new List<StockHistory>();
         foreach (var item in order.OrderItems)
-            OrderStockDoWorker(stocks, addStockHistories, item.Product, userId, -item.Quantity, order, "标记付款");
+            OrderStockDoWorker(stocks, addStockHistories, item.Product, userId, -item.Quantity, order, "Mark Payment");
 
         using (var transaction = _orderRepository.BeginTransaction())
         {
@@ -641,25 +641,25 @@ public class OrderService : IOrderService
     }
 
     /// <summary>
-    /// 验证并获取预下单信息
+    /// Verify and obtain pre-order information
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
     public async Task<CheckoutResult> OrderCheckout(CheckoutParam param)
     {
         if (param == null)
-            throw new Exception("参数异常");
+            throw new Exception("Parameter abnormality");
         if (param.Items == null || param.Items.Count <= 0)
-            throw new Exception("购买商品不存在或已下架");
+            throw new Exception("The purchased product does not exist or has been removed from the shelves");
         if (param.Items.Any(c => c.Quantity <= 0))
-            throw new Exception("购买商品数量必须>0");
+            throw new Exception("Quantity of goods to be purchased > 0");
 
         var user = await _workContext.GetCurrentUserOrNullAsync();
         var userId = user?.Id ?? (int)UserWithId.System;
         var customerId = param.CustomerId;
         var customer = await _userRepository.FirstOrDefaultAsync(customerId);
         if (customer == null)
-            throw new Exception("客户不存在");
+            throw new Exception("Customer does not exist");
 
         var ids = param.Items.Select(c => c.ProductId).Distinct();
         var products = await _productRepository.Query()
@@ -686,7 +686,7 @@ public class OrderService : IOrderService
                 })
             }).ToListAsync();
 
-        if (products == null || products.Count <= 0) throw new Exception("购买商品不存在或已下架");
+        if (products == null || products.Count <= 0) throw new Exception("The purchased product does not exist or has been removed from the shelves");
 
         var productIds = products.Select(c => c.ProductId).Distinct();
         var stocks = await _stockRepository.Query().Where(c => productIds.Contains(c.ProductId)).ToListAsync();
@@ -708,7 +708,7 @@ public class OrderService : IOrderService
                 }
                 else
                 {
-                    if (!c.DisplayStockQuantity) c.StockQuantity = 0; // 不显示库存量
+                    if (!c.DisplayStockQuantity) c.StockQuantity = 0; // Do not display inventory
                 }
             }
         });

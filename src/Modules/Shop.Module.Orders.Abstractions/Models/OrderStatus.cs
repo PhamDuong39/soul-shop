@@ -3,59 +3,59 @@
 namespace Shop.Module.Orders.Models;
 
 /// <summary>
-/// 订单状态
+/// Order status
 /// </summary>
 public enum OrderStatus
 {
     /// <summary>
-    /// 新订单
+    /// New order
     /// </summary>
-    [Description("新订单")] New = 0,
+    [Description("New order")] New = 0,
 
     /// <summary>
-    /// 挂起
-    /// 冻结中的订单、纠纷中的订单、退款中的订单
+    /// Suspended
+    /// Frozen orders, orders in dispute, orders in refund
     /// </summary>
-    [Description("挂起")] OnHold = 10,
+    [Description("Suspended")] OnHold = 10,
 
     /// <summary>
-    /// 等待付款/待付款
+    /// Waiting for payment/pending payment
     /// </summary>
-    [Description("待付款")] PendingPayment = 20,
+    [Description("Pending payment")] PendingPayment = 20,
 
     /// <summary>
-    /// 付款失败
-    /// 允许重新付款，等同于待付款
+    /// Payment failed
+    /// Allow re-payment, equivalent to pending payment
     /// </summary>
-    [Description("付款失败")] PaymentFailed = 25,
+    [Description("Payment failed")] PaymentFailed = 25,
 
     /// <summary>
-    /// 收到付款/已付款
+    /// Payment received/paid
     /// </summary>
-    [Description("已付款")] PaymentReceived = 30,
+    [Description("paid")] PaymentReceived = 30,
 
     /// <summary>
-    /// 发货处理中
-    /// 运输状态：待发货、部分发货
+    /// Shipping in progress
+    /// Shipping status: pending, partially shipped
     /// </summary>
-    [Description("发货中")] Shipping = 40,
+    [Description("Shipping")] Shipping = 40,
 
     /// <summary>
-    /// 已发货
-    /// 运输状态：无航运、已发货
+    /// Shipped
+    /// Shipping status: no shipping, shipped
     /// </summary>
-    [Description("已发货")] Shipped = 50,
+    [Description("Shipped")] Shipped = 50,
 
     /// <summary>
-    /// 完成/交易成功
-    /// 运输状态：确认收货
+    /// Completed/transaction successful
+    /// Shipping status: confirmed receipt
     /// </summary>
-    [Description("交易成功")] Complete = 60,
+    [Description("transaction successful")] Complete = 60,
 
     /// <summary>
-    /// 取消/关闭
-    /// 买家、卖家家申请取消订单；到期未付款交易自动取消
-    /// 付款以后用户退款成功，交易自动关闭/取消
+    /// Cancel/Close
+    /// Buyers and sellers apply to cancel orders; transactions that are not paid on time are automatically canceled
+    /// After payment, the user successfully refunds and the transaction is automatically closed/cancelled
     /// </summary>
-    [Description("交易取消")] Canceled = 70
+    [Description("Transaction Cancelled")] Canceled = 70
 }

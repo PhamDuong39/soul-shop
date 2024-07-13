@@ -73,18 +73,18 @@ public class ProductGetResult
     public DateTime? PublishedOn { get; set; }
 
     /// <summary>
-    /// 商品条形码
+    /// Product barcode
     /// </summary>
     public string Barcode { get; set; }
 
     /// <summary>
-    /// 商品有效期。单位:天。自发布/上架时间起计算，如果过期，则自动取消发布/下架。发布时，计算下架时间。
-    /// 可提供功能，到期/即将到期时自动发布/上架用以重新计算上架/下架时间。
+    /// Product validity period. Unit: day. Calculated from the release/listing time. If expired, the release/listing will be automatically cancelled. When publishing, the listing time is calculated.
+    /// Function can be provided. When the product expires/is about to expire, it will be automatically released/listed to recalculate the listing/listing time.
     /// </summary>
     public int? ValidThru { get; set; }
 
     /// <summary>
-    /// 备货期。取值范围:1-60;单位:天。
+    /// Stocking period. Value range: 1-60; unit: day.
     /// </summary>
     public int? DeliveryTime { get; set; }
 
@@ -111,7 +111,7 @@ public class ProductGetResult
     public bool DisplayStockQuantity { get; set; }
 
     /// <summary>
-    /// 库存扣减策略，总共有2种：下单减库存(place_order_withhold)和支付减库存(payment_success_deduct)。
+    /// There are two types of inventory deduction strategies: place_order_withhold and payment_success_deduct.
     /// </summary>
     public StockReduceStrategy StockReduceStrategy { get; set; }
 
@@ -125,7 +125,7 @@ public class ProductGetResult
     public DateTime? UnpublishedOn { get; set; }
 
     /// <summary>
-    /// 取消发布原因
+    /// Reason for cancelling the publication
     /// </summary>
     public string UnpublishedReason { get; set; }
 
@@ -174,12 +174,12 @@ public class ProductGetResult
     public decimal AdditionalShippingCharge { get; set; }
 
     /// <summary>
-    /// 运费模版Id
+    /// Freight Template Id
     /// </summary>
     public int? FreightTemplateId { get; set; }
 
     /// <summary>
-    /// 管理员备注
+    /// Administrator Notes
     /// </summary>
     public string AdminRemark { get; set; }
 

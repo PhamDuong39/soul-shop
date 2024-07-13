@@ -9,7 +9,7 @@ public class OrderCreateByOrderParam
     [Required] public int OrderId { get; set; }
 
     /// <summary>
-    /// 下单备注
+    /// Order notes
     /// </summary>
     [StringLength(450)]
     public string OrderNote { get; set; }

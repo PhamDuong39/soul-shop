@@ -7,7 +7,7 @@ public class CalculatedProductPrice
     public decimal? OldPrice { get; set; }
 
     /// <summary>
-    /// 优惠
+    /// Discounts
     /// </summary>
     public int PercentOfSaving { get; set; }
 }

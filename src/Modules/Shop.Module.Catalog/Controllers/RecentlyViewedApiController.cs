@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 最近浏览API控制器，负责管理用户的最近浏览商品记录。
+/// The recently browsed API controller is responsible for managing the user's recently browsed product records.
 /// </summary>
 [Authorize()]
 [Route("api/recently-viewed")]
@@ -31,10 +31,10 @@ public class RecentlyViewedApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取用户最近浏览的商品列表。
+    /// Get the list of products that the user has recently browsed.
     /// </summary>
-    /// <param name="take">返回记录的数量，默认为20。</param>
-    /// <returns>最近浏览的商品列表。</returns>
+    /// <param name="take">The number of records returned, the default is 20. </param>
+    /// <returns>The list of products that have been recently browsed. </returns>
     [HttpGet()]
     public async Task<Result> List(int take = 20)
     {
@@ -79,9 +79,9 @@ public class RecentlyViewedApiController : ControllerBase
     }
 
     /// <summary>
-    /// 清除用户的所有最近浏览记录。
+    /// Clear all the user's recent browsing history.
     /// </summary>
-    /// <returns>操作结果。</returns>
+    /// <returns>Operation results. </returns>
     [HttpDelete()]
     public async Task<Result> Clear()
     {
@@ -95,10 +95,10 @@ public class RecentlyViewedApiController : ControllerBase
     }
 
     /// <summary>
-    /// 从用户的最近浏览记录中移除指定的商品。
+    /// Remove the specified product from the user's recent browsing history.
     /// </summary>
-    /// <param name="productId">需要移除的商品ID。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="productId">The ID of the product to be removed. </param>
+    /// <returns>Operation results. </returns>
     [HttpDelete("{productId:int:min(1)}")]
     public async Task<Result> Remove(int productId)
     {

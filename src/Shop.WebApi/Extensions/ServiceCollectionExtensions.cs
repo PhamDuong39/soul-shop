@@ -57,6 +57,19 @@ public static class ServiceCollectionExtensions
             });
 
 
+            c.AddSecurityDefinition("Bearer",
+                new OpenApiSecurityScheme()
+                {
+                    Description = "在下框中输入请求头中需要添加 Jwt 授权 Token: Bearer {Token}",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer"
+                });
+
+
+
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
                 {
@@ -219,6 +232,17 @@ public static class ServiceCollectionExtensions
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
         var serverVersion = new MySqlServerVersion(new Version(8, 4, 0));
+
+
+        options.UseMySql(connectionString, serverVersion, mysqlOptions =>
+        {
+            mysqlOptions.MigrationsAssembly("Shop.WebApi");
+            mysqlOptions.EnableRetryOnFailure(
+                maxRetryCount: 5,
+                maxRetryDelay: TimeSpan.FromSeconds(10),
+                errorNumbersToAdd: null
+            );
+        });
 
     }
 

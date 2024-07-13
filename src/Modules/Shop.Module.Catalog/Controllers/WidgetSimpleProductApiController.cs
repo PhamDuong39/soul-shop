@@ -12,7 +12,7 @@ using Shop.Module.Core.Models;
 namespace Shop.Module.Catalog.Controllers;
 
 /// <summary>
-/// 管理后台控制器用于处理简单产品小部件相关操作的 API 请求。
+/// The management backend controller is used to handle API requests for simple product widget related operations.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/widget-simple-products")]
@@ -30,16 +30,16 @@ public class WidgetSimpleProductApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据指定的小部件实例 ID 获取简单产品小部件信息。
+    /// Get the simple product widget information according to the specified widget instance ID.
     /// </summary>
-    /// <param name="id">小部件实例 ID。</param>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <param name="id">Widget instance ID. </param>
+    /// <returns>The <see cref="Result"/> object representing the result of the operation. </returns>
     [HttpGet("{id}")]
     public async Task<Result> Get(int id)
     {
         var widgetInstance = await _widgetInstanceRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
         if (widgetInstance == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
         var model = new WidgetSimpleProductResult
         {
             Id = widgetInstance.Id,
@@ -53,7 +53,7 @@ public class WidgetSimpleProductApiController : ControllerBase
         if (model.Setting == null) model.Setting = new WidgetSimpleProductSetting();
         if (model.Setting?.Products?.Count > 0)
         {
-            // 验证发布状态
+            // Verify the publishing status
             var productIds = model.Setting.Products.Select(c => c.Id).Distinct();
             model.Setting.Products = await _productRepository.Query().Where(c => productIds.Contains(c.Id)).Select(c =>
                 new ProductLinkResult()
@@ -68,10 +68,10 @@ public class WidgetSimpleProductApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建一个新的简单产品小部件。
+    /// Create a new simple product widget.
     /// </summary>
-    /// <param name="model">要创建的简单产品小部件参数。</param>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <param name="model">Simple product widget parameters to be created. </param>
+    /// <returns>A <see cref="Result"/> object representing the result of the operation. </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] WidgetSimpleProductParam model)
     {
@@ -91,17 +91,17 @@ public class WidgetSimpleProductApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定 ID 的简单产品小部件信息。
+    /// Update the simple product widget information of the specified ID.
     /// </summary>
-    /// <param name="id">小部件实例 ID。</param>
-    /// <param name="model">更新后的简单产品小部件参数。</param>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <param name="id">Widget instance ID. </param>
+    /// <param name="model">Updated simple product widget parameters. </param>
+    /// <returns>The <see cref="Result"/> object indicating the result of the operation. </returns>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] WidgetSimpleProductParam model)
     {
         var widgetInstance = _widgetInstanceRepository.Query().FirstOrDefault(x => x.Id == id);
         if (widgetInstance == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("The document does not exist");
         widgetInstance.Name = model.Name;
         widgetInstance.WidgetZoneId = model.WidgetZoneId;
         widgetInstance.PublishStart = model.PublishStart;
