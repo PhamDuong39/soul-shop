@@ -1,0 +1,32 @@
+[
+  {
+    "Id": 1,
+    "Name": "Category",
+    "IsMenuable": 1,
+    "Module": "Catalog"
+  },
+  {
+    "Id": 2,
+    "Name": "Brand",
+    "IsMenuable": 1,
+    "Module": "Catalog"
+  },
+  {
+    "Id": 3,
+    "Name": "Product",
+    "IsMenuable": 0,
+    "Module": "Catalog"
+  },
+  {
+    "Id": 10,
+    "Name": "Review",
+    "IsMenuable": 0,
+    "Module": "Reviews"
+  },
+  {
+    "Id": 11,
+    "Name": "Reply",
+    "IsMenuable": 0,
+    "Module": "Reviews"
+  }
+]

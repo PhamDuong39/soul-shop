@@ -1,0 +1,13 @@
+[
+  {
+    "Id": 1,
+    "UserId": null,
+    "Contact": "string",
+    "Title": null,
+    "Content": "string",
+    "Type": 0,
+    "IsDeleted": 0,
+    "CreatedOn": "2023-07-24 20:19:37.272158",
+    "UpdatedOn": "2023-07-24 20:19:37.272234"
+  }
+]

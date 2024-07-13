@@ -1,0 +1,382 @@
+[
+  {
+    "Id": 1,
+    "AttributeId": 2,
+    "Value": "特宽",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:04:58.000000",
+    "UpdatedOn": "2019-04-23 10:04:58.000000"
+  },
+  {
+    "Id": 2,
+    "AttributeId": 2,
+    "Value": "超修身",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:05:04.000000",
+    "UpdatedOn": "2019-04-23 10:05:04.000000"
+  },
+  {
+    "Id": 3,
+    "AttributeId": 2,
+    "Value": "宽松",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:05:10.000000",
+    "UpdatedOn": "2019-04-23 10:05:10.000000"
+  },
+  {
+    "Id": 4,
+    "AttributeId": 2,
+    "Value": "修身",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:05:15.000000",
+    "UpdatedOn": "2019-04-23 10:05:15.000000"
+  },
+  {
+    "Id": 5,
+    "AttributeId": 2,
+    "Value": "标准",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:05:22.000000",
+    "UpdatedOn": "2019-04-23 10:05:22.000000"
+  },
+  {
+    "Id": 6,
+    "AttributeId": 1,
+    "Value": "直筒",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:05:52.000000",
+    "UpdatedOn": "2019-04-23 10:05:52.000000"
+  },
+  {
+    "Id": 7,
+    "AttributeId": 1,
+    "Value": "修身",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:05:58.000000",
+    "UpdatedOn": "2019-04-23 10:05:58.000000"
+  },
+  {
+    "Id": 8,
+    "AttributeId": 1,
+    "Value": "高腰型",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:06:04.000000",
+    "UpdatedOn": "2019-04-23 10:06:04.000000"
+  },
+  {
+    "Id": 9,
+    "AttributeId": 7,
+    "Value": "条纹",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:07:37.000000",
+    "UpdatedOn": "2019-04-23 10:07:37.000000"
+  },
+  {
+    "Id": 10,
+    "AttributeId": 7,
+    "Value": "格子",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:07:42.000000",
+    "UpdatedOn": "2019-04-23 10:07:42.000000"
+  },
+  {
+    "Id": 11,
+    "AttributeId": 7,
+    "Value": "纯色",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:07:47.000000",
+    "UpdatedOn": "2019-04-23 10:07:47.000000"
+  },
+  {
+    "Id": 12,
+    "AttributeId": 6,
+    "Value": "短袖",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:07:58.000000",
+    "UpdatedOn": "2019-04-23 10:07:58.000000"
+  },
+  {
+    "Id": 13,
+    "AttributeId": 6,
+    "Value": "长袖",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:08:03.000000",
+    "UpdatedOn": "2019-04-23 10:08:03.000000"
+  },
+  {
+    "Id": 14,
+    "AttributeId": 6,
+    "Value": "九分袖",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:08:09.000000",
+    "UpdatedOn": "2019-04-23 10:08:09.000000"
+  },
+  {
+    "Id": 15,
+    "AttributeId": 6,
+    "Value": "无袖",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:08:15.000000",
+    "UpdatedOn": "2019-04-23 10:08:15.000000"
+  },
+  {
+    "Id": 16,
+    "AttributeId": 5,
+    "Value": "原创设计",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:08:29.000000",
+    "UpdatedOn": "2019-04-23 10:08:29.000000"
+  },
+  {
+    "Id": 17,
+    "AttributeId": 5,
+    "Value": "百搭",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:08:35.000000",
+    "UpdatedOn": "2019-04-23 10:08:35.000000"
+  },
+  {
+    "Id": 18,
+    "AttributeId": 5,
+    "Value": "甜美",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:08:41.000000",
+    "UpdatedOn": "2019-04-23 10:08:41.000000"
+  },
+  {
+    "Id": 19,
+    "AttributeId": 5,
+    "Value": "其他",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:08:46.000000",
+    "UpdatedOn": "2019-04-23 10:08:46.000000"
+  },
+  {
+    "Id": 20,
+    "AttributeId": 4,
+    "Value": "17周岁以下",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:02.000000",
+    "UpdatedOn": "2019-04-23 10:09:02.000000"
+  },
+  {
+    "Id": 21,
+    "AttributeId": 4,
+    "Value": "30-34周岁",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:10.000000",
+    "UpdatedOn": "2019-04-23 10:09:10.000000"
+  },
+  {
+    "Id": 22,
+    "AttributeId": 4,
+    "Value": "25-29周岁",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:16.000000",
+    "UpdatedOn": "2019-04-23 10:09:16.000000"
+  },
+  {
+    "Id": 23,
+    "AttributeId": 4,
+    "Value": "18-24周岁",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:21.000000",
+    "UpdatedOn": "2019-04-23 10:09:21.000000"
+  },
+  {
+    "Id": 24,
+    "AttributeId": 4,
+    "Value": "40-49周岁",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:26.000000",
+    "UpdatedOn": "2019-04-23 10:09:26.000000"
+  },
+  {
+    "Id": 25,
+    "AttributeId": 3,
+    "Value": "羊绒",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:38.000000",
+    "UpdatedOn": "2019-04-23 10:09:38.000000"
+  },
+  {
+    "Id": 26,
+    "AttributeId": 3,
+    "Value": "羊毛",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:44.000000",
+    "UpdatedOn": "2019-04-23 10:09:44.000000"
+  },
+  {
+    "Id": 27,
+    "AttributeId": 3,
+    "Value": "涤纶",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:49.000000",
+    "UpdatedOn": "2019-04-23 10:09:49.000000"
+  },
+  {
+    "Id": 28,
+    "AttributeId": 3,
+    "Value": "棉",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:09:56.000000",
+    "UpdatedOn": "2019-04-23 10:09:56.000000"
+  },
+  {
+    "Id": 29,
+    "AttributeId": 3,
+    "Value": "蚕丝",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:10:04.000000",
+    "UpdatedOn": "2019-04-23 10:10:04.000000"
+  },
+  {
+    "Id": 30,
+    "AttributeId": 3,
+    "Value": "麻",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:10:10.000000",
+    "UpdatedOn": "2019-04-23 10:10:10.000000"
+  },
+  {
+    "Id": 31,
+    "AttributeId": 9,
+    "Value": "圆头",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:12:56.000000",
+    "UpdatedOn": "2019-04-23 10:12:56.000000"
+  },
+  {
+    "Id": 32,
+    "AttributeId": 9,
+    "Value": "尖头",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:13:03.000000",
+    "UpdatedOn": "2019-04-23 10:13:03.000000"
+  },
+  {
+    "Id": 33,
+    "AttributeId": 9,
+    "Value": "方头",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:13:07.000000",
+    "UpdatedOn": "2019-04-23 10:13:07.000000"
+  },
+  {
+    "Id": 34,
+    "AttributeId": 9,
+    "Value": "其他",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:13:12.000000",
+    "UpdatedOn": "2019-04-23 10:13:12.000000"
+  },
+  {
+    "Id": 35,
+    "AttributeId": 8,
+    "Value": "丁字鞋",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:13:25.000000",
+    "UpdatedOn": "2019-04-23 10:13:25.000000"
+  },
+  {
+    "Id": 36,
+    "AttributeId": 8,
+    "Value": "布鞋",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:13:31.000000",
+    "UpdatedOn": "2019-04-23 10:13:31.000000"
+  },
+  {
+    "Id": 37,
+    "AttributeId": 8,
+    "Value": "板鞋",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:13:36.000000",
+    "UpdatedOn": "2019-04-23 10:13:36.000000"
+  },
+  {
+    "Id": 38,
+    "AttributeId": 8,
+    "Value": "牛津鞋",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:13:42.000000",
+    "UpdatedOn": "2019-04-23 10:13:42.000000"
+  }
+]

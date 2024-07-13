@@ -1,0 +1,56 @@
+[
+  {
+    "Id": 1,
+    "Name": "Category Widget",
+    "ViewComponentName": "CategoryWidget",
+    "CreateUrl": "widget-category-create",
+    "EditUrl": "widget-category-edit",
+    "IsPublished": 1,
+    "CreatedOn": "2019-01-01 00:00:00.000000"
+  },
+  {
+    "Id": 2,
+    "Name": "Product Widget",
+    "ViewComponentName": "ProductWidget",
+    "CreateUrl": "widget-product-create",
+    "EditUrl": "widget-product-edit",
+    "IsPublished": 1,
+    "CreatedOn": "2019-01-01 00:00:00.000000"
+  },
+  {
+    "Id": 3,
+    "Name": "Simple Product Widget",
+    "ViewComponentName": "SimpleProductWidget",
+    "CreateUrl": "widget-simple-product-create",
+    "EditUrl": "widget-simple-product-edit",
+    "IsPublished": 1,
+    "CreatedOn": "2019-01-01 00:00:00.000000"
+  },
+  {
+    "Id": 4,
+    "Name": "Html Widget",
+    "ViewComponentName": "HtmlWidget",
+    "CreateUrl": "widget-html-create",
+    "EditUrl": "widget-html-edit",
+    "IsPublished": 1,
+    "CreatedOn": "2019-01-01 00:00:00.000000"
+  },
+  {
+    "Id": 5,
+    "Name": "Carousel Widget",
+    "ViewComponentName": "CarouselWidget",
+    "CreateUrl": "widget-carousel-create",
+    "EditUrl": "widget-carousel-edit",
+    "IsPublished": 1,
+    "CreatedOn": "2019-01-01 00:00:00.000000"
+  },
+  {
+    "Id": 7,
+    "Name": "Recently Viewed Widget",
+    "ViewComponentName": "RecentlyViewedWidget",
+    "CreateUrl": "widget-recently-viewed-create",
+    "EditUrl": "widget-recently-viewed-edit",
+    "IsPublished": 1,
+    "CreatedOn": "2019-01-01 00:00:00.000000"
+  }
+]

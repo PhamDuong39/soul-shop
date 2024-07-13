@@ -1,0 +1,32 @@
+{
+  "accounts": {
+    "thai": {
+      "user.name": "Doanh Thai Bui",
+      "user.email": "thaibdtg16@gmail.com"
+    },
+    "thinh": {
+      "user.name": "Vu dinh thinh",
+      "user.email": "vudinhthinh22082003@gmail.com"
+    },
+    "duong": {
+      "user.name": "Pham Anh Duong",
+      "user.email": "phamanhduong30092003@gmail.com"
+    },
+    "cuong": {
+      "user.name": "Vu lanh cuong",
+      "user.email": "vulanhcuongwork@gmail.com"
+    },
+    "ngoc": {
+      "user.name": "Tran minh ngoc",
+      "user.email": "ngocminh011203@gmail.com"
+    },
+    "huyen": {
+      "user.name": "Thuh",
+      "user.email": "huyenkhongtt@gmail.com"
+    },
+    "quy":{
+      "user.name":"Vu van quy",
+      "user.email":"Quyvu052003@gmail.com"
+    }
+  }
+}

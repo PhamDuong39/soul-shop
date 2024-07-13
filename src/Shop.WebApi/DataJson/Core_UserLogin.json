@@ -1,0 +1,46 @@
+[
+  {
+    "LoginProvider": "WeChatMiniProgram",
+    "ProviderKey": "o1VC-5CLdAe0B2F8cHr2Vh6MK8Eg",
+    "ProviderDisplayName": "微信小程序",
+    "UserId": 1359,
+    "Id": 0,
+    "UnionId": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-03-30 13:59:38.759135",
+    "UpdatedOn": "2022-03-30 13:59:38.759191"
+  },
+  {
+    "LoginProvider": "WeChatMiniProgram",
+    "ProviderKey": "o7Uf-5AkLArmJbQHH4zBaMNpRh1Y",
+    "ProviderDisplayName": "微信小程序",
+    "UserId": 2984,
+    "Id": 0,
+    "UnionId": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2023-02-06 15:58:16.429581",
+    "UpdatedOn": "2023-02-06 15:58:16.429640"
+  },
+  {
+    "LoginProvider": "WeChatMiniProgram",
+    "ProviderKey": "obXs16F6wFS24Pch4wbfCbahHiV4",
+    "ProviderDisplayName": "微信小程序",
+    "UserId": 1583,
+    "Id": 0,
+    "UnionId": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-06-11 10:31:49.284357",
+    "UpdatedOn": "2022-06-11 10:31:49.284446"
+  },
+  {
+    "LoginProvider": "WeChatMiniProgram",
+    "ProviderKey": "omZOy4gMtUIOWqxUX0c3qKTwXCko",
+    "ProviderDisplayName": "微信小程序",
+    "UserId": 1511,
+    "Id": 0,
+    "UnionId": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-05-20 16:34:11.036172",
+    "UpdatedOn": "2022-05-20 16:34:11.036201"
+  }
+]

@@ -1,0 +1,146 @@
+[
+  {
+    "Id": 1,
+    "TemplateId": 1,
+    "AttributeId": 2,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:10.000000",
+    "UpdatedOn": "2019-04-23 10:15:10.000000"
+  },
+  {
+    "Id": 2,
+    "TemplateId": 1,
+    "AttributeId": 3,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:10.000000",
+    "UpdatedOn": "2019-04-23 10:15:10.000000"
+  },
+  {
+    "Id": 3,
+    "TemplateId": 1,
+    "AttributeId": 4,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:10.000000",
+    "UpdatedOn": "2019-04-23 10:15:10.000000"
+  },
+  {
+    "Id": 4,
+    "TemplateId": 1,
+    "AttributeId": 5,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:10.000000",
+    "UpdatedOn": "2019-04-23 10:15:10.000000"
+  },
+  {
+    "Id": 5,
+    "TemplateId": 1,
+    "AttributeId": 6,
+    "IsDeleted": 1,
+    "CreatedOn": "2019-04-23 10:15:10.000000",
+    "UpdatedOn": "2019-04-23 10:15:45.000000"
+  },
+  {
+    "Id": 6,
+    "TemplateId": 1,
+    "AttributeId": 7,
+    "IsDeleted": 1,
+    "CreatedOn": "2019-04-23 10:15:10.000000",
+    "UpdatedOn": "2019-04-23 10:15:45.000000"
+  },
+  {
+    "Id": 7,
+    "TemplateId": 2,
+    "AttributeId": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:27.000000",
+    "UpdatedOn": "2019-04-23 10:15:27.000000"
+  },
+  {
+    "Id": 8,
+    "TemplateId": 2,
+    "AttributeId": 3,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:27.000000",
+    "UpdatedOn": "2019-04-23 10:15:27.000000"
+  },
+  {
+    "Id": 9,
+    "TemplateId": 2,
+    "AttributeId": 4,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:27.000000",
+    "UpdatedOn": "2019-04-23 10:15:27.000000"
+  },
+  {
+    "Id": 10,
+    "TemplateId": 2,
+    "AttributeId": 5,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:27.000000",
+    "UpdatedOn": "2019-04-23 10:15:27.000000"
+  },
+  {
+    "Id": 11,
+    "TemplateId": 2,
+    "AttributeId": 6,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:27.000000",
+    "UpdatedOn": "2019-04-23 10:15:27.000000"
+  },
+  {
+    "Id": 12,
+    "TemplateId": 2,
+    "AttributeId": 7,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:27.000000",
+    "UpdatedOn": "2019-04-23 10:15:27.000000"
+  },
+  {
+    "Id": 13,
+    "TemplateId": 3,
+    "AttributeId": 8,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:59.000000",
+    "UpdatedOn": "2019-04-23 10:15:59.000000"
+  },
+  {
+    "Id": 14,
+    "TemplateId": 3,
+    "AttributeId": 9,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:15:59.000000",
+    "UpdatedOn": "2019-04-23 10:15:59.000000"
+  },
+  {
+    "Id": 15,
+    "TemplateId": 4,
+    "AttributeId": 8,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:16:09.000000",
+    "UpdatedOn": "2019-04-23 10:16:09.000000"
+  },
+  {
+    "Id": 16,
+    "TemplateId": 4,
+    "AttributeId": 9,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:16:09.000000",
+    "UpdatedOn": "2019-04-23 10:16:09.000000"
+  },
+  {
+    "Id": 17,
+    "TemplateId": 4,
+    "AttributeId": 4,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:16:18.000000",
+    "UpdatedOn": "2019-04-23 10:16:18.000000"
+  },
+  {
+    "Id": 18,
+    "TemplateId": 3,
+    "AttributeId": 4,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 10:16:23.000000",
+    "UpdatedOn": "2019-04-23 10:16:23.000000"
+  }
+]

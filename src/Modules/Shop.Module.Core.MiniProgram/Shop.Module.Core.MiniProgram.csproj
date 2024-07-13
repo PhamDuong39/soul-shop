@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Essensoft.AspNetCore.Payment.WeChatPay" Version="3.3.2"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shop.Infrastructure\Shop.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Shop.Module.Core.Abstractions\Shop.Module.Core.Abstractions.csproj"/>
+        <ProjectReference Include="..\Shop.Module.MQ.Abstractions\Shop.Module.MQ.Abstractions.csproj"/>
+        <ProjectReference Include="..\Shop.Module.Orders.Abstractions\Shop.Module.Orders.Abstractions.csproj"/>
+        <ProjectReference Include="..\Shop.Module.Payments.Abstractions\Shop.Module.Payments.Abstractions.csproj"/>
+    </ItemGroup>
+
+</Project>

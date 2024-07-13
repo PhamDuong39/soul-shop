@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Name": "admin",
+    "NormalizedName": "ADMIN",
+    "ConcurrencyStamp": "4776a1b2-dbe4-4056-82ec-8bed211d1454"
+  },
+  {
+    "Id": 2,
+    "Name": "customer",
+    "NormalizedName": "CUSTOMER",
+    "ConcurrencyStamp": "00d172be-03a0-4856-8b12-26d63fcf4374"
+  },
+  {
+    "Id": 3,
+    "Name": "guest",
+    "NormalizedName": "GUEST",
+    "ConcurrencyStamp": "d4754388-8355-4018-b728-218018836817"
+  }
+]

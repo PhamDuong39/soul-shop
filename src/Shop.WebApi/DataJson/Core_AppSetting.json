@@ -1,0 +1,65 @@
+[
+  {
+    "Id": "Catalog.ProductPageSize",
+    "Module": "Catalog",
+    "FormatType": 0,
+    "Type": "System.String",
+    "Value": "10",
+    "IsVisibleInCommonSettingPage": 1,
+    "Note": null
+  },
+  {
+    "Id": "Global.AssetVersion",
+    "Module": "Core",
+    "FormatType": 0,
+    "Type": "System.String",
+    "Value": "1.0",
+    "IsVisibleInCommonSettingPage": 0,
+    "Note": ""
+  },
+  {
+    "Id": "IsReplyAutoApproved",
+    "Module": "Reviews",
+    "FormatType": 0,
+    "Type": "System.Boolean",
+    "Value": "true",
+    "IsVisibleInCommonSettingPage": 1,
+    "Note": "启用回复自动审核功能"
+  },
+  {
+    "Id": "IsReviewAutoApproved",
+    "Module": "Reviews",
+    "FormatType": 0,
+    "Type": "System.Boolean",
+    "Value": "false",
+    "IsVisibleInCommonSettingPage": 1,
+    "Note": "启用评论自动审核功能"
+  },
+  {
+    "Id": "OrderAutoCanceledTimeForMinute",
+    "Module": "Orders",
+    "FormatType": 0,
+    "Type": "System.Int32",
+    "Value": "120",
+    "IsVisibleInCommonSettingPage": 1,
+    "Note": "订单下单后超时自动取消订单时间（单位：分钟）"
+  },
+  {
+    "Id": "OrderAutoCompleteTimeForMinute",
+    "Module": "Orders",
+    "FormatType": 0,
+    "Type": "System.Int32",
+    "Value": "10080",
+    "IsVisibleInCommonSettingPage": 1,
+    "Note": "订单支付后超时自动完成订单时间（买家未在指定的时间内确认收货,则系统自动确认收货完成订单，单位：分钟）"
+  },
+  {
+    "Id": "OrderCompleteAutoReviewTimeForMinute",
+    "Module": "Orders",
+    "FormatType": 0,
+    "Type": "System.Int32",
+    "Value": "10080",
+    "IsVisibleInCommonSettingPage": 1,
+    "Note": "订单完成后超时自动好评时间（买家未在指定的时间内评价,则系统自动好评，单位：分钟）"
+  }
+]

@@ -3,8 +3,42 @@
 [![CodeQL](https://github.com/PhamDuong39/soul-shop/actions/workflows/codeql.yml/badge.svg?branch=develop)](https://github.com/PhamDuong39/soul-shop/actions/workflows/codeql.yml)
 
 [![Soul shop build with github actions](https://github.com/PhamDuong39/soul-shop/actions/workflows/blank.yml/badge.svg)](https://github.com/PhamDuong39/soul-shop/actions/workflows/blank.yml)
+<!-- Copy-paste in your Readme.md file -->
+
+<!-- Copy-paste in your Readme.md file -->
+
+<a href="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors?limit=10&repo_id=796480596" target="_blank" style="display: block" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?limit=10&repo_id=796480596&image_size=auto&color_scheme=dark" width="655" height="auto">
+    <img alt="Active Contributors of PhamDuong39/soul-shop - Last 28 days" src="https://next.ossinsight.io/widgets/official/compose-recent-active-contributors/thumbnail.png?limit=10&repo_id=796480596&image_size=auto&color_scheme=light" width="655" height="auto">
+  </picture>
+</a>
+<!-- Copy-paste in your Readme.md file -->
+
+<a href="https://next.ossinsight.io/widgets/official/analyze-repo-pushes-and-commits-per-month?repo_id=796480596" target="_blank" style="display: block" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/analyze-repo-pushes-and-commits-per-month/thumbnail.png?repo_id=796480596&image_size=auto&color_scheme=dark" width="721" height="auto">
+    <img alt="Pushes and Commits of PhamDuong39/soul-shop" src="https://next.ossinsight.io/widgets/official/analyze-repo-pushes-and-commits-per-month/thumbnail.png?repo_id=796480596&image_size=auto&color_scheme=light" width="721" height="auto">
+  </picture>
+</a>
+
+<!-- Made with [OSS Insight](https://ossinsight.io/) -->
+
+<!-- Made with [OSS Insight](https://ossinsight.io/) -->
+
+
+<!-- Copy-paste in your Readme.md file -->
+
+<a href="https://next.ossinsight.io/widgets/official/analyze-repo-commits-time-distribution?repo_id=796480596&period=last_1_year&zone=0" target="_blank" style="display: block" align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://next.ossinsight.io/widgets/official/analyze-repo-commits-time-distribution/thumbnail.png?repo_id=796480596&period=last_1_year&zone=0&image_size=auto&color_scheme=dark" width="721" height="auto">
+    <img alt="Commits Time Distribution of PhamDuong39/soul-shop" src="https://next.ossinsight.io/widgets/official/analyze-repo-commits-time-distribution/thumbnail.png?repo_id=796480596&period=last_1_year&zone=0&image_size=auto&color_scheme=light" width="721" height="auto">
+  </picture>
+</a>
+
+<!-- Made with [OSS Insight](https://ossinsight.io/) -->
 # Introduction
-- Add your project logo.
+- Add your project logoa
 - Write a short introduction to the project.
 - If you are using badges, add them here.
 

@@ -1,0 +1,38 @@
+[
+  {
+    "Id": 1,
+    "Name": "临时仓库",
+    "AddressId": 1,
+    "AdminRemark": null,
+    "IsDeleted": 1,
+    "CreatedOn": "2021-05-25 15:50:18.791738",
+    "UpdatedOn": "2022-03-15 11:01:30.262008"
+  },
+  {
+    "Id": 2,
+    "Name": "柳东临时仓库",
+    "AddressId": 2,
+    "AdminRemark": "123",
+    "IsDeleted": 1,
+    "CreatedOn": "2021-12-01 01:28:53.945937",
+    "UpdatedOn": "2022-05-23 23:58:41.137297"
+  },
+  {
+    "Id": 3,
+    "Name": "无锡仓库",
+    "AddressId": 4,
+    "AdminRemark": null,
+    "IsDeleted": 1,
+    "CreatedOn": "2022-09-14 21:24:20.991429",
+    "UpdatedOn": "2024-03-28 09:51:11.531012"
+  },
+  {
+    "Id": 4,
+    "Name": "郑州仓",
+    "AddressId": 6,
+    "AdminRemark": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2024-04-01 08:35:46.892703",
+    "UpdatedOn": "2024-04-09 10:11:02.072801"
+  }
+]

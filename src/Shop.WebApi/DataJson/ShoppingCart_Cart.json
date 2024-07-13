@@ -1,0 +1,53 @@
+[
+  {
+    "Id": 1,
+    "CustomerId": 1359,
+    "IsActive": 1,
+    "CouponCode": null,
+    "CouponRuleName": null,
+    "ShippingMethod": null,
+    "IsProductPriceIncludeTax": 0,
+    "ShippingAmount": null,
+    "ShippingData": null,
+    "OrderNote": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-03-30 14:30:28.160375",
+    "UpdatedOn": "2022-03-30 14:30:28.160437",
+    "CreatedById": 1359,
+    "UpdatedById": 1359
+  },
+  {
+    "Id": 2,
+    "CustomerId": 10,
+    "IsActive": 1,
+    "CouponCode": null,
+    "CouponRuleName": null,
+    "ShippingMethod": null,
+    "IsProductPriceIncludeTax": 0,
+    "ShippingAmount": null,
+    "ShippingData": null,
+    "OrderNote": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2022-06-10 16:36:02.851681",
+    "UpdatedOn": "2022-06-10 16:36:02.851740",
+    "CreatedById": 10,
+    "UpdatedById": 10
+  },
+  {
+    "Id": 3,
+    "CustomerId": 2984,
+    "IsActive": 1,
+    "CouponCode": null,
+    "CouponRuleName": null,
+    "ShippingMethod": null,
+    "IsProductPriceIncludeTax": 0,
+    "ShippingAmount": null,
+    "ShippingData": null,
+    "OrderNote": null,
+    "IsDeleted": 0,
+    "CreatedOn": "2023-02-06 15:58:39.873181",
+    "UpdatedOn": "2023-02-06 15:58:39.873252",
+    "CreatedById": 2984,
+    "UpdatedById": 2984
+  }
+]

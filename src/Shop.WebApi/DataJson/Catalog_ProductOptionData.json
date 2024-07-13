@@ -1,0 +1,156 @@
+[
+  {
+    "Id": 1,
+    "OptionId": 2,
+    "Value": "s",
+    "Display": "S",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:42:42.000000",
+    "UpdatedOn": "2019-04-23 08:48:59.000000"
+  },
+  {
+    "Id": 2,
+    "OptionId": 2,
+    "Value": "m",
+    "Display": "M",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:42:52.000000",
+    "UpdatedOn": "2019-04-23 08:48:57.000000"
+  },
+  {
+    "Id": 3,
+    "OptionId": 2,
+    "Value": "l",
+    "Display": "L",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:43:01.000000",
+    "UpdatedOn": "2019-04-23 08:48:52.000000"
+  },
+  {
+    "Id": 4,
+    "OptionId": 2,
+    "Value": "xl",
+    "Display": "XL",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:43:08.000000",
+    "UpdatedOn": "2019-04-23 08:48:48.000000"
+  },
+  {
+    "Id": 5,
+    "OptionId": 2,
+    "Value": "xxl",
+    "Display": "XXL",
+    "Description": "",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:43:16.000000",
+    "UpdatedOn": "2019-04-23 08:48:44.000000"
+  },
+  {
+    "Id": 6,
+    "OptionId": 1,
+    "Value": "red",
+    "Display": "#d0021b",
+    "Description": "红色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:44:29.000000",
+    "UpdatedOn": "2019-04-23 08:44:29.000000"
+  },
+  {
+    "Id": 7,
+    "OptionId": 1,
+    "Value": "orange",
+    "Display": "#f5a623",
+    "Description": "橙色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:44:45.000000",
+    "UpdatedOn": "2019-04-23 08:44:45.000000"
+  },
+  {
+    "Id": 8,
+    "OptionId": 1,
+    "Value": "yellow",
+    "Display": "#f8e71c",
+    "Description": "黄色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:45:05.000000",
+    "UpdatedOn": "2019-04-23 08:45:05.000000"
+  },
+  {
+    "Id": 9,
+    "OptionId": 1,
+    "Value": "green",
+    "Display": "#417505",
+    "Description": "绿色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:45:29.000000",
+    "UpdatedOn": "2019-04-23 08:45:29.000000"
+  },
+  {
+    "Id": 10,
+    "OptionId": 1,
+    "Value": "purple",
+    "Display": "#9013fe",
+    "Description": "紫色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:45:58.000000",
+    "UpdatedOn": "2019-04-23 08:45:58.000000"
+  },
+  {
+    "Id": 11,
+    "OptionId": 1,
+    "Value": "blue",
+    "Display": "#4a90e2",
+    "Description": "蓝色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:46:25.000000",
+    "UpdatedOn": "2019-04-23 08:46:25.000000"
+  },
+  {
+    "Id": 12,
+    "OptionId": 1,
+    "Value": "black",
+    "Display": "#000000",
+    "Description": "黑色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:46:45.000000",
+    "UpdatedOn": "2019-04-23 08:46:45.000000"
+  },
+  {
+    "Id": 13,
+    "OptionId": 1,
+    "Value": "white",
+    "Display": "#ffffff",
+    "Description": "白色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:47:01.000000",
+    "UpdatedOn": "2019-04-23 08:47:01.000000"
+  },
+  {
+    "Id": 14,
+    "OptionId": 1,
+    "Value": "gray",
+    "Display": "#9b9b9b",
+    "Description": "灰色",
+    "IsPublished": 1,
+    "IsDeleted": 0,
+    "CreatedOn": "2019-04-23 08:47:13.000000",
+    "UpdatedOn": "2019-04-23 08:47:13.000000"
+  }
+]
