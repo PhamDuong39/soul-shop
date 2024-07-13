@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Shop.Module.ShoppingCart.Controllers;
 
 /// <summary>
-/// 购物车 API 控制器，负责处理购物车相关操作。
+/// Shopping cart API controller, responsible for handling shopping cart related operations.
 /// </summary>
 [Authorize()]
 [Route("api/cart")]
@@ -34,9 +34,9 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取当前用户的购物车列表，未登录用户返回空购物车。
+    /// Get the current user's cart list and return an empty cart for the non-logged in user.
     /// </summary>
-    /// <returns>购物车内容。</returns>
+    /// <returns>Cart content. </returns>
     [HttpGet()]
     [AllowAnonymous]
     public async Task<Result> List()
@@ -48,10 +48,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// 向购物车中添加商品。
+    /// Add items to cart.
     /// </summary>
-    /// <param name="model">添加到购物车的商品信息。</param>
-    /// <returns>更新后的购物车内容。</returns>
+    /// <param name="model">Product information has been added to the cart </param>
+    /// <returns>Update cart content. </returns>
     [HttpPost("add-item")]
     public async Task<Result> AddToCart([FromBody] AddToCartParam model)
     {
@@ -62,10 +62,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新购物车中某个商品的数量。
+    /// Update the number of products in the cart.
     /// </summary>
-    /// <param name="model">商品和新数量的信息。</param>
-    /// <returns>更新后的购物车内容。</returns>
+    /// <param name="model">New product information and quantity. </param>
+    /// <returns>Update cart content.</returns>
     [HttpPut("update-item-quantity")]
     public async Task<Result> UpdateItemQuantity([FromBody] AddToCartParam model)
     {
@@ -76,10 +76,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// 选中或取消选中购物车中的商品项。
+    /// Check or uncheck items in your cart.
     /// </summary>
-    /// <param name="model">商品项选中状态的信息。</param>
-    /// <returns>更新后的购物车内容。</returns>
+    /// <param name="model">Information about the selected status of the product item. </param>
+    /// <returns>Update cart content. </returns>
     [HttpPut("checked")]
     public async Task<Result> CheckedItem([FromBody] CheckedItemParam model)
     {
@@ -90,10 +90,10 @@ public class CartApiController : ControllerBase
     }
 
     /// <summary>
-    /// 从购物车中移除一个或多个商品。
+    /// Remove one or more items from your cart.
     /// </summary>
-    /// <param name="model">要移除的商品的ID列表。</param>
-    /// <returns>更新后的购物车内容。</returns>
+    /// <param name="model">List of product IDs to delete. </param>
+    /// <returns>Update cart content. </returns>
     [HttpDelete("remove-items")]
     public async Task<Result> Remove([FromBody] DeleteItemParam model)
     {

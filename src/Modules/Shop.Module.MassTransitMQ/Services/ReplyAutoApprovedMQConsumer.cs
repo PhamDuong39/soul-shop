@@ -28,7 +28,7 @@ public class ReplyAutoApprovedMQConsumer : IConsumer<ReplyAutoApprovedEvent>
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "回复自动审核消息，处理失败", context?.Message);
+            _logger.LogError(ex, "Respond to automatic audit message，Processing failed", context?.Message);
         }
     }
 }

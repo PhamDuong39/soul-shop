@@ -11,7 +11,7 @@ public class ReviewAddParam
 
     public string Title { get; set; }
 
-    [Required(ErrorMessage = "请输入评论，且长度不能超过400")]
+    [Required(ErrorMessage = "Please enter a comment, length no more than 400")]
     [StringLength(400)]
     public string Comment { get; set; }
 
@@ -20,12 +20,12 @@ public class ReviewAddParam
     public EntityTypeWithId EntityTypeId { get; set; } = EntityTypeWithId.Product;
 
     /// <summary>
-    /// 评论来源Id 例如:订单Id
+    /// Comment source ID Example: Order ID
     /// </summary>
-    public int? SourceId { get; set; }
+    public int? SourceId { get; set; set; }
 
     /// <summary>
-    /// 评论来源类型 Order = 0
+    /// Comment source type Order = 0
     /// </summary>
     public ReviewSourceType? SourceType { get; set; }
 

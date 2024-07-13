@@ -19,7 +19,7 @@ using System.Threading.Tasks;
 namespace Shop.WebApi.Controllers;
 
 /// <summary>
-/// 首页 API 控制器，提供用于处理首页相关内容的 API 接口。
+/// Bộ điều khiển API trang chủ cung cấp giao diện API để xử lý nội dung liên quan đến trang chủ.
 /// </summary>
 [ApiController]
 [Route("api")]
@@ -37,9 +37,9 @@ public class HomeApiController(
     private readonly IProductPricingService _productPricingService = productPricingService;
 
     /// <summary>
-    /// 获取发布的小部件实例集合。
+    /// Nhận một tập hợp các phiên bản widget được xuất bản.
     /// </summary>
-    /// <returns>包含首页小部件实例的结果。</returns>
+    /// <returns>Chứa kết quả cho các phiên bản tiện ích trang chủ. </returns>
     [HttpGet("widgets")]
     public async Task<Result> Widgets()
     {
@@ -61,10 +61,10 @@ public class HomeApiController(
     }
 
     /// <summary>
-    /// 根据小部件实例 ID 获取特定的小部件内容。
+    /// Nhận nội dung tiện ích cụ thể dựa trên ID phiên bản tiện ích.
     /// </summary>
-    /// <param name="id">小部件实例的 ID。</param>
-    /// <returns>特定小部件的内容。</returns>
+    /// <param name="id">ID của phiên bản widget. </param>
+    /// <returns>Nội dung của một widget cụ thể. </returns>
     [HttpGet("widgets/{id:int:min(1)}")]
     public async Task<Result> Component(int id)
     {
@@ -135,12 +135,12 @@ public class HomeApiController(
                         query = query.OrderByDescending(c => c.CreatedOn);
                         break;
                     case WidgetProductOrderBy.BestSelling:
-                        // 暂无销量
-                        query = query.OrderByDescending(c => c.CreatedOn);
+                            // Chưa có doanh số bán hàng
+                            query = query.OrderByDescending(c => c.CreatedOn);
                         break;
                     case WidgetProductOrderBy.Discount:
-                        // 暂无折扣
-                        query = query.Where(c => c.SpecialPrice > 0).OrderByDescending(c => c.UpdatedOn);
+                            // Chưa có giảm giá
+                            query = query.Where(c => c.SpecialPrice > 0).OrderByDescending(c => c.UpdatedOn);
                         break;
                     default:
                         query = query.OrderByDescending(c => c.CreatedOn);

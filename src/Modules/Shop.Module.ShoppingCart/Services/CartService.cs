@@ -290,7 +290,7 @@ public class CartService : ICartService
         }
     }
 
-    // 暂不控制，下单时控制
+    // Not controlled yet, control when placing an order
     //async Task ValidateAddToCard()
     //{
 

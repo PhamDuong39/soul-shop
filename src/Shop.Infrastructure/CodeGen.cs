@@ -7,7 +7,7 @@ public static class CodeGen
     private static readonly object obj = new();
 
     /// <summary>
-    /// 生成长度{length}随机数字组合
+    /// Tạo tổ hợp số ngẫu nhiên có độ dài {length}
     /// </summary>
     /// <param name="length"></param>
     /// <returns></returns>

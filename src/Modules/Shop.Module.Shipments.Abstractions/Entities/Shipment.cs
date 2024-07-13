@@ -24,12 +24,12 @@ public class Shipment : EntityBase
     [StringLength(450)] public string TrackingNumber { get; set; }
 
     /// <summary>
-    /// 发货时间
+    /// delivery time
     /// </summary>
-    public DateTime? ShippedOn { get; set; }
+    public DateTime? ShippedOn { get; set; set; }
 
     /// <summary>
-    /// 收货时间
+    /// Receiving time
     /// </summary>
     public DateTime? DeliveredOn { get; set; }
 

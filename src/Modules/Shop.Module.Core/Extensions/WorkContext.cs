@@ -66,7 +66,7 @@ public class WorkContext : IWorkContext
     {
         var contextUser = await GetCurrentUserOrNullAsync();
         if (contextUser == null)
-            throw new Exception("请重新登录");
+            throw new Exception("Please log in again");
         return _currentUser;
     }
 
@@ -109,7 +109,7 @@ public class WorkContext : IWorkContext
     }
 
     /// <summary>
-    /// 验证令牌并自动续签
+    /// Validate token and automatically renew
     /// </summary>
     /// <param name="userId"></param>
     /// <param name="token"></param>
@@ -138,13 +138,13 @@ public class WorkContext : IWorkContext
 
             if (currentUser.TokenExpiresOnUtc != null && currentUser.TokenExpiresOnUtc < utcNow)
             {
-                // 过期
+                // expired
                 _cacheManager.Remove(key);
                 return false;
             }
             else if (minutes > 0 && currentUser.TokenExpiresOnUtc == null)
             {
-                // 当调整配置时，访问时更新配置（无过期时间->有过期时间）
+                // When adjusting configurations, update configurations upon access (from no expiration time to having an expiration time)
                 currentUser.TokenUpdatedOnUtc = utcNow;
                 currentUser.TokenExpiresOnUtc = utcNow.AddMinutes(minutes);
 
@@ -153,8 +153,8 @@ public class WorkContext : IWorkContext
             else if (currentUser.TokenExpiresOnUtc != null &&
                      (utcNow - currentUser.TokenUpdatedOnUtc).TotalMinutes >= 1)
             {
-                // 每分钟自动续签
-                // 注意：默认jwt令牌不开启过期策略的
+                // Automatic renewal every minute.
+                // By default, JWT tokens do not have an expiration policy enabled.
                 currentUser.TokenUpdatedOnUtc = utcNow;
                 currentUser.TokenExpiresOnUtc = utcNow.AddMinutes(minutes);
 
@@ -165,7 +165,7 @@ public class WorkContext : IWorkContext
         }
         else
         {
-            // 令牌不存在或令牌不一致，返回 401
+            // If the token does not exist or is inconsistent, return 401.
             statusCode = StatusCodes.Status401Unauthorized;
         }
 

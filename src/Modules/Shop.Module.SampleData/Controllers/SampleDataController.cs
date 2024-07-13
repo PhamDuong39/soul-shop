@@ -7,7 +7,7 @@ using Shop.Module.SampleData.ViewModels;
 namespace Shop.Module.SampleData.Controllers;
 
 /// <summary>
-/// 示例数据控制器，用于管理和操作示例数据的重置和生成。
+/// Example data controller used to manage and manipulate the reset and generation of sample data.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/sample-data")]
@@ -25,10 +25,10 @@ public class SampleDataController : ControllerBase
     }
 
     /// <summary>
-    /// 重置应用数据为示例数据。该操作会将当前数据清空，并导入预定义的示例数据。
+    /// Reset application data to example data. This operation clears the current data and imports predefined example data.
     /// </summary>
-    /// <param name="model">包含示例数据重置选项的模型。</param>
-    /// <returns>返回操作结果。成功时返回成功状态码，失败时返回错误信息。</returns>
+    /// <param name="model"> A model containing options for resetting example data. </param>
+    /// <returns> Return operation result. On success, return success status code; on failure, return error message. </returns>
     [HttpPost]
     public async Task<Result> ResetToSample([FromBody] SampleDataOption model)
     {
@@ -37,9 +37,9 @@ public class SampleDataController : ControllerBase
     }
 
     /// <summary>
-    /// 生成省/市/区数据。该操作通常用于初始化地址相关的数据表。
+    /// Generate province/city/district data. This operation is typically used to initialize tables related to addresses.
     /// </summary>
-    /// <returns>返回操作结果。成功时返回成功状态码，失败时返回错误信息。</returns>
+    /// <returns> Return operation result. On success, return success status code; on failure, return error message. </returns>
     [HttpPost("provinces")]
     public async Task<Result> GenPcas()
     {

@@ -73,14 +73,14 @@ public class EmailSender : IEmailSender
             }
 
             send.IsSucceed = true;
-            _logger.LogInformation("邮件发送成功", send);
+            _logger.LogInformation(" Email Sent Successfully", send);
             return true;
         }
         catch (Exception ex)
         {
             send.Message = ex.Message;
             send.IsSucceed = false;
-            _logger.LogError(ex, "邮件发送异常", send, email, subject, body, isHtml);
+            _logger.LogError(ex, "Email sending error", send, email, subject, body, isHtml);
             return false;
         }
         finally

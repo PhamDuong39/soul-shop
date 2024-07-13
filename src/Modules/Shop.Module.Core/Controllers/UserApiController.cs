@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 管理后台用户 API 控制器，包含用户相关操作的接口。
+/// Admin backend user API controller, containing interfaces for user-related operations
 /// </summary>
 [ApiController]
 [Route("api/users")]
@@ -41,11 +41,11 @@ public class UserApiController : ControllerBase
     }
 
     /// <summary>
-    /// 快速搜索用户。
+    /// Quick search for users
     /// </summary>
-    /// <param name="nameOrPhone">用户名或电话号码。</param>
-    /// <param name="take">返回结果数量。</param>
-    /// <returns>符合条件的用户列表。</returns>
+    /// <param name="nameOrPhone">Username or phone number</param>
+    /// <param name="take">Return number of results </param>
+    /// <returns>A list of users that match the criteria </returns>
     [HttpGet("quick-search")]
     public async Task<Result> QuickSearch(string nameOrPhone, int take = 20)
     {
@@ -70,10 +70,10 @@ public class UserApiController : ControllerBase
 
 
     /// <summary>
-    /// 获取用户列表。
+    /// Retrieve user list
     /// </summary>
-    /// <param name="param">标准表格参数。</param>
-    /// <returns>用户列表的标准表格结果。</returns>
+    /// <param name="param">standard table parameters</param>
+    /// <returns>Standard table results for the user list </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<UserQueryResult>>> List(
         [FromBody] StandardTableParam<UserQueryParam> param)
@@ -121,10 +121,10 @@ public class UserApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据用户ID获取用户信息。
+    /// Retrieve user information based on user ID
     /// </summary>
-    /// <param name="id">用户ID。</param>
-    /// <returns>指定用户的信息。</returns>
+    /// <param name="id">User ID</param>
+    /// <returns>Information of the specified user </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
@@ -155,18 +155,18 @@ public class UserApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建新用户。
+    /// Create new user
     /// </summary>
-    /// <param name="model">用户创建参数。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="model">User creation parameters</param>
+    /// <returns>Operation result </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] UserCreateParam model)
     {
         if (string.IsNullOrWhiteSpace(model.Password))
-            throw new Exception("密码不能为空");
+            throw new Exception("Password cannot be empty");
 
         var any = _userRepository.Query().Any(c => c.UserName == model.UserName);
-        if (any) return Result.Fail("用户名已存在");
+        if (any) return Result.Fail("Username already exists");
 
         var user = new User
         {
@@ -181,7 +181,7 @@ public class UserApiController : ControllerBase
         var roleArray = (int[])Enum.GetValues(typeof(RoleWithId));
         foreach (var roleId in roleIds)
         {
-            if (!roleArray.Contains(roleId)) throw new Exception("角色不存在");
+            if (!roleArray.Contains(roleId)) throw new Exception("Role does not exist");
             var userRole = new UserRole
             {
                 RoleId = roleId
@@ -192,7 +192,7 @@ public class UserApiController : ControllerBase
 
         model.Password = model.Password.Trim();
         if (model.Password.Length < 6 || model.Password.Length > 32)
-            throw new Exception("密码长度6-32字符");
+            throw new Exception("Password must be 6-32 characters long");
 
         var result = await _userManager.CreateAsync(user, model.Password);
         if (!result.Succeeded) return Result.Fail(result.Errors.FirstOrDefault()?.Description);
@@ -200,11 +200,11 @@ public class UserApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新用户信息。
+    /// Update user information
     /// </summary>
-    /// <param name="id">用户ID。</param>
-    /// <param name="model">用户创建参数。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">User ID </param>
+    /// <param name="model">User creates parameter</param>
+    /// <returns>Operation result </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] UserCreateParam model)
     {
@@ -213,7 +213,7 @@ public class UserApiController : ControllerBase
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (user == null)
-            throw new Exception("用户不存在");
+            throw new Exception("User does not exist");
 
         user.Email = model.Email;
         user.UserName = model.UserName;
@@ -231,7 +231,7 @@ public class UserApiController : ControllerBase
         {
             model.Password = model.Password.Trim();
             if (model.Password.Length < 6 || model.Password.Length > 32)
-                throw new Exception("密码长度6-32字符");
+                throw new Exception("Password length must be 6-32 characters");
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
             result = await _userManager.ResetPasswordAsync(user, code, model.Password.Trim());
@@ -246,8 +246,8 @@ public class UserApiController : ControllerBase
     /// <summary>
     /// 删除用户。
     /// </summary>
-    /// <param name="id">用户ID。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">User ID</param>
+    /// <returns>Operation result </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
@@ -256,7 +256,7 @@ public class UserApiController : ControllerBase
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (user == null)
-            throw new Exception("用户不存在");
+            throw new Exception("User does not exist");
 
         user.IsDeleted = true;
         user.UpdatedOn = DateTime.Now;
@@ -277,7 +277,7 @@ public class UserApiController : ControllerBase
         foreach (var roleId in model.RoleIds)
         {
             if (user.Roles.Any(x => x.RoleId == roleId)) continue;
-            if (!roleArray.Contains(roleId)) throw new Exception("角色不存在");
+            if (!roleArray.Contains(roleId)) throw new Exception("Role does not exist");
             var userRole = new UserRole
             {
                 RoleId = roleId,
@@ -297,16 +297,16 @@ public class UserApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取用户地址列表。
+    /// Retrieve user address lis
     /// </summary>
-    /// <param name="userId">用户ID。</param>
-    /// <param name="userAddressRepository">用户地址仓储。</param>
-    /// <returns>用户地址列表。</returns>
+    /// <param name="userId">User ID </param>
+    /// <param name="userAddressRepository">User address repository </param>
+    /// <returns>User address list </returns>
     [HttpGet("{userId}/addresses")]
     public async Task<Result> UserAddress(int userId, [FromServices] IRepository<UserAddress> userAddressRepository)
     {
         var user = await _userRepository.Query().FirstOrDefaultAsync(x => x.Id == userId);
-        if (user == null) return Result.Fail("用户不存在");
+        if (user == null) return Result.Fail("User does not exist");
         var userAddress = await userAddressRepository
             .Query()
             .Where(x => x.UserId == userId)

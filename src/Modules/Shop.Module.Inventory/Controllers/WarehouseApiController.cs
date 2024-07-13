@@ -14,7 +14,7 @@ using Shop.Module.Inventory.ViewModels;
 namespace Shop.Module.Inventory.Areas.Inventory.Controllers;
 
 /// <summary>
-/// 仓库管理API控制器，提供仓库的增删改查等功能
+/// The warehouse management API controller provides functions such as adding, deleting, editing, and querying the warehouse
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/warehouses")]
@@ -42,9 +42,9 @@ public class WarehouseApiController : ControllerBase
 
 
     /// <summary>
-    /// 获取所有仓库的简要信息
+    /// Get brief information about all warehouses
     /// </summary>
-    /// <returns>返回操作结果，包含仓库的简要信息列表</returns>
+    /// <returns>Returns the results of the operation, including a list of summary information about the warehouse</returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -59,10 +59,10 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据分页参数获取仓库数据列表
+    /// Get a list of warehouse data based on the pagination parameter
     /// </summary>
-    /// <param name="param">标准表格参数，包含分页、排序等信息</param>
-    /// <returns>返回操作结果，包含分页的仓库数据列表</returns>
+    /// <param name="param">Standard table parameters, including paging, sorting, and more</param>
+    /// <returns>Returns the results of the operation, including a paginated list of warehouse data</returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<WarehouseQueryResult>>> DataList([FromBody] StandardTableParam param)
     {
@@ -87,17 +87,17 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据仓库ID获取仓库详细信息
+    /// Get warehouse details based on warehouse ID
     /// </summary>
-    /// <param name="id">仓库ID</param>
-    /// <returns>返回操作结果，包含指定ID的仓库详细信息</returns>
+    /// <param name="id">Repository ID</param>
+    /// <returns>Returns the results of the operation, including inventory details of the specified ID</returns>
     [HttpGet("{id}")]
     public async Task<Result> Get(int id)
     {
         var currentUser = await _workContext.GetCurrentUserAsync();
         var warehouse = await _warehouseRepository.Query().Include(w => w.Address).FirstOrDefaultAsync(w => w.Id == id);
         if (warehouse == null)
-            throw new Exception("仓库不存在");
+            throw new Exception("Warehouse does not exist");
         var address = warehouse.Address ?? new Address();
         var result = new WarehouseQueryResult
         {
@@ -118,21 +118,21 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建新仓库
+    /// Create a new repository
     /// </summary>
-    /// <param name="model">仓库创建参数</param>
-    /// <returns>返回操作结果，表示是否创建成功</returns>
+    /// <param name="model">Repository creation parameters</param>
+    /// <returns>Returns the result of the operation, indicating whether the creation was successful or not</returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] WarehouseCreateParam model)
     {
         var currentUser = await _workContext.GetCurrentUserAsync();
 
-        //验证所选择省市区是否属于国家
+        //Verify whether the selected province or city is part of the country
         var province = await _provinceRepository.FirstOrDefaultAsync(model.StateOrProvinceId);
         if (province == null)
-            throw new Exception("省市区不存在");
+            throw new Exception("The province or city does not exist");
         if (province.CountryId != model.CountryId)
-            throw new Exception("所选择省市区不属于当前选择的国家");
+            throw new Exception("The selected province or city is not part of the currently selected country");
 
         var address = new Address
         {
@@ -157,12 +157,13 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新仓库
+    /// Update the repository
     /// </summary>
     /// <param name="id"></param>
     /// <param name="model"></param>
     /// <returns></returns>
     /// <exception cref="Exception"></exception>
+    
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] WarehouseCreateParam model)
     {
@@ -171,14 +172,14 @@ public class WarehouseApiController : ControllerBase
             .Include(x => x.Address)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (warehouse == null)
-            throw new Exception("仓库不存在");
+            throw new Exception("Repository does not exist");
 
-        //验证所选择省市区是否属于国家
+        //Verify whether the selected province or city belongs to the country
         var province = await _provinceRepository.FirstOrDefaultAsync(model.StateOrProvinceId);
         if (province == null)
-            throw new Exception("省市区不存在");
+            throw new Exception("The province or city does not exist");
         if (province.CountryId != model.CountryId)
-            throw new Exception("所选择省市区不属于当前选择的国家");
+            throw new Exception("The selected province or city is not part of the currently selected country");
 
         warehouse.Name = model.Name;
         warehouse.AdminRemark = model.AdminRemark;
@@ -203,7 +204,7 @@ public class WarehouseApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除仓库
+    /// Xóa kho
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -215,11 +216,11 @@ public class WarehouseApiController : ControllerBase
             .Include(x => x.Address)
             .FirstOrDefaultAsync(x => x.Id == id);
         if (warehouse == null)
-            return Result.Fail("仓库不存在");
+            return Result.Fail("Repository does not exist");
 
         //var any = _productRepository.Query().Any(c => c.DefaultWarehouseId == id);
         //if (any)
-        //    return Result.Fail("仓库已被产品引用，不允许删除");
+        // return Result.Fail("The warehouse has been referenced by the product and cannot be deleted.");
 
         warehouse.IsDeleted = true;
         warehouse.UpdatedOn = DateTime.Now;

@@ -12,7 +12,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// 管理员回复 API 控制器，用于处理管理员对评论的回复操作。
+/// Admin Reply API Controller, used to handle admin comment replies.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/admin-replies")]
@@ -39,10 +39,10 @@ public class AdminReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取管理员回复列表。
+    /// Get the list of admin responses in pagination.
     /// </summary>
-    /// <param name="param">分页和筛选参数。</param>
-    /// <returns>管理员回复的分页列表。</returns>
+    /// <param name="param">Paging and filtering parameters. </param>
+    /// <returns>A paginated list of admin responses. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<AdminReplyListResult>>> Grid(
         [FromBody] StandardTableParam<AdminReplyQueryParam> param)
@@ -78,11 +78,11 @@ public class AdminReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定 ID 的管理员回复的状态。
+    /// Updates the admin response status with the specified ID.
     /// </summary>
-    /// <param name="id">管理员回复 ID。</param>
-    /// <param name="param">回复更新参数。</param>
-    /// <returns>更新操作的结果。</returns>
+    /// <param name="id">Administrator response ID. </param>
+    /// <param name="param">Reply to update parameters. </param>
+    /// <returns>The result of the update operation. </return>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] AdminReplyUpdateParam param)
     {
@@ -99,10 +99,10 @@ public class AdminReplyApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定 ID 的管理员回复。
+    /// Delete the admin response with the specified ID.
     /// </summary>
-    /// <param name="id">管理员回复 ID。</param>
-    /// <returns>删除操作的结果。</returns>
+    /// <param name="id">Administrator response ID. </param>
+    /// <returns>Result of the delete operation. </return>
     [HttpDelete("{id}")]
     public async Task<Result> Delete(int id)
     {
@@ -111,7 +111,7 @@ public class AdminReplyApiController : ControllerBase
         if (model != null)
         {
             var any = _replyRepository.Query().Any(c => c.ParentId == model.Id);
-            if (any) throw new Exception("当前回复下存在子回复，不允许删除");
+            if (any) throw new Exception("There is a sub answer below the current answer and deletion is not allowed.");
 
             model.IsDeleted = true;
             model.UpdatedOn = DateTime.Now;

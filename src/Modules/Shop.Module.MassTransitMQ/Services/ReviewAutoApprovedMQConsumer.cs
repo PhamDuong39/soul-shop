@@ -28,7 +28,7 @@ public class ReviewAutoApprovedMQConsumer : IConsumer<ReviewAutoApprovedEvent>
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "评论自动审核消息，处理失败", context?.Message);
+            _logger.LogError(ex, "Comment automatic audit message，Processing failed", context?.Message);
         }
     }
 }

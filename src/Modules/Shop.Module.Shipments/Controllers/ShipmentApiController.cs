@@ -12,7 +12,7 @@ using Shop.Module.Shipments.ViewModels;
 namespace Shop.Module.Shipments.Controllers;
 
 /// <summary>
-/// 发货 API 控制器，负责管理发货单相关操作。
+/// Shipping API controller, responsible for managing activities related to shipping orders.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/shipments")]
@@ -33,10 +33,10 @@ public class ShipmentApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取指定发货单的详细信息。
+    /// Get details of a specified invoice.
     /// </summary>
-    /// <param name="id">发货单 ID。</param>
-    /// <returns>发货单详细信息。</returns>
+    /// <param name="id">Invoice ID.</param>
+    /// <returns>Invoice details. </return>
     [HttpGet("{id}")]
     public async Task<Result<ShipmentQueryResult>> Get(long id)
     {
@@ -79,10 +79,10 @@ public class ShipmentApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取所有发货单信息。
+    /// Get all invoice information in pages.
     /// </summary>
-    /// <param name="param">分页和筛选参数。</param>
-    /// <returns>分页的发货单列表。</returns>
+    /// <param name="param">Paging and filtering parameters. </param>
+    /// <returns> List of invoices with page numbers. </return>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<ShipmentQueryResult>>> List(
         [FromBody] StandardTableParam<ShipmentQueryParam> param)

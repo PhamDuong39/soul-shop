@@ -12,7 +12,7 @@ using Shop.Module.Core.ViewModels;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 用户收货地址相关 API
+/// User shipping address related API
 /// </summary>
 [ApiController]
 [Authorize]
@@ -46,7 +46,7 @@ public class UserAddressApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取当前用户所有的收货地址
+    /// Retrieve all shipping addresses of the current user
     /// </summary>
     /// <returns></returns>
     [HttpGet]
@@ -57,7 +57,7 @@ public class UserAddressApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取收货地址详情
+    /// Retrieve shipping address details
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -70,7 +70,7 @@ public class UserAddressApiController : ControllerBase
     }
 
     /// <summary>
-    /// 添加用户收货地址
+    /// Add user shipping address
     /// </summary>
     /// <param name="param"></param>
     /// <returns></returns>
@@ -82,19 +82,19 @@ public class UserAddressApiController : ControllerBase
         var countryId = (int)CountryWithId.China;
         var provinces = await _countryService.GetProvinceByCache(countryId);
         if (provinces == null || provinces.Count <= 0)
-            throw new Exception("省市区数据异常，请联系管理员");
+            throw new Exception("Province, city, and district data anomaly，Please contact the administrator");
 
         if (!provinces.Any(c => c.Id == param.StateOrProvinceId && c.Level == StateOrProvinceLevel.Default))
-            throw new Exception("所选择省信息不存在");
+            throw new Exception("The selected province information does not exist");
 
         if (!provinces.Any(c =>
                 c.Id == param.CityId && c.Level == StateOrProvinceLevel.City && c.ParentId == param.StateOrProvinceId))
-            throw new Exception("所选择市信息不存在");
+            throw new Exception("The selected city information does not exist");
 
         if (param.DistrictId.HasValue)
             if (!provinces.Any(c =>
                     c.Id == param.DistrictId && c.Level == StateOrProvinceLevel.District && c.ParentId == param.CityId))
-                throw new Exception("所选择区/县信息不存在");
+                throw new Exception("The selected district information does not exist");
 
         var address = new Address()
         {
@@ -102,7 +102,7 @@ public class UserAddressApiController : ControllerBase
             ContactName = param.ContactName,
             Phone = param.Phone,
             CountryId = countryId,
-            StateOrProvinceId = param.DistrictId ?? param.CityId // 存储最小结构数据
+            StateOrProvinceId = param.DistrictId ?? param.CityId // tore minimal structured data
         };
         var userAddress = new UserAddress()
         {
@@ -126,7 +126,7 @@ public class UserAddressApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新用户收货地址
+    /// Update user shipping address
     /// </summary>
     /// <param name="id"></param>
     /// <param name="param"></param>
@@ -138,24 +138,24 @@ public class UserAddressApiController : ControllerBase
         var user = await _workContext.GetCurrentUserAsync();
         var userAddress = await _userAddressRepository.Query().Include(c => c.Address)
             .FirstOrDefaultAsync(c => c.Id == id && c.UserId == user.Id);
-        if (userAddress?.Address == null) throw new Exception("地址不存在");
+        if (userAddress?.Address == null) throw new Exception("Address does not exist");
 
         var countryId = (int)CountryWithId.China;
         var provinces = await _countryService.GetProvinceByCache(countryId);
         if (provinces == null || provinces.Count <= 0)
-            throw new Exception("省市区数据异常，请联系管理员");
+            throw new Exception("Province, city, and district data anomaly, please contact the administrator");
 
         if (!provinces.Any(c => c.Id == param.StateOrProvinceId && c.Level == StateOrProvinceLevel.Default))
-            throw new Exception("所选择省信息不存在");
+            throw new Exception("The selected province information does not exist");
 
         if (!provinces.Any(c =>
                 c.Id == param.CityId && c.Level == StateOrProvinceLevel.City && c.ParentId == param.StateOrProvinceId))
-            throw new Exception("所选择市信息不存在");
+            throw new Exception("The selected city information does not exist");
 
         if (param.DistrictId.HasValue)
             if (!provinces.Any(c =>
                     c.Id == param.DistrictId && c.Level == StateOrProvinceLevel.District && c.ParentId == param.CityId))
-                throw new Exception("所选择区/县信息不存在");
+                throw new Exception("The selected district information does not exist");
 
         userAddress.Address.AddressLine1 = param.AddressLine1;
         userAddress.Address.ContactName = param.ContactName;
@@ -187,7 +187,7 @@ public class UserAddressApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除用户收货地址
+    /// Delete user shipping address
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
@@ -200,7 +200,7 @@ public class UserAddressApiController : ControllerBase
             .Query()
             .Include(c => c.Address)
             .FirstOrDefaultAsync(c => c.Id == id && c.UserId == user.Id);
-        if (userAddress?.Address == null) throw new Exception("地址不存在");
+        if (userAddress?.Address == null) throw new Exception("Address does not exist");
 
         userAddress.IsDeleted = true;
         userAddress.Address.IsDeleted = true;
@@ -221,7 +221,7 @@ public class UserAddressApiController : ControllerBase
     }
 
     /// <summary>
-    /// 省市区列表
+    /// Province, city, district list
     /// </summary>
     /// <returns></returns>
     [HttpGet("provinces")]

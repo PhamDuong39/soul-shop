@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 管理后台系统服务相关 API
+/// Manage backend system service-related APIs
 /// </summary>
 [ApiController]
 [Route("api/system")]
@@ -29,7 +29,7 @@ public class SystemApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取系统运行信息
+    /// Retrieve system runtime information
     /// </summary>
     /// <returns></returns>
     [HttpGet("info")]

@@ -12,7 +12,7 @@ using Shop.Module.Core.ViewModels;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 小部件轮播 API 控制器，提供轮播部件相关的接口操作。
+/// Widget carousel API controller, providing interface operations related to carousel widgets
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/widget-carousels")]
@@ -33,16 +33,16 @@ public class WidgetCarouselApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据部件实例ID获取轮播部件信息。
+    /// Retrieve carousel widget information based on the widget instance ID
     /// </summary>
-    /// <param name="id">部件实例ID。</param>
-    /// <returns>轮播部件信息。</returns>
+    /// <param name="id">widget instance ID </param>
+    /// <returns>carousel widget information </returns>
     [HttpGet("{id}")]
     public async Task<Result> Get(long id)
     {
         var widgetInstance = await _widgetInstanceRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
         if (widgetInstance == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("Document does not exist");
         var model = new WidgetCarouselResult
         {
             Id = widgetInstance.Id,
@@ -66,10 +66,10 @@ public class WidgetCarouselApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建新的轮播部件。
+    /// Create a new carousel widget
     /// </summary>
-    /// <param name="model">轮播部件参数。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="model">Carousel widget parameters </param>
+    /// <returns>Operation result </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] WidgetCarouselParam model)
     {
@@ -89,17 +89,17 @@ public class WidgetCarouselApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新轮播部件信息。
+    /// Update carousel widget information
     /// </summary>
-    /// <param name="id">部件实例ID。</param>
-    /// <param name="model">轮播部件参数。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">widget instance ID </param>
+    /// <param name="model">carousel widget parameters </param>
+    /// <returns>Operation result </returns>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] WidgetCarouselParam model)
     {
         var widgetInstance = await _widgetInstanceRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
         if (widgetInstance == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("Document does not exist");
         widgetInstance.Name = model.Name;
         widgetInstance.PublishStart = model.PublishStart;
         widgetInstance.PublishEnd = model.PublishEnd;

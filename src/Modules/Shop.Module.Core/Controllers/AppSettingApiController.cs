@@ -13,7 +13,7 @@ using Shop.Module.Core.Services;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 管理后台控制器用于处理应用程序设置相关操作的 API 请求。
+/// A backend management controller for handling API requests related to application settings.
 /// </summary>
 [ApiController]
 [Route("api/appsettings")]
@@ -38,9 +38,9 @@ public class AppSettingApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取应用程序设置列表。
+    /// Retrieve the list of application settings.
     /// </summary>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <returns> Represents the operation result as <see cref="Result"/> object </returns>
     [HttpGet]
     public async Task<Result> Get()
     {
@@ -49,18 +49,18 @@ public class AppSettingApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新应用程序设置。
+    /// Update application settings.
     /// </summary>
-    /// <param name="model">要更新的应用程序设置。</param>
-    /// <returns>表示操作结果的 <see cref="Result"/> 对象。</returns>
+    /// <param name="model">Application settings to be updated</param>
+    /// <returns>Indicating the result of the operation <see cref="Result"/> object </returns>
     [HttpPut]
     public async Task<Result> Put([FromBody] AppSetting model)
     {
-        // 由于涉及高级权限，影响系统运行，目前暂时控制系统用户才可以修改
-        // TODO 待优化
+        // Due to involving advanced permissions and affecting system operation, currently only system administrators are allowed to make changes.
+        // To be optimized
         var user = await _workContext.GetCurrentOrThrowAsync();
         if (user.Id != (int)UserWithId.System)
-            return Result.Fail("您不是系统管理员！您没有操作权限");
+            return Result.Fail("You are not a system administrator！You do not have permission to perform this operation.");
 
         var setting = await _appSettingRepository.Query()
             .FirstOrDefaultAsync(x => x.Id == model.Id && x.IsVisibleInCommonSettingPage);
@@ -69,9 +69,9 @@ public class AppSettingApiController : ControllerBase
             if (setting.FormatType == AppSettingFormatType.Json)
             {
                 var type = Type.GetType(setting.Type);
-                if (type == null) return Result.Fail("设置类型异常");
+                if (type == null) return Result.Fail("Setting type error");
                 var obj = JsonConvert.DeserializeObject(model.Value, type);
-                if (obj == null) return Result.Fail("设置参数异常");
+                if (obj == null) return Result.Fail("Setting parameter exception");
             }
 
             setting.Value = model.Value;
@@ -83,13 +83,13 @@ public class AppSettingApiController : ControllerBase
 
                 //if (setting.FormatType == AppSettingFormatType.Json)
                 //{
-                //    // 绑定方式
+                //    // Binding method
                 //    // Singleton/Option
-                //    // 是否可以重新注入绑定??
+                //    // Can bindings be reinjected???
                 //    var type = Type.GetType(setting.Type);
                 //    if (type == null)
                 //    {
-                //        return Result.Fail("配置类型异常");
+                //        return Result.Fail("Configuration type exception");
                 //    }
                 //    //var obj = type.Assembly.CreateInstance(type.FullName);
                 //    var obj = Activator.CreateInstance(type);

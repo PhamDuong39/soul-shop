@@ -125,7 +125,7 @@ public class AliyunSmsSenderService(
             return (false, "Invalid phone number");
 
         var cacheKey = ShopKeys.RegisterPhonePrefix + phone;
-        if (cacheManager.IsSet(cacheKey)) return (false, "The verification code has been sent, please try again later.");
+        if (cacheManager.IsSet(cacheKey)) return (false, "Verification code has been sent, please try again later.");
 
         var code = captcha;
         var success = await SendSmsAsync(new SmsSend()
@@ -140,10 +140,10 @@ public class AliyunSmsSenderService(
         if (success)
         {
             cacheManager.Set(cacheKey, code, 1);
-            return (true, "Sent successfully");
+            return (true, "Submitted successfully");
         }
 
-        return (false, "sent failed");
+        return (false, "Send failed");
     }
 
     private static string SignString(string source, string accessSecret)

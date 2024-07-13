@@ -20,7 +20,7 @@ using Shop.Module.Reviews.ViewModels;
 namespace Shop.Module.Reviews.Controllers;
 
 /// <summary>
-/// 评论 API 控制器，负责处理评论相关操作。
+/// Comments API controller, responsible for handling comment-related operations.
 /// </summary>
 [Route("api/reviews")]
 [Authorize()]
@@ -54,41 +54,40 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 添加评论。
+    /// add comment
     /// </summary>
-    /// <param name="param">评论添加的参数。</param>
-    /// <returns>添加评论操作的结果。</returns>
+    /// <param name="param">Comment out the added parameters. </param>
+    /// <returns>Result of adding comment. </return>
     [HttpPost]
     public async Task<Result> AddReview([FromBody] ReviewAddParam param)
     {
         var user = await _workContext.GetCurrentOrThrowAsync();
         var anyType = entityTypeIds.Any(c => c == param.EntityTypeId);
-        if (!anyType) throw new Exception("参数异常");
+        if (!anyType) throw new Exception("Parameter exception");
 
         if (param.SourceType == null && param.SourceId != null)
-            throw new Exception("评论来源类型异常");
+            throw new Exception("Unusual comment source type");
         else if (param.SourceType != null && param.SourceId != null)
             if (param.SourceType == ReviewSourceType.Order && param.EntityTypeId == EntityTypeWithId.Product)
             {
                 var anyProduct = _orderRepository.Query().Any(c =>
-                    c.Id == param.SourceId.Value && c.OrderItems.Any(x => x.ProductId == param.EntityId));
-                if (!anyProduct) throw new Exception("评论商品不存在");
+                c.Id == param.SourceId.Value && c.OrderItems.Any(x => x.ProductId == param.EntityId));
+                if (!anyProduct) throw new Exception("The product being evaluated does not exist");
                 var order = await _orderRepository.Query().FirstOrDefaultAsync(c => c.Id == param.SourceId);
                 if (order == null)
-                    throw new Exception("订单不存在");
+                    throw new Exception("Order does not exist");
                 if (order.OrderStatus != OrderStatus.Complete)
-                    throw new Exception("订单未完成，无法进行评价");
+                    throw new Exception("The order has not been completed and cannot be evaluated.");
             }
 
-        // 一个用户
-        // 评论 某订单 某商品只能一次
-        // 评论 无订单关联 评论商品只能一次
+        // a user comments on an order and a certain product can only be fulfilled once
+        // comments not related to the order. You can only comment on a product once.
         var any = await _reviewRepository.Query()
             .AnyAsync(c =>
                 c.UserId == user.Id && c.EntityTypeId == (int)param.EntityTypeId && c.EntityId == param.EntityId &&
                 c.SourceId == param.SourceId && c.SourceType == param.SourceType);
         if (any)
-            throw new Exception("您已评论");
+            throw new Exception("You have commented");
 
         var review = new Review
         {
@@ -133,17 +132,17 @@ public class ReviewApiController : ControllerBase
 
 
     /// <summary>
-    /// 获取特定实体的评论信息，如评论总数和各星级的评论数。
+    /// Gets review information for a specific entity, such as the total number of reviews and the number of reviews for each star rating.
     /// </summary>
-    /// <param name="param">评论信息查询的参数。</param>
-    /// <returns>特定实体的评论信息。</returns>
+    /// <param name="param">Parameters for comment information query. </param>
+    /// <returns>Comment information of specific entities. </return>
     [HttpPost("info")]
     [AllowAnonymous]
     public async Task<Result> Info([FromBody] ReviewInfoParam param)
     {
         var any = entityTypeIds.Any(c => c == param.EntityTypeId);
         if (!any)
-            throw new Exception("参数不支持");
+            throw new Exception("Parameter not supported");
 
         var query = _reviewRepository.Query()
             .Where(c => c.EntityId == param.EntityId && c.EntityTypeId == (int)param.EntityTypeId &&
@@ -169,17 +168,17 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 列出特定实体的评论列表。
+    /// Lists annotations for a specific entity.
     /// </summary>
-    /// <param name="param">评论列表查询的参数。</param>
-    /// <returns>特定实体的评论列表。</returns>
+    /// <param name="param">Parameters for comment list query. </param>
+    /// <returns>List of comments for a specific entity. </return>
     [HttpPost("list")]
     [AllowAnonymous]
     public async Task<Result> List([FromBody] ReviewListQueryParam param)
     {
         var any = entityTypeIds.Any(c => c == param.EntityTypeId);
         if (!any)
-            throw new Exception("参数不支持");
+            throw new Exception("Parameter not supported");
 
         var query = _reviewRepository.Query()
             .Where(c => c.Status == ReviewStatus.Approved && c.EntityId == param.EntityId &&
@@ -214,7 +213,7 @@ public class ReviewApiController : ControllerBase
                 //})
             }).Take(param.Take).ToListAsync();
 
-        // bug todo 待优化
+        // bug todo to be optimized
         result.ForEach(c =>
         {
             if (c.ReplieCount > 0)
@@ -235,10 +234,10 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 分页获取评论列表。
+    /// Get the list of comments in pagination.
     /// </summary>
-    /// <param name="param">分页查询参数。</param>
-    /// <returns>分页的评论列表。</returns>
+    /// <param name="param">Pagination query parameters. </param>
+    /// <returns> Paged list of comments. </return>
     [HttpPost("grid")]
     [AllowAnonymous]
     public async Task<Result<StandardTableResult<ReviewListResult>>> Grid(
@@ -246,11 +245,11 @@ public class ReviewApiController : ControllerBase
     {
         var search = param?.Search;
         if (search == null)
-            throw new ArgumentNullException("参数异常");
+            throw new ArgumentNullException("Parameter exception");
 
         var any = entityTypeIds.Any(c => c == search.EntityTypeId);
         if (!any)
-            throw new Exception("参数不支持");
+            throw new Exception("Parameter not supported");
 
         var query = _reviewRepository.Query()
             .Where(c => c.Status == ReviewStatus.Approved && c.EntityId == search.EntityId &&
@@ -304,7 +303,7 @@ public class ReviewApiController : ControllerBase
             });
 
         if (result?.List?.Count() > 0)
-            // bug todo 待优化
+            // bug todo to be optimized
             result.List.ToList().ForEach(c =>
             {
                 if (c.ReplieCount > 0)
@@ -325,10 +324,10 @@ public class ReviewApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取特定评论的详细信息。
+    /// Get details for a specific comment.
     /// </summary>
-    /// <param name="id">评论 ID。</param>
-    /// <returns>特定评论的详细信息。</returns>
+    /// <param name="id">Comment ID. </param>
+    /// <returns>Details about the specific comment. </return>
     [HttpGet("{id:int:min(1)}")]
     [AllowAnonymous]
     public async Task<Result> Get(int id)

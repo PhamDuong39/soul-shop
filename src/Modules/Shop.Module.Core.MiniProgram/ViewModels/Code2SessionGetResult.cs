@@ -5,31 +5,31 @@ namespace Shop.Module.Core.MiniProgram.ViewModels;
 public class Code2SessionGetResult
 {
     /// <summary>
-    /// 用户唯一标识
+    /// User unique identifier
     /// </summary>
     [JsonProperty("openid")]
     public string OpenId { get; set; }
 
     /// <summary>
-    /// 会话密钥
+    /// Session key
     /// </summary>
     [JsonProperty("session_key")]
     public string SessionKey { get; set; }
 
     /// <summary>
-    /// 用户在开放平台的唯一标识符，在满足 UnionID 下发条件的情况下会返回，详见 UnionID 机制说明。
+    /// User's unique identifier on the open platform, which will be returned if the conditions for issuing UnionID are met. Refer to the UnionID mechanism documentation for details.
     /// </summary>
     [JsonProperty("unionid")]
     public string UnionId { get; set; }
 
     /// <summary>
-    /// 错误码
+    /// Error code
     /// </summary>
     [JsonProperty("errcode")]
     public int ErrCode { get; set; }
 
     /// <summary>
-    /// 错误信息
+    /// Error message
     /// </summary>
     [JsonProperty("errmsg")]
     public string ErrMessage { get; set; }

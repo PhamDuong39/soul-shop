@@ -12,7 +12,7 @@ public class AuthenticationJwtConfig
     public string Issuer { get; set; }
 
     /// <summary>
-    /// 提示：暂未开启JWT过期策略，此时间用于令牌生成过期时间及令牌续签过期时间
+    /// Mẹo: Chính sách hết hạn JWT chưa được bật. Thời gian này được sử dụng cho thời gian hết hạn tạo mã thông báo và thời gian hết hạn gia hạn mã thông báo.
     /// </summary>
     public int AccessTokenDurationInMinutes { get; set; }
 }

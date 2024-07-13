@@ -14,7 +14,7 @@ using Shop.Module.Core.ViewModels;
 namespace Shop.WebApi.Controllers;
 
 /// <summary>
-/// 模拟 API 控制器，仅用于开发环境和演示站点，用来模拟超管、买家用户、重置样本数据、重置测试账号密码等。
+/// Bộ điều khiển API mô phỏng chỉ được sử dụng trong môi trường phát triển và trang demo để mô phỏng quản trị viên cấp cao, người dùng người mua, đặt lại dữ liệu mẫu, đặt lại mật khẩu tài khoản thử nghiệm, v.v.
 /// </summary>
 [ApiController]
 [Route("api/mock")]
@@ -31,7 +31,7 @@ public class MockApiController : ControllerBase
     {
         _options = options;
 
-        if (_options.Value.ShopEnv == ShopEnv.PRO) throw new Exception("正式环境不允许此操作！");
+        if (_options.Value.ShopEnv == ShopEnv.PRO) throw new Exception("Hoạt động này không được phép trong môi trường chính thức!");
 
         _userRepository = userRepository;
         _tokenService = tokenService;
@@ -40,7 +40,7 @@ public class MockApiController : ControllerBase
     }
 
     /// <summary>
-    /// 模拟超管用户登录，并自动将令牌保存到 cookie 中，用于 swagger 免输入直接调用接口
+    /// Mô phỏng thông tin đăng nhập của người dùng siêu quản trị viên và tự động lưu mã thông báo vào cookie để vênh vang gọi trực tiếp giao diện mà không cần nhập.
     /// </summary>
     /// <returns></returns>
     [HttpGet("admin")]
@@ -57,8 +57,9 @@ public class MockApiController : ControllerBase
             Phone = user.PhoneNumber
         };
 
-        // 处理 Swagger 刷新记住授权状态
-        // 设置 Swagger 刷新自动授权
+        // Làm mới quy trình Swagger để ghi nhớ trạng thái ủy quyền
+        // Đặt Swagger để làm mới ủy quyền tự động
+
         Response.Cookies.Append("access-token", token,
             new CookieOptions() { SameSite = SameSiteMode.None, Secure = true });
 
@@ -66,7 +67,7 @@ public class MockApiController : ControllerBase
     }
 
     /// <summary>
-    /// 重置超管用户密码为 123456
+    /// Đặt lại mật khẩu quản trị viên cấp cao thành 123456
     /// </summary>
     /// <returns></returns>
     [HttpGet("reset-admin-password")]
@@ -76,7 +77,7 @@ public class MockApiController : ControllerBase
 
         var user = await _userManager.FindByIdAsync(adminUser.Id.ToString());
         if (user == null)
-            throw new Exception("用户信息异常");
+            throw new Exception("Thông tin người dùng bất thường");
 
         var identityResult = await _userManager.RemovePasswordAsync(user);
 
@@ -96,8 +97,9 @@ public class MockApiController : ControllerBase
     }
 
     /// <summary>
-    /// 模拟普通/买家/方可用户登录，并自动将令牌保存到 cookie 中，用于 swagger 免输入直接调用接口（注意：普通用户无法调用后台接口，会返回 403 无权限）
-    /// </summary>
+    /// Mô phỏng thông tin đăng nhập thông thường người mua chỉ người dùng và tự động lưu mã thông báo vào cookie để vênh vang gọi trực tiếp
+    /// giao diện mà không cần nhập (lưu ý: người dùng thông thường không thể gọi giao diện phụ trợ và sẽ trả về 403 Không có quyền)
+    /// /// </summary>
     /// <returns></returns>
     [HttpGet("guest")]
     public async Task<Result> MockGuest()
@@ -115,8 +117,8 @@ public class MockApiController : ControllerBase
             Phone = user.PhoneNumber
         };
 
-        // 处理 Swagger 刷新记住授权状态
-        // 设置 Swagger 刷新自动授权
+        // Làm mới quy trình Swagger để ghi nhớ trạng thái ủy quyền
+        // Đặt Swagger để làm mới ủy quyền tự động
         Response.Cookies.Append("access-token", token,
             new CookieOptions() { SameSite = SameSiteMode.None, Secure = true });
 

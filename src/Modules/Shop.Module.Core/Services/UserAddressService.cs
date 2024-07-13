@@ -43,7 +43,7 @@ public class UserAddressService : IUserAddressService
         var countryId = (int)CountryWithId.China;
         var provinces = await _countryService.GetProvinceByCache(countryId);
         if (provinces == null || provinces.Count <= 0)
-            throw new Exception("省市区数据异常，请联系管理员");
+            throw new Exception("Province, city, district data anomaly，Please contact the administrator");
 
         var query = _userAddressRepository
             .Query()

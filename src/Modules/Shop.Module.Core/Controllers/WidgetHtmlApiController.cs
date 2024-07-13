@@ -10,7 +10,7 @@ using Shop.Module.Core.ViewModels;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 小部件 Html API 控制器，提供 HTML 部件相关的接口操作。
+/// Widget Html API controller, providing interface operations related to HTML widgets.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/widget-html")]
@@ -24,15 +24,15 @@ public class WidgetHtmlApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据部件实例ID获取 HTML 部件信息。
+    /// Retrieve HTML widget information based on the widget instance ID
     /// </summary>
-    /// <param name="id">部件实例ID。</param>
-    /// <returns>HTML 部件信息。</returns>
+    /// <param name="id">widget instance ID</param>
+    /// <returns>HTML widget information</returns>
     [HttpGet("{id}")]
     public async Task<Result> Get(int id)
     {
         var widget = await _widgetInstanceRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
-        if (widget == null) return Result.Fail("单据不存在");
+        if (widget == null) return Result.Fail("Document does not exist");
         var model = new WidgetHtmlResult
         {
             Id = widget.Id,
@@ -47,10 +47,10 @@ public class WidgetHtmlApiController : ControllerBase
     }
 
     /// <summary>
-    /// 创建新的 HTML 部件。
+    /// Create a new HTML widget
     /// </summary>
-    /// <param name="model">HTML 部件参数。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="model">HTML widget parameters </param>
+    /// <returns>widget parameters </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] WidgetHtmlParam model)
     {
@@ -70,16 +70,16 @@ public class WidgetHtmlApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新 HTML 部件信息。
+    /// Update HTML widget information
     /// </summary>
-    /// <param name="id">部件实例ID。</param>
-    /// <param name="model">HTML 部件参数。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">widget instance ID </param>
+    /// <param name="model">HTML widget parameters </param>
+    /// <returns>Operation result </returns>
     [HttpPut("{id}")]
     public async Task<Result> Put(int id, [FromBody] WidgetHtmlParam model)
     {
         var widgetInstance = await _widgetInstanceRepository.Query().FirstOrDefaultAsync(x => x.Id == id);
-        if (widgetInstance == null) return Result.Fail("单据不存在");
+        if (widgetInstance == null) return Result.Fail("Document does not exist");
         widgetInstance.Name = model.Name;
         widgetInstance.WidgetZoneId = model.WidgetZoneId;
         widgetInstance.HtmlData = model.HtmlContent;

@@ -5,11 +5,11 @@ namespace Shop.Module.Feedbacks.ViewModels;
 
 public class FeedbackAddParam
 {
-    [StringLength(450)] public string Contact { get; set; }
+  [StringLength(450)] public string Contact { get; set; set; }
 
-    [StringLength(450)]
-    [Required(ErrorMessage = "请输入内容，且内容长度不能超过450")]
-    public string Content { get; set; }
+ [StringLength(450)]
+ [Required(ErrorMessage = "Please enter a message and its length must not exceed 450 characters")]
+ public string Content { get; set; set; }
 
-    [Required(ErrorMessage = "请选择反馈类型")] public FeedbackType? Type { get; set; }
+ [Required(ErrorMessage = "Please select a response type")] public ResponseType? Type { get; set; set; }
 }

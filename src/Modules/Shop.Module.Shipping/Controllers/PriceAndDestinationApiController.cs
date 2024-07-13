@@ -14,7 +14,7 @@ using Shop.Module.Shipping.ViewModels;
 namespace Shop.Module.Shipping.Controllers;
 
 /// <summary>
-/// 运费价格与目的地 API 控制器，负责管理运费模板内的具体运费规则。
+/// The rate and destination API controller is responsible for managing the specific freight rules in the freight template.
 /// </summary>
 [Authorize(Roles = "admin")]
 [Route("api/shippings/price-destinations")]
@@ -38,11 +38,12 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据运费模板 ID 分页获取运费策略列表。
+    /// Get a list of freight strategies in pages based on the freight template ID.
     /// </summary>
-    /// <param name="freightTemplateId">运费模板 ID。</param>
-    /// <param name="param">分页参数。</param>
-    /// <returns>分页的运费策略列表。</returns>
+    /// <param name="freightTemplateId">Freight template ID. </param>
+    /// <param name="param">Paging parameters. </param>
+    /// <returns> Paged list of shipping strategies. </return>
+
     [HttpPost("grid/{freightTemplateId:int:min(1)}")]
     public async Task<Result<StandardTableResult<PriceAndDestinationQueryResult>>> DataList(int freightTemplateId,
         [FromBody] StandardTableParam param)
@@ -73,12 +74,12 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// 在指定运费模板下创建新的运费策略。
+    /// Create a new freight strategy according to the specified freight template.
     /// </summary>
-    /// <param name="freightTemplateId">运费模板 ID。</param>
-    /// <param name="model">运费策略的创建参数。</param>
-    /// <returns>创建操作的结果。</returns>
-    [HttpPost("{freightTemplateId:int:min(1)}")]
+    /// <param name="freightTemplateId">Freight template ID. </param>
+    /// <param name="model">Build the parameters of the freight strategy. </param>
+    /// <returns>The result of the create operation. </return>
+
     public async Task<Result> Post(int freightTemplateId, [FromBody] PriceAndDestinationCreateParam model)
     {
         var entity = new PriceAndDestination()
@@ -96,7 +97,7 @@ public class PriceAndDestinationApiController : ControllerBase
             && c.CountryId == model.CountryId
             && c.StateOrProvinceId == model.StateOrProvinceId);
         if (any)
-            return Result.Fail("运费策略已存在，同一国家、省市区运费策略只能存在一个");
+            return Result.Fail("Freight policy already exists. There can only be one freight policy for the same country, province, city or city.");
 
         _priceAndDestinationRepository.Add(entity);
         await _priceAndDestinationRepository.SaveChangesAsync();
@@ -104,17 +105,17 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定 ID 的运费策略。
+    /// Updates the shipping policy for the specified ID.
     /// </summary>
-    /// <param name="id">运费策略 ID。</param>
-    /// <param name="model">运费策略的更新参数。</param>
-    /// <returns>更新操作的结果。</returns>
+    /// <param name="id">Shipping policy ID. </param>
+    /// <param name="model">Updates the freight strategy parameters. </param>
+    /// <returns>The result of the update operation. </return>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] PriceAndDestinationCreateParam model)
     {
         var entity = await _priceAndDestinationRepository.FirstOrDefaultAsync(id);
         if (entity == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("Documentation does not exist");
 
         var any = await _priceAndDestinationRepository.Query().AnyAsync(c =>
             c.FreightTemplateId == entity.FreightTemplateId
@@ -122,7 +123,7 @@ public class PriceAndDestinationApiController : ControllerBase
             && c.StateOrProvinceId == model.StateOrProvinceId
             && c.Id != entity.Id);
         if (any)
-            return Result.Fail("运费策略已存在，同一国家、省市区运费策略只能存在一个");
+            return Result.Fail("Freight policy already exists. There can only be a freight policy for the same country, province, city or municipality.");
 
         entity.CountryId = model.CountryId;
         entity.MinOrderSubtotal = model.MinOrderSubtotal;
@@ -136,16 +137,16 @@ public class PriceAndDestinationApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定 ID 的运费策略。
+    /// Delete the shipping policy with the specified ID.
     /// </summary>
-    /// <param name="id">运费策略 ID。</param>
-    /// <returns>删除操作的结果。</returns>
+    /// <param name="id">Shipping policy ID. </param>
+    /// <returns>Result of the delete operation. </return>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var entity = await _priceAndDestinationRepository.FirstOrDefaultAsync(id);
         if (entity == null)
-            return Result.Fail("单据不存在");
+            return Result.Fail("Documentation does not exist");
 
         entity.IsDeleted = true;
         entity.UpdatedOn = DateTime.Now;
