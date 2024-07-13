@@ -5,7 +5,7 @@ namespace Shop.Module.Shipping.ViewModels;
 
 public class PriceAndDestinationQueryResult
 {
-    public int Id { get; set; }
+    public double Id { get; set; }
 
     public int FreightTemplateId { get; set; }
 

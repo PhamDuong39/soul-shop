@@ -42,8 +42,7 @@ public class PriceAndDestinationApiController : ControllerBase
     /// </summary>
     /// <param name="freightTemplateId">Freight template ID. </param>
     /// <param name="param">Paging parameters. </param>
-    /// <returns> Paged list of shipping strategies. </return>
-
+    /// <returns> Paged list of shipping strategies. </returns>
     [HttpPost("grid/{freightTemplateId:int:min(1)}")]
     public async Task<Result<StandardTableResult<PriceAndDestinationQueryResult>>> DataList(int freightTemplateId,
         [FromBody] StandardTableParam param)
@@ -78,8 +77,8 @@ public class PriceAndDestinationApiController : ControllerBase
     /// </summary>
     /// <param name="freightTemplateId">Freight template ID. </param>
     /// <param name="model">Build the parameters of the freight strategy. </param>
-    /// <returns>The result of the create operation. </return>
-
+    /// <returns>The result of the create operation. </returns>
+    [HttpPost]
     public async Task<Result> Post(int freightTemplateId, [FromBody] PriceAndDestinationCreateParam model)
     {
         var entity = new PriceAndDestination()
@@ -109,7 +108,7 @@ public class PriceAndDestinationApiController : ControllerBase
     /// </summary>
     /// <param name="id">Shipping policy ID. </param>
     /// <param name="model">Updates the freight strategy parameters. </param>
-    /// <returns>The result of the update operation. </return>
+    /// <returns>The result of the update operation. </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] PriceAndDestinationCreateParam model)
     {
@@ -140,7 +139,7 @@ public class PriceAndDestinationApiController : ControllerBase
     /// Delete the shipping policy with the specified ID.
     /// </summary>
     /// <param name="id">Shipping policy ID. </param>
-    /// <returns>Result of the delete operation. </return>
+    /// <returns>Result of the delete operation. </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {

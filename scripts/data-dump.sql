@@ -23,12 +23,12 @@ DROP TABLE IF EXISTS `Catalog_Brand`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_Brand` (
-  `Id` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
   `Name` text COLLATE utf8mb4_unicode_ci,
   `Slug` text COLLATE utf8mb4_unicode_ci,
   `Description` text COLLATE utf8mb4_unicode_ci,
-  `IsPublished` double DEFAULT NULL,
-  `IsDeleted` double DEFAULT NULL,
+  `IsPublished` int DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -52,19 +52,19 @@ DROP TABLE IF EXISTS `Catalog_Category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_Category` (
-  `Id` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
   `Name` text COLLATE utf8mb4_unicode_ci,
   `Slug` text COLLATE utf8mb4_unicode_ci,
   `MetaTitle` text COLLATE utf8mb4_unicode_ci,
   `MetaKeywords` text COLLATE utf8mb4_unicode_ci,
   `MetaDescription` text COLLATE utf8mb4_unicode_ci,
   `Description` text COLLATE utf8mb4_unicode_ci,
-  `DisplayOrder` double DEFAULT NULL,
-  `IsPublished` double DEFAULT NULL,
-  `IncludeInMenu` double DEFAULT NULL,
-  `ParentId` double DEFAULT NULL,
-  `MediaId` double DEFAULT NULL,
-  `IsDeleted` double DEFAULT NULL,
+  `DisplayOrder` int DEFAULT NULL,
+  `IsPublished` int DEFAULT NULL,
+  `IncludeInMenu` int DEFAULT NULL,
+  `ParentId` int DEFAULT NULL,
+  `MediaId` int DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -88,8 +88,8 @@ DROP TABLE IF EXISTS `Catalog_Product`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_Product` (
-  `Id` double DEFAULT NULL,
-  `ParentGroupedProductId` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
+  `ParentGroupedProductId` int DEFAULT NULL,
   `Name` text COLLATE utf8mb4_unicode_ci,
   `Slug` text COLLATE utf8mb4_unicode_ci,
   `MetaTitle` text COLLATE utf8mb4_unicode_ci,
@@ -98,53 +98,53 @@ CREATE TABLE `Catalog_Product` (
   `ShortDescription` text COLLATE utf8mb4_unicode_ci,
   `Description` text COLLATE utf8mb4_unicode_ci,
   `Specification` text COLLATE utf8mb4_unicode_ci,
-  `Price` double DEFAULT NULL,
-  `OldPrice` double DEFAULT NULL,
-  `SpecialPrice` double DEFAULT NULL,
+  `Price` int DEFAULT NULL,
+  `OldPrice` int DEFAULT NULL,
+  `SpecialPrice` int DEFAULT NULL,
   `SpecialPriceStart` text COLLATE utf8mb4_unicode_ci,
   `SpecialPriceEnd` text COLLATE utf8mb4_unicode_ci,
-  `HasOptions` double DEFAULT NULL,
-  `IsVisibleIndividually` double DEFAULT NULL,
-  `IsFeatured` double DEFAULT NULL,
-  `IsCallForPricing` double DEFAULT NULL,
-  `IsAllowToOrder` double DEFAULT NULL,
-  `StockTrackingIsEnabled` double DEFAULT NULL,
+  `HasOptions` int DEFAULT NULL,
+  `IsVisibleIndividually` int DEFAULT NULL,
+  `IsFeatured` int DEFAULT NULL,
+  `IsCallForPricing` int DEFAULT NULL,
+  `IsAllowToOrder` int DEFAULT NULL,
+  `StockTrackingIsEnabled` int DEFAULT NULL,
   `Sku` text COLLATE utf8mb4_unicode_ci,
   `Gtin` text COLLATE utf8mb4_unicode_ci,
   `NormalizedName` text COLLATE utf8mb4_unicode_ci,
-  `ThumbnailImageId` double DEFAULT NULL,
-  `ReviewsCount` double DEFAULT NULL,
+  `ThumbnailImageId` int DEFAULT NULL,
+  `ReviewsCount` int DEFAULT NULL,
   `RatingAverage` text COLLATE utf8mb4_unicode_ci,
-  `BrandId` double DEFAULT NULL,
+  `BrandId` int DEFAULT NULL,
   `Barcode` text COLLATE utf8mb4_unicode_ci,
   `ValidThru` text COLLATE utf8mb4_unicode_ci,
-  `OrderMinimumQuantity` double DEFAULT NULL,
-  `OrderMaximumQuantity` double DEFAULT NULL,
-  `DisplayStockAvailability` double DEFAULT NULL,
-  `DisplayStockQuantity` double DEFAULT NULL,
-  `StockReduceStrategy` double DEFAULT NULL,
-  `NotReturnable` double DEFAULT NULL,
-  `PublishType` double DEFAULT NULL,
-  `DisplayOrder` double DEFAULT NULL,
-  `IsPublished` double DEFAULT NULL,
+  `OrderMinimumQuantity` int DEFAULT NULL,
+  `OrderMaximumQuantity` int DEFAULT NULL,
+  `DisplayStockAvailability` int DEFAULT NULL,
+  `DisplayStockQuantity` int DEFAULT NULL,
+  `StockReduceStrategy` int DEFAULT NULL,
+  `NotReturnable` int DEFAULT NULL,
+  `PublishType` int DEFAULT NULL,
+  `DisplayOrder` int DEFAULT NULL,
+  `IsPublished` int DEFAULT NULL,
   `PublishedOn` text COLLATE utf8mb4_unicode_ci,
   `UnpublishedOn` text COLLATE utf8mb4_unicode_ci,
   `UnpublishedReason` text COLLATE utf8mb4_unicode_ci,
-  `IsShipEnabled` double DEFAULT NULL,
-  `Weight` double DEFAULT NULL,
-  `Length` double DEFAULT NULL,
-  `Width` double DEFAULT NULL,
-  `Height` double DEFAULT NULL,
-  `IsFreeShipping` double DEFAULT NULL,
-  `AdditionalShippingCharge` double DEFAULT NULL,
+  `IsShipEnabled` int DEFAULT NULL,
+  `Weight` int DEFAULT NULL,
+  `Length` int DEFAULT NULL,
+  `Width` int DEFAULT NULL,
+  `Height` int DEFAULT NULL,
+  `IsFreeShipping` int DEFAULT NULL,
+  `AdditionalShippingCharge` int DEFAULT NULL,
   `FreightTemplateId` text COLLATE utf8mb4_unicode_ci,
-  `UnitId` double DEFAULT NULL,
+  `UnitId` int DEFAULT NULL,
   `AdminRemark` text COLLATE utf8mb4_unicode_ci,
   `DeliveryTime` text COLLATE utf8mb4_unicode_ci,
-  `IsDeleted` double DEFAULT NULL,
-  `CreatedById` double DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
+  `CreatedById` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
-  `UpdatedById` double DEFAULT NULL,
+  `UpdatedById` int DEFAULT NULL,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -167,10 +167,10 @@ DROP TABLE IF EXISTS `Catalog_ProductAttribute`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_ProductAttribute` (
-  `Id` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
   `Name` text COLLATE utf8mb4_unicode_ci,
-  `GroupId` double DEFAULT NULL,
-  `IsDeleted` double DEFAULT NULL,
+  `GroupId` int DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -194,12 +194,12 @@ DROP TABLE IF EXISTS `Catalog_ProductAttributeData`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_ProductAttributeData` (
-  `Id` double DEFAULT NULL,
-  `AttributeId` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
+  `AttributeId` int DEFAULT NULL,
   `Value` text COLLATE utf8mb4_unicode_ci,
   `Description` text COLLATE utf8mb4_unicode_ci,
-  `IsPublished` double DEFAULT NULL,
-  `IsDeleted` double DEFAULT NULL,
+  `IsPublished` int DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -223,9 +223,9 @@ DROP TABLE IF EXISTS `Catalog_ProductAttributeGroup`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_ProductAttributeGroup` (
-  `Id` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
   `Name` text COLLATE utf8mb4_unicode_ci,
-  `IsDeleted` double DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -249,9 +249,9 @@ DROP TABLE IF EXISTS `Catalog_ProductAttributeTemplate`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_ProductAttributeTemplate` (
-  `Id` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
   `Name` text COLLATE utf8mb4_unicode_ci,
-  `IsDeleted` double DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -275,10 +275,10 @@ DROP TABLE IF EXISTS `Catalog_ProductAttributeTemplateRelation`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_ProductAttributeTemplateRelation` (
-  `Id` double DEFAULT NULL,
-  `TemplateId` double DEFAULT NULL,
-  `AttributeId` double DEFAULT NULL,
-  `IsDeleted` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
+  `TemplateId` int DEFAULT NULL,
+  `AttributeId` int DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -302,12 +302,12 @@ DROP TABLE IF EXISTS `Catalog_ProductAttributeValue`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `Catalog_ProductAttributeValue` (
-  `Id` double DEFAULT NULL,
-  `AttributeId` double DEFAULT NULL,
-  `ProductId` double DEFAULT NULL,
+  `Id` int DEFAULT NULL,
+  `AttributeId` int DEFAULT NULL,
+  `ProductId` int DEFAULT NULL,
   `Value` text COLLATE utf8mb4_unicode_ci,
   `Description` text COLLATE utf8mb4_unicode_ci,
-  `IsDeleted` double DEFAULT NULL,
+  `IsDeleted` int DEFAULT NULL,
   `CreatedOn` text COLLATE utf8mb4_unicode_ci,
   `UpdatedOn` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -535,7 +535,7 @@ DROP TABLE IF EXISTS `Catalog_ProductPriceHistory`;
 CREATE TABLE `Catalog_ProductPriceHistory` (
   `Id` int DEFAULT NULL,
   `ProductId` int DEFAULT NULL,
-  `Price` double DEFAULT NULL,
+  `Price` int DEFAULT NULL,
   `OldPrice` text COLLATE utf8mb4_unicode_ci,
   `SpecialPrice` text COLLATE utf8mb4_unicode_ci,
   `SpecialPriceStart` text COLLATE utf8mb4_unicode_ci,

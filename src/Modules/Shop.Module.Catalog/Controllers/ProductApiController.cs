@@ -121,6 +121,65 @@ public class ProductApiController : ControllerBase
         return Result.Ok(gridData);
     }
 
+    [HttpPost("list-product")]
+    [AllowAnonymous]
+    public async Task<Result<StandardTableResult<ProductQueryResult>>> ListProduct(
+        [FromBody] StandardTableParam<ProductQueryParam> param)
+    {
+        var query = _productRepository.Query();
+        var search = param.Search;
+        if (search != null)
+        {
+            if (!string.IsNullOrWhiteSpace(search.Name)) query = query.Where(c => c.Name.Contains(search.Name.Trim()));
+            if (!string.IsNullOrWhiteSpace(search.Sku)) query = query.Where(c => c.Sku.Contains(search.Sku.Trim()));
+            if (search.HasOptions != null) query = query.Where(c => c.HasOptions == search.HasOptions.Value);
+            if (search.IsAllowToOrder != null)
+                query = query.Where(c => c.IsAllowToOrder == search.IsAllowToOrder.Value);
+            if (search.IsFeatured != null) query = query.Where(c => c.IsFeatured == search.IsFeatured.Value);
+            if (search.IsPublished != null) query = query.Where(c => c.IsPublished == search.IsPublished.Value);
+            if (search.IsVisibleIndividually != null)
+                query = query.Where(c => c.IsVisibleIndividually == search.IsVisibleIndividually.Value);
+            if (search.CategoryIds.Count > 0)
+            {
+                var ids = new List<int>();
+                ids.AddRange(search.CategoryIds);
+
+                if (search.IncludeSubCategories)
+                {
+                    //Recursively get subcategories
+                    var all = await _categoryService.GetAll();
+                    foreach (var id in search.CategoryIds)
+                        ids.AddRange(_categoryService.GetChildrens(id, all).Select(c => c.Id));
+                }
+
+                var subQuery = from c in query
+                    join b in _productCategoryRepository.Query() on c.Id equals b.ProductId
+                    where ids.Distinct().Contains(b.CategoryId)
+                    select c.Id;
+                query = query.Where(c => subQuery.Distinct().Contains(c.Id));
+            }
+        }
+
+        var gridData = await query
+            //.Include(x => x.Stock)
+            .ToStandardTableResult(param, x => new ProductQueryResult
+            {
+                Id = x.Id,
+                Name = x.Name,
+                HasOptions = x.HasOptions,
+                IsVisibleIndividually = x.IsVisibleIndividually,
+                IsFeatured = x.IsFeatured,
+                IsAllowToOrder = x.IsAllowToOrder,
+                IsCallForPricing = x.IsCallForPricing,
+                //StockQuantity = x.Stock.StockQuantity,
+                CreatedOn = x.CreatedOn,
+                IsPublished = x.IsPublished,
+                Price = x.Price,
+                MediaUrl = x.ThumbnailImage != null ? x.ThumbnailImage.Url : null
+            });
+        return Result.Ok(gridData);
+    }
+
     /// <summary>
     /// Get detailed information about the product based on the product ID, including product media, attributes, inventory and other information.
     /// </summary>
@@ -263,13 +322,14 @@ public class ProductApiController : ControllerBase
                 MediaId = x.ThumbnailImageId,
                 MediaUrl = x.ThumbnailImage?.Url,
                 //StockQuantity = x.Stock.StockQuantity,
-                OptionCombinations = x.OptionCombinations.Select(p => new ProductGetOptionCombinationResult
-                {
-                    OptionId = p.OptionId,
-                    OptionName = p.Option?.Name,
-                    Value = p.Value,
-                    DisplayOrder = p.DisplayOrder
-                }).OrderBy(p => p.DisplayOrder).ToList(),
+                OptionCombinations =
+                    x.OptionCombinations.Select(p => new ProductGetOptionCombinationResult
+                    {
+                        OptionId = p.OptionId,
+                        OptionName = p.Option?.Name,
+                        Value = p.Value,
+                        DisplayOrder = p.DisplayOrder
+                    }).OrderBy(p => p.DisplayOrder).ToList(),
                 StockQuantity = stocks.Where(c => c.IsEnabled && c.ProductId == x.Id).Sum(c => c.StockQuantity),
                 WarehouseIds = stocks.Where(c => c.ProductId == x.Id).Select(c => c.WarehouseId).ToList(),
                 Stocks = stocks.Where(c => c.ProductId == x.Id).Select(c => new ProductGetStockResult()
@@ -290,11 +350,8 @@ public class ProductApiController : ControllerBase
             {
                 Id = attributeId,
                 Name = list.First().Attribute.Name,
-                Values = list.Select(c => new ProductGetAttributeValueResult()
-                {
-                    Id = c.Id,
-                    Value = c.Value
-                }).ToList()
+                Values = list.Select(c => new ProductGetAttributeValueResult() { Id = c.Id, Value = c.Value })
+                    .ToList()
             });
         }
 
@@ -334,13 +391,11 @@ public class ProductApiController : ControllerBase
             BrandId = param.BrandId,
             StockTrackingIsEnabled = param.StockTrackingIsEnabled,
             ThumbnailImageId = param.ThumbnailImageUrlId,
-
             CreatedBy = currentUser,
             UpdatedBy = currentUser,
             ParentGroupedProductId = null,
             IsVisibleIndividually = true, //When adding a new product, it must be visible
             HasOptions = param.Variations.Distinct().Any() ? true : false,
-
             Barcode = param.Barcode,
             DeliveryTime = param.DeliveryTime,
             ValidThru = param.ValidThru,
@@ -393,30 +448,20 @@ public class ProductApiController : ControllerBase
 
         foreach (var categoryId in param.CategoryIds.Distinct())
         {
-            var productCategory = new ProductCategory
-            {
-                CategoryId = categoryId
-            };
+            var productCategory = new ProductCategory { CategoryId = categoryId };
             product.AddCategory(productCategory);
         }
 
         foreach (var mediaId in param.MediaIds.Distinct())
         {
-            var productMedia = new ProductMedia
-            {
-                MediaId = mediaId
-            };
+            var productMedia = new ProductMedia { MediaId = mediaId };
             product.AddMedia(productMedia);
         }
 
         foreach (var attribute in param.Attributes.Distinct())
         foreach (var value in attribute.Values.Distinct())
         {
-            var attributeValue = new ProductAttributeValue
-            {
-                AttributeId = attribute.AttributeId,
-                Value = value
-            };
+            var attributeValue = new ProductAttributeValue { AttributeId = attribute.AttributeId, Value = value };
             product.AddAttributeValue(attributeValue);
         }
 
@@ -785,10 +830,7 @@ public class ProductApiController : ControllerBase
         foreach (var categoryId in categoryIds)
         {
             if (product.Categories.Any(x => x.CategoryId == categoryId)) continue;
-            var productCategory = new ProductCategory
-            {
-                CategoryId = categoryId
-            };
+            var productCategory = new ProductCategory { CategoryId = categoryId };
             product.AddCategory(productCategory);
         }
 
@@ -804,10 +846,7 @@ public class ProductApiController : ControllerBase
         foreach (var mediaId in mediaIds)
         {
             if (product.Medias.Any(x => x.MediaId == mediaId)) continue;
-            var productMedia = new ProductMedia
-            {
-                MediaId = mediaId
-            };
+            var productMedia = new ProductMedia { MediaId = mediaId };
             product.AddMedia(productMedia);
         }
 
@@ -835,8 +874,7 @@ public class ProductApiController : ControllerBase
                 {
                     var attributeValue = new ProductAttributeValue
                     {
-                        AttributeId = attribute.AttributeId,
-                        Value = value
+                        AttributeId = attribute.AttributeId, Value = value
                     };
                     product.AddAttributeValue(attributeValue);
                 }
@@ -979,7 +1017,8 @@ public class ProductApiController : ControllerBase
             return Result.Ok();
 
         if (product.ParentProduct != null && !product.ParentProduct.IsPublished)
-            return Result.Fail("The parent product corresponding to the current product has not been published, so the operation is not allowed.");
+            return Result.Fail(
+                "The parent product corresponding to the current product has not been published, so the operation is not allowed.");
 
         product.IsPublished = true;
         product.PublishedOn = DateTime.Now;
@@ -1056,10 +1095,7 @@ public class ProductApiController : ControllerBase
         {
             newProduct.ThumbnailImageId = product.ThumbnailImageId;
             foreach (var productMedia in product.Medias)
-                newProduct.AddMedia(new ProductMedia
-                {
-                    MediaId = productMedia.MediaId
-                });
+                newProduct.AddMedia(new ProductMedia { MediaId = productMedia.MediaId });
         }
 
         //Copy Options
