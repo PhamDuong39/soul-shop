@@ -22,7 +22,7 @@ public class ReviewAddParam
     /// <summary>
     /// Comment source ID Example: Order ID
     /// </summary>
-    public int? SourceId { get; set; set; }
+    public int? SourceId { get; set; }
 
     /// <summary>
     /// Comment source type Order = 0

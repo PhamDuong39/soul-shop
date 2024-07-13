@@ -26,7 +26,7 @@ public class Shipment : EntityBase
     /// <summary>
     /// delivery time
     /// </summary>
-    public DateTime? ShippedOn { get; set; set; }
+    public DateTime? ShippedOn { get; set; }
 
     /// <summary>
     /// Receiving time

@@ -17,16 +17,16 @@ public class ShipmentQueryResult
     /// <summary>
     /// Delivery status
     /// </summary>
-    public ShippingStatus? ShippingStatus { get; set; set; }
+    public ShippingStatus? ShippingStatus { get; set; }
 
-    public string TrackingNumber { get; set; set; }
+    public string TrackingNumber { get; set; }
 
-    public decimal TotalWeight { get; set; set; }
+    public decimal TotalWeight { get; set; }
 
     /// <summary>
     /// delivery time
     /// </summary>
-    public DateTime? ShippedOn { get; set; set; }
+    public DateTime? ShippedOn { get; set; }
 
     /// <summary>
     /// Receiving time

@@ -2,8 +2,8 @@
 using Shop.Infrastructure;
 using Shop.Infrastructure.Data;
 using Shop.Module.Core.Extensions;
+using Shop.Module.Feedbacks.Abstractions.ViewModels;
 using Shop.Module.Feedbacks.Entities;
-using Shop.Module.Feedbacks.ViewModels;
 
 namespace Shop.Module.Feedbacks.Controllers;
 

@@ -15,17 +15,17 @@ public class ShipmentQueryItemResult
     /// <summary>
     /// Product name (snapshot)
     /// </summary>
-    public string ProductName { get; set; set; }
+    public string ProductName { get; set; }
 
     /// <summary>
     /// Product image (snapshot)
     /// </summary>
-    public string ProductMediaUrl { get; set; set; }
+    public string ProductMediaUrl { get; set; }
 
     /// <summary>
     /// Number of orders
     /// </summary>
-    public int OrderedQuantity { get; set; set; }
+    public int OrderedQuantity { get; set; }
 
     /// <summary>
     /// Shipping quantity
