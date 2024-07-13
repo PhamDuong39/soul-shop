@@ -40,9 +40,9 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args)
     {
         return Host.CreateDefaultBuilder(args).ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.UseStartup<Startup>();
-        })
+            {
+                webBuilder.UseStartup<Startup>();
+            })
             .ConfigureAppConfiguration((builderContext, config) =>
             {
                 var env = builderContext.HostingEnvironment;
@@ -77,14 +77,6 @@ public class Program
                 config.AddEntityFrameworkConfig(opt => opt.UseCustomizedDataStore(configuration));
 
                 // Configure Serilog for logging
-                var loggerConfig = new LoggerConfiguration();
-                if (env.IsDevelopment())
-                {
-                    loggerConfig.MinimumLevel.Information().Enrich.FromLogContext().WriteTo.Console();
-                    SelfLog.Enable(Console.Error);
-                }
-
-                Log.Logger = loggerConfig.ReadFrom.Configuration(configuration).CreateLogger();
             });
     }
 }
