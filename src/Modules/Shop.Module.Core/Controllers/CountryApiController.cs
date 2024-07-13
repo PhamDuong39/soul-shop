@@ -12,7 +12,7 @@ using Shop.Module.Core.ViewModels;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 管理后台控制器用于处理国家和省份相关操作的 API 请求。
+/// The admin backend controller is used to handle API requests related to countries and provinces
 /// </summary>
 [ApiController]
 [Route("api/countries")]
@@ -37,10 +37,10 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取所有国家的分页结果。
+    /// Get paginated results of all countries.
     /// </summary>
-    /// <param name="param">分页参数。</param>
-    /// <returns>表示操作结果的 <see cref="Result{T}"/> 对象，其中的值为 <see cref="StandardTableResult{CountryResult}"/> 对象。</returns>
+    /// <param name="param"> pagination parameters </param>
+    /// <returns> Indicating the operation result <see cref="Result{T}"/> object, with its values being. <see cref="StandardTableResult{CountryResult}"/> object </returns>
     [HttpPost("grid")]
     public async Task<Result<StandardTableResult<CountryResult>>> List([FromBody] StandardTableParam param)
     {
@@ -68,10 +68,10 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据国家ID获取国家详情。
+    /// Retrieve country details based on country ID.
     /// </summary>
-    /// <param name="id">国家ID。</param>
-    /// <returns>指定ID的国家详情。</returns>
+    /// <param name="id"> Country ID </param>
+    /// <returns> Details of the country specified by ID </returns>
     [HttpGet("{id:int:min(1)}")]
     public async Task<Result> Get(int id)
     {
@@ -97,14 +97,14 @@ public class CountryApiController : ControllerBase
                 StateOrProvinceCount = c.StatesOrProvinces.Count
             }).FirstOrDefaultAsync();
         if (country == null)
-            throw new Exception("国家不存在");
+            throw new Exception("Country does not exist");
         return Result.Ok(country);
     }
 
     /// <summary>
-    /// 获取所有国家的列表。
+    /// Retrieve a list of all countries
     /// </summary>
-    /// <returns>所有国家的列表。</returns>
+    /// <returns> List of all countries </returns>
     [HttpGet()]
     public async Task<Result> Get()
     {
@@ -132,17 +132,17 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 添加新的国家。
+    /// Add a new country
     /// </summary>
-    /// <param name="model">包含新国家信息的对象。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="model"> Object containing information of the new country </param>
+    /// <returns> Operation result </returns>
     [HttpPost]
     public async Task<Result> Post([FromBody] CountryCreateParam model)
     {
         var any = _countryRepository.Query().Any(c => c.NumericIsoCode == model.NumericIsoCode
                                                       || c.TwoLetterIsoCode == model.TwoLetterIsoCode
                                                       || c.ThreeLetterIsoCode == model.ThreeLetterIsoCode);
-        if (any) return Result.Fail("国家编码已存在");
+        if (any) return Result.Fail("Country code already exists");
         var country = new Country()
         {
             DisplayOrder = model.DisplayOrder,
@@ -162,23 +162,23 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定ID的国家信息。
+    /// Update country information for the specified ID
     /// </summary>
-    /// <param name="id">要更新的国家ID。</param>
-    /// <param name="model">包含更新信息的对象。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">Country ID to be updated </param>
+    /// <param name="model"> Object containing update information </param>
+    /// <returns> Operation result </returns>
     [HttpPut("{id:int:min(1)}")]
     public async Task<Result> Put(int id, [FromBody] CountryCreateParam model)
     {
         var country = await _countryRepository.FirstOrDefaultAsync(id);
         if (country == null)
-            throw new Exception("国家不存在");
+            throw new Exception("Country does not exist");
         var any = _countryRepository.Query().Any(c =>
             (c.NumericIsoCode == model.NumericIsoCode
              || c.TwoLetterIsoCode == model.TwoLetterIsoCode
              || c.ThreeLetterIsoCode == model.ThreeLetterIsoCode)
             && c.Id != id);
-        if (any) return Result.Fail("国家编码已存在");
+        if (any) return Result.Fail("Country code already exists");
         country.DisplayOrder = model.DisplayOrder;
         country.NumericIsoCode = model.NumericIsoCode;
         country.ThreeLetterIsoCode = model.ThreeLetterIsoCode;
@@ -195,24 +195,24 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定ID的国家。
+    /// Delete the country with the specified ID
     /// </summary>
-    /// <param name="id">要删除的国家ID。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id"> Country ID to be deleted </param>
+    /// <returns> Operation result </returns>
     [HttpDelete("{id:int:min(1)}")]
     public async Task<Result> Delete(int id)
     {
         var country = await _countryRepository.FirstOrDefaultAsync(id);
         if (country == null)
-            throw new Exception("国家不存在");
+            throw new Exception("Country does not exist");
 
         var any = _provinceRepository.Query().Any(c => c.CountryId == country.Id);
         if (any)
-            throw new Exception("请确保国家未被使用");
+            throw new Exception("Please ensure the country is not in use");
 
         var anyUsed = _addressRepository.Query().Any(c => c.CountryId == id);
         if (anyUsed)
-            throw new Exception("请确保国家未被使用");
+            throw new Exception("Please ensure the country is not in use");
 
         country.IsDeleted = true;
         country.UpdatedOn = DateTime.Now;
@@ -221,11 +221,11 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取指定国家ID的省份列表，支持分页。
+    /// Retrieve a paginated list of provinces for the specified country ID
     /// </summary>
-    /// <param name="countryId">国家ID。</param>
-    /// <param name="param">分页和查询参数。</param>
-    /// <returns>包含省份列表的分页结果。</returns>
+    /// <param name="countryId"> country ID </param>
+    /// <param name="param"> Pagination and query parameters </param>
+    /// <returns> Pagination results containing a list of provinces </returns>
     [HttpPost("provinces/grid/{countryId:int:min(1)}")]
     public async Task<Result<StandardTableResult<ProvinceQueryResult>>> ListProvince(int countryId,
         [FromBody] StandardTableParam<ProvinceQueryParam> param)
@@ -263,10 +263,10 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 获取指定国家ID的省份树结构。
+    /// Retrieve the province tree structure for the specified country ID
     /// </summary>
-    /// <param name="countryId">国家ID。</param>
-    /// <returns>省份的树结构列表。</returns>
+    /// <param name="countryId"> country ID</param>
+    /// <returns>Tree structure list of provinces</returns>
     [HttpGet("provinces/tree/{countryId:int:min(1)}")]
     public async Task<Result<IList<ProvinceTreeResult>>> ProvinceTree(int countryId)
     {
@@ -276,17 +276,17 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 根据省份ID获取省份详情。
+    /// Retrieve province details based on province ID
     /// </summary>
-    /// <param name="id">省份ID。</param>
-    /// <returns>指定ID的省份详情。</returns>
+    /// <param name="id"> province ID </param>
+    /// <returns> Details of the province specified by ID </returns>
     [HttpGet("provinces/{id:int:min(1)}")]
     public async Task<Result<ProvinceGetResult>> GetProvince(int id)
     {
         var province = await _provinceRepository.Query().Include(c => c.Parent).Where(c => c.Id == id)
             .FirstOrDefaultAsync();
         if (province == null)
-            throw new Exception("单据不存在");
+            throw new Exception("Document does not exist");
         var result = new ProvinceGetResult()
         {
             Code = province.Code,
@@ -305,22 +305,22 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 在指定国家下添加新的省份。
+    /// Add a new province in the specified country.
     /// </summary>
-    /// <param name="countryId">国家ID。</param>
-    /// <param name="model">包含省份信息的对象。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="countryId"> country ID </param>
+    /// <param name="model"> Object containing province information </param>
+    /// <returns>Operation result </returns>
     [HttpPost("provinces/{countryId:int:min(1)}")]
     public async Task<Result> AddProvince(int countryId, [FromBody] ProvinceCreateParam model)
     {
         var anyCountry = _countryRepository.Query().Any(c => c.Id == countryId);
         if (!anyCountry)
-            throw new Exception("国家不存在");
+            throw new Exception("Country does not exist");
         var level = await GetLevelByParent(model.ParentId);
         var any = _provinceRepository.Query()
             .Any(c => c.Name == model.Name && c.CountryId == countryId && c.ParentId == model.ParentId);
         if (any)
-            throw new Exception("单据已存在");
+            throw new Exception("Document already exists");
         var province = new StateOrProvince()
         {
             CountryId = countryId,
@@ -338,37 +338,37 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 更新指定ID的省份信息。
+    /// Update province information for the specified ID
     /// </summary>
-    /// <param name="id">要更新的省份ID。</param>
-    /// <param name="model">包含更新信息的对象。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">Province ID to be updated </param>
+    /// <param name="model">Object containing update information </param>
+    /// <returns>Operation result </returns>
     [HttpPut("provinces/{id:int:min(1)}")]
     public async Task<Result> EditProvince(int id, [FromBody] ProvinceCreateParam model)
     {
         var province = await _provinceRepository.FirstOrDefaultAsync(id);
         if (province == null)
-            throw new Exception("单据不存在");
+            throw new Exception("Document does not exist");
         var anyCountry = _countryRepository.Query().Any(c => c.Id == province.CountryId);
         if (!anyCountry)
-            throw new Exception("国家不存在");
+            throw new Exception("Country does not exist");
 
         var any = _provinceRepository.Query().Any(c =>
             c.Name == model.Name && c.CountryId == province.CountryId && c.ParentId == model.ParentId && c.Id != id);
         if (any)
-            throw new Exception("单据已存在");
+            throw new Exception("Document already exists");
 
         if (model.ParentId == province.Id)
-            throw new Exception("不能设置自身作为父级");
+            throw new Exception("Cannot set itself as parent");
 
-        //高层级或低层级 升高或降低控制
-        //如果当前单据存在子集，则不允许调整层级
+        //higher or lower level, raising or lowering control
+        //if the current document has subsets, adjusting the level is not allowed
         var level = await GetLevelByParent(model.ParentId);
         if (level != province.Level)
         {
             var anyChild = _provinceRepository.Query().Any(c => c.ParentId == province.Id);
             if (anyChild)
-                throw new Exception("当前单据存在子级，不允许调整层级");
+                throw new Exception("He current document has child entries，Adjusting the level is not allowed");
         }
 
         //province.CountryId = model.CountryId;
@@ -385,24 +385,24 @@ public class CountryApiController : ControllerBase
     }
 
     /// <summary>
-    /// 删除指定ID的省份。
+    /// Delete the province with the specified ID.
     /// </summary>
-    /// <param name="id">要删除的省份ID。</param>
-    /// <returns>操作结果。</returns>
+    /// <param name="id">The ID of the province to be deleted </param>
+    /// <returns>Operation result </returns>
     [HttpDelete("provinces/{id:int:min(1)}")]
     public async Task<Result> DeleteProvince(int id)
     {
         var province = await _provinceRepository.FirstOrDefaultAsync(id);
         if (province == null)
-            throw new Exception("单据不存在");
+            throw new Exception("The document does not exist");
 
         var any = _provinceRepository.Query().Any(c => c.ParentId == id);
         if (any)
-            throw new Exception("请确保单据未被使用");
+            throw new Exception("Please ensure the document is not in use");
 
         var anyUsed = _addressRepository.Query().Any(c => c.StateOrProvinceId == id);
         if (anyUsed)
-            throw new Exception("请确保单据未被使用");
+            throw new Exception("Please ensure the document is not being used");
 
         province.IsDeleted = true;
         province.UpdatedOn = DateTime.Now;
@@ -418,13 +418,13 @@ public class CountryApiController : ControllerBase
         {
             var anyParent = _provinceRepository.Query().Any(c => c.Id == parentId.Value);
             if (!anyParent)
-                throw new Exception("父级不存在");
+                throw new Exception("Parent level does not exist");
 
             var parent = await _provinceRepository.FirstOrDefaultAsync(parentId.Value);
             if (parent == null)
-                throw new Exception("父级不存在");
+                throw new Exception("Parent level does not exist");
 
-            //如果存在父级，则处理level
+            //If a parent exists, then handle the level.
             switch (parent.Level)
             {
                 case StateOrProvinceLevel.Default:
@@ -440,9 +440,9 @@ public class CountryApiController : ControllerBase
                     break;
 
                 case StateOrProvinceLevel.Street:
-                    throw new Exception($"无法设置最小层级[{parent.Level.ToString()}]作为父级");
+                    throw new Exception($"Unable to set minimum level[{parent.Level.ToString()}]as a parent");
                 default:
-                    throw new Exception("父级类型异常");
+                    throw new Exception("Parent type exception");
             }
         }
 

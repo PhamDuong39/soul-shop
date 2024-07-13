@@ -35,7 +35,7 @@ public class ProductViewMQConsumer : IConsumer<ProductViewed>
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "产品浏览记录消息，处理失败", context?.Message);
+            _logger.LogError(ex, "Product browsing history message，Processing failed", context?.Message);
         }
     }
 }

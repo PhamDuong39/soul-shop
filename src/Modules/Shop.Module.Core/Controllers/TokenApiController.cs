@@ -9,7 +9,7 @@ using Shop.Module.Core.ViewModels;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 管理后台令牌服务相关 API
+/// Manage backend token service-related API
 /// </summary>
 [ApiController]
 [Route("api/token")]
@@ -28,7 +28,7 @@ public class TokenApiController : ControllerBase
     }
 
     /// <summary>
-    /// 刷新令牌
+    /// refresh token
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>

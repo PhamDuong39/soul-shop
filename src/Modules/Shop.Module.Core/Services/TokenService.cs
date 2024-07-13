@@ -118,13 +118,13 @@ public class TokenService : ITokenService
         var minutes = _config.Jwt.AccessTokenDurationInMinutes;
         if (userToken.TokenExpiresOnUtc != null && userToken.TokenExpiresOnUtc < utcNow)
         {
-            // 过期
+            // expired
             validate = false;
             _cacheManager.Remove(ShopKeys.UserJwtTokenPrefix + identityId);
         }
         else if (minutes > 0 && userToken.TokenExpiresOnUtc == null)
         {
-            // 当调整配置时，访问时更新配置（无过期时间->有过期时间）
+            // When adjusting configurations, update configurations upon access (from no expiration time to having expiration time).
             userToken.TokenUpdatedOnUtc = utcNow;
             userToken.TokenExpiresOnUtc = utcNow.AddMinutes(minutes);
             _cacheManager.Set(ShopKeys.UserJwtTokenPrefix + userToken.UserId, userToken, minutes);
@@ -132,11 +132,10 @@ public class TokenService : ITokenService
         else if (userToken.TokenExpiresOnUtc != null && userToken.TokenType != UserTokenType.Disposable &&
                  (utcNow - userToken.TokenUpdatedOnUtc).TotalMinutes >= 1)
         {
-            // 如果是一次性令牌则不续签
+            //If it's a one-time token, then do not renew it.
 
-            // 每分钟自动续签
-            // 注意：默认jwt令牌不开启过期策略的
-
+            // Automatically renew every minute.
+            // Note: By default, JWT tokens do not have an expiration policy enabled.
             userToken.TokenUpdatedOnUtc = utcNow;
             userToken.TokenExpiresOnUtc = utcNow.AddMinutes(minutes);
             _cacheManager.Set(ShopKeys.UserJwtTokenPrefix + userToken.UserId, userToken, minutes);

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Shop.Module.Core.Controllers;
 
 /// <summary>
-/// 上传服务相关 API
+/// Upload service-related API
 /// </summary>
 [ApiController]
 [Route("api/upload")]
@@ -32,7 +32,7 @@ public class UploadApiController : ControllerBase
     }
 
     /// <summary>
-    /// 单文件上传
+    /// Single file upload
     /// </summary>
     /// <param name="file"></param>
     /// <returns></returns>
@@ -56,7 +56,7 @@ public class UploadApiController : ControllerBase
     }
 
     /// <summary>
-    /// 多文件上传
+    /// Multiple file upload
     /// </summary>
     /// <param name="formCollection"></param>
     /// <returns></returns>
@@ -86,8 +86,8 @@ public class UploadApiController : ControllerBase
         {
             var result = Result.Ok(list,
                 list.Count != formCollection.Files.Count
-                    ? $"成功: {list.Count}, 失败: {formCollection.Files.Count - list.Count}"
-                    : "全部上传完成");
+                    ? $"success: {list.Count}, failure: {formCollection.Files.Count - list.Count}"
+                    : "All uploads completed");
             return result;
         }
 
